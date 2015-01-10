@@ -11,8 +11,7 @@ import scala.scalajs.js
 
 sealed trait UpdateCheckResult
 case class NoUpdate() extends UpdateCheckResult
-case class UpdateAvailable(val version: String) extends UpdateCheckResult
-//TODO find out when this is returned and if it could be made a property of UpdateAvailable
+case class UpdateAvailable(version: String) extends UpdateCheckResult
 case class Throttled() extends UpdateCheckResult
 
 object Runtime {
@@ -20,7 +19,7 @@ object Runtime {
   val id: bindings.Runtime.AppID = bindings.Runtime.id
   def lastError: Option[Error] = bindings.Runtime.lastError.toOption
 
-  def getBackgroundPage(callback: js.Function1[Window, _]): Future[Window] = {
+  def getBackgroundPage: Future[Window] = {
     val promise = Promise[Window]
     bindings.Runtime.getBackgroundPage((window: Window) => {
       promise.complete(chrome.lastErrorOrValue(window))
@@ -35,7 +34,7 @@ object Runtime {
   def getURL(path: String): String = bindings.Runtime.getURL(path)
   def setUninstallURL(url: String): Unit = bindings.Runtime.setUninstallURL(url)
 
-  def requestUpdateCheck(callback: js.Function2[UpdateCheck.Status, js.UndefOr[UpdateCheck.Details], _]): Future[UpdateCheckResult] = {
+  def requestUpdateCheck: Future[UpdateCheckResult] = {
     val promise = Promise[UpdateCheckResult]
     bindings.Runtime.requestUpdateCheck((status: UpdateCheck.Status, details: js.UndefOr[UpdateCheck.Details]) => {
       promise.complete(
