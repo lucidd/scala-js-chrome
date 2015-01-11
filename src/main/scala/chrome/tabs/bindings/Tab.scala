@@ -36,5 +36,8 @@ object Tab {
     val COMPLETE: Status = "complete"
 
   }
+
+  type Id = Int
   
 }
+
