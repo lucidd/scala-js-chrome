@@ -9,6 +9,6 @@ class CPUInfo extends js.Object {
   def archName: String = js.native
   def modelName: String = js.native
   def features: js.Array[Feature] = js.native
-  def processors: js.Array[ProcessorUsage] = js.native
+  def processors: js.Array[Processor] = js.native
 
 }
