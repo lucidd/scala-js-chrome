@@ -1,6 +1,6 @@
 package chrome.runtime
 
-import chrome.events.Event
+import chrome.events.bindings.Event
 import chrome.runtime.bindings._
 import org.scalajs.dom.Window
 import scala.scalajs.js.JSConverters._
@@ -93,5 +93,5 @@ object Runtime {
   val onMessage: Event[js.Function3[js.UndefOr[js.Object], MessageSender, js.Function1[js.Object, _], Boolean]] = bindings.Runtime.onMessage
   val onMessageExternal: Event[js.Function3[js.UndefOr[js.Object], MessageSender, js.Function1[js.Object, _], Boolean]] = bindings.Runtime.onMessageExternal
   val onRestartRequired: Event[js.Function1[RestartReasons.RestartReason, _]] = bindings.Runtime.onRestartRequired
-  
+
 }

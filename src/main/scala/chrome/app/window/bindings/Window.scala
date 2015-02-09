@@ -1,6 +1,6 @@
 package chrome.app.window.bindings
 
-import chrome.events.Event
+import chrome.events.bindings.Event
 
 import scala.concurrent.{Future, Promise}
 import scala.scalajs.js

@@ -1,6 +1,6 @@
 package chrome.management
 
-import chrome.events.Event
+import chrome.events.bindings.Event
 import chrome.management.bindings.ExtensionInfo._
 
 import scala.concurrent.{Promise, Future}

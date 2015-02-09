@@ -1,6 +1,6 @@
 package chrome.runtime.bindings
 
-import chrome.events.Event
+import chrome.events.bindings.Event
 
 import scala.scalajs.js
 

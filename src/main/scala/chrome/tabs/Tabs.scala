@@ -1,6 +1,6 @@
 package chrome.tabs
 
-import chrome.events.Event
+import chrome.events.bindings.Event
 import chrome.runtime.bindings.Port
 import chrome.tabs.bindings._
 import chrome.windows.bindings.Window

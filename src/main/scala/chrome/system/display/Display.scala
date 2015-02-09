@@ -1,7 +1,7 @@
 package chrome.system.display
 
 import bindings._
-import chrome.events.Event
+import chrome.events.bindings.Event
 
 import scala.concurrent.{Promise, Future}
 import scala.scalajs.js

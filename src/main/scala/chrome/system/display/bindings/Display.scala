@@ -1,6 +1,6 @@
 package chrome.system.display.bindings
 
-import chrome.events.Event
+import chrome.events.bindings.Event
 
 import scala.scalajs.js
 import scala.scalajs.js.annotation.JSName

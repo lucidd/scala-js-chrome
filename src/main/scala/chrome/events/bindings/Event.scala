@@ -1,4 +1,4 @@
-package chrome.events
+package chrome.events.bindings
 
 import scala.scalajs.js
 

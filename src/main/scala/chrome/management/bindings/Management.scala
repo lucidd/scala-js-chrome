@@ -1,6 +1,6 @@
 package chrome.management.bindings
 
-import chrome.events.Event
+import chrome.events.bindings.Event
 import chrome.management.bindings.ExtensionInfo.LaunchType
 
 import scala.scalajs.js

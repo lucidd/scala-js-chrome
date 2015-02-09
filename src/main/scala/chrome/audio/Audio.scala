@@ -1,6 +1,6 @@
 package chrome.audio
 
-import chrome.events.Event
+import chrome.events.bindings.Event
 
 import scala.concurrent.{Promise, Future}
 import scala.scalajs.js
