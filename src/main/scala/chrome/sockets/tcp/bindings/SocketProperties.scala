@@ -9,3 +9,17 @@ class SocketProperties extends js.Object {
   def bufferSize: js.UndefOr[Int] = js.native
 
 }
+
+object SocketProperties {
+
+  def apply(persistent: js.UndefOr[Boolean] = js.undefined,
+            name: js.UndefOr[String] = js.undefined,
+            bufferSize: js.UndefOr[Int] = js.undefined): SocketProperties = {
+    js.Dynamic.literal(
+      persistent = persistent,
+      name = name,
+      bufferSize = bufferSize
+    ).asInstanceOf[SocketProperties]
+  }
+
+}
