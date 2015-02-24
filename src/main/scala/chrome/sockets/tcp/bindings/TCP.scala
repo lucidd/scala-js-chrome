@@ -7,7 +7,7 @@ import scala.scalajs.js.annotation.JSName
 import scala.scalajs.js.typedarray.ArrayBuffer
 
 
-@JSName("chrome.socket.tcp")
+@JSName("chrome.sockets.tcp")
 object TCP extends js.Object {
 
   def create(properties: SocketProperties, callback: js.Function1[CreateInfo, _]): Unit = js.native
