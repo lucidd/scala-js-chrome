@@ -13,17 +13,17 @@ package object tcp {
 
     def update(properties: SocketProperties): Future[Unit] = {
       val promise = Promise[Unit]
-      bindings.TCP.update(socketId, properties, () => {
+      bindings.TCP.update(socketId, properties, js.Any.fromFunction0(() => {
         promise.complete(chrome.lastErrorOrValue(()))
-      })
+      }))
       promise.future
     }
 
     def setPaused(paused: Boolean): Future[Unit] = {
       val promise = Promise[Unit]
-      bindings.TCP.setPaused(socketId, paused, () => {
+      bindings.TCP.setPaused(socketId, paused, js.Any.fromFunction0(() => {
         promise.complete(chrome.lastErrorOrValue(()))
-      })
+      }))
       promise.future
     }
 
@@ -53,9 +53,9 @@ package object tcp {
 
     def disconnect: Future[Unit] = {
       val promise = Promise[Unit]
-      bindings.TCP.disconnect(socketId, () => {
+      bindings.TCP.disconnect(socketId, js.Any.fromFunction0(() => {
         promise.complete(chrome.lastErrorOrValue(()))
-      })
+      }))
       promise.future
     }
 

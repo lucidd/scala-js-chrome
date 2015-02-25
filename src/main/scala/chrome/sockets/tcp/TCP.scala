@@ -8,7 +8,7 @@ import scala.scalajs.js.typedarray.ArrayBuffer
 
 object TCP {
 
-  def create(properties: SocketProperties): Future[CreateInfo] = {
+  def create(properties: js.UndefOr[SocketProperties] = js.undefined): Future[CreateInfo] = {
     val promise = Promise[CreateInfo]
     bindings.TCP.create(properties, (info: CreateInfo) => {
       promise.complete(chrome.lastErrorOrValue(info))
@@ -18,17 +18,17 @@ object TCP {
 
   def update(socketId: SocketId, properties: SocketProperties): Future[Unit] = {
     val promise = Promise[Unit]
-    bindings.TCP.update(socketId, properties, () => {
+    bindings.TCP.update(socketId, properties, js.Any.fromFunction0(() => {
       promise.complete(chrome.lastErrorOrValue(()))
-    })
+    }))
     promise.future
   }
 
   def setPaused(socketId: SocketId, paused: Boolean): Future[Unit] = {
     val promise = Promise[Unit]
-    bindings.TCP.setPaused(socketId, paused, () => {
+    bindings.TCP.setPaused(socketId, paused, js.Any.fromFunction0(() => {
       promise.complete(chrome.lastErrorOrValue(()))
-    })
+    }))
     promise.future
   }
 
@@ -58,9 +58,9 @@ object TCP {
 
   def disconnect(socketId: SocketId): Future[Unit] = {
     val promise = Promise[Unit]
-    bindings.TCP.disconnect(socketId, () => {
+    bindings.TCP.disconnect(socketId, js.Any.fromFunction0(() => {
       promise.complete(chrome.lastErrorOrValue(()))
-    })
+    }))
     promise.future
   }
 
