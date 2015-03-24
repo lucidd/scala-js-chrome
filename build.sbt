@@ -13,6 +13,11 @@ persistLauncher := false
 
 persistLauncher in Test := false
 
+scalacOptions ++= Seq(
+    "-Xlint",
+    "-deprecation",
+    "-Xfatal-warnings"
+)
 
 libraryDependencies ++= Seq(
     "org.scala-js" %%% "scalajs-dom" % "0.8.0" withSources() withJavadoc()

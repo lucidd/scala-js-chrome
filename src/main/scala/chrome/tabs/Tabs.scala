@@ -92,7 +92,7 @@ object Tabs {
     bindings.Tabs.move(tabIds, moveProperties, js.Any.fromFunction1((tabs: js.Any) => {
         promise.complete(
           chrome.lastErrorOrValue(tabs match {
-            case array: js.Array[Tab] => array
+            case array: js.Array[Tab @unchecked] => array
             case tab: Tab => js.Array(tab)
           })
         )

@@ -14,11 +14,11 @@ object TTS {
     promise.future
   }
   
-  def stop: Unit = bindings.TTS.stop()
+  def stop(): Unit = bindings.TTS.stop()
   
-  def pause: Unit = bindings.TTS.pause()
+  def pause(): Unit = bindings.TTS.pause()
   
-  def resume: Unit = bindings.TTS.resume()
+  def resume(): Unit = bindings.TTS.resume()
   
   def isSpeaking: Future[Boolean] = {
     val promise = Promise[Boolean]

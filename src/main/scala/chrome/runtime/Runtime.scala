@@ -27,8 +27,8 @@ object Runtime {
     promise.future
   }
   
-  def reload: Unit = bindings.Runtime.reload()
-  def restart: Unit = bindings.Runtime.restart()
+  def reload(): Unit = bindings.Runtime.reload()
+  def restart(): Unit = bindings.Runtime.restart()
 
   def getManifest: Manifest = bindings.Runtime.getManifest()
   def getURL(path: String): String = bindings.Runtime.getURL(path)
