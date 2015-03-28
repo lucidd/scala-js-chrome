@@ -15,9 +15,11 @@ class Bounds extends js.Object {
   var maxHeight: js.UndefOr[Int] = js.native
 
   def setPosition(top: Int, left: Int): Unit = js.native
+
   def setSize(width: Int, height: Int): Unit = js.native
 
   def setMinimumSize(minWidth: Int, minHeight: Int): Unit = js.native
+
   def setMaximumSize(maxWidth: Int, maxHeight: Int): Unit = js.native
 
 }

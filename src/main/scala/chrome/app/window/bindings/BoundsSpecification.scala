@@ -5,14 +5,14 @@ import scala.scalajs.js
 object BoundsSpecification {
 
   def apply(
-            left: js.UndefOr[Int] = js.undefined,
-            top: js.UndefOr[Int] = js.undefined,
-            width: js.UndefOr[Int] = js.undefined,
-            height: js.UndefOr[Int] = js.undefined,
-            minWidth: js.UndefOr[Int] = js.undefined,
-            minHeight: js.UndefOr[Int] = js.undefined,
-            maxWidth: js.UndefOr[Int] = js.undefined,
-            maxHeight: js.UndefOr[Int] = js.undefined
+             left: js.UndefOr[Int] = js.undefined,
+             top: js.UndefOr[Int] = js.undefined,
+             width: js.UndefOr[Int] = js.undefined,
+             height: js.UndefOr[Int] = js.undefined,
+             minWidth: js.UndefOr[Int] = js.undefined,
+             minHeight: js.UndefOr[Int] = js.undefined,
+             maxWidth: js.UndefOr[Int] = js.undefined,
+             maxHeight: js.UndefOr[Int] = js.undefined
              ): BoundsSpecification = {
 
     js.Dynamic.literal(

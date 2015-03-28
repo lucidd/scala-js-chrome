@@ -3,8 +3,6 @@ package chrome.tabs.bindings
 
 import scala.scalajs.js
 
-import chrome.windows.bindings.Window
-
 class ReloadProperties extends js.Object {
 
   def bypassCache: js.UndefOr[Boolean] = js.native

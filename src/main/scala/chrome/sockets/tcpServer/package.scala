@@ -1,8 +1,8 @@
 package chrome.sockets
 
-import chrome.sockets.tcpServer.bindings.{SocketInfo, SocketProperties, CreateInfo, SocketId}
+import chrome.sockets.tcpServer.bindings.{SocketId, SocketInfo, SocketProperties}
 
-import scala.concurrent.{Promise, Future}
+import scala.concurrent.Future
 import scala.scalajs.js
 
 

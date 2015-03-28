@@ -29,12 +29,9 @@ object CreateWindowOptions {
 
 }
 
-class CreateWindowOptions extends js.Object{
+class CreateWindowOptions extends js.Object {
 
 
-  var id: js.UndefOr[String] = js.native
-  var innerBounds: js.UndefOr[BoundsSpecification] = js.native
-  var outerBounds: js.UndefOr[BoundsSpecification] = js.native
   val alphaEnabled: js.UndefOr[Boolean] = js.native
   val state: js.UndefOr[String] = js.native
   val hidden: js.UndefOr[Boolean] = js.native
@@ -42,5 +39,8 @@ class CreateWindowOptions extends js.Object{
   val alwaysOnTop: js.UndefOr[Boolean] = js.native
   val focused: js.UndefOr[Boolean] = js.native
   val visibleOnAllWorkspaces: js.UndefOr[Boolean] = js.native
+  var id: js.UndefOr[String] = js.native
+  var innerBounds: js.UndefOr[BoundsSpecification] = js.native
+  var outerBounds: js.UndefOr[BoundsSpecification] = js.native
 
 }

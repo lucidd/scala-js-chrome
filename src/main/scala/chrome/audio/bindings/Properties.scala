@@ -5,8 +5,7 @@ import scala.scalajs.js
 
 object Properties {
 
-  def apply(
-            isMuted: Boolean,
+  def apply(isMuted: Boolean,
             volume: js.UndefOr[Double] = js.undefined,
             gain: js.UndefOr[Double] = js.undefined
              ): Properties = {
@@ -22,7 +21,9 @@ object Properties {
 class Properties extends js.Object {
 
   def isMuted: Boolean = js.native
+
   def volume: js.UndefOr[Double] = js.native
+
   def gain: js.UndefOr[Double] = js.native
 
 }

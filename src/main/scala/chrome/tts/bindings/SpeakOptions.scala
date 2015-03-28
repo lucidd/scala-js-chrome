@@ -16,17 +16,17 @@ object SpeakOptions {
             desiredEventTypes: js.UndefOr[TTSEvent.Type] = js.undefined,
             onEvent: js.UndefOr[String] = js.undefined): SpeakOptions = {
     js.Dynamic.literal(
-        enqueue = enqueue,
-        voiceName = voiceName,
-        extensionId = extensionId,
-        lang = lang,
-        gender = gender,
-        rate = rate,
-        pitch = pitch,
-        volume = volume,
-        requiredEventTypes = requiredEventTypes,
-        desiredEventTypes = desiredEventTypes,
-        onEvent = onEvent
+      enqueue = enqueue,
+      voiceName = voiceName,
+      extensionId = extensionId,
+      lang = lang,
+      gender = gender,
+      rate = rate,
+      pitch = pitch,
+      volume = volume,
+      requiredEventTypes = requiredEventTypes,
+      desiredEventTypes = desiredEventTypes,
+      onEvent = onEvent
     ).asInstanceOf[SpeakOptions]
   }
 
@@ -34,16 +34,16 @@ object SpeakOptions {
 
 class SpeakOptions extends js.Object {
 
-  def enqueue: js.UndefOr[Boolean] = js.native
-  def voiceName: js.UndefOr[String] = js.native
-  def extensionId: js.UndefOr[String] = js.native
-  def lang: js.UndefOr[String] = js.native
-  def gender: js.UndefOr[TTSVoice.Gender] = js.native
-  def rate: js.UndefOr[Double] = js.native
-  def pitch: js.UndefOr[Double] = js.native
-  def volume: js.UndefOr[Double] = js.native
-  def requiredEventTypes: js.UndefOr[TTSEvent.Type] = js.native
-  def desiredEventTypes: js.UndefOr[TTSEvent.Type] = js.native
-  def onEvent: js.UndefOr[String] = js.native
+  val enqueue: js.UndefOr[Boolean] = js.native
+  val voiceName: js.UndefOr[String] = js.native
+  val extensionId: js.UndefOr[String] = js.native
+  val lang: js.UndefOr[String] = js.native
+  val gender: js.UndefOr[TTSVoice.Gender] = js.native
+  val rate: js.UndefOr[Double] = js.native
+  val pitch: js.UndefOr[Double] = js.native
+  val volume: js.UndefOr[Double] = js.native
+  val requiredEventTypes: js.UndefOr[TTSEvent.Type] = js.native
+  val desiredEventTypes: js.UndefOr[TTSEvent.Type] = js.native
+  val onEvent: js.UndefOr[String] = js.native
 
 }

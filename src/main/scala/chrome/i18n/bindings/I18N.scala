@@ -7,7 +7,9 @@ import scala.scalajs.js.annotation.JSName
 object I18N extends js.Object {
 
   def getAcceptLanguages(callback: js.Function1[js.Array[String], _]): Unit = js.native
+
   def getMessage(messageName: String, substitutions: String*): js.UndefOr[String] = js.native
+
   def getUILanguage(): String = js.native
 
 }

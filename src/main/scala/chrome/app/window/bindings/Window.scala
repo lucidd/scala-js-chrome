@@ -2,29 +2,29 @@ package chrome.app.window.bindings
 
 import chrome.events.bindings.Event
 
-import scala.concurrent.{Future, Promise}
 import scala.scalajs.js
 import scala.scalajs.js.annotation.JSName
-import scala.scalajs.js.{Any, Function1}
+import scala.scalajs.js.{UndefOr, native, undefined}
 
 @JSName("chrome.app.window")
 object Window extends js.Object {
 
-  def current(): AppWindow = js.native
+  val onBoundsChanged: Event[js.Function0[_]] = native
+  val onClosed: Event[js.Function0[_]] = native
+  val onFullscreened: Event[js.Function0[_]] = native
+  val onMaximized: Event[js.Function0[_]] = native
+  val onMinimized: Event[js.Function0[_]] = native
+  val onRestored: Event[js.Function0[_]] = native
 
-  def create(url: String, options: js.UndefOr[CreateWindowOptions] = js.undefined, callback: js.UndefOr[Function1[AppWindow, _]] = js.undefined): Unit = js.native
+  def current(): AppWindow = native
 
-  def getAll(): js.Array[AppWindow] = js.native
+  def create(url: String, options: UndefOr[CreateWindowOptions] = undefined,
+             callback: UndefOr[js.Function1[AppWindow, _]] = undefined): Unit = native
 
-  def get(id: AppWindow.Id): AppWindow = js.native
+  def getAll(): js.Array[AppWindow] = native
 
-  def canSetVisibleOnAllWorkspaces(): Boolean = js.native
+  def get(id: AppWindow.Id): AppWindow = native
 
-  val onBoundsChanged: Event[js.Function0[_]] = js.native
-  val onClosed: Event[js.Function0[_]] = js.native
-  val onFullscreened: Event[js.Function0[_]] = js.native
-  val onMaximized: Event[js.Function0[_]] = js.native
-  val onMinimized: Event[js.Function0[_]] = js.native
-  val onRestored: Event[js.Function0[_]] = js.native
+  def canSetVisibleOnAllWorkspaces(): Boolean = native
 
 }

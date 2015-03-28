@@ -5,8 +5,8 @@ import scala.scalajs.js
 
 class NetworkInterface extends js.Object {
 
-  def name: String = js.native
-  def address: String = js.native
-  def prefixLength: Int = js.native
+  val name: String = js.native
+  val address: String = js.native
+  val prefixLength: Int = js.native
 
 }

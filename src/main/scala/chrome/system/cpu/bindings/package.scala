@@ -17,5 +17,5 @@ package object bindings {
     val AVX: Feature = "avx"
 
   }
-  
+
 }

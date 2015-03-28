@@ -1,9 +1,8 @@
 package chrome.tabs.bindings
 
+import chrome.windows.bindings.Window
 
 import scala.scalajs.js
-
-import chrome.windows.bindings.Window
 
 object MoveProperties {
 
@@ -20,6 +19,7 @@ object MoveProperties {
 class MoveProperties extends js.Object {
 
   def windowId: js.UndefOr[Window.Id] = js.native
+
   def index: Int = js.native
 
 }

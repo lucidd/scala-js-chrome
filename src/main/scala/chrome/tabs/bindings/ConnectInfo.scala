@@ -1,6 +1,5 @@
 package chrome.tabs.bindings
 
-
 import scala.scalajs.js
 
 
@@ -22,6 +21,7 @@ object ConnectInfo {
 class ConnectInfo extends js.Object {
 
   def name: js.UndefOr[String] = js.native
+
   def frameId: js.UndefOr[ConnectInfo.FrameID] = js.native
 
 }

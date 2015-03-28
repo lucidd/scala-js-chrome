@@ -5,7 +5,7 @@ import scala.scalajs.js
 
 object CaptureOptions {
 
-  type ImageFormat =  String
+  type ImageFormat = String
 
   val JPEG: ImageFormat = "jpeg"
   val PNG: ImageFormat = "png"
@@ -15,6 +15,7 @@ object CaptureOptions {
 class CaptureOptions extends js.Object {
 
   def format: js.UndefOr[CaptureOptions.ImageFormat] = js.native
+
   def quality: js.UndefOr[Int] = js.native
 
 }

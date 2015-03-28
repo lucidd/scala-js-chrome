@@ -20,5 +20,5 @@ object Window {
     val APP: Type = "app"
 
   }
-  
+
 }

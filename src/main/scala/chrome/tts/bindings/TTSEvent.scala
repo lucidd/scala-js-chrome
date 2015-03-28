@@ -26,7 +26,9 @@ object TTSEvent {
 class TTSEvent extends js.Object {
 
   val `type`: TTSEvent.Type = js.native
+
   def charIndex: js.UndefOr[Double] = js.native
+
   def errorMessage: js.UndefOr[String] = js.native
 
 }

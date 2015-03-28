@@ -4,8 +4,9 @@ import scala.scalajs.js
 
 class TLSVersionBounds extends js.Object {
 
-  def min: js.UndefOr[TLSVersionBounds.Version] = js.native;
-  def max: js.UndefOr[TLSVersionBounds.Version] = js.native;
+  def min: js.UndefOr[TLSVersionBounds.Version] = js.native
+
+  def max: js.UndefOr[TLSVersionBounds.Version] = js.native
 
 }
 

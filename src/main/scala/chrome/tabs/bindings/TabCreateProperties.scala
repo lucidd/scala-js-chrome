@@ -1,12 +1,11 @@
 package chrome.tabs.bindings
 
 
-import scala.scalajs.js
-
 import chrome.windows.bindings.Window
 
-object TabCreateProperties {
+import scala.scalajs.js
 
+object TabCreateProperties {
 
 
   def apply(windowId: js.UndefOr[Window.Id] = js.undefined,
@@ -31,10 +30,15 @@ object TabCreateProperties {
 class TabCreateProperties extends js.Object {
 
   def windowId: js.UndefOr[Window.Id] = js.native
+
   def index: js.UndefOr[Int] = js.native
+
   def url: js.UndefOr[String] = js.native
+
   def active: js.UndefOr[Boolean] = js.native
+
   def pinned: js.UndefOr[Boolean] = js.native
+
   def openerTabId: js.UndefOr[Tab.Id] = js.native
 
 }

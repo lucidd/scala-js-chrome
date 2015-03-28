@@ -25,9 +25,13 @@ object UpdateProperties {
 class UpdateProperties extends js.Object {
 
   def url: js.UndefOr[String] = js.native
+
   def active: js.UndefOr[Boolean] = js.native
+
   def highlighted: js.UndefOr[Boolean] = js.native
+
   def pinned: js.UndefOr[Boolean] = js.native
+
   def openerTabId: js.UndefOr[Tab.Id] = js.native
 
 }

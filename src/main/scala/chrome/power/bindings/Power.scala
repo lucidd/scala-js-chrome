@@ -7,15 +7,16 @@ import scala.scalajs.js.annotation.JSName
 object Power extends js.Object {
 
   def requestKeepAwake(level: Level.Level): Unit = js.native
+
   def releaseKeepAwake(): Unit = js.native
 
 }
 
 object Level {
 
- type Level = String
+  type Level = String
 
- val SYSTEM: Level = "system"
- val DISPLAY: Level = "display"
+  val SYSTEM: Level = "system"
+  val DISPLAY: Level = "display"
 
 }

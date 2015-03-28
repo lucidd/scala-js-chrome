@@ -2,10 +2,10 @@ package chrome.system.network
 
 import chrome.system.network.Interface.Config
 
-case class Interface(val name: String, val configurations: List[Config])
+case class Interface(name: String, configurations: List[Config])
 
 object Interface {
 
-  case class Config(val address: String, val prefixLength: Int)
+  case class Config(address: String, prefixLength: Int)
 
 }

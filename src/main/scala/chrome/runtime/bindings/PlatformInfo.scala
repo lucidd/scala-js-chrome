@@ -7,6 +7,7 @@ import scala.scalajs.js.annotation.JSName
 object PlatformInfo {
 
   type OperatingSystem = String
+  type Architecture = String
 
   object OperatingSystems {
 
@@ -19,8 +20,6 @@ object PlatformInfo {
 
   }
 
-  type Architecture = String
-
   object Architectures {
 
     val ARM: OperatingSystem = "arm"
@@ -29,13 +28,12 @@ object PlatformInfo {
 
   }
 
-
-
 }
 
 class PlatformInfo extends js.Object {
 
   def os: PlatformInfo.OperatingSystem = js.native
+
   def arch: PlatformInfo.Architecture = js.native
 
   @JSName("nacl_arch")

@@ -4,7 +4,7 @@ import scala.scalajs.js
 
 class IconInfo extends js.Object {
 
-   val size: Int = js.native
-   val url: String = js.native
+  val size: Int = js.native
+  val url: String = js.native
 
- }
+}

@@ -1,13 +1,14 @@
 package chrome.system.memory
 
 
-import scala.concurrent.{Promise, Future}
-import bindings._
+import chrome.system.memory.bindings._
+
+import scala.concurrent.{Future, Promise}
 
 object Memory {
 
   def getInfo: Future[MemoryInfo] = {
-    val promise = Promise[MemoryInfo]
+    val promise = Promise[MemoryInfo]()
     bindings.Memory.getInfo((info: MemoryInfo) => {
       promise.complete(chrome.lastErrorOrValue(info))
     })

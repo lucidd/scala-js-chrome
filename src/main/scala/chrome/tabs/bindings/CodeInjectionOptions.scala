@@ -16,7 +16,7 @@ object CodeInjectionOptions {
             allFrames: js.UndefOr[Boolean] = js.undefined,
             matchAboutBlank: js.UndefOr[Boolean] = js.undefined,
             runAt: js.UndefOr[String] = js.undefined
-  ): ExeutionTime = {
+             ): ExeutionTime = {
     js.Dynamic.literal(
       code = code,
       file = file,
@@ -31,9 +31,13 @@ object CodeInjectionOptions {
 class CodeInjectionOptions extends js.Object {
 
   def code: js.UndefOr[String] = js.native
+
   def file: js.UndefOr[String] = js.native
+
   def allFrames: js.UndefOr[Boolean] = js.native
+
   def matchAboutBlank: js.UndefOr[Boolean] = js.native
+
   def runAt: js.UndefOr[String] = js.native
 
 }

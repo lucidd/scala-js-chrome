@@ -4,8 +4,6 @@ import scala.scalajs.js
 import scala.scalajs.js.annotation.JSName
 
 
-
-
 @JSName("chrome.system.memory")
 object Memory extends js.Object {
 

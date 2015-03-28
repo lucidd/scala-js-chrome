@@ -6,9 +6,13 @@ import scala.scalajs.js
 class CPUInfo extends js.Object {
 
   def numOfProcessors: Int = js.native
+
   def archName: String = js.native
+
   def modelName: String = js.native
+
   def features: js.Array[Feature] = js.native
+
   def processors: js.Array[Processor] = js.native
 
 }

@@ -7,5 +7,4 @@ import scala.scalajs.js
 class Manifest extends js.Object {
 
 
-
 }

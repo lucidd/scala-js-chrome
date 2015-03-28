@@ -12,7 +12,7 @@ class Bounds extends js.Object {
 }
 
 object Bounds {
-  
+
   def apply(left: Int, top: Int, width: Int, height: Int): Bounds = {
     js.Dynamic.literal(
       left = left,
@@ -21,5 +21,5 @@ object Bounds {
       height = height
     ).asInstanceOf[Bounds]
   }
-  
+
 }
