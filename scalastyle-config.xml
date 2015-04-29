@@ -64,7 +64,7 @@
  <check level="warning" class="org.scalastyle.scalariform.IfBraceChecker" enabled="true">
   <parameters>
    <parameter name="singleLineAllowed">true></parameter>
-   <parameter name="doubleLineAllowed">false</parameter>
+   <parameter name="doubleLineAllowed">true</parameter>
   </parameters>
  </check>
  <check level="warning" class="org.scalastyle.scalariform.MethodLengthChecker" enabled="true">
