@@ -1,8 +1,9 @@
 package chrome.system.cpu
 
 
-import scala.concurrent.{Promise, Future}
-import bindings._
+import chrome.system.cpu.bindings._
+
+import scala.concurrent.{Future, Promise}
 
 object CPU {
 
