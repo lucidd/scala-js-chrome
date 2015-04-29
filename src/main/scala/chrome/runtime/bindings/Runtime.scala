@@ -21,10 +21,8 @@ object Runtime extends js.Object {
   val onBrowserUpdateAvailable: Event[js.Function0[_]] = native
   val onConnect: Event[js.Function1[Port, _]] = native
   val onConnectExternal: Event[js.Function1[Port, _]] = native
-  val onMessage: Event[js.Function3[UndefOr[js.Object], MessageSender, js.Function1[js.Object, _], Boolean]] =
-    native
-  val onMessageExternal: Event[js.Function3[UndefOr[js.Object], MessageSender, js.Function1[js.Object, _], Boolean]] =
-    native
+  val onMessage: Event[js.Function3[UndefOr[Any], MessageSender, js.Function1[Any, _], Boolean]] = native
+  val onMessageExternal: Event[js.Function3[UndefOr[Any], MessageSender, js.Function1[Any, _], Boolean]] = native
   val onRestartRequired: Event[js.Function1[RestartReasons.RestartReason, _]] = native
 
   def lastError: UndefOr[Error] = native

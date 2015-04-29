@@ -1,6 +1,7 @@
 package chrome.management
 
-import chrome.events.bindings.Event
+import chrome.events.EventSource
+import chrome.events.EventSourceImplicits._
 import chrome.management.bindings.ExtensionInfo._
 import chrome.management.bindings._
 import chrome.runtime.bindings.Runtime.AppID
@@ -10,10 +11,10 @@ import scala.scalajs.js
 
 object Management {
 
-  val onInstalled: Event[js.Function1[ExtensionInfo, _]] = bindings.Management.onInstalled
-  val onUninstalled: Event[js.Function1[String, _]] = bindings.Management.onUninstalled
-  val onEnabled: Event[js.Function1[ExtensionInfo, _]] = bindings.Management.onEnabled
-  val onDisabled: Event[js.Function1[ExtensionInfo, _]] = bindings.Management.onDisabled
+  val onInstalled: EventSource[ExtensionInfo] = bindings.Management.onInstalled
+  val onUninstalled: EventSource[String] = bindings.Management.onUninstalled
+  val onEnabled: EventSource[ExtensionInfo] = bindings.Management.onEnabled
+  val onDisabled: EventSource[ExtensionInfo] = bindings.Management.onDisabled
 
   def getAll: Future[js.Array[ExtensionInfo]] = {
     val promise = Promise[js.Array[ExtensionInfo]]()

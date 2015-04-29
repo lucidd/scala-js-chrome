@@ -1,6 +1,7 @@
 package chrome.system.display
 
-import chrome.events.bindings.Event
+import chrome.events.EventSource
+import chrome.events.EventSourceImplicits._
 import chrome.system.display.bindings._
 
 import scala.concurrent.{Future, Promise}
@@ -9,7 +10,7 @@ import scala.scalajs.js
 
 object Display {
 
-  val onDisplayChanged: Event[js.Function0[_]] = bindings.Display.onDisplayChanged
+  val onDisplayChanged: EventSource[Unit] = bindings.Display.onDisplayChanged
 
   def getInfo: Future[List[DisplayInfo]] = {
     val promise = Promise[List[DisplayInfo]]()

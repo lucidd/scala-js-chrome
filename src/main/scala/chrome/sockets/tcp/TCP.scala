@@ -1,6 +1,7 @@
 package chrome.sockets.tcp
 
-import chrome.events.bindings.Event
+import chrome.events.EventSource
+import chrome.events.EventSourceImplicits._
 import chrome.sockets.tcp.bindings._
 
 import scala.concurrent.{Future, Promise}
@@ -9,8 +10,8 @@ import scala.scalajs.js.typedarray.ArrayBuffer
 
 object TCP {
 
-  val onReceive: Event[js.Function1[ReceiveEvent, _]] = bindings.TCP.onReceive
-  val onReceiveError: Event[js.Function1[ReceiveErrorEvent, _]] = bindings.TCP.onReceiveError
+  val onReceive: EventSource[ReceiveEvent] = bindings.TCP.onReceive
+  val onReceiveError: EventSource[ReceiveErrorEvent] = bindings.TCP.onReceiveError
 
   def create(properties: js.UndefOr[SocketProperties] = js.undefined): Future[CreateInfo] = {
     val promise = Promise[CreateInfo]()

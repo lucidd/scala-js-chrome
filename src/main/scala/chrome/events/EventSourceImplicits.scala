@@ -83,7 +83,7 @@ class EventSource3Impl[A, B, C](event: Event[js.Function3[A, B, C, _]]) extends 
 
 }
 
-object EventSourceImpl {
+object EventSourceImplicits {
 
   implicit def eventAsEventSource0(event: Event[js.Function0[_]]): EventSource[Unit] = new EventSource0Impl(event)
   implicit def eventAsEventSource1[A](event: Event[js.Function1[A, _]]): EventSource[A] = new EventSource1Impl(event)

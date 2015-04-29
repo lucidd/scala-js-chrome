@@ -1,6 +1,7 @@
 package chrome.sockets.tcpServer
 
-import chrome.events.bindings.Event
+import chrome.events.EventSource
+import chrome.events.EventSourceImplicits._
 import chrome.sockets.tcpServer.bindings._
 
 import scala.concurrent.{Future, Promise}
@@ -8,8 +9,8 @@ import scala.scalajs.js
 
 object TCPServer {
 
-  val onAccept: Event[js.Function1[AcceptEvent, _]] = bindings.TCPServer.onAccept
-  val onAcceptError: Event[js.Function1[AcceptErrorEvent, _]] = bindings.TCPServer.onAcceptError
+  val onAccept: EventSource[AcceptEvent] = bindings.TCPServer.onAccept
+  val onAcceptError: EventSource[AcceptErrorEvent] = bindings.TCPServer.onAcceptError
 
   def create(properties: js.UndefOr[SocketProperties] = js.undefined): Future[CreateInfo] = {
     val promise = Promise[CreateInfo]()

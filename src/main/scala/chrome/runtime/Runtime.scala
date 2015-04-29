@@ -1,6 +1,8 @@
 package chrome.runtime
 
+import chrome.events.EventSourceImplicits._
 import chrome.events.bindings.Event
+import chrome.events.{EventSource, Subscription}
 import chrome.runtime.bindings.Runtime.AppID
 import chrome.runtime.bindings._
 import org.scalajs.dom.Window
@@ -8,6 +10,7 @@ import org.scalajs.dom.Window
 import scala.concurrent.{Future, Promise}
 import scala.scalajs.js
 import scala.scalajs.js.{UndefOr, undefined}
+import scala.util.{Failure, Success}
 
 
 sealed trait UpdateCheckResult
@@ -21,19 +24,64 @@ case class Throttled() extends UpdateCheckResult
 object Runtime {
 
   val id: bindings.Runtime.AppID = bindings.Runtime.id
-  val onStartup: Event[js.Function0[_]] = bindings.Runtime.onStartup
-  val onInstalled: Event[js.Function1[OnInstalledDetails, _]] = bindings.Runtime.onInstalled
-  val onSuspend: Event[js.Function0[_]] = bindings.Runtime.onSuspend
-  val onSuspendCanceled: Event[js.Function0[_]] = bindings.Runtime.onSuspendCanceled
-  val onUpdateAvailable: Event[js.Function1[OnUpdateAvailableDetails, _]] = bindings.Runtime.onUpdateAvailable
-  val onBrowserUpdateAvailable: Event[js.Function0[_]] = bindings.Runtime.onBrowserUpdateAvailable
-  val onConnect: Event[js.Function1[Port, _]] = bindings.Runtime.onConnect
-  val onConnectExternal: Event[js.Function1[Port, _]] = bindings.Runtime.onConnectExternal
-  val onMessage: Event[js.Function3[UndefOr[js.Object], MessageSender, js.Function1[js.Object, _], Boolean]] =
-    bindings.Runtime.onMessage
-  val onMessageExternal: Event[js.Function3[UndefOr[js.Object], MessageSender, js.Function1[js.Object, _], Boolean]] =
-    bindings.Runtime.onMessageExternal
-  val onRestartRequired: Event[js.Function1[RestartReasons.RestartReason, _]] = bindings.Runtime.onRestartRequired
+  val onStartup: EventSource[Unit] = bindings.Runtime.onStartup
+  val onInstalled: EventSource[OnInstalledDetails] = bindings.Runtime.onInstalled
+  val onSuspend: EventSource[Unit] = bindings.Runtime.onSuspend
+  val onSuspendCanceled: EventSource[Unit] = bindings.Runtime.onSuspendCanceled
+  val onUpdateAvailable: EventSource[OnUpdateAvailableDetails] = bindings.Runtime.onUpdateAvailable
+  val onBrowserUpdateAvailable: EventSource[Unit] = bindings.Runtime.onBrowserUpdateAvailable
+  val onConnect: EventSource[Port] = bindings.Runtime.onConnect
+  val onConnectExternal: EventSource[Port] = bindings.Runtime.onConnectExternal
+
+  class Message[A, R](val value: A, sender: MessageSender, sendResponse: js.Function1[R, _]) {
+
+    private[Runtime] var async = false
+
+    def response(response: R): Unit = {
+      sendResponse(response)
+      async = false
+    }
+
+    def response(asyncResponse: Future[R], failure: => R): Unit = {
+      import scala.scalajs.concurrent.JSExecutionContext.Implicits.queue
+      asyncResponse.onComplete {
+        case Success(value) => sendResponse(value)
+        case Failure(error) => sendResponse(failure)
+      }
+      async = true
+    }
+
+  }
+
+  class MessageEventSource(event: Event[js.Function3[UndefOr[Any], MessageSender, js.Function1[Any, _], Boolean]])
+    extends EventSource[Message[Option[Any], Any]] {
+
+    class SubscriptionImpl(fn: Message[Option[Any], Any] => Unit) extends Subscription {
+
+      val fn2 = (msg: UndefOr[Any], sender: MessageSender, sendResponse: js.Function1[Any, _]) => {
+        val message = new Message[Option[Any], Any](msg.toOption, sender, sendResponse)
+        fn(message)
+        message.async
+      }
+
+      event.addListener(fn2)
+
+      def cancel(): Unit = {
+        event.removeListener(fn2)
+      }
+
+    }
+
+    def listen(fn: Message[Option[Any], Any] => Unit): Subscription = {
+      new SubscriptionImpl(fn)
+    }
+
+  }
+
+  val onMessage: EventSource[Message[Option[Any], Any]] = new MessageEventSource(bindings.Runtime.onMessage)
+  val onMessageExternal: EventSource[Message[Option[Any], Any]] =
+    new MessageEventSource(bindings.Runtime.onMessageExternal)
+  val onRestartRequired: EventSource[RestartReasons.RestartReason] = bindings.Runtime.onRestartRequired
 
   def lastError: Option[Error] = bindings.Runtime.lastError.toOption
 

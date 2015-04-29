@@ -1,14 +1,15 @@
 package chrome.audio
 
 import chrome.audio.bindings._
-import chrome.events.bindings.Event
+import chrome.events.EventSource
+import chrome.events.EventSourceImplicits._
 
 import scala.concurrent.{Future, Promise}
 import scala.scalajs.js
 
 object Audio {
 
-  val onDeviceChanged: Event[js.Function0[_]] = bindings.Audio.onDeviceChanged
+  val onDeviceChanged: EventSource[Unit] = bindings.Audio.onDeviceChanged
 
   def getInfo: Future[(js.Array[OutputInfo], js.Array[InputInfo])] = {
     val promise = Promise[(js.Array[OutputInfo], js.Array[InputInfo])]()

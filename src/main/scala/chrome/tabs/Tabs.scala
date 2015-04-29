@@ -1,6 +1,7 @@
 package chrome.tabs
 
-import chrome.events.bindings.Event
+import chrome.events.EventSource
+import chrome.events.EventSourceImplicits._
 import chrome.runtime.bindings.Port
 import chrome.tabs.bindings._
 import chrome.windows.bindings.Window
@@ -12,16 +13,16 @@ import scala.scalajs.js.UndefOr
 
 object Tabs {
 
-  val onCreated: Event[js.Function1[Tab, _]] = bindings.Tabs.onCreated
-  val onUpdated: Event[js.Function3[Tab.Id, ChangeInfo, Tab, _]] = bindings.Tabs.onUpdated
-  val onMoved: Event[js.Function2[Tab.Id, MoveInfo, _]] = bindings.Tabs.onMoved
-  val onActivated: Event[js.Function1[ActiveInfo, _]] = bindings.Tabs.onActivated
-  val onHighlighted: Event[js.Function1[HighlightInfo, _]] = bindings.Tabs.onHighlighted
-  val onDetached: Event[js.Function2[Tab.Id, DetachInfo, _]] = bindings.Tabs.onDetached
-  val onAttached: Event[js.Function2[Tab.Id, AttachInfo, _]] = bindings.Tabs.onAttached
-  val onRemoved: Event[js.Function2[Tab.Id, RemoveInfo, _]] = bindings.Tabs.onRemoved
-  val onReplaced: Event[js.Function2[Tab.Id, Tab.Id, _]] = bindings.Tabs.onReplaced
-  val onZoomChange: Event[js.Function1[ZoomChangeInfo, _]] = bindings.Tabs.onZoomChange
+  val onCreated: EventSource[Tab] = bindings.Tabs.onCreated
+  val onUpdated: EventSource[(Tab.Id, ChangeInfo, Tab)] = bindings.Tabs.onUpdated
+  val onMoved: EventSource[(Tab.Id, MoveInfo)] = bindings.Tabs.onMoved
+  val onActivated: EventSource[ActiveInfo] = bindings.Tabs.onActivated
+  val onHighlighted: EventSource[HighlightInfo] = bindings.Tabs.onHighlighted
+  val onDetached: EventSource[(Tab.Id, DetachInfo)] = bindings.Tabs.onDetached
+  val onAttached: EventSource[(Tab.Id, AttachInfo)] = bindings.Tabs.onAttached
+  val onRemoved: EventSource[(Tab.Id, RemoveInfo)] = bindings.Tabs.onRemoved
+  val onReplaced: EventSource[(Tab.Id, Tab.Id)] = bindings.Tabs.onReplaced
+  val onZoomChange: EventSource[ZoomChangeInfo] = bindings.Tabs.onZoomChange
 
   def get(tabId: Tab.Id): Future[Tab] = {
     val promise = Promise[Tab]()

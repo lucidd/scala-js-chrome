@@ -1,7 +1,8 @@
 package chrome.app.window
 
 import chrome.app.window.bindings._
-import chrome.events.bindings.Event
+import chrome.events.EventSource
+import chrome.events.EventSourceImplicits._
 
 import scala.concurrent.{Future, Promise}
 import scala.scalajs.js
@@ -9,12 +10,12 @@ import scala.scalajs.js
 
 object Window {
 
-  val onBoundsChanged: Event[js.Function0[_]] = bindings.Window.onBoundsChanged
-  val onClosed: Event[js.Function0[_]] = bindings.Window.onClosed
-  val onFullscreened: Event[js.Function0[_]] = bindings.Window.onFullscreened
-  val onMaximized: Event[js.Function0[_]] = bindings.Window.onMaximized
-  val onMinimized: Event[js.Function0[_]] = bindings.Window.onMinimized
-  val onRestored: Event[js.Function0[_]] = bindings.Window.onRestored
+  val onBoundsChanged: EventSource[Unit] = bindings.Window.onBoundsChanged
+  val onClosed: EventSource[Unit] = bindings.Window.onClosed
+  val onFullscreened: EventSource[Unit] = bindings.Window.onFullscreened
+  val onMaximized: EventSource[Unit] = bindings.Window.onMaximized
+  val onMinimized: EventSource[Unit] = bindings.Window.onMinimized
+  val onRestored: EventSource[Unit] = bindings.Window.onRestored
 
   def current: AppWindow = bindings.Window.current()
 
