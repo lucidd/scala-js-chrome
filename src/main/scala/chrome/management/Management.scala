@@ -3,6 +3,7 @@ package chrome.management
 import chrome.events.bindings.Event
 import chrome.management.bindings.ExtensionInfo._
 import chrome.management.bindings._
+import chrome.runtime.bindings.Runtime.AppID
 
 import scala.concurrent.{Future, Promise}
 import scala.scalajs.js
@@ -22,7 +23,7 @@ object Management {
     promise.future
   }
 
-  def get(id: String): Future[ExtensionInfo] = {
+  def get(id: AppID): Future[ExtensionInfo] = {
     val promise = Promise[ExtensionInfo]()
     bindings.Management.get(id, (extension: ExtensionInfo) => {
       promise.complete(chrome.lastErrorOrValue(extension))
@@ -38,7 +39,7 @@ object Management {
     promise.future
   }
 
-  def getPermissionWarningsById(id: String): Future[js.Array[String]] = {
+  def getPermissionWarningsById(id: AppID): Future[js.Array[String]] = {
     val promise = Promise[js.Array[String]]()
     bindings.Management.getPermissionWarningsById(id, (warnings: js.Array[String]) => {
       promise.complete(chrome.lastErrorOrValue(warnings))
@@ -54,7 +55,7 @@ object Management {
     promise.future
   }
 
-  def setEnabled(id: String, enabled: Boolean): Future[Boolean] = {
+  def setEnabled(id: AppID, enabled: Boolean): Future[Boolean] = {
     val promise = Promise[Boolean]()
     bindings.Management.setEnabled(id, enabled, js.Any.fromFunction0(() => {
       promise.complete(chrome.lastErrorOrValue(enabled))
@@ -62,7 +63,7 @@ object Management {
     promise.future
   }
 
-  def uninstall(id: String, options: js.UndefOr[js.Object] = js.undefined): Future[Unit] = {
+  def uninstall(id: AppID, options: js.UndefOr[js.Object] = js.undefined): Future[Unit] = {
     val promise = Promise[Unit]()
     bindings.Management.uninstall(id, options, js.Any.fromFunction0(() => {
       promise.complete(chrome.lastErrorOrValue(()))
@@ -79,7 +80,7 @@ object Management {
     promise.future
   }
 
-  def launchApp(id: String): Future[Unit] = {
+  def launchApp(id: AppID): Future[Unit] = {
     val promise = Promise[Unit]()
     bindings.Management.launchApp(id, js.Any.fromFunction0(() => {
       promise.complete(chrome.lastErrorOrValue(()))
@@ -87,7 +88,7 @@ object Management {
     promise.future
   }
 
-  def createAppShortcut(id: String): Future[Unit] = {
+  def createAppShortcut(id: AppID): Future[Unit] = {
     val promise = Promise[Unit]()
     bindings.Management.createAppShortcut(id, js.Any.fromFunction0(() => {
       promise.complete(chrome.lastErrorOrValue(()))
@@ -95,7 +96,7 @@ object Management {
     promise.future
   }
 
-  def setLaunchType(id: String, launchType: LaunchType): Future[Unit] = {
+  def setLaunchType(id: AppID, launchType: LaunchType): Future[Unit] = {
     val promise = Promise[Unit]()
     bindings.Management.setLaunchType(id, launchType, js.Any.fromFunction0(() => {
       promise.complete(chrome.lastErrorOrValue(()))

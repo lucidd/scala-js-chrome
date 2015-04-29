@@ -1,6 +1,7 @@
 package chrome.runtime
 
 import chrome.events.bindings.Event
+import chrome.runtime.bindings.Runtime.AppID
 import chrome.runtime.bindings._
 import org.scalajs.dom.Window
 
@@ -70,7 +71,7 @@ object Runtime {
     promise.future
   }
 
-  def connect(extensionId: UndefOr[String] = undefined, connectInfo: UndefOr[ConnectInfo] = undefined): Port = {
+  def connect(extensionId: UndefOr[AppID] = undefined, connectInfo: UndefOr[ConnectInfo] = undefined): Port = {
     bindings.Runtime.connect(extensionId, connectInfo)
   }
 
@@ -78,9 +79,9 @@ object Runtime {
     bindings.Runtime.connectNative(application)
   }
 
-  def sendMessage(extensionId: UndefOr[String] = undefined, message: js.Object,
+  def sendMessage(extensionId: UndefOr[AppID] = undefined, message: js.Any,
                   options: UndefOr[SendMessageOptions] = undefined,
-                  responseCallback: UndefOr[js.Function1[js.Object, _]]): Unit = {
+                  responseCallback: UndefOr[js.Function1[js.Object, _]] = js.undefined): Unit = {
     bindings.Runtime.sendMessage(extensionId, message, options, responseCallback)
   }
 

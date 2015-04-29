@@ -43,13 +43,13 @@ object Runtime extends js.Object {
 
   def requestUpdateCheck(callback: js.Function2[UpdateCheck.Status, UndefOr[UpdateCheck.Details], _]): Unit = native
 
-  def connect(extensionId: UndefOr[String] = undefined, connectInfo: UndefOr[ConnectInfo] = undefined): Port = native
+  def connect(extensionId: UndefOr[AppID] = undefined, connectInfo: UndefOr[ConnectInfo] = undefined): Port = native
 
   def connectNative(application: String): Port = native
 
-  def sendMessage(extensionId: UndefOr[String] = undefined, message: js.Object,
+  def sendMessage(extensionId: UndefOr[AppID] = undefined, message: js.Any,
                   options: UndefOr[SendMessageOptions] = undefined,
-                  responseCallback: UndefOr[js.Function1[js.Object, _]]): Unit = native
+                  responseCallback: UndefOr[js.Function1[js.Object, _]] = js.undefined): Unit = native
 
   def sendNativeMessage(application: String, message: js.Object,
                         responseCallback: UndefOr[js.Function1[js.Object, _]]): Unit = native
