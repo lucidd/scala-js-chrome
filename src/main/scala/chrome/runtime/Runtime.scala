@@ -51,6 +51,14 @@ object Runtime {
 
   def getManifest: Manifest = bindings.Runtime.getManifest()
 
+  def openOptionsPage: Future[Unit] = {
+    val promise = Promise[Unit]
+    bindings.Runtime.openOptionsPage(js.Any.fromFunction0(() => {
+      promise.complete(chrome.lastErrorOrValue(()))
+    }))
+    promise.future
+  }
+
   def getURL(path: String): String = bindings.Runtime.getURL(path)
 
   def setUninstallURL(url: String): Unit = bindings.Runtime.setUninstallURL(url)

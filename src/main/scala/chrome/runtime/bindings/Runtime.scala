@@ -37,6 +37,8 @@ object Runtime extends js.Object {
 
   def getManifest(): Manifest = native
 
+  def openOptionsPage(callback: js.UndefOr[js.Function0[_]]): Unit = js.native
+
   def getURL(path: String): String = native
 
   def setUninstallURL(url: String): Unit = native
