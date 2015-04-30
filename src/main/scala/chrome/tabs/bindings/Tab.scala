@@ -1,16 +1,19 @@
 package chrome.tabs.bindings
 
+import chrome.sessions.bindings.Session
+import chrome.windows.bindings.Window
+
 import scala.scalajs.js
 
 class Tab extends js.Object {
 
-  def id: js.UndefOr[Int] = js.native
+  def id: js.UndefOr[Tab.Id] = js.native
 
   def index: Int = js.native
 
-  def windowId: Int = js.native
+  def windowId: Window.Id = js.native
 
-  def openerTabId: js.UndefOr[Int] = js.native
+  def openerTabId: js.UndefOr[Tab.Id] = js.native
 
   def highlighted: Boolean = js.native
 
@@ -32,7 +35,7 @@ class Tab extends js.Object {
 
   def height: js.UndefOr[Int] = js.native
 
-  def sessionId: js.UndefOr[String] = js.native
+  def sessionId: js.UndefOr[Session.Id] = js.native
 
 }
 
