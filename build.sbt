@@ -16,7 +16,8 @@ persistLauncher in Test := false
 scalacOptions ++= Seq(
     "-Xlint",
     "-deprecation",
-    "-Xfatal-warnings"
+    "-Xfatal-warnings",
+    "-feature"
 )
 
 libraryDependencies ++= Seq(
