@@ -1,8 +1,12 @@
 package chrome.power
 
+import chrome.ChromeAPI
+import chrome.permissions.APIPermission
 import chrome.power.bindings._
 
-object Power {
+object Power extends ChromeAPI {
+
+  val requiredPermissions: List[APIPermission] = List(APIPermission.Power)
 
   def requestKeepAwake(level: Level.Level): Unit = bindings.Power.requestKeepAwake(level)
 

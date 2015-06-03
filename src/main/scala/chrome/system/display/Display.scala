@@ -1,14 +1,18 @@
 package chrome.system.display
 
+import chrome.ChromeAPI
 import chrome.events.EventSource
 import chrome.events.EventSourceImplicits._
+import chrome.permissions.APIPermission
 import chrome.system.display.bindings._
 
 import scala.concurrent.{Future, Promise}
 import scala.scalajs.js
 
 
-object Display {
+object Display extends ChromeAPI {
+
+  val requiredPermissions: List[APIPermission] = List(APIPermission.System.Display)
 
   val onDisplayChanged: EventSource[Unit] = bindings.Display.onDisplayChanged
 

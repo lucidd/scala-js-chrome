@@ -1,15 +1,19 @@
 package chrome.management
 
+import chrome.ChromeAPI
 import chrome.events.EventSource
 import chrome.events.EventSourceImplicits._
 import chrome.management.bindings.ExtensionInfo._
 import chrome.management.bindings._
+import chrome.permissions.APIPermission
 import chrome.runtime.bindings.Runtime.AppID
 
 import scala.concurrent.{Future, Promise}
 import scala.scalajs.js
 
-object Management {
+object Management extends ChromeAPI {
+
+  val requiredPermissions: List[APIPermission] = List(APIPermission.Management)
 
   val onInstalled: EventSource[ExtensionInfo] = bindings.Management.onInstalled
   val onUninstalled: EventSource[String] = bindings.Management.onUninstalled

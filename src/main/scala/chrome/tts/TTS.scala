@@ -1,11 +1,15 @@
 package chrome.tts
 
+import chrome.ChromeAPI
+import chrome.permissions.APIPermission
 import chrome.tts.bindings._
 
 import scala.concurrent.{Future, Promise}
 import scala.scalajs.js
 
-object TTS {
+object TTS extends ChromeAPI {
+
+  val requiredPermissions: List[APIPermission] = List(APIPermission.TTS)
 
   def speak(utterance: String, options: js.UndefOr[SpeakOptions] = js.undefined): Future[Unit] = {
     val promise = Promise[Unit]()
