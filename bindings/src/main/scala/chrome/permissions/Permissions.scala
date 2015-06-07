@@ -9,6 +9,12 @@ import scala.scalajs.js
 
 object Permissions {
 
+  implicit class PermissionOps(val permission: Permission) extends AnyVal {
+    def granted: Future[Boolean] = Permissions.contains(permission)
+    def request: Future[Boolean] = Permissions.request(permission)
+    def drop: Future[Boolean] = Permissions.remove(permission)
+  }
+
   val onAdded: EventSource[PermissionList] = bindings.Permissions.onAdded
   val onRemoved: EventSource[PermissionList] = bindings.Permissions.onRemoved
 

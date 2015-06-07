@@ -1,12 +1,6 @@
 package chrome.permissions
 
-import scala.concurrent.Future
-
-sealed trait Permission {
-  def granted: Future[Boolean] = Permissions.contains(this)
-  def request: Future[Boolean] = Permissions.request(this)
-  def drop: Future[Boolean] = Permissions.remove(this)
-}
+sealed trait Permission
 
 class HostPermission(val urlPattern: String) extends Permission
 

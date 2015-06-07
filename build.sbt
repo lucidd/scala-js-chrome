@@ -5,6 +5,9 @@ lazy val commonSettings = Seq(
     "-deprecation",
     "-Xfatal-warnings",
     "-feature"
+  ),
+  unmanagedSourceDirectories in Compile ++= Seq(
+    baseDirectory.value.getParentFile / "shared" / "src" / "main" / "scala"
   )
 )
 
