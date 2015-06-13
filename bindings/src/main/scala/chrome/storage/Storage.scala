@@ -1,0 +1,64 @@
+package chrome.storage
+
+import chrome.ChromeAPI
+import chrome.events.EventSource
+import chrome.events.EventSourceImplicits._
+import chrome.permissions.APIPermission
+import chrome.storage.bindings.StorageChange
+import scala.concurrent.{Promise, Future}
+import scala.scalajs.js
+
+
+object Storage extends ChromeAPI {
+
+  implicit class StorageArea(area: bindings.StorageArea) {
+
+    def get(keys: js.UndefOr[js.Any] = js.undefined): Future[Map[String, js.Any]] = {
+      val promise = Promise[Map[String, js.Any]]()
+      area.get(keys, (results: Map[String, js.Any]) => {
+        promise.complete(chrome.lastErrorOrValue(results))
+      })
+      promise.future
+    }
+
+    def getBytesInUse(keys: js.UndefOr[js.Any] = js.undefined): Future[Int] = {
+      val promise = Promise[Int]()
+      area.getBytesInUse(keys, (result: Int) => {
+        promise.complete(chrome.lastErrorOrValue(result))
+      })
+      promise.future
+    }
+
+    def set(items: Map[String, js.Any]): Future[Unit] = {
+      val promise = Promise[Unit]()
+      area.set(items, js.Any.fromFunction0(() => {
+        promise.complete(chrome.lastErrorOrValue(()))
+      }))
+      promise.future
+    }
+
+    def remove(keys: js.Any): Future[Unit] = {
+      val promise = Promise[Unit]()
+      area.remove(keys, js.Any.fromFunction0(() => {
+        promise.complete(chrome.lastErrorOrValue(()))
+      }))
+      promise.future
+    }
+
+    def clear: Future[Unit] = {
+      val promise = Promise[Unit]()
+      area.clear(js.Any.fromFunction0(() => {
+        promise.complete(chrome.lastErrorOrValue(()))
+      }))
+      promise.future
+    }
+  }
+
+  val requiredPermissions: Set[APIPermission] = Set(APIPermission.Storage)
+  val onChanged: EventSource[(Map[String, StorageChange], String)] = bindings.Storage.onChanged
+
+  val sync: StorageArea = bindings.Storage.sync
+  val local: StorageArea = bindings.Storage.local
+  val managed: StorageArea = bindings.Storage.managed
+
+}
