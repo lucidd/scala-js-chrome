@@ -9,7 +9,7 @@ import scala.concurrent.{Future, Promise}
 
 object CPU extends ChromeAPI {
 
-  val requiredPermissions: List[APIPermission] = List(APIPermission.System.CPU)
+  val requiredPermissions: Set[APIPermission] = Set(APIPermission.System.CPU)
 
   def getInfo: Future[CPUInfo] = {
     val promise = Promise[CPUInfo]()

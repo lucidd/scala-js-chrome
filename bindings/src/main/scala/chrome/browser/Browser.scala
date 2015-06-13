@@ -9,7 +9,7 @@ import scala.scalajs.js
 
 object Browser extends ChromeAPI {
 
-  val requiredPermissions: List[APIPermission] = List(APIPermission.Browser)
+  val requiredPermissions: Set[APIPermission] = Set(APIPermission.Browser)
 
   def openTab(url: String): Future[Unit] = {
     val promise = Promise[Unit]()

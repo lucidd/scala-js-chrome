@@ -13,7 +13,7 @@ import scala.scalajs.js
 
 object Management extends ChromeAPI {
 
-  val requiredPermissions: List[APIPermission] = List(APIPermission.Management)
+  val requiredPermissions: Set[APIPermission] = Set(APIPermission.Management)
 
   val onInstalled: EventSource[ExtensionInfo] = bindings.Management.onInstalled
   val onUninstalled: EventSource[String] = bindings.Management.onUninstalled

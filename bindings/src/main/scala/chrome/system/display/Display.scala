@@ -12,7 +12,7 @@ import scala.scalajs.js
 
 object Display extends ChromeAPI {
 
-  val requiredPermissions: List[APIPermission] = List(APIPermission.System.Display)
+  val requiredPermissions: Set[APIPermission] = Set(APIPermission.System.Display)
 
   val onDisplayChanged: EventSource[Unit] = bindings.Display.onDisplayChanged
 

@@ -15,7 +15,7 @@ import scala.scalajs.js.UndefOr
 
 object Tabs extends ChromeAPI {
 
-  val requiredPermissions: List[APIPermission] = List(APIPermission.Tabs)
+  val requiredPermissions: Set[APIPermission] = Set(APIPermission.Tabs)
 
   val onCreated: EventSource[Tab] = bindings.Tabs.onCreated
   val onUpdated: EventSource[(Tab.Id, ChangeInfo, Tab)] = bindings.Tabs.onUpdated

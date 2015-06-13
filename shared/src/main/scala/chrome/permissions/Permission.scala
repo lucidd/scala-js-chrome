@@ -35,6 +35,7 @@ object APIPermission {
   val Processes = APIPermission("processes", "")
   val Privacy = APIPermission("privacy", "")
   val Cookies = APIPermission("cookies", "")
+  val Storage = APIPermission("storage", "")
 
 }
 

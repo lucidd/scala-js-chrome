@@ -10,7 +10,7 @@ import scala.concurrent.{Promise, Future}
 
 object Idle extends ChromeAPI {
 
-  val requiredPermissions: List[APIPermission] = List(APIPermission.Idle)
+  val requiredPermissions: Set[APIPermission] = Set(APIPermission.Idle)
 
   val onStateChanged: EventSource[State] = bindings.Idle.onStateChanged
 

@@ -2,6 +2,7 @@ package chrome.processes
 
 import chrome.events.EventSource
 import chrome.events.EventSourceImplicits._
+import chrome.permissions.APIPermission
 import chrome.processes.bindings._
 import chrome.tabs.bindings.Tab
 
@@ -9,6 +10,8 @@ import scala.concurrent.{Future, Promise}
 import scala.scalajs.js
 
 object Processes {
+
+  val requiredPermissions: Set[APIPermission] = Set(APIPermission.Processes)
 
   val onUpdated: EventSource[Map[Process.Id, Process]] = bindings.Processes.onUpdated
   val onUpdatedWithMemory: EventSource[Map[Process.Id, Process]] = bindings.Processes.onUpdatedWithMemory

@@ -8,7 +8,7 @@ import scala.scalajs.js
 
 object Network extends ChromeAPI {
 
-  val requiredPermissions: List[APIPermission] = List(APIPermission.System.Network)
+  val requiredPermissions: Set[APIPermission] = Set(APIPermission.System.Network)
 
   def getNetworkInterfaces: Future[List[Interface]] = {
     val promise = Promise[List[Interface]]()

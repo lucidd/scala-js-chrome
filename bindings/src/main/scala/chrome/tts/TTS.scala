@@ -9,7 +9,7 @@ import scala.scalajs.js
 
 object TTS extends ChromeAPI {
 
-  val requiredPermissions: List[APIPermission] = List(APIPermission.TTS)
+  val requiredPermissions: Set[APIPermission] = Set(APIPermission.TTS)
 
   def speak(utterance: String, options: js.UndefOr[SpeakOptions] = js.undefined): Future[Unit] = {
     val promise = Promise[Unit]()
