@@ -25,7 +25,7 @@ object Permissions {
       promise.complete(lastErrorOrValue({
         val apiPerms = for {
           perm <- perms.permissions.getOrElse(js.Array())
-          result <- string2Permission(perm)
+          result <- permissionFromString(perm)
         } yield result
 
         val hostPerms = for {
@@ -38,15 +38,8 @@ object Permissions {
     promise.future
   }
 
-  private def string2Permission(perm: String): Option[APIPermission] = {
-    import APIPermission._
-    perm match {
-      case Tabs.name => Some(Tabs)
-      case System.Display.name => Some(System.Display)
-      case System.CPU.name => Some(System.CPU)
-      case TTS.name => Some(TTS)
-      case _ => None
-    }
+  def permissionFromString(perm: String): Option[Permission] = {
+    APIPermission.All.get(perm).orElse(Some(HostPermission(perm)))
   }
 
   def contains(permissions: Permission*): Future[Boolean] = {

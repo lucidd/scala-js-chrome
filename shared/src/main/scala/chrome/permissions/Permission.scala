@@ -37,5 +37,11 @@ object APIPermission {
   val Cookies = APIPermission("cookies", "")
   val Storage = APIPermission("storage", "")
 
+  val All: Map[String, APIPermission] = Set(
+    Tabs, Notifications, System.CPU, System.Display, System.Memory, System.Network,
+    TTS, Alarms, Browser, Idle, Power, Management, Experimental, Identity, GCM,
+    Location, Sessions, Proxy, Processes, Privacy, Cookies, Storage
+  ).map(x => x.name -> x).toMap
+
 }
 
