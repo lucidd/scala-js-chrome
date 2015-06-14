@@ -1,2 +1,2 @@
 language: scala
-script: sbt fullOptJS
+script: sbt compile scalastyle

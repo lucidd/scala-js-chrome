@@ -9,11 +9,12 @@ import sbt._
 
 object ChromeSbtPlugin extends AutoPlugin {
 
-  override def requires = ScalaJSPlugin
+  override def requires: Plugins = ScalaJSPlugin
 
   object autoImport {
 
-    val chromePackageContent = SettingKey[File]("chromePackageContent", "The contents of this directory get copied to the into the chrome extension")
+    val chromePackageContent = SettingKey[File]("chromePackageContent",
+      "The contents of this directory get copied to the into the chrome extension")
     val chromeBuildOpt = TaskKey[File]("chromeBuildOpt")
     val chromeBuildFast = TaskKey[File]("chromeBuildFast")
     val chromePackage = TaskKey[File]("chromePackage")

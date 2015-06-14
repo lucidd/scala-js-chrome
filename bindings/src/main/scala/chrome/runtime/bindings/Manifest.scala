@@ -41,15 +41,15 @@ object Manifest {
     def isExtensionManifest: Boolean = !isAppManifest
 
     def asAppManifest: Option[AppManifest] = {
-      if (isAppManifest)
+      if (isAppManifest) {
         Some(manifest.asInstanceOf[AppManifest])
-      else None
+      } else None
     }
 
     def asExtensionManifest: Option[ExtensionManifest] = {
-      if (isExtensionManifest)
+      if (isExtensionManifest) {
         Some(manifest.asInstanceOf[ExtensionManifest])
-      else None
+      } else None
     }
   }
 
