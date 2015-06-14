@@ -1,2 +1,5 @@
 language: scala
+before_script:
+  - mkdir -p /home/travis/.sbt/launchers/0.13.9-M1
+  - curl -L http://dl.bintray.com/typesafe/ivy-releases/org.scala-sbt/sbt-launch/0.13.9-M1/sbt-launch.jar -o /home/travis/.sbt/launchers/0.13.9-M1/sbt-launch.jar
 script: sbt compile scalastyle
