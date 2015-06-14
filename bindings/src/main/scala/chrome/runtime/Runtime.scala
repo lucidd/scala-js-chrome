@@ -1,8 +1,10 @@
 package chrome.runtime
 
+import chrome.Impl.{ExtensionManifest, Background, App, AppManifest}
 import chrome.events.EventSourceImplicits._
 import chrome.events.bindings.Event
 import chrome.events.{EventSource, Subscription}
+import chrome.permissions.{Permission, Permissions}
 import chrome.runtime.bindings.Runtime.AppID
 import chrome.runtime.bindings._
 import org.scalajs.dom.Window
@@ -98,7 +100,50 @@ object Runtime {
 
   def restart(): Unit = bindings.Runtime.restart()
 
-  def getManifest: Manifest = bindings.Runtime.getManifest()
+  def getManifest: chrome.Manifest = {
+    val manifest = bindings.Runtime.getManifest()
+    val perms = manifest.permissions.map(_.foldLeft(Set[Permission]()){
+      case (acc, perm) => acc ++ Permissions.permissionFromString(perm)
+    }).getOrElse(Set())
+    val icons = for {
+      (k, v) <- manifest.icons.getOrElse(Map())
+    } yield k.toInt -> v
+    if (manifest.isAppManifest) {
+      val app = manifest.asAppManifest.get
+      AppManifest(
+        app = App(
+          background = Background(
+            scripts = app.app.background.scripts.toList
+          )
+        ),
+        name = manifest.name,
+        version = manifest.version,
+        manifestVersion = manifest.manifest_version,
+        shortName = manifest.shortName.toOption,
+        defaultLocale = manifest.defaultLocale.toOption,
+        description = manifest.description.toOption,
+        offlineEnabled = manifest.offlineEnabled.getOrElse(true),
+        permissions = perms,
+        icons = icons
+      )
+    } else {
+      val extension = manifest.asExtensionManifest.get
+      ExtensionManifest(
+        name = manifest.name,
+        version = manifest.version,
+        manifestVersion = manifest.manifest_version,
+        shortName = manifest.shortName.toOption,
+        defaultLocale = manifest.defaultLocale.toOption,
+        description = manifest.description.toOption,
+        offlineEnabled = manifest.offlineEnabled.getOrElse(true),
+        permissions = perms,
+        icons = icons,
+        background = Background(
+          scripts = extension.background.map(_.scripts.toList).getOrElse(List())
+        )
+      )
+    }
+  }
 
   def openOptionsPage: Future[Unit] = {
     val promise = Promise[Unit]

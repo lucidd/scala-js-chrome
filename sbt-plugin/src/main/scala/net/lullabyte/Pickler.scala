@@ -1,34 +1,11 @@
 package net.lullabyte
 
-import chrome.permissions._
+import chrome.AppManifest
+import chrome.permissions.{HostPermission, APIPermission}
 
-sealed trait Manifest {
-  val name: String
-  val version: String
-  val defaultLocale: Option[String]
-  val description: Option[String]
-  val permissions: Set[Permission]
-  val icons: Map[Int, String]
-}
-
-case class AppManifest(app: AppManifest.App,
-                    manifestVersion: Int = 2,
-                    name: String,
-                    shortName: Option[String] = None,
-                    version: String,
-                    defaultLocale: Option[String] = None,
-                    description: Option[String] = None,
-                    offlineEnabled: Boolean = true,
-                    icons: Map[Int, String] = Map(),
-                    permissions: Set[Permission] = Set()) extends Manifest
-
-object AppManifest {
+object Pickler {
 
   import upickle._
-
-  case class Background(scripts: List[String])
-
-  case class App(background: Background)
 
   implicit val manifestWriter = upickle.Writer[AppManifest] {
     case m => {
@@ -59,3 +36,4 @@ object AppManifest {
     }
   }
 }
+
