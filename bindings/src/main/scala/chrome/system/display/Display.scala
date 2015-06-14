@@ -5,6 +5,7 @@ import chrome.events.EventSource
 import chrome.events.EventSourceImplicits._
 import chrome.permissions.APIPermission
 import chrome.system.display.bindings._
+import utils.ErrorHandling.lastErrorOrValue
 
 import scala.concurrent.{Future, Promise}
 import scala.scalajs.js
@@ -19,7 +20,7 @@ object Display extends ChromeAPI {
   def getInfo: Future[List[DisplayInfo]] = {
     val promise = Promise[List[DisplayInfo]]()
     bindings.Display.getInfo((info: js.Array[DisplayInfo]) => {
-      promise.complete(chrome.lastErrorOrValue(info.toList))
+      promise.complete(lastErrorOrValue(info.toList))
     })
     promise.future
   }
@@ -27,7 +28,7 @@ object Display extends ChromeAPI {
   def setDisplayProperties(id: bindings.Display.ID, info: DisplayProperties): Future[bindings.Display.ID] = {
     val promise = Promise[bindings.Display.ID]()
     bindings.Display.setDisplayProperties(id, info, js.Any.fromFunction0(() => {
-      promise.complete(chrome.lastErrorOrValue(id))
+      promise.complete(lastErrorOrValue(id))
     }))
     promise.future
   }

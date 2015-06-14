@@ -3,6 +3,7 @@ package chrome.sockets.tcpServer
 import chrome.events.EventSource
 import chrome.events.EventSourceImplicits._
 import chrome.sockets.tcpServer.bindings._
+import utils.ErrorHandling.lastErrorOrValue
 
 import scala.concurrent.{Future, Promise}
 import scala.scalajs.js
@@ -15,7 +16,7 @@ object TCPServer {
   def create(properties: js.UndefOr[SocketProperties] = js.undefined): Future[CreateInfo] = {
     val promise = Promise[CreateInfo]()
     bindings.TCPServer.create(properties, (info: CreateInfo) => {
-      promise.complete(chrome.lastErrorOrValue(info))
+      promise.complete(lastErrorOrValue(info))
     })
     promise.future
   }
@@ -23,7 +24,7 @@ object TCPServer {
   def update(socketId: SocketId, properties: SocketProperties): Future[Unit] = {
     val promise = Promise[Unit]()
     bindings.TCPServer.update(socketId, properties, js.Any.fromFunction0(() => {
-      promise.complete(chrome.lastErrorOrValue(()))
+      promise.complete(lastErrorOrValue(()))
     }))
     promise.future
   }
@@ -31,7 +32,7 @@ object TCPServer {
   def setPaused(socketId: SocketId, paused: Boolean): Future[Unit] = {
     val promise = Promise[Unit]()
     bindings.TCPServer.setPaused(socketId, paused, js.Any.fromFunction0(() => {
-      promise.complete(chrome.lastErrorOrValue(()))
+      promise.complete(lastErrorOrValue(()))
     }))
     promise.future
   }
@@ -39,7 +40,7 @@ object TCPServer {
   def listen(socketId: SocketId, address: String, port: Int, backlog: js.UndefOr[Int] = js.undefined): Future[Int] = {
     val promise = Promise[Int]()
     bindings.TCPServer.listen(socketId, address, port, backlog, (result: Int) => {
-      promise.complete(chrome.lastErrorOrValue(result))
+      promise.complete(lastErrorOrValue(result))
     })
     promise.future
   }
@@ -47,7 +48,7 @@ object TCPServer {
   def disconnect(socketId: SocketId): Future[Unit] = {
     val promise = Promise[Unit]()
     bindings.TCPServer.disconnect(socketId, js.Any.fromFunction0(() => {
-      promise.complete(chrome.lastErrorOrValue(()))
+      promise.complete(lastErrorOrValue(()))
     }))
     promise.future
   }
@@ -55,7 +56,7 @@ object TCPServer {
   def close(socketId: SocketId): Future[Unit] = {
     val promise = Promise[Unit]()
     bindings.TCPServer.close(socketId, js.Any.fromFunction0(() => {
-      promise.complete(chrome.lastErrorOrValue(()))
+      promise.complete(lastErrorOrValue(()))
     }))
     promise.future
   }
@@ -63,7 +64,7 @@ object TCPServer {
   def getInfo(socketId: SocketId): Future[SocketInfo] = {
     val promise = Promise[SocketInfo]()
     bindings.TCPServer.getInfo(socketId, (info: SocketInfo) => {
-      promise.complete(chrome.lastErrorOrValue(info))
+      promise.complete(lastErrorOrValue(info))
     })
     promise.future
   }
@@ -71,7 +72,7 @@ object TCPServer {
   def getSockets: Future[js.Array[SocketInfo]] = {
     val promise = Promise[js.Array[SocketInfo]]()
     bindings.TCPServer.getSockets((info: js.Array[SocketInfo]) => {
-      promise.complete(chrome.lastErrorOrValue(info))
+      promise.complete(lastErrorOrValue(info))
     })
     promise.future
   }

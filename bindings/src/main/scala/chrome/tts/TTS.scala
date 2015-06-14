@@ -3,6 +3,7 @@ package chrome.tts
 import chrome.ChromeAPI
 import chrome.permissions.APIPermission
 import chrome.tts.bindings._
+import utils.ErrorHandling.lastErrorOrValue
 
 import scala.concurrent.{Future, Promise}
 import scala.scalajs.js
@@ -14,7 +15,7 @@ object TTS extends ChromeAPI {
   def speak(utterance: String, options: js.UndefOr[SpeakOptions] = js.undefined): Future[Unit] = {
     val promise = Promise[Unit]()
     bindings.TTS.speak(utterance, options, js.Any.fromFunction0(() => {
-      promise.complete(chrome.lastErrorOrValue(()))
+      promise.complete(lastErrorOrValue(()))
     }))
     promise.future
   }
@@ -28,7 +29,7 @@ object TTS extends ChromeAPI {
   def isSpeaking: Future[Boolean] = {
     val promise = Promise[Boolean]()
     bindings.TTS.isSpeaking(js.Any.fromFunction1((speaking: Boolean) => {
-      promise.complete(chrome.lastErrorOrValue(speaking))
+      promise.complete(lastErrorOrValue(speaking))
     }))
     promise.future
   }
@@ -36,7 +37,7 @@ object TTS extends ChromeAPI {
   def getVoices: Future[js.Array[TTSVoice]] = {
     val promise = Promise[js.Array[TTSVoice]]()
     bindings.TTS.getVoices(js.Any.fromFunction1((voices: js.Array[TTSVoice]) => {
-      promise.complete(chrome.lastErrorOrValue(voices))
+      promise.complete(lastErrorOrValue(voices))
     }))
     promise.future
   }

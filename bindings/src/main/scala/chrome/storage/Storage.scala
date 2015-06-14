@@ -5,6 +5,7 @@ import chrome.events.EventSource
 import chrome.events.EventSourceImplicits._
 import chrome.permissions.APIPermission
 import chrome.storage.bindings.StorageChange
+import utils.ErrorHandling.lastErrorOrValue
 import scala.concurrent.{Promise, Future}
 import scala.scalajs.js
 
@@ -16,7 +17,7 @@ object Storage extends ChromeAPI {
     def get(keys: js.UndefOr[js.Any] = js.undefined): Future[Map[String, js.Any]] = {
       val promise = Promise[Map[String, js.Any]]()
       area.get(keys, (results: Map[String, js.Any]) => {
-        promise.complete(chrome.lastErrorOrValue(results))
+        promise.complete(lastErrorOrValue(results))
       })
       promise.future
     }
@@ -24,7 +25,7 @@ object Storage extends ChromeAPI {
     def getBytesInUse(keys: js.UndefOr[js.Any] = js.undefined): Future[Int] = {
       val promise = Promise[Int]()
       area.getBytesInUse(keys, (result: Int) => {
-        promise.complete(chrome.lastErrorOrValue(result))
+        promise.complete(lastErrorOrValue(result))
       })
       promise.future
     }
@@ -32,7 +33,7 @@ object Storage extends ChromeAPI {
     def set(items: Map[String, js.Any]): Future[Unit] = {
       val promise = Promise[Unit]()
       area.set(items, js.Any.fromFunction0(() => {
-        promise.complete(chrome.lastErrorOrValue(()))
+        promise.complete(lastErrorOrValue(()))
       }))
       promise.future
     }
@@ -40,7 +41,7 @@ object Storage extends ChromeAPI {
     def remove(keys: js.Any): Future[Unit] = {
       val promise = Promise[Unit]()
       area.remove(keys, js.Any.fromFunction0(() => {
-        promise.complete(chrome.lastErrorOrValue(()))
+        promise.complete(lastErrorOrValue(()))
       }))
       promise.future
     }
@@ -48,7 +49,7 @@ object Storage extends ChromeAPI {
     def clear: Future[Unit] = {
       val promise = Promise[Unit]()
       area.clear(js.Any.fromFunction0(() => {
-        promise.complete(chrome.lastErrorOrValue(()))
+        promise.complete(lastErrorOrValue(()))
       }))
       promise.future
     }

@@ -5,6 +5,7 @@ import chrome.events.EventSourceImplicits._
 import chrome.permissions.APIPermission
 import chrome.processes.bindings._
 import chrome.tabs.bindings.Tab
+import utils.ErrorHandling.lastErrorOrValue
 
 import scala.concurrent.{Future, Promise}
 import scala.scalajs.js
@@ -22,7 +23,7 @@ object Processes {
   def terminate(processId: Process.Id): Future[Boolean] = {
     val promise = Promise[Boolean]()
     bindings.Processes.terminate(processId, js.Any.fromFunction1((terminated: Boolean) => {
-      promise.complete(chrome.lastErrorOrValue(terminated))
+      promise.complete(lastErrorOrValue(terminated))
     }))
     promise.future
   }
@@ -30,7 +31,7 @@ object Processes {
   def getProcessIdForTab(tabId: Tab.Id): Future[Process.Id] = {
     val promise = Promise[Process.Id]()
     bindings.Processes.getProcessIdForTab(tabId, (pid: Process.Id) => {
-      promise.complete(chrome.lastErrorOrValue(pid))
+      promise.complete(lastErrorOrValue(pid))
     })
     promise.future
   }
@@ -38,7 +39,7 @@ object Processes {
   def getProcessInfo(processIds: js.Array[Process.Id], includeMemory: Boolean): Future[Map[Process.Id, Process]] = {
     val promise = Promise[Map[Process.Id, Process]]()
     bindings.Processes.getProcessInfo(processIds, includeMemory, (info: Map[Process.Id, Process]) => {
-      promise.complete(chrome.lastErrorOrValue(info))
+      promise.complete(lastErrorOrValue(info))
     })
     promise.future
   }

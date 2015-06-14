@@ -7,6 +7,7 @@ import chrome.management.bindings.ExtensionInfo._
 import chrome.management.bindings._
 import chrome.permissions.APIPermission
 import chrome.runtime.bindings.Runtime.AppID
+import utils.ErrorHandling.lastErrorOrValue
 
 import scala.concurrent.{Future, Promise}
 import scala.scalajs.js
@@ -23,7 +24,7 @@ object Management extends ChromeAPI {
   def getAll: Future[js.Array[ExtensionInfo]] = {
     val promise = Promise[js.Array[ExtensionInfo]]()
     bindings.Management.getAll((extensions: js.Array[ExtensionInfo]) => {
-      promise.complete(chrome.lastErrorOrValue(extensions))
+      promise.complete(lastErrorOrValue(extensions))
     })
     promise.future
   }
@@ -31,7 +32,7 @@ object Management extends ChromeAPI {
   def get(id: AppID): Future[ExtensionInfo] = {
     val promise = Promise[ExtensionInfo]()
     bindings.Management.get(id, (extension: ExtensionInfo) => {
-      promise.complete(chrome.lastErrorOrValue(extension))
+      promise.complete(lastErrorOrValue(extension))
     })
     promise.future
   }
@@ -39,7 +40,7 @@ object Management extends ChromeAPI {
   def getSelf: Future[ExtensionInfo] = {
     val promise = Promise[ExtensionInfo]()
     bindings.Management.getSelf((self: ExtensionInfo) => {
-      promise.complete(chrome.lastErrorOrValue(self))
+      promise.complete(lastErrorOrValue(self))
     })
     promise.future
   }
@@ -47,7 +48,7 @@ object Management extends ChromeAPI {
   def getPermissionWarningsById(id: AppID): Future[js.Array[String]] = {
     val promise = Promise[js.Array[String]]()
     bindings.Management.getPermissionWarningsById(id, (warnings: js.Array[String]) => {
-      promise.complete(chrome.lastErrorOrValue(warnings))
+      promise.complete(lastErrorOrValue(warnings))
     })
     promise.future
   }
@@ -55,7 +56,7 @@ object Management extends ChromeAPI {
   def getPermissionWarningsByManifest(manifestStr: String): Future[js.Array[String]] = {
     val promise = Promise[js.Array[String]]()
     bindings.Management.getPermissionWarningsByManifest(manifestStr, (warnings: js.Array[String]) => {
-      promise.complete(chrome.lastErrorOrValue(warnings))
+      promise.complete(lastErrorOrValue(warnings))
     })
     promise.future
   }
@@ -63,7 +64,7 @@ object Management extends ChromeAPI {
   def setEnabled(id: AppID, enabled: Boolean): Future[Boolean] = {
     val promise = Promise[Boolean]()
     bindings.Management.setEnabled(id, enabled, js.Any.fromFunction0(() => {
-      promise.complete(chrome.lastErrorOrValue(enabled))
+      promise.complete(lastErrorOrValue(enabled))
     }))
     promise.future
   }
@@ -71,7 +72,7 @@ object Management extends ChromeAPI {
   def uninstall(id: AppID, options: js.UndefOr[js.Object] = js.undefined): Future[Unit] = {
     val promise = Promise[Unit]()
     bindings.Management.uninstall(id, options, js.Any.fromFunction0(() => {
-      promise.complete(chrome.lastErrorOrValue(()))
+      promise.complete(lastErrorOrValue(()))
     }))
     promise.future
   }
@@ -80,7 +81,7 @@ object Management extends ChromeAPI {
                     callback: js.UndefOr[js.Function0[_]] = js.undefined): Future[Unit] = {
     val promise = Promise[Unit]()
     bindings.Management.uninstallSelf(options, js.Any.fromFunction0(() => {
-      promise.complete(chrome.lastErrorOrValue(()))
+      promise.complete(lastErrorOrValue(()))
     }))
     promise.future
   }
@@ -88,7 +89,7 @@ object Management extends ChromeAPI {
   def launchApp(id: AppID): Future[Unit] = {
     val promise = Promise[Unit]()
     bindings.Management.launchApp(id, js.Any.fromFunction0(() => {
-      promise.complete(chrome.lastErrorOrValue(()))
+      promise.complete(lastErrorOrValue(()))
     }))
     promise.future
   }
@@ -96,7 +97,7 @@ object Management extends ChromeAPI {
   def createAppShortcut(id: AppID): Future[Unit] = {
     val promise = Promise[Unit]()
     bindings.Management.createAppShortcut(id, js.Any.fromFunction0(() => {
-      promise.complete(chrome.lastErrorOrValue(()))
+      promise.complete(lastErrorOrValue(()))
     }))
     promise.future
   }
@@ -104,7 +105,7 @@ object Management extends ChromeAPI {
   def setLaunchType(id: AppID, launchType: LaunchType): Future[Unit] = {
     val promise = Promise[Unit]()
     bindings.Management.setLaunchType(id, launchType, js.Any.fromFunction0(() => {
-      promise.complete(chrome.lastErrorOrValue(()))
+      promise.complete(lastErrorOrValue(()))
     }))
     promise.future
   }
@@ -112,7 +113,7 @@ object Management extends ChromeAPI {
   def generateAppForLink(url: String, title: String): Future[ExtensionInfo] = {
     val promise = Promise[ExtensionInfo]()
     bindings.Management.generateAppForLink(url, title, js.Any.fromFunction1((info: ExtensionInfo) => {
-      promise.complete(chrome.lastErrorOrValue(info))
+      promise.complete(lastErrorOrValue(info))
     }))
     promise.future
   }

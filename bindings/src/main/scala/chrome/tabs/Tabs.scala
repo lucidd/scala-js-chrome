@@ -7,6 +7,7 @@ import chrome.permissions.APIPermission
 import chrome.runtime.bindings.Port
 import chrome.tabs.bindings._
 import chrome.windows.bindings.Window
+import utils.ErrorHandling.lastErrorOrValue
 
 import scala.concurrent.{Future, Promise}
 import scala.scalajs.js
@@ -31,7 +32,7 @@ object Tabs extends ChromeAPI {
   def get(tabId: Tab.Id): Future[Tab] = {
     val promise = Promise[Tab]()
     bindings.Tabs.get(tabId, (tab: Tab) => {
-      promise.complete(chrome.lastErrorOrValue(tab))
+      promise.complete(lastErrorOrValue(tab))
     })
     promise.future
   }
@@ -39,7 +40,7 @@ object Tabs extends ChromeAPI {
   def getCurrent: Future[Tab] = {
     val promise = Promise[Tab]()
     bindings.Tabs.getCurrent((tab: Tab) => {
-      promise.complete(chrome.lastErrorOrValue(tab))
+      promise.complete(lastErrorOrValue(tab))
     })
     promise.future
   }
@@ -50,7 +51,7 @@ object Tabs extends ChromeAPI {
   def sendRequest(tabId: Tab.Id, request: js.Any): Future[js.Any] = {
     val promise = Promise[js.Any]()
     bindings.Tabs.sendRequest(tabId, request, js.Any.fromFunction1((response: js.Any) => {
-      promise.complete(chrome.lastErrorOrValue(response))
+      promise.complete(lastErrorOrValue(response))
     }))
     promise.future
   }
@@ -59,7 +60,7 @@ object Tabs extends ChromeAPI {
                   options: js.UndefOr[MessageOptions] = js.undefined): Future[js.Any] = {
     val promise = Promise[js.Any]()
     bindings.Tabs.sendMessage(tabId, message, options, js.Any.fromFunction1((response: js.Any) => {
-      promise.complete(chrome.lastErrorOrValue(response))
+      promise.complete(lastErrorOrValue(response))
     }))
     promise.future
   }
@@ -67,7 +68,7 @@ object Tabs extends ChromeAPI {
   def create(createProperties: TabCreateProperties): Future[Tab] = {
     val promise = Promise[Tab]()
     bindings.Tabs.create(createProperties, js.Any.fromFunction1((tab: Tab) => {
-      promise.complete(chrome.lastErrorOrValue(tab))
+      promise.complete(lastErrorOrValue(tab))
     }))
     promise.future
   }
@@ -75,7 +76,7 @@ object Tabs extends ChromeAPI {
   def duplicate(tabId: Tab.Id): Future[UndefOr[Tab]] = {
     val promise = Promise[js.UndefOr[Tab]]()
     bindings.Tabs.duplicate(tabId, js.Any.fromFunction1((tab: js.UndefOr[Tab]) => {
-      promise.complete(chrome.lastErrorOrValue(tab))
+      promise.complete(lastErrorOrValue(tab))
     }))
     promise.future
   }
@@ -83,7 +84,7 @@ object Tabs extends ChromeAPI {
   def query(queryInfo: TabQuery): Future[js.Array[Tab]] = {
     val promise = Promise[js.Array[Tab]]()
     bindings.Tabs.query(queryInfo, js.Any.fromFunction1((tabs: js.Array[Tab]) => {
-      promise.complete(chrome.lastErrorOrValue(tabs))
+      promise.complete(lastErrorOrValue(tabs))
     }))
     promise.future
   }
@@ -91,7 +92,7 @@ object Tabs extends ChromeAPI {
   def highlight(highlightInfo: HighlightInfo): Future[Window] = {
     val promise = Promise[Window]()
     bindings.Tabs.highlight(highlightInfo, js.Any.fromFunction1((window: Window) => {
-      promise.complete(chrome.lastErrorOrValue(window))
+      promise.complete(lastErrorOrValue(window))
     }))
     promise.future
   }
@@ -99,7 +100,7 @@ object Tabs extends ChromeAPI {
   def update(tabId: js.UndefOr[Tab.Id] = js.undefined, updateProperties: UpdateProperties): Future[js.UndefOr[Tab]] = {
     val promise = Promise[js.UndefOr[Tab]]()
     bindings.Tabs.update(tabId, updateProperties, js.Any.fromFunction1((tabs: js.UndefOr[Tab]) => {
-      promise.complete(chrome.lastErrorOrValue(tabs))
+      promise.complete(lastErrorOrValue(tabs))
     }))
     promise.future
   }
@@ -108,7 +109,7 @@ object Tabs extends ChromeAPI {
     val promise = Promise[js.Array[Tab]]()
     bindings.Tabs.move(tabIds, moveProperties, js.Any.fromFunction1((tabs: js.Any) => {
       promise.complete(
-        chrome.lastErrorOrValue(tabs match {
+        lastErrorOrValue(tabs match {
           case array: js.Array[Tab@unchecked] => array
           case tab: Tab => js.Array(tab)
         })
@@ -120,7 +121,7 @@ object Tabs extends ChromeAPI {
   def reload(tabId: js.UndefOr[Tab.Id] = js.undefined, reloadProperties: ReloadProperties): Future[Unit] = {
     val promise = Promise[Unit]()
     bindings.Tabs.reload(tabId, reloadProperties, js.Any.fromFunction0(() => {
-      promise.complete(chrome.lastErrorOrValue(()))
+      promise.complete(lastErrorOrValue(()))
     }))
     promise.future
   }
@@ -128,7 +129,7 @@ object Tabs extends ChromeAPI {
   def remove(tabIds: js.Array[Tab.Id]): Future[Unit] = {
     val promise = Promise[Unit]()
     bindings.Tabs.remove(tabIds, js.Any.fromFunction0(() => {
-      promise.complete(chrome.lastErrorOrValue(()))
+      promise.complete(lastErrorOrValue(()))
     }))
     promise.future
   }
@@ -136,7 +137,7 @@ object Tabs extends ChromeAPI {
   def detectLanguage(tabId: js.UndefOr[Tab.Id] = js.undefined): Future[String] = {
     val promise = Promise[String]()
     bindings.Tabs.detectLanguage(tabId, js.Any.fromFunction1((language: String) => {
-      promise.complete(chrome.lastErrorOrValue(language))
+      promise.complete(lastErrorOrValue(language))
     }))
     promise.future
   }
@@ -145,7 +146,7 @@ object Tabs extends ChromeAPI {
                         options: js.UndefOr[CaptureOptions] = js.undefined): Future[String] = {
     val promise = Promise[String]()
     bindings.Tabs.captureVisibleTab(windowId, options, js.Any.fromFunction1((dataUrl: String) => {
-      promise.complete(chrome.lastErrorOrValue(dataUrl))
+      promise.complete(lastErrorOrValue(dataUrl))
     }))
     promise.future
   }
@@ -154,7 +155,7 @@ object Tabs extends ChromeAPI {
                     details: CodeInjectionOptions): Future[js.UndefOr[js.Array[js.Any]]] = {
     val promise = Promise[js.UndefOr[js.Array[js.Any]]]()
     bindings.Tabs.executeScript(tabId, details, js.Any.fromFunction1((result: js.UndefOr[js.Array[js.Any]]) => {
-      promise.complete(chrome.lastErrorOrValue(result))
+      promise.complete(lastErrorOrValue(result))
     }))
     promise.future
   }
@@ -162,7 +163,7 @@ object Tabs extends ChromeAPI {
   def insertCSS(tabId: js.UndefOr[Tab.Id] = js.undefined, details: CodeInjectionOptions): Future[Unit] = {
     val promise = Promise[Unit]()
     bindings.Tabs.insertCSS(tabId, details, js.Any.fromFunction0(() => {
-      promise.complete(chrome.lastErrorOrValue(()))
+      promise.complete(lastErrorOrValue(()))
     }))
     promise.future
   }
@@ -170,7 +171,7 @@ object Tabs extends ChromeAPI {
   def setZoom(tabId: js.UndefOr[Tab.Id] = js.undefined, zoomFactor: Double): Future[Unit] = {
     val promise = Promise[Unit]()
     bindings.Tabs.setZoom(tabId, zoomFactor, js.Any.fromFunction0(() => {
-      promise.complete(chrome.lastErrorOrValue(()))
+      promise.complete(lastErrorOrValue(()))
     }))
     promise.future
   }
@@ -178,7 +179,7 @@ object Tabs extends ChromeAPI {
   def getZoom(tabId: js.UndefOr[Tab.Id] = js.undefined): Future[Double] = {
     val promise = Promise[Double]()
     bindings.Tabs.getZoom(tabId, js.Any.fromFunction1((zoomFactor: Double) => {
-      promise.complete(chrome.lastErrorOrValue(zoomFactor))
+      promise.complete(lastErrorOrValue(zoomFactor))
     }))
     promise.future
   }
@@ -186,7 +187,7 @@ object Tabs extends ChromeAPI {
   def setZoomSettings(tabId: js.UndefOr[Tab.Id] = js.undefined, zoomSettings: ZoomSettings): Future[Unit] = {
     val promise = Promise[Unit]()
     bindings.Tabs.setZoomSettings(tabId, zoomSettings, js.Any.fromFunction0(() => {
-      promise.complete(chrome.lastErrorOrValue(()))
+      promise.complete(lastErrorOrValue(()))
     }))
     promise.future
   }
@@ -194,7 +195,7 @@ object Tabs extends ChromeAPI {
   def getZoomSettings(tabId: js.UndefOr[Tab.Id] = js.undefined): Future[ZoomSettings] = {
     val promise = Promise[ZoomSettings]()
     bindings.Tabs.getZoomSettings(tabId, js.Any.fromFunction1((zoomSettings: ZoomSettings) => {
-      promise.complete(chrome.lastErrorOrValue(zoomSettings))
+      promise.complete(lastErrorOrValue(zoomSettings))
     }))
     promise.future
   }

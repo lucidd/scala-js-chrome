@@ -3,6 +3,7 @@ package chrome.windows
 import bindings._
 import chrome.events.EventSource
 import chrome.events.EventSourceImplicits._
+import utils.ErrorHandling.lastErrorOrValue
 
 import scala.concurrent.{Promise, Future}
 import scala.scalajs.js
@@ -19,7 +20,7 @@ object Windows {
   def get(windowId: Window.Id, getInfo: js.UndefOr[GetOptions] = js.undefined): Future[Window] = {
     val promise = Promise[Window]()
     bindings.Windows.get(windowId, getInfo, (window: Window) => {
-      promise.complete(chrome.lastErrorOrValue(window))
+      promise.complete(lastErrorOrValue(window))
     })
     promise.future
   }
@@ -27,7 +28,7 @@ object Windows {
   def getCurrent(getInfo: js.UndefOr[GetOptions] = js.undefined): Future[Window] = {
     val promise = Promise[Window]()
     bindings.Windows.getCurrent(getInfo, (window: Window) => {
-      promise.complete(chrome.lastErrorOrValue(window))
+      promise.complete(lastErrorOrValue(window))
     })
     promise.future
   }
@@ -35,7 +36,7 @@ object Windows {
   def getLastFocused(getInfo: js.UndefOr[GetOptions] = js.undefined): Future[Window] = {
     val promise = Promise[Window]()
     bindings.Windows.getLastFocused(getInfo, (window: Window) => {
-      promise.complete(chrome.lastErrorOrValue(window))
+      promise.complete(lastErrorOrValue(window))
     })
     promise.future
   }
@@ -43,7 +44,7 @@ object Windows {
   def getAll(getInfo: js.UndefOr[GetOptions] = js.undefined): Future[List[Window]] = {
     val promise = Promise[List[Window]]()
     bindings.Windows.getAll(getInfo, (windows: js.Array[Window]) => {
-      promise.complete(chrome.lastErrorOrValue(windows.toList))
+      promise.complete(lastErrorOrValue(windows.toList))
     })
     promise.future
   }
@@ -51,7 +52,7 @@ object Windows {
   def create(createData: js.UndefOr[CreateOptions]): Future[Option[Window]] = {
     val promise = Promise[Option[Window]]()
     bindings.Windows.create(createData, js.Any.fromFunction1((window: js.UndefOr[Window]) => {
-      promise.complete(chrome.lastErrorOrValue(window.toOption))
+      promise.complete(lastErrorOrValue(window.toOption))
     }))
     promise.future
   }
@@ -59,7 +60,7 @@ object Windows {
   def update(windowId: Window.Id, updateInfo: UpdateOptions): Future[Window] = {
     val promise = Promise[Window]()
     bindings.Windows.update(windowId, updateInfo, js.Any.fromFunction1((window: Window) => {
-      promise.complete(chrome.lastErrorOrValue(window))
+      promise.complete(lastErrorOrValue(window))
     }))
     promise.future
   }
@@ -67,7 +68,7 @@ object Windows {
   def remove(windowId: Window.Id): Future[Unit] = {
     val promise = Promise[Unit]()
     bindings.Windows.remove(windowId, js.Any.fromFunction0(() => {
-      promise.complete(chrome.lastErrorOrValue(()))
+      promise.complete(lastErrorOrValue(()))
     }))
     promise.future
   }

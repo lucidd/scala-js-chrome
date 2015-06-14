@@ -1,8 +1,10 @@
+package utils
+
 import chrome.runtime.bindings.Runtime
 
 import scala.util.{Failure, Success, Try}
 
-package object chrome {
+object ErrorHandling {
 
   def lastErrorOrValue[T](value: => T): Try[T] = {
     Runtime.lastError.map {

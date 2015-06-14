@@ -2,6 +2,7 @@ package chrome.commands
 
 import chrome.commands.bindings.Command
 import chrome.events.{EventSource, EventSource1Impl}
+import utils.ErrorHandling.lastErrorOrValue
 
 import scala.concurrent.{Future, Promise}
 import scala.scalajs.js
@@ -14,7 +15,7 @@ object Commands {
   def getAll: Future[List[Command]] = {
     val promise = Promise[List[Command]]
     bindings.Commands.getAll(js.Any.fromFunction1((commands: js.Array[Command]) => {
-      promise.complete(chrome.lastErrorOrValue(commands.toList))
+      promise.complete(lastErrorOrValue(commands.toList))
     }))
     promise.future
   }

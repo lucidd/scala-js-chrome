@@ -3,6 +3,7 @@ package chrome.idle
 import chrome.ChromeAPI
 import chrome.events.EventSource
 import chrome.events.EventSourceImplicits._
+import utils.ErrorHandling.lastErrorOrValue
 import bindings._
 import chrome.permissions.APIPermission
 
@@ -17,7 +18,7 @@ object Idle extends ChromeAPI {
   def queryState(detectionIntervalInSeconds: Int): Future[State] = {
     val promise = Promise[State]()
     bindings.Idle.queryState(detectionIntervalInSeconds, (state: State) => {
-      promise.complete(chrome.lastErrorOrValue(state))
+      promise.complete(lastErrorOrValue(state))
     })
     promise.future
   }

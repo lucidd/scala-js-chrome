@@ -3,6 +3,7 @@ package chrome.permissions
 import chrome.events.EventSource
 import chrome.events.EventSourceImplicits._
 import chrome.permissions.bindings._
+import utils.ErrorHandling.lastErrorOrValue
 
 import scala.concurrent.{Future, Promise}
 import scala.scalajs.js
@@ -21,7 +22,7 @@ object Permissions {
   def getAll: Future[js.Array[Permission]] = {
     val promise = Promise[js.Array[Permission]]()
     bindings.Permissions.getAll((perms: PermissionList) => {
-      promise.complete(chrome.lastErrorOrValue({
+      promise.complete(lastErrorOrValue({
         val apiPerms = for {
           perm <- perms.permissions.getOrElse(js.Array())
           result <- string2Permission(perm)
@@ -52,7 +53,7 @@ object Permissions {
     val promise = Promise[Boolean]()
     val (api, host) = permissions2PermissionList(permissions)
     bindings.Permissions.contains(PermissionList(api, host), (result: Boolean) => {
-      promise.complete(chrome.lastErrorOrValue(result))
+      promise.complete(lastErrorOrValue(result))
     })
     promise.future
   }
@@ -71,7 +72,7 @@ object Permissions {
     val promise = Promise[Boolean]()
     val (api, host) = permissions2PermissionList(permissions)
     bindings.Permissions.request(PermissionList(api, host), js.Any.fromFunction1((result: Boolean) => {
-      promise.complete(chrome.lastErrorOrValue(result))
+      promise.complete(lastErrorOrValue(result))
     }))
     promise.future
   }
@@ -80,7 +81,7 @@ object Permissions {
     val promise = Promise[Boolean]()
     val (api, host) = permissions2PermissionList(permissions)
     bindings.Permissions.remove(PermissionList(api, host), js.Any.fromFunction1((result: Boolean) => {
-      promise.complete(chrome.lastErrorOrValue(result))
+      promise.complete(lastErrorOrValue(result))
     }))
     promise.future
   }

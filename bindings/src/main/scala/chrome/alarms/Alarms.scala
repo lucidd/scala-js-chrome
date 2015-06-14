@@ -3,6 +3,7 @@ package chrome.alarms
 import chrome.alarms.bindings.{AlarmInfo, Alarm}
 import chrome.events.EventSource
 import chrome.events.EventSourceImplicits._
+import utils.ErrorHandling.lastErrorOrValue
 
 import scala.concurrent.duration._
 import scala.concurrent.{Future, Promise}
@@ -18,7 +19,7 @@ object Alarms {
   def getAll(): Future[List[Alarm]] = {
     val promise = Promise[List[Alarm]]()
     bindings.Alarms.getAll((alarms: js.Array[bindings.Alarm]) => {
-      chrome.lastErrorOrValue(alarms)
+      lastErrorOrValue(alarms)
     })
     promise.future
   }
@@ -26,7 +27,7 @@ object Alarms {
   def clearAll(): Future[Boolean] = {
     val promise = Promise[Boolean]()
     bindings.Alarms.clearAll(js.Any.fromFunction1((wasCleared: Boolean) => {
-      chrome.lastErrorOrValue(wasCleared)
+      lastErrorOrValue(wasCleared)
     }))
     promise.future
   }
@@ -39,7 +40,7 @@ object Alarms {
   def get(name: String): Future[Option[Alarm]] = {
     val promise = Promise[Option[Alarm]]
     bindings.Alarms.get(name, (alarm: js.UndefOr[Alarm]) => {
-      promise.complete(chrome.lastErrorOrValue(alarm.toOption))
+      promise.complete(lastErrorOrValue(alarm.toOption))
     })
     promise.future
   }
@@ -47,7 +48,7 @@ object Alarms {
   def clear(name: String = ""): Future[Boolean] = {
     val promise = Promise[Boolean]()
     bindings.Alarms.clear(name, js.Any.fromFunction1((wasCleared: Boolean) => {
-      promise.complete(chrome.lastErrorOrValue(wasCleared))
+      promise.complete(lastErrorOrValue(wasCleared))
     }))
     promise.future
   }

@@ -6,6 +6,7 @@ import chrome.events.{EventSource, Subscription}
 import chrome.runtime.bindings.Runtime.AppID
 import chrome.runtime.bindings._
 import org.scalajs.dom.Window
+import utils.ErrorHandling.lastErrorOrValue
 
 import scala.concurrent.{Future, Promise}
 import scala.scalajs.js
@@ -88,7 +89,7 @@ object Runtime {
   def getBackgroundPage: Future[Window] = {
     val promise = Promise[Window]()
     bindings.Runtime.getBackgroundPage((window: Window) => {
-      promise.complete(chrome.lastErrorOrValue(window))
+      promise.complete(lastErrorOrValue(window))
     })
     promise.future
   }
@@ -102,7 +103,7 @@ object Runtime {
   def openOptionsPage: Future[Unit] = {
     val promise = Promise[Unit]
     bindings.Runtime.openOptionsPage(js.Any.fromFunction0(() => {
-      promise.complete(chrome.lastErrorOrValue(()))
+      promise.complete(lastErrorOrValue(()))
     }))
     promise.future
   }
@@ -115,7 +116,7 @@ object Runtime {
     val promise = Promise[UpdateCheckResult]()
     bindings.Runtime.requestUpdateCheck((status: UpdateCheck.Status, details: UndefOr[UpdateCheck.Details]) => {
       promise.complete(
-        chrome.lastErrorOrValue(
+        lastErrorOrValue(
           status match {
             case UpdateCheck.UPDATE_AVAILABLE => UpdateAvailable(details.get.version)
             case UpdateCheck.NO_UPDATE => NoUpdate()
@@ -149,7 +150,7 @@ object Runtime {
   def getPlatformInfo: Future[PlatformInfo] = {
     val promise = Promise[PlatformInfo]()
     bindings.Runtime.getPlatformInfo((info: PlatformInfo) => {
-      promise.complete(chrome.lastErrorOrValue(info))
+      promise.complete(lastErrorOrValue(info))
     })
     promise.future
   }
@@ -157,7 +158,7 @@ object Runtime {
   def getPackageDirectoryEntry: Future[DirectoryEntry] = {
     val promise = Promise[DirectoryEntry]()
     bindings.Runtime.getPackageDirectoryEntry((dir: DirectoryEntry) => {
-      promise.complete(chrome.lastErrorOrValue(dir))
+      promise.complete(lastErrorOrValue(dir))
     })
     promise.future
   }

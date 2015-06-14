@@ -3,6 +3,7 @@ package chrome.app.window
 import chrome.app.window.bindings._
 import chrome.events.EventSource
 import chrome.events.EventSourceImplicits._
+import utils.ErrorHandling.lastErrorOrValue
 
 import scala.concurrent.{Future, Promise}
 import scala.scalajs.js
@@ -22,7 +23,7 @@ object Window {
   def create(url: String, options: js.UndefOr[CreateWindowOptions] = js.undefined): Future[AppWindow] = {
     val promise = Promise[AppWindow]()
     bindings.Window.create(url, options, js.Any.fromFunction1((appWindow: AppWindow) => {
-      promise.complete(chrome.lastErrorOrValue(appWindow))
+      promise.complete(lastErrorOrValue(appWindow))
     }))
     promise.future
   }
