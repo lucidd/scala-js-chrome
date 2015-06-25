@@ -36,7 +36,7 @@ object Runtime {
   val onConnect: EventSource[Port] = bindings.Runtime.onConnect
   val onConnectExternal: EventSource[Port] = bindings.Runtime.onConnectExternal
 
-  class Message[A, R](val value: A, sender: MessageSender, sendResponse: js.Function1[R, _]) {
+  class Message[A, R](val value: A, val sender: MessageSender, sendResponse: js.Function1[R, _]) {
 
     private[Runtime] var async = false
 
