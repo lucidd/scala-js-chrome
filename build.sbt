@@ -34,7 +34,7 @@ lazy val bindings = project.in(file("bindings")).
     persistLauncher := false,
     persistLauncher in Test := false,
     libraryDependencies ++= Seq(
-      "org.scala-js" %%% "scalajs-dom" % "0.8.0" withSources() withJavadoc()
+      "org.scala-js" %%% "scalajs-dom" % "0.8.1" withSources() withJavadoc()
     ),
     publishMavenStyle := true,
     publishTo := {
