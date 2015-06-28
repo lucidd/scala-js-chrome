@@ -1,6 +1,7 @@
 package net.lullabyte
 
 import chrome.Impl.{App, Background, AppManifest}
+import chrome.Manifest
 import chrome.permissions.{HostPermission, APIPermission, Permission}
 import sbt._
 
@@ -24,22 +25,8 @@ object Chrome {
     ), overwrite = true, preserveLastModified = true)
     unpacked
   }
-  def generateManifest(out: File)(name: String, version: String, permissions: Set[Permission],
-    defaultLocale: Option[String], offlineEnabled: Boolean, icons: Map[Int, String]): File = {
-    val manifest: chrome.AppManifest = AppManifest(
-      app = App(
-        Background(
-          scripts = List("deps.js", "main.js", "launcher.js")
-        )
-      ),
-      name = name,
-      version = version,
-      manifestVersion = 2,
-      icons = icons,
-      offlineEnabled = offlineEnabled,
-      permissions = permissions,
-      defaultLocale = defaultLocale
-    )
+
+  def generateManifest(out: File)(manifest: Manifest): File = {
     import Pickler._
     val content = upickle.write(manifest)
     IO.write(out, content)

@@ -1,6 +1,6 @@
 package chrome
 
-import chrome.permissions.{HostPermission, APIPermission, Permission}
+import chrome.permissions.Permission
 
 
 trait Manifest {
@@ -13,6 +13,7 @@ trait Manifest {
   val offlineEnabled: Boolean
   val permissions: Set[Permission]
   val icons: Map[Int, String]
+  val minimumChromeVersion: Option[String]
 }
 
 trait Background {
@@ -25,6 +26,7 @@ trait App {
 
 trait AppManifest extends Manifest {
   val app: App
+  val sockets: Option[Sockets]
 }
 
 trait ExtensionManifest extends Manifest {
@@ -42,25 +44,28 @@ object Impl {
   case class AppManifest(name: String,
                          version: String,
                          app: App,
-                         manifestVersion: Int,
+                         manifestVersion: Int = 2,
                          shortName: Option[String] = None,
                          defaultLocale: Option[String] = None,
                          description: Option[String] = None,
                          offlineEnabled: Boolean = true,
                          permissions: Set[Permission] = Set(),
-                         icons: Map[Int, String] = Map()
+                         icons: Map[Int, String] = Map(),
+                         sockets: Option[Sockets] = None,
+                         minimumChromeVersion: Option[String] = None
                           ) extends chrome.AppManifest
 
   case class ExtensionManifest(name: String,
                                version: String,
-                               manifestVersion: Int,
+                               manifestVersion: Int = 2,
                                background: Background,
                                shortName: Option[String] = None,
                                defaultLocale: Option[String],
                                description: Option[String],
                                offlineEnabled: Boolean = true,
                                permissions: Set[Permission],
-                               icons: Map[Int, String]
+                               icons: Map[Int, String],
+                               minimumChromeVersion: Option[String] = None
                                 ) extends chrome.ExtensionManifest
 
 }
