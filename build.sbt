@@ -12,11 +12,17 @@ lazy val commonSettings = Seq(
   ),
   scmInfo := Some(
     ScmInfo(
-      url("http://github.com/lucidd/scala-js-chrome"), "scm:git@github.com:lucidd/scala-js-chrome.git"
+      url("http://github.com/lucidd/scala-js-chrome"),
+      "scm:git@github.com:lucidd/scala-js-chrome.git"
     )
   ),
   developers := List(
-    Developer("lucidd", "Kevin Walter", "kevin.walter.private@gmail.com", url("http://lullabyte.net"))
+    Developer(
+      "lucidd",
+      "Kevin Walter",
+      "kevin.walter.private@gmail.com",
+      url("http://lullabyte.net")
+    )
   ),
   licenses += "MIT" -> url("http://www.opensource.org/licenses/mit-license.html"),
   homepage := Some(url("http://github.com/lucidd/scala-js-chrome")),
@@ -30,7 +36,7 @@ lazy val bindings = project.in(file("bindings")).
   settings(commonSettings: _*).
   settings(
     name := "scala-js-chrome",
-    scalaVersion := "2.11.6",
+    scalaVersion := "2.11.7",
     persistLauncher := false,
     persistLauncher in Test := false,
     libraryDependencies ++= Seq(
@@ -59,7 +65,7 @@ lazy val plugin = project.in(file("sbt-plugin")).
     publishMavenStyle := false,
     bintrayRepository := "sbt-plugins",
     bintrayOrganization := None,
-    addSbtPlugin("org.scala-js" % "sbt-scalajs" % "0.6.3")
+    addSbtPlugin("org.scala-js" % "sbt-scalajs" % "0.6.4")
   ).
   enablePlugins(commonPlugins: _*)
 
