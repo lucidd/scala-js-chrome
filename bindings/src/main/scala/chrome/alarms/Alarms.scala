@@ -19,7 +19,7 @@ object Alarms {
   def getAll(): Future[List[Alarm]] = {
     val promise = Promise[List[Alarm]]()
     bindings.Alarms.getAll((alarms: js.Array[bindings.Alarm]) => {
-      lastErrorOrValue(alarms)
+      promise.complete(lastErrorOrValue(alarms))
     })
     promise.future
   }
@@ -27,7 +27,7 @@ object Alarms {
   def clearAll(): Future[Boolean] = {
     val promise = Promise[Boolean]()
     bindings.Alarms.clearAll(js.Any.fromFunction1((wasCleared: Boolean) => {
-      lastErrorOrValue(wasCleared)
+      promise.complete(lastErrorOrValue(wasCleared))
     }))
     promise.future
   }
