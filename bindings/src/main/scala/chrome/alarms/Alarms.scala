@@ -19,7 +19,7 @@ object Alarms {
   def getAll(): Future[List[Alarm]] = {
     val promise = Promise[List[Alarm]]()
     bindings.Alarms.getAll((alarms: js.Array[bindings.Alarm]) => {
-      promise.complete(lastErrorOrValue(alarms).toList)
+      promise.complete(lastErrorOrValue(alarms).map(_.toList))
     })
     promise.future
   }
