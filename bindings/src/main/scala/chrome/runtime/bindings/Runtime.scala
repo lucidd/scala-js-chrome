@@ -8,6 +8,7 @@ import scala.scalajs.js.annotation.JSName
 import scala.scalajs.js.{UndefOr, native, undefined}
 
 @JSName("chrome.runtime")
+@js.native
 object Runtime extends js.Object {
 
   type AppID = String
@@ -68,7 +69,8 @@ object UpdateCheck {
   val NO_UPDATE: Status = "no_update"
   val UPDATE_AVAILABLE: Status = "update_available"
 
-  class Details extends js.Object {
+  @js.native
+  trait Details extends js.Object {
 
     val version: String = native
 

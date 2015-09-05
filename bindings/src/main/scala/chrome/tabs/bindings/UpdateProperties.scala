@@ -22,7 +22,8 @@ object UpdateProperties {
 
 }
 
-class UpdateProperties extends js.Object {
+@js.native
+trait UpdateProperties extends js.Object {
 
   def url: js.UndefOr[String] = js.native
 

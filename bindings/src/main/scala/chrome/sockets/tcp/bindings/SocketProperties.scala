@@ -2,7 +2,8 @@ package chrome.sockets.tcp.bindings
 
 import scala.scalajs.js
 
-class SocketProperties extends js.Object {
+@js.native
+trait SocketProperties extends js.Object {
 
   def persistent: js.UndefOr[Boolean] = js.native
 

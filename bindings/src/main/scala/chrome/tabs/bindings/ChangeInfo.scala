@@ -2,8 +2,8 @@ package chrome.tabs.bindings
 
 import scala.scalajs.js
 
-
-class ChangeInfo extends js.Object {
+@js.native
+trait ChangeInfo extends js.Object {
 
   def status: js.UndefOr[Tab.Status] = js.native
 

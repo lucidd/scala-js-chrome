@@ -28,7 +28,7 @@ object Chrome {
 
   def generateManifest(out: File)(manifest: Manifest): File = {
     import Pickler._
-    val content = upickle.write(manifest)
+    val content = upickle.default.write(manifest)
     IO.write(out, content)
     out
   }

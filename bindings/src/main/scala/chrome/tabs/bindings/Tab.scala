@@ -5,7 +5,8 @@ import chrome.windows.bindings.Window
 
 import scala.scalajs.js
 
-class Tab extends js.Object {
+@js.native
+trait Tab extends js.Object {
 
   def id: js.UndefOr[Tab.Id] = js.native
 

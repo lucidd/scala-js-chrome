@@ -4,7 +4,8 @@ import chrome.windows.bindings.Window
 
 import scala.scalajs.js
 
-class ActiveInfo extends js.Object {
+@js.native
+trait ActiveInfo extends js.Object {
 
   def tabId: Tab.Id = js.native
 

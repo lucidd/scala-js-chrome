@@ -2,7 +2,8 @@ package chrome.sockets.tcp.bindings
 
 import scala.scalajs.js
 
-class SocketInfo extends js.Object {
+@js.native
+trait SocketInfo extends js.Object {
 
   def socketId: SocketId = js.native
 

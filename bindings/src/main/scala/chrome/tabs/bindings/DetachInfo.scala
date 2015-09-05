@@ -5,7 +5,8 @@ import chrome.windows.bindings.Window
 
 import scala.scalajs.js
 
-class DetachInfo extends js.Object {
+@js.native
+trait DetachInfo extends js.Object {
 
   def oldWindowId: Window.Id = js.native
 

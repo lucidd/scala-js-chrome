@@ -18,7 +18,8 @@ object ConnectInfo {
 
 }
 
-class ConnectInfo extends js.Object {
+@js.native
+trait ConnectInfo extends js.Object {
 
   def name: js.UndefOr[String] = js.native
 

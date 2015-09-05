@@ -4,6 +4,7 @@ package chrome.system.network.bindings
 import scala.scalajs.js
 import scala.scalajs.js.annotation.JSName
 
+@js.native
 @JSName("chrome.system.network")
 object Network extends js.Object {
 

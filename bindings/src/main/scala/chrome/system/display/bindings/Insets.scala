@@ -3,7 +3,8 @@ package chrome.system.display.bindings
 import scala.scalajs.js
 
 
-class Insets extends js.Object {
+@js.native
+trait Insets extends js.Object {
 
   val left: Int = js.native
   val top: Int = js.native

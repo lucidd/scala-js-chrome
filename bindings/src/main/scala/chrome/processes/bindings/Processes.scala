@@ -8,6 +8,7 @@ import scala.scalajs.js.annotation.JSName
 
 
 
+@js.native
 @JSName("chrome.processes")
 object Processes extends js.Object {
 

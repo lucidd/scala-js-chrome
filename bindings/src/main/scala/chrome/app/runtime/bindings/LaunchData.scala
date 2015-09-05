@@ -29,14 +29,16 @@ object LaunchData {
 
 }
 
-class FileHandler extends js.Object {
+@js.native
+trait FileHandler extends js.Object {
 
   val entry: FileEntry = js.native
   val `type`: String = js.native
 
 }
 
-class LaunchData extends js.Object {
+@js.native
+trait LaunchData extends js.Object {
 
   def id: js.UndefOr[String] = js.native
 

@@ -12,7 +12,8 @@ object CaptureOptions {
 
 }
 
-class CaptureOptions extends js.Object {
+@js.native
+trait CaptureOptions extends js.Object {
 
   def format: js.UndefOr[CaptureOptions.ImageFormat] = js.native
 

@@ -4,7 +4,8 @@ import chrome.events.bindings.Event
 
 import scala.scalajs.js
 
-class Port extends js.Object {
+@js.native
+trait Port extends js.Object {
 
   val name: String = js.native
   val onDisconnect: Event[js.Function0[_]] = js.native

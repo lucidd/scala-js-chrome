@@ -2,7 +2,8 @@ package chrome.notifications.bindings
 
 import scala.scalajs.js
 
-class NotificationOptions extends js.Object {
+@js.native
+trait NotificationOptions extends js.Object {
 
   val `type`: js.UndefOr[TemplateType] = js.native
   val iconUrl: js.UndefOr[String] = js.native
@@ -53,7 +54,8 @@ object NotificationOptions {
   }
 }
 
-class Button extends js.Object {
+@js.native
+trait Button extends js.Object {
   val title: String = js.native
   val iconUrl: js.UndefOr[String] = js.native
 }
@@ -69,7 +71,8 @@ object Button {
 
 }
 
-class Item extends js.Object {
+@js.native
+trait Item extends js.Object {
   val title: String = js.native
   val message: String = js.native
 }

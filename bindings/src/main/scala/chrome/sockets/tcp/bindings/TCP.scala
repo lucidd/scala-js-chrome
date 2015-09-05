@@ -7,7 +7,7 @@ import scala.scalajs.js.annotation.JSName
 import scala.scalajs.js.typedarray.ArrayBuffer
 import scala.scalajs.js.{UndefOr, native, undefined}
 
-
+@js.native
 @JSName("chrome.sockets.tcp")
 object TCP extends js.Object {
 

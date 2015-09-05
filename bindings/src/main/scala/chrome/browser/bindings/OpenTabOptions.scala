@@ -2,7 +2,8 @@ package chrome.browser.bindings
 
 import scala.scalajs.js
 
-class OpenTabOptions extends js.Object {
+@js.native
+trait OpenTabOptions extends js.Object {
   val url: String = js.native
 }
 

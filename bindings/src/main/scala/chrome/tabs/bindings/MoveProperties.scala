@@ -16,7 +16,8 @@ object MoveProperties {
 
 }
 
-class MoveProperties extends js.Object {
+@js.native
+trait MoveProperties extends js.Object {
 
   def windowId: js.UndefOr[Window.Id] = js.native
 

@@ -4,8 +4,8 @@ import chrome.windows.bindings.Window
 
 import scala.scalajs.js
 
-
-class TabQuery extends js.Object {
+@js.native
+trait TabQuery extends js.Object {
 
   def active: js.UndefOr[Boolean] = js.native
 

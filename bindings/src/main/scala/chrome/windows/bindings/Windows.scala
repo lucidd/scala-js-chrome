@@ -6,7 +6,8 @@ import chrome.tabs.bindings.Tab
 import scala.scalajs.js
 import scala.scalajs.js.annotation.JSName
 
-class GetOptions extends js.Object {
+@js.native
+trait GetOptions extends js.Object {
   val populate: js.UndefOr[Boolean] = js.native
 }
 
@@ -18,7 +19,8 @@ object GetOptions {
   }
 }
 
-class CreateOptions extends js.Object {
+@js.native
+trait CreateOptions extends js.Object {
   val url: js.UndefOr[js.Any] = js.native
   val tabId: js.UndefOr[Tab.Id] = js.native
   val left: js.UndefOr[Int] = js.native
@@ -62,7 +64,8 @@ object CreateOptions {
   }
 }
 
-class UpdateOptions extends js.Object {
+@js.native
+trait UpdateOptions extends js.Object {
   val left: js.UndefOr[Int] = js.native
   val top: js.UndefOr[Int] = js.native
   val width: js.UndefOr[Int] = js.native
@@ -93,6 +96,7 @@ object UpdateOptions {
   }
 }
 
+@js.native
 @JSName("chrome.windows")
 object Windows extends js.Object {
 

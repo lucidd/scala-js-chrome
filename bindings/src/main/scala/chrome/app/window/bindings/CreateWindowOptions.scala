@@ -29,7 +29,8 @@ object CreateWindowOptions {
 
 }
 
-class CreateWindowOptions extends js.Object {
+@js.native
+trait CreateWindowOptions extends js.Object {
 
 
   val alphaEnabled: js.UndefOr[Boolean] = js.native

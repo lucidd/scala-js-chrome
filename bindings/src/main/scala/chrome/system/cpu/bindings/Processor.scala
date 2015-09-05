@@ -2,7 +2,8 @@ package chrome.system.cpu.bindings
 
 import scala.scalajs.js
 
-class Processor extends js.Object {
+@js.native
+trait Processor extends js.Object {
 
   def usage: Processor.Usage = js.native
 
@@ -10,7 +11,8 @@ class Processor extends js.Object {
 
 object Processor {
 
-  class Usage extends js.Object {
+  @js.native
+  trait Usage extends js.Object {
 
     val user: Double = js.native
     val kernel: Double = js.native

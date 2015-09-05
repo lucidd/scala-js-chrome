@@ -2,22 +2,27 @@ package chrome.runtime.bindings
 
 import scala.scalajs.js
 
+@js.native
 trait App extends js.Object {
   val background: Background = js.native
 }
 
+@js.native
 trait Background extends js.Object {
   val scripts: js.Array[String] = js.native
 }
 
+@js.native
 trait AppManifest extends Manifest {
   val app: App = js.native
 }
 
+@js.native
 trait ExtensionManifest extends Manifest {
   val background: js.UndefOr[Background] = js.native
 }
 
+@js.native
 trait Manifest extends js.Object {
 
   val name: String = js.native

@@ -6,7 +6,8 @@ import chrome.permissions.{APIPermission, HostPermission}
 
 object Pickler {
 
-  import upickle._
+  import upickle.Js
+  import upickle.default._
 
   def manifest2Seq(m: Manifest): Seq[(String, Js.Value)] = Seq(
     "name" -> Js.Str(m.name),
@@ -27,12 +28,12 @@ object Pickler {
   m.minimumChromeVersion.map(x => "minimum_chrome_version" -> Js.Str(x))
 
 
-  implicit val manifestWriter = upickle.Writer[Manifest] {
+  implicit val manifestWriter = Writer[Manifest] {
     case app: AppManifest => appManifestWriter.write(app)
     case extension: ExtensionManifest => extensionManifestWriter.write(extension)
   }
 
-  implicit val extensionManifestWriter: Writer[ExtensionManifest] = upickle.Writer {
+  implicit val extensionManifestWriter: Writer[ExtensionManifest] = Writer {
     case m => {
       val props = manifest2Seq(m) ++ Seq(
         "background" -> Js.Obj(
@@ -46,7 +47,7 @@ object Pickler {
     }
   }
 
-  implicit val appManifestWriter: Writer[AppManifest] = upickle.Writer {
+  implicit val appManifestWriter: Writer[AppManifest] = Writer {
     case m => {
       val props = manifest2Seq(m) ++ Seq(
         "app" -> Js.Obj(

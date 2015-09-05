@@ -5,7 +5,8 @@ import chrome.tabs.bindings.Tab
 
 import scala.scalajs.js
 
-class Window extends js.Object {
+@js.native
+trait Window extends js.Object {
 
   val id: js.UndefOr[Window.Id] = js.native
   val focused: Boolean = js.native

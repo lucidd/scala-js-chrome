@@ -2,7 +2,8 @@ package chrome.runtime.bindings
 
 import scala.scalajs.js
 
-class MessageSender extends js.Object {
+@js.native
+trait MessageSender extends js.Object {
 
   def id: js.UndefOr[String] = js.native
 

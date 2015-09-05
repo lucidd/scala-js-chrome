@@ -30,7 +30,8 @@ object BoundsSpecification {
 
 }
 
-class BoundsSpecification extends js.Object {
+@js.native
+trait BoundsSpecification extends js.Object {
 
   var left: js.UndefOr[Int] = js.native
   var top: js.UndefOr[Int] = js.native

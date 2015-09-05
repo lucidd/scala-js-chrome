@@ -7,6 +7,7 @@ import chrome.runtime.bindings.Runtime.AppID
 import scala.scalajs.js
 import scala.scalajs.js.annotation.JSName
 
+@js.native
 @JSName("chrome.management")
 object Management extends js.Object {
 

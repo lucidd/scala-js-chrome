@@ -32,7 +32,8 @@ object SpeakOptions {
 
 }
 
-class SpeakOptions extends js.Object {
+@js.native
+trait SpeakOptions extends js.Object {
 
   val enqueue: js.UndefOr[Boolean] = js.native
   val voiceName: js.UndefOr[String] = js.native

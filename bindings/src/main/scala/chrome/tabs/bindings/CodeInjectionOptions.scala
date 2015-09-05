@@ -16,19 +16,20 @@ object CodeInjectionOptions {
             allFrames: js.UndefOr[Boolean] = js.undefined,
             matchAboutBlank: js.UndefOr[Boolean] = js.undefined,
             runAt: js.UndefOr[String] = js.undefined
-             ): ExeutionTime = {
+             ): CodeInjectionOptions = {
     js.Dynamic.literal(
       code = code,
       file = file,
       allFrames = allFrames,
       matchAboutBlank = matchAboutBlank,
       runAt = runAt
-    ).asInstanceOf[ExeutionTime]
+    ).asInstanceOf[CodeInjectionOptions]
   }
 
 }
 
-class CodeInjectionOptions extends js.Object {
+@js.native
+trait CodeInjectionOptions extends js.Object {
 
   def code: js.UndefOr[String] = js.native
 

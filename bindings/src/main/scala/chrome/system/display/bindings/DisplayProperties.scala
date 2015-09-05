@@ -23,7 +23,8 @@ object DisplayProperties {
 
 }
 
-class DisplayProperties extends js.Object {
+@js.native
+trait DisplayProperties extends js.Object {
 
   var mirroringSourceId: js.UndefOr[Display.ID] = js.native
   var isPrimary: js.UndefOr[Boolean] = js.native

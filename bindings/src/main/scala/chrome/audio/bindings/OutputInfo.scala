@@ -2,7 +2,8 @@ package chrome.audio.bindings
 
 import scala.scalajs.js
 
-class OutputInfo extends js.Object {
+@js.native
+trait OutputInfo extends js.Object {
 
   def id: Audio.DeviceID = js.native
 

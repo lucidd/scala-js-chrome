@@ -3,8 +3,8 @@ package chrome.tabs.bindings
 
 import scala.scalajs.js
 
-
-class ZoomChangeInfo extends js.Object {
+@js.native
+trait ZoomChangeInfo extends js.Object {
 
   def tabId: Tab.Id = js.native
 

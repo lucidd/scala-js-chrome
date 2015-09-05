@@ -3,7 +3,8 @@ package chrome.tabs.bindings
 
 import scala.scalajs.js
 
-class ZoomSettings extends js.Object {
+@js.native
+trait ZoomSettings extends js.Object {
 
   def mode: js.UndefOr[ZoomSettings.Mode] = js.native
 

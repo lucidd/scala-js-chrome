@@ -2,7 +2,8 @@ package chrome.app.runtime.bindings
 
 import scala.scalajs.js
 
-class Request extends js.Object {
+@js.native
+trait Request extends js.Object {
 
   def embedderId: String = js.native
 

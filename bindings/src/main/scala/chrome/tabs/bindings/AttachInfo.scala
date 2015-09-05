@@ -4,7 +4,8 @@ import chrome.windows.bindings.Window
 
 import scala.scalajs.js
 
-class AttachInfo extends js.Object {
+@js.native
+trait AttachInfo extends js.Object {
 
   def newWindowId: Window.Id = js.native
 

@@ -2,7 +2,8 @@ package chrome.filesystem.bindings
 
 import scala.scalajs.js
 
-class FileEntry extends js.Object {
+@js.native
+trait FileEntry extends js.Object {
 
   val fullPath: String = js.native
   val isDirectory: Boolean = js.native

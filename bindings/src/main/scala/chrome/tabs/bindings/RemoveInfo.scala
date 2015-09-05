@@ -5,7 +5,8 @@ import chrome.windows.bindings.Window
 
 import scala.scalajs.js
 
-class RemoveInfo extends js.Object {
+@js.native
+trait RemoveInfo extends js.Object {
 
   def windowId: Window.Id = js.native
 

@@ -2,7 +2,8 @@ package chrome.app.window.bindings
 
 import scala.scalajs.js
 
-class Bounds extends js.Object {
+@js.native
+trait Bounds extends js.Object {
 
   var left: Int = js.native
   var top: Int = js.native

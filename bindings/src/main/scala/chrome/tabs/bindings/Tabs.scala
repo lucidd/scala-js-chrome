@@ -8,8 +8,10 @@ import chrome.windows.bindings.Window
 import scala.scalajs.js
 import scala.scalajs.js.annotation.JSName
 import scala.scalajs.js.{UndefOr, native, undefined}
+import scala.scalajs.js.`|`
 
 @JSName("chrome.tabs")
+@js.native
 object Tabs extends js.Object {
 
   val onCreated: Event[js.Function1[Tab, _]] = native
@@ -47,7 +49,7 @@ object Tabs extends js.Object {
              callback: UndefOr[js.Function1[UndefOr[Tab], _]] = undefined): Unit = native
 
   def move(tabIds: js.Any, moveProperties: MoveProperties,
-           callback: UndefOr[js.Function1[js.Any, _]] = undefined): Unit = native
+           callback: UndefOr[js.Function1[Tab | js.Array[Tab], _]] = undefined): Unit = native
 
   def reload(tabId: UndefOr[Tab.Id] = undefined, reloadProperties: ReloadProperties,
              callback: UndefOr[js.Function0[_]] = undefined): Unit = native

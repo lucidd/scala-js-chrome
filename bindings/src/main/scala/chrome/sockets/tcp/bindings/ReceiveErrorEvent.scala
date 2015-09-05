@@ -2,7 +2,8 @@ package chrome.sockets.tcp.bindings
 
 import scala.scalajs.js
 
-class ReceiveErrorEvent extends js.Object {
+@js.native
+trait ReceiveErrorEvent extends js.Object {
 
   def socketId: SocketId = js.native
 

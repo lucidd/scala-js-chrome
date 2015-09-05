@@ -30,7 +30,8 @@ object PlatformInfo {
 
 }
 
-class PlatformInfo extends js.Object {
+@js.native
+trait PlatformInfo extends js.Object {
 
   def os: PlatformInfo.OperatingSystem = js.native
 

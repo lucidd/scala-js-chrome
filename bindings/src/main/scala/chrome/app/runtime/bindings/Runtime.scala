@@ -5,6 +5,7 @@ import chrome.events.bindings.Event
 import scala.scalajs.js
 import scala.scalajs.js.annotation.JSName
 
+@js.native
 @JSName("chrome.app.runtime")
 object Runtime extends js.Object {
 

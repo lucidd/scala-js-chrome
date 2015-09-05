@@ -3,7 +3,8 @@ package chrome.system.cpu.bindings
 
 import scala.scalajs.js
 
-class CPUInfo extends js.Object {
+@js.native
+trait CPUInfo extends js.Object {
 
   def numOfProcessors: Int = js.native
 

@@ -60,12 +60,12 @@ lazy val plugin = project.in(file("sbt-plugin")).
     sbtPlugin := true,
     name := "sbt-chrome-plugin",
     libraryDependencies ++= Seq(
-      "com.lihaoyi" %% "upickle" % "0.2.8" withSources() withJavadoc()
+      "com.lihaoyi" %% "upickle" % "0.3.6" withSources() withJavadoc()
     ),
     publishMavenStyle := false,
     bintrayRepository := "sbt-plugins",
     bintrayOrganization := None,
-    addSbtPlugin("org.scala-js" % "sbt-scalajs" % "0.6.4")
+    addSbtPlugin("org.scala-js" % "sbt-scalajs" % "0.6.5")
   ).
   enablePlugins(commonPlugins: _*)
 

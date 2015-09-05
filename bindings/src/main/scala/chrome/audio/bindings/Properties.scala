@@ -18,7 +18,8 @@ object Properties {
 
 }
 
-class Properties extends js.Object {
+@js.native
+trait Properties extends js.Object {
 
   def isMuted: Boolean = js.native
 

@@ -4,7 +4,8 @@ import chrome.tabs.bindings.Tab
 
 import scala.scalajs.js
 
-class Process extends js.Object {
+@js.native
+trait Process extends js.Object {
 
   val id: Process.Id = js.native
   val osProcessId: Process.Id = js.native

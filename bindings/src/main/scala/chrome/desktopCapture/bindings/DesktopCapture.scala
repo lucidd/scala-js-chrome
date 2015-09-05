@@ -5,6 +5,7 @@ import chrome.tabs.bindings.Tab
 import scala.scalajs.js
 import scala.scalajs.js.annotation.JSName
 
+@js.native
 @JSName("chrome.desktopCapture")
 object DesktopCapture extends js.Object {
 

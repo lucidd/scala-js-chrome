@@ -4,7 +4,8 @@ import scala.scalajs.js
 
 
 
-class Event[-T <: js.Function] extends js.Object {
+@js.native
+trait Event[-T <: js.Function] extends js.Object {
 
   def addListener(callback: T): Unit = js.native
   def removeListener(callback: T): Unit = js.native

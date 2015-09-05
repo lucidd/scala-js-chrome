@@ -5,6 +5,7 @@ import chrome.events.bindings.Event
 import scala.scalajs.js
 import scala.scalajs.js.annotation.JSName
 
+@js.native
 @JSName("chrome.omnibox")
 object Omnibox extends js.Object {
 

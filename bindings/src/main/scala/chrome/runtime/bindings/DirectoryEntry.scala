@@ -4,7 +4,8 @@ import scala.scalajs.js
 
 
 //TODO implement DirectoryEntry facade
-class DirectoryEntry extends js.Object {
+@js.native
+trait DirectoryEntry extends js.Object {
 
 
 }

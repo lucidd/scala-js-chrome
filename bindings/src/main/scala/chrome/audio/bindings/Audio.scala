@@ -6,6 +6,7 @@ import scala.scalajs.js
 import scala.scalajs.js.annotation.JSName
 
 
+@js.native
 @JSName("chrome.audio")
 object Audio extends js.Object {
 

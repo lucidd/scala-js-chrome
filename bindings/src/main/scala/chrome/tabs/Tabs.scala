@@ -12,7 +12,7 @@ import utils.ErrorHandling.lastErrorOrValue
 import scala.concurrent.{Future, Promise}
 import scala.scalajs.js
 import scala.scalajs.js.UndefOr
-
+import scala.scalajs.js.`|`
 
 object Tabs extends ChromeAPI {
 
@@ -107,12 +107,12 @@ object Tabs extends ChromeAPI {
 
   def move(tabIds: js.Array[Tab.Id], moveProperties: MoveProperties): Future[js.Array[Tab]] = {
     val promise = Promise[js.Array[Tab]]()
-    bindings.Tabs.move(tabIds, moveProperties, js.Any.fromFunction1((tabs: js.Any) => {
+    bindings.Tabs.move(tabIds, moveProperties, js.Any.fromFunction1((tabs: Tab | js.Array[Tab]) => {
       promise.complete(
-        lastErrorOrValue(tabs match {
-          case array: js.Array[Tab@unchecked] => array
-          case tab: Tab => js.Array(tab)
-        })
+        lastErrorOrValue{
+          if(tabs.isInstanceOf[js.Array[_]]) tabs.asInstanceOf[js.Array[Tab]]
+          else js.Array(tabs.asInstanceOf[Tab])
+        }
       )
     }))
     promise.future

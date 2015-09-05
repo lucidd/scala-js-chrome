@@ -2,7 +2,8 @@ package chrome.management.bindings
 
 import scala.scalajs.js
 
-class ExtensionInfo extends js.Object {
+@js.native
+trait ExtensionInfo extends js.Object {
 
   val id: String = js.native
   val name: String = js.native

@@ -4,7 +4,8 @@ import org.scalajs.dom
 
 import scala.scalajs.js
 
-class AppWindow extends js.Object {
+@js.native
+trait AppWindow extends js.Object {
 
   def focus(): Unit = js.native
 

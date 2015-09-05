@@ -12,6 +12,7 @@ object MessageOptions {
   }
 }
 
-class MessageOptions extends js.Object {
+@js.native
+trait MessageOptions extends js.Object {
   def frameId: js.UndefOr[ConnectInfo.FrameID] = js.native
 }

@@ -13,7 +13,8 @@ object TTSVoice {
 
 }
 
-class TTSVoice extends js.Object {
+@js.native
+trait TTSVoice extends js.Object {
 
   def voiceName: js.UndefOr[String] = js.native
 

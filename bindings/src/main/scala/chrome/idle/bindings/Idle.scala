@@ -5,7 +5,7 @@ import chrome.events.bindings.Event
 import scala.scalajs.js
 import scala.scalajs.js.annotation.JSName
 
-
+@js.native
 @JSName("chrome.idle")
 object Idle extends js.Object {
 

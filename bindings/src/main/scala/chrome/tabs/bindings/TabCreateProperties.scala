@@ -27,7 +27,8 @@ object TabCreateProperties {
 
 }
 
-class TabCreateProperties extends js.Object {
+@js.native
+trait TabCreateProperties extends js.Object {
 
   def windowId: js.UndefOr[Window.Id] = js.native
 

@@ -3,7 +3,8 @@ package chrome.system.display.bindings
 
 import scala.scalajs.js
 
-class DisplayInfo extends js.Object {
+@js.native
+trait DisplayInfo extends js.Object {
 
   def id: Display.ID = js.native
 

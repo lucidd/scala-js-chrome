@@ -5,6 +5,7 @@ import chrome.events.bindings.Event
 import scala.scalajs.js.annotation.JSName
 import scala.scalajs.js
 
+@js.native
 class StorageChange extends js.Object {
 
   val oldValue: js.UndefOr[js.Any] = js.native
@@ -12,7 +13,8 @@ class StorageChange extends js.Object {
 
 }
 
-class StorageArea extends js.Object {
+@js.native
+trait StorageArea extends js.Object {
 
   def get(keys: js.UndefOr[js.Any] = js.undefined, callback: js.Function1[Map[String, js.Any], _]): Unit = js.native
   def getBytesInUse(keys: js.UndefOr[js.Any] = js.undefined, callback: js.Function1[Int, _]): Unit = js.native
@@ -22,6 +24,7 @@ class StorageArea extends js.Object {
 
 }
 
+@js.native
 @JSName("chrome.storage")
 object Storage extends js.Object {
 

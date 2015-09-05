@@ -3,7 +3,8 @@ package chrome.sockets.tcp.bindings
 
 import scala.scalajs.js
 
-class SecureOptions extends js.Object {
+@js.native
+trait SecureOptions extends js.Object {
 
   def tlsVersion: js.UndefOr[TLSVersionBounds] = js.native
 

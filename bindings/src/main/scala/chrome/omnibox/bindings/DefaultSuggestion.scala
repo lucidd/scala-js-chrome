@@ -2,7 +2,8 @@ package chrome.omnibox.bindings
 
 import scala.scalajs.js
 
-class DefaultSuggestion extends js.Object {
+@js.native
+trait DefaultSuggestion extends js.Object {
 
   val description: String = js.native
 

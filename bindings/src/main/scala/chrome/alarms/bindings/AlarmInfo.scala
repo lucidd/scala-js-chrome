@@ -16,7 +16,8 @@ object AlarmInfo {
 
 }
 
-class AlarmInfo extends js.Object {
+@js.native
+trait AlarmInfo extends js.Object {
 
   def when: js.UndefOr[Double] = js.native
   def delayInMinutes: js.UndefOr[Double] = js.native

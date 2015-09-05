@@ -7,6 +7,7 @@ import scala.scalajs.js.annotation.JSName
 import scala.scalajs.js.{UndefOr, native, undefined}
 
 
+@js.native
 @JSName("chrome.permissions")
 object Permissions extends js.Object {
 
@@ -23,7 +24,8 @@ object Permissions extends js.Object {
 
 }
 
-class PermissionList extends js.Object {
+@js.native
+trait PermissionList extends js.Object {
 
   var permissions: UndefOr[js.Array[String]] = native
   var origins: UndefOr[js.Array[String]] = native

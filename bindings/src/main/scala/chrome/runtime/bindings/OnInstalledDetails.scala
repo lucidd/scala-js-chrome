@@ -18,7 +18,8 @@ object OnInstalledDetails {
 
 }
 
-class OnInstalledDetails extends js.Object {
+@js.native
+trait OnInstalledDetails extends js.Object {
 
   val reason: OnInstalledDetails.InstallReason = js.native
   val previousVersion: js.UndefOr[String] = js.native

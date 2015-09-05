@@ -23,7 +23,8 @@ object TTSEvent {
 
 }
 
-class TTSEvent extends js.Object {
+@js.native
+trait TTSEvent extends js.Object {
 
   val `type`: TTSEvent.Type = js.native
 
