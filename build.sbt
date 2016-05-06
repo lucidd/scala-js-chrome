@@ -36,11 +36,11 @@ lazy val bindings = project.in(file("bindings")).
   settings(commonSettings: _*).
   settings(
     name := "scala-js-chrome",
-    scalaVersion := "2.11.7",
+    scalaVersion := "2.11.8",
     persistLauncher := false,
     persistLauncher in Test := false,
     libraryDependencies ++= Seq(
-      "org.scala-js" %%% "scalajs-dom" % "0.8.1" withSources() withJavadoc()
+      "org.scala-js" %%% "scalajs-dom" % "0.9.0"
     ),
     publishMavenStyle := true,
     publishTo := {
@@ -60,12 +60,12 @@ lazy val plugin = project.in(file("sbt-plugin")).
     sbtPlugin := true,
     name := "sbt-chrome-plugin",
     libraryDependencies ++= Seq(
-      "com.lihaoyi" %% "upickle" % "0.3.6" withSources() withJavadoc()
+      "com.lihaoyi" %% "upickle" % "0.4.0"
     ),
     publishMavenStyle := false,
     bintrayRepository := "sbt-plugins",
     bintrayOrganization := None,
-    addSbtPlugin("org.scala-js" % "sbt-scalajs" % "0.6.5")
+    addSbtPlugin("org.scala-js" % "sbt-scalajs" % "0.6.9")
   ).
   enablePlugins(commonPlugins: _*)
 
