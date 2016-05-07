@@ -93,6 +93,7 @@ object ChromeAppExample extends ChromeApp {
 
 }
 ```
+For a more complete example see https://github.com/lucidd/chrome-system-monitor.
 
 ### UI Libraries
 
