@@ -47,16 +47,16 @@ object ContextMenus extends js.Object{
 
 @ScalaJSDefined
 class UpdateProperties(
-                        val `type`: String = MenuType.NORMAL,
-                        val title: String,
-                        val checked: js.UndefOr[Boolean] = js.undefined,
-                        val contexts: js.UndefOr[js.Array[String]] = js.undefined,
-                        val onclick: js.UndefOr[js.Function2[MenuInfo, Tab, Unit]],
-                        val parentId: js.UndefOr[String | Int] = js.undefined,
-                        val documentUrlPatterns: js.UndefOr[js.Array[String]] = js.undefined,
-                        val targetUrlPatterns: js.UndefOr[js.Array[String]] = js.undefined,
-                        val enabled: Boolean = true
-                      ) extends js.Object
+  val `type`: String = MenuType.NORMAL,
+  val title: String,
+  val checked: js.UndefOr[Boolean] = js.undefined,
+  val contexts: js.UndefOr[js.Array[String]] = js.undefined,
+  val onclick: js.UndefOr[js.Function2[MenuInfo, Tab, Unit]],
+  val parentId: js.UndefOr[String | Int] = js.undefined,
+  val documentUrlPatterns: js.UndefOr[js.Array[String]] = js.undefined,
+  val targetUrlPatterns: js.UndefOr[js.Array[String]] = js.undefined,
+  val enabled: Boolean = true
+) extends js.Object
 
 object CreateProperties {
 
@@ -77,7 +77,7 @@ class CreateProperties(
   val documentUrlPatterns: js.UndefOr[js.Array[String]] = js.undefined,
   val targetUrlPatterns: js.UndefOr[js.Array[String]] = js.undefined,
   val enabled: Boolean = true
-  ) extends js.Object
+) extends js.Object
 
 @js.native
 trait  MenuInfo extends js.Object{
