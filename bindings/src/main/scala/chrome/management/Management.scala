@@ -7,7 +7,7 @@ import chrome.management.bindings.ExtensionInfo._
 import chrome.management.bindings._
 import chrome.permissions.APIPermission
 import chrome.runtime.bindings.Runtime.AppID
-import utils.ErrorHandling.lastErrorOrValue
+import chrome.utils.ErrorHandling._
 
 import scala.concurrent.{Future, Promise}
 import scala.scalajs.js

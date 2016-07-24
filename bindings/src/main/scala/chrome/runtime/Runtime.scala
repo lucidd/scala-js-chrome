@@ -8,7 +8,7 @@ import chrome.permissions.{Permission, Permissions}
 import chrome.runtime.bindings.Runtime.AppID
 import chrome.runtime.bindings._
 import org.scalajs.dom.Window
-import utils.ErrorHandling.lastErrorOrValue
+import chrome.utils.ErrorHandling._
 
 import scala.concurrent.{Future, Promise}
 import scala.scalajs.js

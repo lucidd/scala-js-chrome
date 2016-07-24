@@ -2,9 +2,10 @@ package chrome.wallpaper
 
 import chrome.ChromeAPI
 import chrome.permissions.APIPermission
+import chrome.utils.ErrorHandling._
 import chrome.wallpaper.bindings.WallpaperDetails
 
-import scala.concurrent.{Promise, Future}
+import scala.concurrent.{Future, Promise}
 import scala.scalajs.js
 
 object Wallpaper extends ChromeAPI {
@@ -14,7 +15,7 @@ object Wallpaper extends ChromeAPI {
   def setWallpaper(details: WallpaperDetails): Future[Option[Any]] = {
     val promise = Promise[Option[Any]]()
     bindings.Wallpaper.setWallpaper(details, (thumbnail: js.UndefOr[js.Any]) => {
-      promise.complete(utils.ErrorHandling.lastErrorOrValue(thumbnail.toOption))
+      promise.complete(lastErrorOrValue(thumbnail.toOption))
     })
     promise.future
   }

@@ -5,7 +5,7 @@ import chrome.events.EventSource
 import chrome.events.EventSourceImplicits._
 import chrome.permissions.APIPermission
 import chrome.storage.bindings.StorageChange
-import utils.ErrorHandling.lastErrorOrValue
+import chrome.utils.ErrorHandling._
 import scala.concurrent.{Promise, Future}
 import scala.scalajs.js
 

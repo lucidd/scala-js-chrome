@@ -5,7 +5,7 @@ import chrome.events.EventSourceImplicits._
 import chrome.permissions.APIPermission
 import chrome.processes.bindings._
 import chrome.tabs.bindings.Tab
-import utils.ErrorHandling.lastErrorOrValue
+import chrome.utils.ErrorHandling._
 
 import scala.concurrent.{Future, Promise}
 import scala.scalajs.js

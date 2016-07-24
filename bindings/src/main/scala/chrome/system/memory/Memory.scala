@@ -4,7 +4,7 @@ package chrome.system.memory
 import chrome.ChromeAPI
 import chrome.permissions.APIPermission
 import chrome.system.memory.bindings._
-import utils.ErrorHandling.lastErrorOrValue
+import chrome.utils.ErrorHandling._
 
 import scala.concurrent.{Future, Promise}
 

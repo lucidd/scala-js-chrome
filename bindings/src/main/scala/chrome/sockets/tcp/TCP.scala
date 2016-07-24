@@ -3,7 +3,7 @@ package chrome.sockets.tcp
 import chrome.events.EventSource
 import chrome.events.EventSourceImplicits._
 import chrome.sockets.tcp.bindings._
-import utils.ErrorHandling.lastErrorOrValue
+import chrome.utils.ErrorHandling._
 
 import scala.concurrent.{Future, Promise}
 import scala.scalajs.js

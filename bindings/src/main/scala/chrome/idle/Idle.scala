@@ -3,9 +3,9 @@ package chrome.idle
 import chrome.ChromeAPI
 import chrome.events.EventSource
 import chrome.events.EventSourceImplicits._
-import utils.ErrorHandling.lastErrorOrValue
 import bindings._
 import chrome.permissions.APIPermission
+import chrome.utils.ErrorHandling._
 
 import scala.concurrent.{Promise, Future}
 

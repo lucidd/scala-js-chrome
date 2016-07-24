@@ -2,7 +2,7 @@ package chrome.i18n
 
 import scala.concurrent.{Future, Promise}
 import scala.scalajs.js
-import utils.ErrorHandling.lastErrorOrValue
+import chrome.utils.ErrorHandling._
 
 object I18N {
 

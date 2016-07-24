@@ -2,7 +2,7 @@ package chrome.system.network
 
 import chrome.ChromeAPI
 import chrome.permissions.APIPermission
-import utils.ErrorHandling.lastErrorOrValue
+import chrome.utils.ErrorHandling._
 
 import scala.concurrent.{Future, Promise}
 import scala.scalajs.js

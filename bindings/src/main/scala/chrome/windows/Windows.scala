@@ -3,7 +3,7 @@ package chrome.windows
 import bindings._
 import chrome.events.EventSource
 import chrome.events.EventSourceImplicits._
-import utils.ErrorHandling.lastErrorOrValue
+import chrome.utils.ErrorHandling._
 
 import scala.concurrent.{Promise, Future}
 import scala.scalajs.js

@@ -2,7 +2,7 @@ package chrome.commands
 
 import chrome.commands.bindings.Command
 import chrome.events.{EventSource, EventSource1Impl}
-import utils.ErrorHandling.lastErrorOrValue
+import chrome.utils.ErrorHandling._
 
 import scala.concurrent.{Future, Promise}
 import scala.scalajs.js

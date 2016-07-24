@@ -1,4 +1,4 @@
-package utils
+package chrome.utils
 
 import chrome.app.runtime.Runtime
 import chrome.app.runtime.bindings.{LaunchData, Request}

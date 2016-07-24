@@ -5,8 +5,8 @@ import bindings.Notifications.Id
 import chrome.ChromeAPI
 import chrome.events.EventSource
 import chrome.events.EventSourceImplicits._
+import chrome.utils.ErrorHandling._
 import chrome.permissions.APIPermission
-import utils.ErrorHandling.lastErrorOrValue
 import scala.scalajs.js
 import scala.scalajs.js.JSConverters._
 

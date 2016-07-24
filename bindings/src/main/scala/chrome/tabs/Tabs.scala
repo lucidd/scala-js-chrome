@@ -7,7 +7,7 @@ import chrome.permissions.APIPermission
 import chrome.runtime.bindings.Port
 import chrome.tabs.bindings._
 import chrome.windows.bindings.Window
-import utils.ErrorHandling.lastErrorOrValue
+import chrome.utils.ErrorHandling._
 
 import scala.concurrent.{Future, Promise}
 import scala.scalajs.js

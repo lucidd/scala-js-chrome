@@ -1,4 +1,4 @@
-package utils
+package chrome.utils
 
 import chrome.runtime.bindings.Runtime
 

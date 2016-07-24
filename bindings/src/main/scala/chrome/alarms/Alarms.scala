@@ -3,7 +3,7 @@ package chrome.alarms
 import chrome.alarms.bindings.{AlarmInfo, Alarm}
 import chrome.events.EventSource
 import chrome.events.EventSourceImplicits._
-import utils.ErrorHandling.lastErrorOrValue
+import chrome.utils.ErrorHandling._
 
 import scala.concurrent.duration._
 import scala.concurrent.{Future, Promise}
