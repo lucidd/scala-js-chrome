@@ -7,6 +7,7 @@ import sbt._
 
 object Chrome {
 
+  def i18n(msg: String): String = s"__MSG_${msg}__"
   def icons(base: String, name: String, sizes: Set[Int]): Map[Int, String] = {
     sizes.map{ size =>
       size -> s"$base/$size/$name"
