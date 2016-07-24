@@ -13,10 +13,12 @@ object Chrome {
     }.toMap
   }
 
-  def buildExtentionDirectory(unpacked: File)(manifest: File, jsLib: File,
-                                              jsDeps: File, jsLauncher: File, content: File): File =  {
+  def buildUnpackedDirectory(unpacked: File)(manifest: File, jsLib: File,
+                                             jsDeps: File, jsLauncher: File, resources: Seq[File]): File =  {
     IO.createDirectory(unpacked)
-    IO.copyDirectory(content, unpacked, overwrite = true, preserveLastModified = true)
+    resources.foreach { resource =>
+      IO.copyDirectory(resource, unpacked, overwrite = true, preserveLastModified = true)
+    }
     IO.copy(List(
       (jsLib, unpacked / "main.js"),
       (jsDeps, unpacked / "deps.js"),

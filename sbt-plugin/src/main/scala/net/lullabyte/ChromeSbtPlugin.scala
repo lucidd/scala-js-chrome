@@ -13,8 +13,6 @@ object ChromeSbtPlugin extends AutoPlugin {
 
   object autoImport {
 
-    val chromePackageContent = SettingKey[File]("chromePackageContent",
-      "The contents of this directory get copied to the into the chrome extension")
     val chromeBuildOpt = TaskKey[File]("chromeBuildOpt")
     val chromeBuildFast = TaskKey[File]("chromeBuildFast")
     val chromePackage = TaskKey[File]("chromePackage")
@@ -23,14 +21,13 @@ object ChromeSbtPlugin extends AutoPlugin {
 
 
     lazy val baseSettings: Seq[Def.Setting[_]] = Seq(
-      chromePackageContent := file("content"),
       chromeBuildOpt := {
         Chrome.buildExtentionDirectory(target.value / "chrome" / "unpacked")(
           (chromeGenerateManifest in Compile).value,
           (fullOptJS in Compile).value.data,
           (packageJSDependencies in Compile).value,
           (packageScalaJSLauncher in Compile).value.data,
-          (chromePackageContent in Compile).value
+          (resourceDirectories in Compile).value
         )
       },
       chromePackage := {
