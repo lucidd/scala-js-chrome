@@ -1,13 +1,19 @@
 package net.lullabyte
 
-import chrome.Impl.{App, Background, AppManifest}
+import chrome.Impl.{App, AppManifest, ExtensionManifest, Background}
 import chrome.Manifest
-import chrome.permissions.{HostPermission, APIPermission, Permission}
+import chrome.permissions.{APIPermission, HostPermission, Permission}
 import sbt._
 
 object Chrome {
 
+  val mainFileName = "main.js"
+  val dependenciesFileName = "dependencies.js"
+  val launcherFileName = "launcher.js"
+  val defaultScripts = List(dependenciesFileName, mainFileName, launcherFileName)
+
   def i18n(msg: String): String = s"__MSG_${msg}__"
+
   def icons(base: String, name: String, sizes: Set[Int]): Map[Int, String] = {
     sizes.map{ size =>
       size -> s"$base/$size/$name"
@@ -21,9 +27,9 @@ object Chrome {
       IO.copyDirectory(resource, unpacked, overwrite = true, preserveLastModified = true)
     }
     IO.copy(List(
-      (jsLib, unpacked / "main.js"),
-      (jsDeps, unpacked / "deps.js"),
-      (jsLauncher, unpacked / "launcher.js"),
+      (jsLib, unpacked / mainFileName),
+      (jsDeps, unpacked / dependenciesFileName),
+      (jsLauncher, unpacked / launcherFileName),
       (manifest, unpacked / "manifest.json")
     ), overwrite = true, preserveLastModified = true)
     unpacked
