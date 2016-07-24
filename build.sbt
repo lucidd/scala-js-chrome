@@ -40,7 +40,7 @@ lazy val bindings = project.in(file("bindings")).
     persistLauncher := false,
     persistLauncher in Test := false,
     libraryDependencies ++= Seq(
-      "org.scala-js" %%% "scalajs-dom" % "0.9.0"
+      "org.scala-js" %%% "scalajs-dom" % "0.9.1"
     ),
     publishMavenStyle := true,
     publishTo := {
@@ -65,7 +65,7 @@ lazy val plugin = project.in(file("sbt-plugin")).
     publishMavenStyle := false,
     bintrayRepository := "sbt-plugins",
     bintrayOrganization := None,
-    addSbtPlugin("org.scala-js" % "sbt-scalajs" % "0.6.9")
+    addSbtPlugin("org.scala-js" % "sbt-scalajs" % "0.6.10")
   ).
   enablePlugins(commonPlugins: _*)
 
