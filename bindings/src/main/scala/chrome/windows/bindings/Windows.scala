@@ -13,9 +13,11 @@ trait GetOptions extends js.Object {
 
 object GetOptions {
   def apply(populate: js.UndefOr[Boolean] = js.undefined): GetOptions = {
-    js.Dynamic.literal(
-      populate = populate
-    ).asInstanceOf[GetOptions]
+    js.Dynamic
+      .literal(
+          populate = populate
+      )
+      .asInstanceOf[GetOptions]
   }
 }
 
@@ -43,24 +45,25 @@ object CreateOptions {
             focused: js.UndefOr[Boolean] = js.undefined,
             incognito: js.UndefOr[Boolean] = js.undefined,
             `type`: js.UndefOr[Window.CreateType] = js.undefined,
-            state: js.UndefOr[Window.State] = js.undefined
-            ): CreateOptions = {
-    js.Dynamic.literal(
-            url = url.length match {
-              case 0 => js.undefined
-              case 1 => url(0)
-              case _ => url
-            },
-            tabId = tabId,
-            left = left,
-            top = top,
-            width = width,
-            height = height,
-            focused = focused,
-            incognito = incognito,
-            `type` = `type`,
-            state = state
-    ).asInstanceOf[CreateOptions]
+            state: js.UndefOr[Window.State] = js.undefined): CreateOptions = {
+    js.Dynamic
+      .literal(
+          url = url.length match {
+            case 0 => js.undefined
+            case 1 => url(0)
+            case _ => url
+          },
+          tabId = tabId,
+          left = left,
+          top = top,
+          width = width,
+          height = height,
+          focused = focused,
+          incognito = incognito,
+          `type` = `type`,
+          state = state
+      )
+      .asInstanceOf[CreateOptions]
   }
 }
 
@@ -82,17 +85,18 @@ object UpdateOptions {
             height: js.UndefOr[Int] = js.undefined,
             focused: js.UndefOr[Boolean] = js.undefined,
             drawAttention: js.UndefOr[Boolean] = js.undefined,
-            state: js.UndefOr[Window.State] = js.undefined
-            ): UpdateOptions = {
-    js.Dynamic.literal(
-            left = left,
-            top = top,
-            width = width,
-            height = height,
-            focused = focused,
-            drawAttention = drawAttention,
-            state = state
-    ).asInstanceOf[UpdateOptions]
+            state: js.UndefOr[Window.State] = js.undefined): UpdateOptions = {
+    js.Dynamic
+      .literal(
+          left = left,
+          top = top,
+          width = width,
+          height = height,
+          focused = focused,
+          drawAttention = drawAttention,
+          state = state
+      )
+      .asInstanceOf[UpdateOptions]
   }
 }
 
@@ -107,10 +111,12 @@ object Windows extends js.Object {
   val onRemoved: Event[js.Function1[Window.Id, _]] = js.native
   val onFocusChanged: Event[js.Function1[Window.Id, _]] = js.native
 
-  def get(windowId: Window.Id, getInfo: js.UndefOr[GetOptions] = js.undefined,
+  def get(windowId: Window.Id,
+          getInfo: js.UndefOr[GetOptions] = js.undefined,
           callback: js.Function1[Window, _]): Unit = js.native
 
-  def getCurrent(getInfo: js.UndefOr[GetOptions] = js.undefined, callback: js.Function1[Window, _]): Unit = js.native
+  def getCurrent(getInfo: js.UndefOr[GetOptions] = js.undefined,
+                 callback: js.Function1[Window, _]): Unit = js.native
 
   def getLastFocused(getInfo: js.UndefOr[GetOptions] = js.undefined,
                      callback: js.Function1[Window, _]): Unit = js.native
@@ -119,8 +125,14 @@ object Windows extends js.Object {
              callback: js.Function1[js.Array[Window], _]): Unit = js.native
 
   def create(createData: js.UndefOr[CreateOptions],
-             callback: js.UndefOr[js.Function1[js.UndefOr[Window], _]] = js.undefined): Unit = js.native
-  def update(windowId: Window.Id, updateInfo: UpdateOptions,
-             callback: js.UndefOr[js.Function1[Window, _]] = js.undefined): Unit = js.native
-  def remove(windowId: Window.Id, callback: js.UndefOr[js.Function0[_]] = js.undefined): Unit = js.native
+             callback: js.UndefOr[js.Function1[js.UndefOr[Window], _]] =
+               js.undefined): Unit = js.native
+  def update(
+      windowId: Window.Id,
+      updateInfo: UpdateOptions,
+      callback: js.UndefOr[js.Function1[Window, _]] = js.undefined): Unit =
+    js.native
+  def remove(windowId: Window.Id,
+             callback: js.UndefOr[js.Function0[_]] = js.undefined): Unit =
+    js.native
 }

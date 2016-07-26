@@ -2,7 +2,6 @@ package chrome.system.display.bindings
 
 import scala.scalajs.js
 
-
 @js.native
 trait Insets extends js.Object {
 
@@ -16,12 +15,14 @@ trait Insets extends js.Object {
 object Insets {
 
   def apply(left: Int, top: Int, right: Int, bottom: Int): Insets = {
-    js.Dynamic.literal(
-      left = left,
-      top = top,
-      right = right,
-      bottom = bottom
-    ).asInstanceOf[Insets]
+    js.Dynamic
+      .literal(
+          left = left,
+          top = top,
+          right = right,
+          bottom = bottom
+      )
+      .asInstanceOf[Insets]
   }
 
 }

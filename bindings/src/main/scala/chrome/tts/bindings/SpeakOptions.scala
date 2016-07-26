@@ -15,19 +15,21 @@ object SpeakOptions {
             requiredEventTypes: js.UndefOr[TTSEvent.Type] = js.undefined,
             desiredEventTypes: js.UndefOr[TTSEvent.Type] = js.undefined,
             onEvent: js.UndefOr[String] = js.undefined): SpeakOptions = {
-    js.Dynamic.literal(
-      enqueue = enqueue,
-      voiceName = voiceName,
-      extensionId = extensionId,
-      lang = lang,
-      gender = gender,
-      rate = rate,
-      pitch = pitch,
-      volume = volume,
-      requiredEventTypes = requiredEventTypes,
-      desiredEventTypes = desiredEventTypes,
-      onEvent = onEvent
-    ).asInstanceOf[SpeakOptions]
+    js.Dynamic
+      .literal(
+          enqueue = enqueue,
+          voiceName = voiceName,
+          extensionId = extensionId,
+          lang = lang,
+          gender = gender,
+          rate = rate,
+          pitch = pitch,
+          volume = volume,
+          requiredEventTypes = requiredEventTypes,
+          desiredEventTypes = desiredEventTypes,
+          onEvent = onEvent
+      )
+      .asInstanceOf[SpeakOptions]
   }
 
 }

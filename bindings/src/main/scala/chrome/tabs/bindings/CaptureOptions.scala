@@ -2,7 +2,6 @@ package chrome.tabs.bindings
 
 import scala.scalajs.js
 
-
 object CaptureOptions {
 
   type ImageFormat = String

@@ -10,8 +10,12 @@ import scala.scalajs.js.typedarray.ArrayBuffer
 
 class Socket(val socketId: SocketId) {
 
-  val onReceive = TCP.onReceive.filter(_.socketId == socketId).map((event) => Socket.Received(event.data))
-  val onReceiveError = TCP.onReceiveError.filter(_.socketId == socketId).map((event) => Socket.Error(event.resultCode))
+  val onReceive = TCP.onReceive
+    .filter(_.socketId == socketId)
+    .map((event) => Socket.Received(event.data))
+  val onReceiveError = TCP.onReceiveError
+    .filter(_.socketId == socketId)
+    .map((event) => Socket.Error(event.resultCode))
   val all: EventSource[Socket.ReceiveEvent] = onReceive.merge(onReceiveError)
 
   def update(properties: SocketProperties): Future[Unit] = {
@@ -22,7 +26,8 @@ class Socket(val socketId: SocketId) {
     TCP.setPaused(socketId, paused)
   }
 
-  def setKeepAlive(enable: Boolean, delay: js.UndefOr[Int] = js.undefined): Future[Int] = {
+  def setKeepAlive(enable: Boolean,
+                   delay: js.UndefOr[Int] = js.undefined): Future[Int] = {
     TCP.setKeepAlive(socketId, enable, delay)
   }
 
@@ -64,8 +69,12 @@ object Socket {
 
   def apply(id: SocketId): Socket = new Socket(id)
 
-  def apply(name: String = "", persistent: Boolean, bufferSize: Int): Future[Socket] = {
-    TCP.create(SocketProperties(persistent, name, bufferSize)).map(i => Socket(i.socketId))
+  def apply(name: String = "",
+            persistent: Boolean,
+            bufferSize: Int): Future[Socket] = {
+    TCP
+      .create(SocketProperties(persistent, name, bufferSize))
+      .map(i => Socket(i.socketId))
   }
 
 }

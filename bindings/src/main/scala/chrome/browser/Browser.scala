@@ -14,9 +14,10 @@ object Browser extends ChromeAPI {
 
   def openTab(url: String): Future[Unit] = {
     val promise = Promise[Unit]()
-    bindings.Browser.openTab(OpenTabOptions(url = url), js.Any.fromFunction0(() => {
-      promise.complete(lastErrorOrValue(()))
-    }))
+    bindings.Browser
+      .openTab(OpenTabOptions(url = url), js.Any.fromFunction0(() => {
+        promise.complete(lastErrorOrValue(()))
+      }))
     promise.future
   }
 

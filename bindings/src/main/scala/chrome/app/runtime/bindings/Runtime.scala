@@ -14,9 +14,3 @@ object Runtime extends js.Object {
   val onRestarted: Event[js.Function0[_]] = js.native
 
 }
-
-
-
-
-
-

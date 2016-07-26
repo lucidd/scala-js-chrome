@@ -2,7 +2,6 @@ package chrome.runtime.bindings
 
 import scala.scalajs.js
 
-
 object OnInstalledDetails {
 
   type InstallReason = String

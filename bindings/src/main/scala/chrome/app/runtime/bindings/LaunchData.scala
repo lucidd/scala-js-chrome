@@ -52,5 +52,4 @@ trait LaunchData extends js.Object {
 
   def source: js.UndefOr[LaunchData.Source] = js.native
 
-
 }

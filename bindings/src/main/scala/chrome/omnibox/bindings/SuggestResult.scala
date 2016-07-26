@@ -10,14 +10,15 @@ trait SuggestResult extends js.Object {
 
 }
 
-
 object SuggestResult {
 
   def apply(content: String, description: String): SuggestResult = {
-    js.Dynamic.literal(
-      content = content,
-      description = description
-    ).asInstanceOf[SuggestResult]
+    js.Dynamic
+      .literal(
+          content = content,
+          description = description
+      )
+      .asInstanceOf[SuggestResult]
   }
 
 }

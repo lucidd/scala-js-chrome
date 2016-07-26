@@ -2,8 +2,6 @@ package chrome.events.bindings
 
 import scala.scalajs.js
 
-
-
 @js.native
 trait Event[-T <: js.Function] extends js.Object {
 

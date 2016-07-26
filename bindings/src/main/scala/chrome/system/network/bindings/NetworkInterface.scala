@@ -2,7 +2,6 @@ package chrome.system.network.bindings
 
 import scala.scalajs.js
 
-
 @js.native
 trait NetworkInterface extends js.Object {
 

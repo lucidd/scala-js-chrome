@@ -2,7 +2,6 @@ package chrome.app.window.bindings
 
 import scala.scalajs.js
 
-
 @js.native
 trait FrameOptions extends js.Object {
 

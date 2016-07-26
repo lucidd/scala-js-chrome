@@ -1,6 +1,5 @@
 package chrome.system.cpu
 
-
 package object bindings {
 
   type Feature = String

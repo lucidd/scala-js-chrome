@@ -27,8 +27,8 @@ trait ExtensionInfo extends js.Object {
   //TODO: find a good way to make sure this can only be accessed if we are in a app (maybe using implicits)
   val appLaunchUrl: js.UndefOr[String] = js.native
   val launchType: js.UndefOr[ExtensionInfo.LaunchType] = js.native
-  val availableLaunchTypes: js.UndefOr[js.Array[ExtensionInfo.LaunchType]] = js.native
-
+  val availableLaunchTypes: js.UndefOr[js.Array[ExtensionInfo.LaunchType]] =
+    js.native
 
 }
 
@@ -76,5 +76,3 @@ object ExtensionInfo {
   }
 
 }
-
-

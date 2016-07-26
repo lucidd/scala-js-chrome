@@ -9,12 +9,12 @@ import chrome.utils.ErrorHandling._
 import scala.concurrent.{Promise, Future}
 import scala.scalajs.js
 
-
 object Storage extends ChromeAPI {
 
   implicit class StorageArea(area: bindings.StorageArea) {
 
-    def get(keys: js.UndefOr[js.Any] = js.undefined): Future[Map[String, js.Any]] = {
+    def get(keys: js.UndefOr[js.Any] = js.undefined)
+      : Future[Map[String, js.Any]] = {
       val promise = Promise[Map[String, js.Any]]()
       area.get(keys, (results: Map[String, js.Any]) => {
         promise.complete(lastErrorOrValue(results))
@@ -56,7 +56,8 @@ object Storage extends ChromeAPI {
   }
 
   val requiredPermissions: Set[APIPermission] = Set(APIPermission.Storage)
-  val onChanged: EventSource[(Map[String, StorageChange], String)] = bindings.Storage.onChanged
+  val onChanged: EventSource[(Map[String, StorageChange], String)] =
+    bindings.Storage.onChanged
 
   val sync: StorageArea = bindings.Storage.sync
   val local: StorageArea = bindings.Storage.local

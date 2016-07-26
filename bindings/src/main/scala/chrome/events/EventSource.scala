@@ -2,7 +2,6 @@ package chrome.events
 
 import scala.collection.mutable
 
-
 trait Subscription {
   def cancel(): Unit
 }
@@ -42,11 +41,12 @@ class EventSourceController[A] extends EventSource[A] {
   }
 
   def emit(value: A): Unit = {
-    subcribers.foreach( fn =>
-      scala.scalajs.concurrent.JSExecutionContext.queue.execute(new Runnable {
-        override def run(): Unit = fn(value)
-      })
-    )
+    subcribers.foreach(
+        fn =>
+          scala.scalajs.concurrent.JSExecutionContext.queue
+            .execute(new Runnable {
+          override def run(): Unit = fn(value)
+        }))
   }
 
   def source: EventSource[A] = this

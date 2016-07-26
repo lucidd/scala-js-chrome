@@ -17,7 +17,8 @@ object Windows {
   val onRemoved: EventSource[Window.Id] = bindings.Windows.onRemoved
   val onFocusChanged: EventSource[Window.Id] = bindings.Windows.onFocusChanged
 
-  def get(windowId: Window.Id, getInfo: js.UndefOr[GetOptions] = js.undefined): Future[Window] = {
+  def get(windowId: Window.Id,
+          getInfo: js.UndefOr[GetOptions] = js.undefined): Future[Window] = {
     val promise = Promise[Window]()
     bindings.Windows.get(windowId, getInfo, (window: Window) => {
       promise.complete(lastErrorOrValue(window))
@@ -25,7 +26,8 @@ object Windows {
     promise.future
   }
 
-  def getCurrent(getInfo: js.UndefOr[GetOptions] = js.undefined): Future[Window] = {
+  def getCurrent(
+      getInfo: js.UndefOr[GetOptions] = js.undefined): Future[Window] = {
     val promise = Promise[Window]()
     bindings.Windows.getCurrent(getInfo, (window: Window) => {
       promise.complete(lastErrorOrValue(window))
@@ -33,7 +35,8 @@ object Windows {
     promise.future
   }
 
-  def getLastFocused(getInfo: js.UndefOr[GetOptions] = js.undefined): Future[Window] = {
+  def getLastFocused(
+      getInfo: js.UndefOr[GetOptions] = js.undefined): Future[Window] = {
     val promise = Promise[Window]()
     bindings.Windows.getLastFocused(getInfo, (window: Window) => {
       promise.complete(lastErrorOrValue(window))
@@ -41,7 +44,8 @@ object Windows {
     promise.future
   }
 
-  def getAll(getInfo: js.UndefOr[GetOptions] = js.undefined): Future[List[Window]] = {
+  def getAll(
+      getInfo: js.UndefOr[GetOptions] = js.undefined): Future[List[Window]] = {
     val promise = Promise[List[Window]]()
     bindings.Windows.getAll(getInfo, (windows: js.Array[Window]) => {
       promise.complete(lastErrorOrValue(windows.toList))
@@ -51,17 +55,20 @@ object Windows {
 
   def create(createData: js.UndefOr[CreateOptions]): Future[Option[Window]] = {
     val promise = Promise[Option[Window]]()
-    bindings.Windows.create(createData, js.Any.fromFunction1((window: js.UndefOr[Window]) => {
-      promise.complete(lastErrorOrValue(window.toOption))
-    }))
+    bindings.Windows.create(
+        createData,
+        js.Any.fromFunction1((window: js.UndefOr[Window]) => {
+          promise.complete(lastErrorOrValue(window.toOption))
+        }))
     promise.future
   }
 
   def update(windowId: Window.Id, updateInfo: UpdateOptions): Future[Window] = {
     val promise = Promise[Window]()
-    bindings.Windows.update(windowId, updateInfo, js.Any.fromFunction1((window: Window) => {
-      promise.complete(lastErrorOrValue(window))
-    }))
+    bindings.Windows
+      .update(windowId, updateInfo, js.Any.fromFunction1((window: Window) => {
+        promise.complete(lastErrorOrValue(window))
+      }))
     promise.future
   }
 

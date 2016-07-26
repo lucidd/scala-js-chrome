@@ -23,5 +23,6 @@ object Idle extends ChromeAPI {
     promise.future
   }
 
-  def setDetectionInterval(intervalInSeconds: Int): Unit = bindings.Idle.setDetectionInterval(intervalInSeconds)
+  def setDetectionInterval(intervalInSeconds: Int): Unit =
+    bindings.Idle.setDetectionInterval(intervalInSeconds)
 }

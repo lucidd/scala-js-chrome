@@ -6,7 +6,8 @@ import chrome.events.EventSourceImplicits._
 
 object Runtime {
 
-  val onEmbedRequested: EventSource[Request] = bindings.Runtime.onEmbedRequested
+  val onEmbedRequested: EventSource[Request] =
+    bindings.Runtime.onEmbedRequested
   val onLaunched: EventSource[LaunchData] = bindings.Runtime.onLaunched
   val onRestarted: EventSource[Unit] = bindings.Runtime.onRestarted
 

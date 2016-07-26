@@ -10,4 +10,3 @@ trait MemoryInfo extends js.Object {
   def availableCapacity: Double = js.native
 
 }
-

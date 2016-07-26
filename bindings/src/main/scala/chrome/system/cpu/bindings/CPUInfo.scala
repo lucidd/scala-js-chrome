@@ -1,6 +1,5 @@
 package chrome.system.cpu.bindings
 
-
 import scala.scalajs.js
 
 @js.native

@@ -1,6 +1,5 @@
 package chrome.idle
 
-
 package object bindings {
 
   type State = String

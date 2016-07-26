@@ -13,25 +13,26 @@ object CreateWindowOptions {
             resizable: js.UndefOr[Boolean] = js.undefined,
             alwaysOnTop: js.UndefOr[Boolean] = js.undefined,
             focused: js.UndefOr[Boolean] = js.undefined,
-            visibleOnAllWorkspaces: js.UndefOr[Boolean] = js.undefined
-             ): CreateWindowOptions = {
-    js.Dynamic.literal(
-      id = id,
-      alphaEnabled = alphaEnabled,
-      state = state,
-      hidden = hidden,
-      resizable = resizable,
-      alwaysOnTop = alwaysOnTop,
-      focused = focused,
-      visibleOnAllWorkspaces = visibleOnAllWorkspaces
-    ).asInstanceOf[CreateWindowOptions]
+            visibleOnAllWorkspaces: js.UndefOr[Boolean] = js.undefined)
+    : CreateWindowOptions = {
+    js.Dynamic
+      .literal(
+          id = id,
+          alphaEnabled = alphaEnabled,
+          state = state,
+          hidden = hidden,
+          resizable = resizable,
+          alwaysOnTop = alwaysOnTop,
+          focused = focused,
+          visibleOnAllWorkspaces = visibleOnAllWorkspaces
+      )
+      .asInstanceOf[CreateWindowOptions]
   }
 
 }
 
 @js.native
 trait CreateWindowOptions extends js.Object {
-
 
   val alphaEnabled: js.UndefOr[Boolean] = js.native
   val state: js.UndefOr[String] = js.native

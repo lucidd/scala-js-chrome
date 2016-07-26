@@ -1,6 +1,5 @@
 package chrome.omnibox
 
-
 package object bindings {
 
   type DescriptionStyleType = String

@@ -1,6 +1,5 @@
 package chrome.tabs.bindings
 
-
 import scala.scalajs.js
 
 @js.native
@@ -17,12 +16,15 @@ object ZoomSettings {
   type Mode = String
   type Scope = String
 
-  def apply(mode: js.UndefOr[ZoomSettings.Mode] = js.undefined,
-            scope: js.UndefOr[ZoomSettings.Scope] = js.undefined): ZoomSettings = {
-    js.Dynamic.literal(
-      mode = mode,
-      scope = scope
-    ).asInstanceOf[ZoomSettings]
+  def apply(
+      mode: js.UndefOr[ZoomSettings.Mode] = js.undefined,
+      scope: js.UndefOr[ZoomSettings.Scope] = js.undefined): ZoomSettings = {
+    js.Dynamic
+      .literal(
+          mode = mode,
+          scope = scope
+      )
+      .asInstanceOf[ZoomSettings]
   }
 
   object Modes {

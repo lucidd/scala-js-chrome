@@ -2,7 +2,6 @@ package chrome.tabs.bindings
 
 import scala.scalajs.js
 
-
 object CodeInjectionOptions {
 
   type ExeutionTime = String
@@ -15,15 +14,16 @@ object CodeInjectionOptions {
             file: js.UndefOr[String] = js.undefined,
             allFrames: js.UndefOr[Boolean] = js.undefined,
             matchAboutBlank: js.UndefOr[Boolean] = js.undefined,
-            runAt: js.UndefOr[String] = js.undefined
-             ): CodeInjectionOptions = {
-    js.Dynamic.literal(
-      code = code,
-      file = file,
-      allFrames = allFrames,
-      matchAboutBlank = matchAboutBlank,
-      runAt = runAt
-    ).asInstanceOf[CodeInjectionOptions]
+            runAt: js.UndefOr[String] = js.undefined): CodeInjectionOptions = {
+    js.Dynamic
+      .literal(
+          code = code,
+          file = file,
+          allFrames = allFrames,
+          matchAboutBlank = matchAboutBlank,
+          runAt = runAt
+      )
+      .asInstanceOf[CodeInjectionOptions]
   }
 
 }

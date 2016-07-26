@@ -14,7 +14,8 @@ object Audio {
 
   def getInfo: Future[(js.Array[OutputInfo], js.Array[InputInfo])] = {
     val promise = Promise[(js.Array[OutputInfo], js.Array[InputInfo])]()
-    bindings.Audio.getInfo((outoutInfo: js.Array[OutputInfo], inputInfo: js.Array[InputInfo]) => {
+    bindings.Audio.getInfo(
+        (outoutInfo: js.Array[OutputInfo], inputInfo: js.Array[InputInfo]) => {
       promise.complete(lastErrorOrValue((outoutInfo, inputInfo)))
     })
     promise.future
@@ -28,7 +29,8 @@ object Audio {
     promise.future
   }
 
-  def setProperties(id: bindings.Audio.DeviceID, properties: Properties): Future[Unit] = {
+  def setProperties(id: bindings.Audio.DeviceID,
+                    properties: Properties): Future[Unit] = {
     val promise = Promise[Unit]()
     bindings.Audio.setProperties(id, properties, () => {
       promise.complete(lastErrorOrValue(()))

@@ -10,8 +10,6 @@ import scala.concurrent.{Future, Promise}
 import scala.scalajs.js
 import scala.scalajs.js.Any
 
-
-
 object Alarms {
 
   val onAlarm: EventSource[Alarm] = bindings.Alarms.onAlarm
@@ -31,7 +29,6 @@ object Alarms {
     }))
     promise.future
   }
-
 
   def create(name: String = "", alarmInfo: AlarmInfo): Unit = {
     bindings.Alarms.create(name, alarmInfo)
@@ -53,6 +50,4 @@ object Alarms {
     promise.future
   }
 
-
 }
-

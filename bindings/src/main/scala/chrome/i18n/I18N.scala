@@ -15,7 +15,8 @@ object I18N {
   }
 
   def getMessage(messageName: String,
-                 substitutions: String*): js.UndefOr[String] = bindings.I18N.getMessage(messageName, substitutions: _*)
+                 substitutions: String*): js.UndefOr[String] =
+    bindings.I18N.getMessage(messageName, substitutions: _*)
 
   def getUILanguage: String = bindings.I18N.getUILanguage()
 

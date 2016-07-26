@@ -10,10 +10,10 @@ import chrome.utils.ErrorHandling._
 import scala.concurrent.{Future, Promise}
 import scala.scalajs.js
 
-
 object Display extends ChromeAPI {
 
-  val requiredPermissions: Set[APIPermission] = Set(APIPermission.System.Display)
+  val requiredPermissions: Set[APIPermission] = Set(
+      APIPermission.System.Display)
 
   val onDisplayChanged: EventSource[Unit] = bindings.Display.onDisplayChanged
 
@@ -25,11 +25,14 @@ object Display extends ChromeAPI {
     promise.future
   }
 
-  def setDisplayProperties(id: bindings.Display.ID, info: DisplayProperties): Future[bindings.Display.ID] = {
+  def setDisplayProperties(
+      id: bindings.Display.ID,
+      info: DisplayProperties): Future[bindings.Display.ID] = {
     val promise = Promise[bindings.Display.ID]()
-    bindings.Display.setDisplayProperties(id, info, js.Any.fromFunction0(() => {
-      promise.complete(lastErrorOrValue(id))
-    }))
+    bindings.Display
+      .setDisplayProperties(id, info, js.Any.fromFunction0(() => {
+        promise.complete(lastErrorOrValue(id))
+      }))
     promise.future
   }
 

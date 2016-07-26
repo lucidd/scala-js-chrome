@@ -1,6 +1,5 @@
 package chrome.system.cpu
 
-
 import chrome.ChromeAPI
 import chrome.permissions.APIPermission
 import chrome.system.cpu.bindings._

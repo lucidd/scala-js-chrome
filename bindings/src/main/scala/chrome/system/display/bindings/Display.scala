@@ -15,19 +15,9 @@ object Display extends js.Object {
 
   def getInfo(callback: js.Function1[js.Array[DisplayInfo], _]): Unit = native
 
-  def setDisplayProperties(id: ID, info: DisplayProperties,
-                           callback: UndefOr[js.Function0[_]] = undefined): Unit = native
+  def setDisplayProperties(
+      id: ID,
+      info: DisplayProperties,
+      callback: UndefOr[js.Function0[_]] = undefined): Unit = native
 
 }
-
-
-
-
-
-
-
-
-
-
-
-

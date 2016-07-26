@@ -39,7 +39,8 @@ case class Bluetooth(
     peripheral: Option[Boolean] = None
 )
 
-case class Requirements(webgl: Option[Boolean] = None, npapi: Option[Boolean] = None)
+case class Requirements(webgl: Option[Boolean] = None,
+                        npapi: Option[Boolean] = None)
 case class Omnibox(keyword: String)
 case class Storage(managedSchema: String)
 
@@ -90,7 +91,6 @@ trait AppManifest extends chrome.Manifest {
   val kioskEnabled: Option[Boolean] = None
   val kioskOnly: Option[Boolean] = None
 }
-
 
 trait ExtensionManifest extends chrome.Manifest {
   val background: Background

@@ -6,7 +6,6 @@ import scala.scalajs.js
 import scala.scalajs.js.annotation.JSName
 import scala.scalajs.js.{UndefOr, native, undefined}
 
-
 @js.native
 @JSName("chrome.permissions")
 object Permissions extends js.Object {
@@ -16,11 +15,16 @@ object Permissions extends js.Object {
 
   def getAll(callback: js.Function1[PermissionList, _]): Unit = native
 
-  def contains(permissions: PermissionList, callback: js.Function1[Boolean, _]): Unit = native
+  def contains(permissions: PermissionList,
+               callback: js.Function1[Boolean, _]): Unit = native
 
-  def request(permissions: PermissionList, callback: UndefOr[js.Function1[Boolean, _]] = undefined): Unit = native
+  def request(permissions: PermissionList,
+              callback: UndefOr[js.Function1[Boolean, _]] = undefined): Unit =
+    native
 
-  def remove(permissions: PermissionList, callback: UndefOr[js.Function1[Boolean, _]] = undefined): Unit = native
+  def remove(permissions: PermissionList,
+             callback: UndefOr[js.Function1[Boolean, _]] = undefined): Unit =
+    native
 
 }
 
@@ -36,10 +40,12 @@ object PermissionList {
 
   def apply(permissions: UndefOr[js.Array[String]] = undefined,
             origins: UndefOr[js.Array[String]] = undefined): PermissionList = {
-    js.Dynamic.literal(
-      permissions = permissions,
-      origins = origins
-    ).asInstanceOf[PermissionList]
+    js.Dynamic
+      .literal(
+          permissions = permissions,
+          origins = origins
+      )
+      .asInstanceOf[PermissionList]
   }
 
 }

@@ -11,9 +11,11 @@ import scala.scalajs.js
 object TCPServer {
 
   val onAccept: EventSource[AcceptEvent] = bindings.TCPServer.onAccept
-  val onAcceptError: EventSource[AcceptErrorEvent] = bindings.TCPServer.onAcceptError
+  val onAcceptError: EventSource[AcceptErrorEvent] =
+    bindings.TCPServer.onAcceptError
 
-  def create(properties: js.UndefOr[SocketProperties] = js.undefined): Future[CreateInfo] = {
+  def create(properties: js.UndefOr[SocketProperties] = js.undefined)
+    : Future[CreateInfo] = {
     val promise = Promise[CreateInfo]()
     bindings.TCPServer.create(properties, (info: CreateInfo) => {
       promise.complete(lastErrorOrValue(info))
@@ -23,9 +25,10 @@ object TCPServer {
 
   def update(socketId: SocketId, properties: SocketProperties): Future[Unit] = {
     val promise = Promise[Unit]()
-    bindings.TCPServer.update(socketId, properties, js.Any.fromFunction0(() => {
-      promise.complete(lastErrorOrValue(()))
-    }))
+    bindings.TCPServer
+      .update(socketId, properties, js.Any.fromFunction0(() => {
+        promise.complete(lastErrorOrValue(()))
+      }))
     promise.future
   }
 
@@ -37,11 +40,15 @@ object TCPServer {
     promise.future
   }
 
-  def listen(socketId: SocketId, address: String, port: Int, backlog: js.UndefOr[Int] = js.undefined): Future[Int] = {
+  def listen(socketId: SocketId,
+             address: String,
+             port: Int,
+             backlog: js.UndefOr[Int] = js.undefined): Future[Int] = {
     val promise = Promise[Int]()
-    bindings.TCPServer.listen(socketId, address, port, backlog, (result: Int) => {
-      promise.complete(lastErrorOrValue(result))
-    })
+    bindings.TCPServer
+      .listen(socketId, address, port, backlog, (result: Int) => {
+        promise.complete(lastErrorOrValue(result))
+      })
     promise.future
   }
 

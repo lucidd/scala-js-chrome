@@ -15,12 +15,14 @@ trait Bounds extends js.Object {
 object Bounds {
 
   def apply(left: Int, top: Int, width: Int, height: Int): Bounds = {
-    js.Dynamic.literal(
-      left = left,
-      top = top,
-      width = width,
-      height = height
-    ).asInstanceOf[Bounds]
+    js.Dynamic
+      .literal(
+          left = left,
+          top = top,
+          width = width,
+          height = height
+      )
+      .asInstanceOf[Bounds]
   }
 
 }

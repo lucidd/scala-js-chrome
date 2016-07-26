@@ -1,6 +1,5 @@
 package chrome.system.display.bindings
 
-
 import scala.scalajs.js
 
 @js.native

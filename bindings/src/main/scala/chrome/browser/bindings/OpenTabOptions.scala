@@ -10,9 +10,11 @@ trait OpenTabOptions extends js.Object {
 object OpenTabOptions {
 
   def apply(url: String): OpenTabOptions = {
-    js.Dynamic.literal(
-      url = url
-    ).asInstanceOf[OpenTabOptions]
+    js.Dynamic
+      .literal(
+          url = url
+      )
+      .asInstanceOf[OpenTabOptions]
   }
 
 }

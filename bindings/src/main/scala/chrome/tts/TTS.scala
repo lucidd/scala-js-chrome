@@ -12,7 +12,8 @@ object TTS extends ChromeAPI {
 
   val requiredPermissions: Set[APIPermission] = Set(APIPermission.TTS)
 
-  def speak(utterance: String, options: js.UndefOr[SpeakOptions] = js.undefined): Future[Unit] = {
+  def speak(utterance: String,
+            options: js.UndefOr[SpeakOptions] = js.undefined): Future[Unit] = {
     val promise = Promise[Unit]()
     bindings.TTS.speak(utterance, options, js.Any.fromFunction0(() => {
       promise.complete(lastErrorOrValue(()))
@@ -36,7 +37,8 @@ object TTS extends ChromeAPI {
 
   def getVoices: Future[js.Array[TTSVoice]] = {
     val promise = Promise[js.Array[TTSVoice]]()
-    bindings.TTS.getVoices(js.Any.fromFunction1((voices: js.Array[TTSVoice]) => {
+    bindings.TTS.getVoices(
+        js.Any.fromFunction1((voices: js.Array[TTSVoice]) => {
       promise.complete(lastErrorOrValue(voices))
     }))
     promise.future

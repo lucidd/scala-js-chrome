@@ -12,9 +12,11 @@ import scala.scalajs.js.typedarray.ArrayBuffer
 object TCP {
 
   val onReceive: EventSource[ReceiveEvent] = bindings.TCP.onReceive
-  val onReceiveError: EventSource[ReceiveErrorEvent] = bindings.TCP.onReceiveError
+  val onReceiveError: EventSource[ReceiveErrorEvent] =
+    bindings.TCP.onReceiveError
 
-  def create(properties: js.UndefOr[SocketProperties] = js.undefined): Future[CreateInfo] = {
+  def create(properties: js.UndefOr[SocketProperties] = js.undefined)
+    : Future[CreateInfo] = {
     val promise = Promise[CreateInfo]()
     bindings.TCP.create(properties, (info: CreateInfo) => {
       promise.complete(lastErrorOrValue(info))
@@ -38,7 +40,9 @@ object TCP {
     promise.future
   }
 
-  def setKeepAlive(socketId: SocketId, enable: Boolean, delay: js.UndefOr[Int] = js.undefined): Future[Int] = {
+  def setKeepAlive(socketId: SocketId,
+                   enable: Boolean,
+                   delay: js.UndefOr[Int] = js.undefined): Future[Int] = {
     val promise = Promise[Int]()
     bindings.TCP.setKeepAlive(socketId, enable, delay, (result: Int) => {
       promise.complete(lastErrorOrValue(result))
@@ -54,7 +58,9 @@ object TCP {
     promise.future
   }
 
-  def connect(socketId: SocketId, peerAddress: String, peerPort: Int): Future[Int] = {
+  def connect(socketId: SocketId,
+              peerAddress: String,
+              peerPort: Int): Future[Int] = {
     val promise = Promise[Int]()
     bindings.TCP.connect(socketId, peerAddress, peerPort, (result: Int) => {
       promise.complete(lastErrorOrValue(result))
@@ -70,7 +76,8 @@ object TCP {
     promise.future
   }
 
-  def secure(socketId: SocketId, options: js.UndefOr[SecureOptions]): Future[Unit] = {
+  def secure(socketId: SocketId,
+             options: js.UndefOr[SecureOptions]): Future[Unit] = {
     val promise = Promise[Unit]()
     bindings.TCP.secure(socketId, options, () => {
       promise.complete(lastErrorOrValue(()))

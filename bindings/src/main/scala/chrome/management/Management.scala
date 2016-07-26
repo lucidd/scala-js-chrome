@@ -47,17 +47,21 @@ object Management extends ChromeAPI {
 
   def getPermissionWarningsById(id: AppID): Future[js.Array[String]] = {
     val promise = Promise[js.Array[String]]()
-    bindings.Management.getPermissionWarningsById(id, (warnings: js.Array[String]) => {
-      promise.complete(lastErrorOrValue(warnings))
-    })
+    bindings.Management
+      .getPermissionWarningsById(id, (warnings: js.Array[String]) => {
+        promise.complete(lastErrorOrValue(warnings))
+      })
     promise.future
   }
 
-  def getPermissionWarningsByManifest(manifestStr: String): Future[js.Array[String]] = {
+  def getPermissionWarningsByManifest(
+      manifestStr: String): Future[js.Array[String]] = {
     val promise = Promise[js.Array[String]]()
-    bindings.Management.getPermissionWarningsByManifest(manifestStr, (warnings: js.Array[String]) => {
-      promise.complete(lastErrorOrValue(warnings))
-    })
+    bindings.Management.getPermissionWarningsByManifest(
+        manifestStr,
+        (warnings: js.Array[String]) => {
+          promise.complete(lastErrorOrValue(warnings))
+        })
     promise.future
   }
 
@@ -69,7 +73,9 @@ object Management extends ChromeAPI {
     promise.future
   }
 
-  def uninstall(id: AppID, options: js.UndefOr[js.Object] = js.undefined): Future[Unit] = {
+  def uninstall(
+      id: AppID,
+      options: js.UndefOr[js.Object] = js.undefined): Future[Unit] = {
     val promise = Promise[Unit]()
     bindings.Management.uninstall(id, options, js.Any.fromFunction0(() => {
       promise.complete(lastErrorOrValue(()))
@@ -77,8 +83,9 @@ object Management extends ChromeAPI {
     promise.future
   }
 
-  def uninstallSelf(options: js.UndefOr[js.Object] = js.undefined,
-                    callback: js.UndefOr[js.Function0[_]] = js.undefined): Future[Unit] = {
+  def uninstallSelf(
+      options: js.UndefOr[js.Object] = js.undefined,
+      callback: js.UndefOr[js.Function0[_]] = js.undefined): Future[Unit] = {
     val promise = Promise[Unit]()
     bindings.Management.uninstallSelf(options, js.Any.fromFunction0(() => {
       promise.complete(lastErrorOrValue(()))
@@ -104,17 +111,21 @@ object Management extends ChromeAPI {
 
   def setLaunchType(id: AppID, launchType: LaunchType): Future[Unit] = {
     val promise = Promise[Unit]()
-    bindings.Management.setLaunchType(id, launchType, js.Any.fromFunction0(() => {
-      promise.complete(lastErrorOrValue(()))
-    }))
+    bindings.Management
+      .setLaunchType(id, launchType, js.Any.fromFunction0(() => {
+        promise.complete(lastErrorOrValue(()))
+      }))
     promise.future
   }
 
   def generateAppForLink(url: String, title: String): Future[ExtensionInfo] = {
     val promise = Promise[ExtensionInfo]()
-    bindings.Management.generateAppForLink(url, title, js.Any.fromFunction1((info: ExtensionInfo) => {
-      promise.complete(lastErrorOrValue(info))
-    }))
+    bindings.Management.generateAppForLink(
+        url,
+        title,
+        js.Any.fromFunction1((info: ExtensionInfo) => {
+          promise.complete(lastErrorOrValue(info))
+        }))
     promise.future
   }
 

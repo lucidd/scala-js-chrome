@@ -1,6 +1,5 @@
 package chrome.tabs.bindings
 
-
 import scala.scalajs.js
 
 @js.native

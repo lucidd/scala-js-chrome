@@ -1,6 +1,5 @@
 package chrome.desktopCapture
 
-
 package object bindings {
 
   type DesktopMediaRequestId = Int

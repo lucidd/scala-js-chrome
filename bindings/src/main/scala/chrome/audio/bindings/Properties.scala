@@ -2,18 +2,18 @@ package chrome.audio.bindings
 
 import scala.scalajs.js
 
-
 object Properties {
 
   def apply(isMuted: Boolean,
             volume: js.UndefOr[Double] = js.undefined,
-            gain: js.UndefOr[Double] = js.undefined
-             ): Properties = {
-    js.Dynamic.literal(
-      isMuted = isMuted,
-      volume = volume,
-      gain = gain
-    ).asInstanceOf[Properties]
+            gain: js.UndefOr[Double] = js.undefined): Properties = {
+    js.Dynamic
+      .literal(
+          isMuted = isMuted,
+          volume = volume,
+          gain = gain
+      )
+      .asInstanceOf[Properties]
   }
 
 }

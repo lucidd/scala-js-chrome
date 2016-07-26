@@ -8,10 +8,12 @@ object MoveProperties {
 
   def apply(windowId: js.UndefOr[Window.Id] = js.undefined,
             index: Int): MoveProperties = {
-    js.Dynamic.literal(
-      windowId = windowId,
-      index = index
-    ).asInstanceOf[MoveProperties]
+    js.Dynamic
+      .literal(
+          windowId = windowId,
+          index = index
+      )
+      .asInstanceOf[MoveProperties]
   }
 
 }

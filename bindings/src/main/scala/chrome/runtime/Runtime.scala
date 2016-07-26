@@ -15,7 +15,6 @@ import scala.scalajs.js
 import scala.scalajs.js.{UndefOr, undefined}
 import scala.util.{Failure, Success}
 
-
 sealed trait UpdateCheckResult
 
 case class NoUpdate() extends UpdateCheckResult
@@ -28,15 +27,20 @@ object Runtime {
 
   val id: bindings.Runtime.AppID = bindings.Runtime.id
   val onStartup: EventSource[Unit] = bindings.Runtime.onStartup
-  val onInstalled: EventSource[OnInstalledDetails] = bindings.Runtime.onInstalled
+  val onInstalled: EventSource[OnInstalledDetails] =
+    bindings.Runtime.onInstalled
   val onSuspend: EventSource[Unit] = bindings.Runtime.onSuspend
   val onSuspendCanceled: EventSource[Unit] = bindings.Runtime.onSuspendCanceled
-  val onUpdateAvailable: EventSource[OnUpdateAvailableDetails] = bindings.Runtime.onUpdateAvailable
-  val onBrowserUpdateAvailable: EventSource[Unit] = bindings.Runtime.onBrowserUpdateAvailable
+  val onUpdateAvailable: EventSource[OnUpdateAvailableDetails] =
+    bindings.Runtime.onUpdateAvailable
+  val onBrowserUpdateAvailable: EventSource[Unit] =
+    bindings.Runtime.onBrowserUpdateAvailable
   val onConnect: EventSource[Port] = bindings.Runtime.onConnect
   val onConnectExternal: EventSource[Port] = bindings.Runtime.onConnectExternal
 
-  class Message[A, R](val value: A, val sender: MessageSender, sendResponse: js.Function1[R, _]) {
+  class Message[A, R](val value: A,
+                      val sender: MessageSender,
+                      sendResponse: js.Function1[R, _]) {
 
     private[Runtime] var async = false
 
@@ -56,13 +60,20 @@ object Runtime {
 
   }
 
-  class MessageEventSource(event: Event[js.Function3[UndefOr[Any], MessageSender, js.Function1[Any, _], Boolean]])
-    extends EventSource[Message[Option[Any], Any]] {
+  class MessageEventSource(
+      event: Event[js.Function3[UndefOr[Any],
+                                MessageSender,
+                                js.Function1[Any, _],
+                                Boolean]])
+      extends EventSource[Message[Option[Any], Any]] {
 
-    class SubscriptionImpl(fn: Message[Option[Any], Any] => Unit) extends Subscription {
+    class SubscriptionImpl(fn: Message[Option[Any], Any] => Unit)
+        extends Subscription {
 
-      val fn2 = (msg: UndefOr[Any], sender: MessageSender, sendResponse: js.Function1[Any, _]) => {
-        val message = new Message[Option[Any], Any](msg.toOption, sender, sendResponse)
+      val fn2 = (msg: UndefOr[Any], sender: MessageSender,
+                 sendResponse: js.Function1[Any, _]) => {
+        val message =
+          new Message[Option[Any], Any](msg.toOption, sender, sendResponse)
         fn(message)
         message.async
       }
@@ -81,10 +92,12 @@ object Runtime {
 
   }
 
-  val onMessage: EventSource[Message[Option[Any], Any]] = new MessageEventSource(bindings.Runtime.onMessage)
+  val onMessage: EventSource[Message[Option[Any], Any]] =
+    new MessageEventSource(bindings.Runtime.onMessage)
   val onMessageExternal: EventSource[Message[Option[Any], Any]] =
     new MessageEventSource(bindings.Runtime.onMessageExternal)
-  val onRestartRequired: EventSource[RestartReasons.RestartReason] = bindings.Runtime.onRestartRequired
+  val onRestartRequired: EventSource[RestartReasons.RestartReason] =
+    bindings.Runtime.onRestartRequired
 
   def lastError: Option[Error] = bindings.Runtime.lastError.toOption
 
@@ -102,9 +115,11 @@ object Runtime {
 
   def getManifest: chrome.Manifest = {
     val manifest = bindings.Runtime.getManifest()
-    val perms = manifest.permissions.map(_.foldLeft(Set[Permission]()){
-      case (acc, perm) => acc ++ Permissions.permissionFromString(perm)
-    }).getOrElse(Set())
+    val perms = manifest.permissions
+      .map(_.foldLeft(Set[Permission]()) {
+        case (acc, perm) => acc ++ Permissions.permissionFromString(perm)
+      })
+      .getOrElse(Set())
     val iconsValue = for {
       (k, v) <- manifest.icons.getOrElse(Map())
     } yield k.toInt -> v
@@ -112,9 +127,9 @@ object Runtime {
       val appManifest = manifest.asAppManifest.get
       new AppManifest {
         val app = App(
-          background = Background(
-            scripts = appManifest.app.background.scripts.toList
-          )
+            background = Background(
+                scripts = appManifest.app.background.scripts.toList
+            )
         )
         val name = manifest.name
         val version = manifest.version
@@ -139,7 +154,8 @@ object Runtime {
         override val permissions = perms
         override val icons = iconsValue
         val background = Background(
-          scripts = extension.background.map(_.scripts.toList).getOrElse(List())
+            scripts =
+              extension.background.map(_.scripts.toList).getOrElse(List())
         )
       }
     }
@@ -155,25 +171,30 @@ object Runtime {
 
   def getURL(path: String): String = bindings.Runtime.getURL(path)
 
-  def setUninstallURL(url: String): Unit = bindings.Runtime.setUninstallURL(url)
+  def setUninstallURL(url: String): Unit =
+    bindings.Runtime.setUninstallURL(url)
 
   def requestUpdateCheck: Future[UpdateCheckResult] = {
     val promise = Promise[UpdateCheckResult]()
-    bindings.Runtime.requestUpdateCheck((status: UpdateCheck.Status, details: UndefOr[UpdateCheck.Details]) => {
+    bindings.Runtime.requestUpdateCheck(
+        (status: UpdateCheck.Status,
+         details: UndefOr[UpdateCheck.Details]) => {
       promise.complete(
-        lastErrorOrValue(
-          status match {
-            case UpdateCheck.UPDATE_AVAILABLE => UpdateAvailable(details.get.version)
-            case UpdateCheck.NO_UPDATE => NoUpdate()
-            case UpdateCheck.THROTTLED => Throttled()
-          }
-        )
+          lastErrorOrValue(
+              status match {
+                case UpdateCheck.UPDATE_AVAILABLE =>
+                  UpdateAvailable(details.get.version)
+                case UpdateCheck.NO_UPDATE => NoUpdate()
+                case UpdateCheck.THROTTLED => Throttled()
+              }
+          )
       )
     })
     promise.future
   }
 
-  def connect(extensionId: UndefOr[AppID] = undefined, connectInfo: UndefOr[ConnectInfo] = undefined): Port = {
+  def connect(extensionId: UndefOr[AppID] = undefined,
+              connectInfo: UndefOr[ConnectInfo] = undefined): Port = {
     bindings.Runtime.connect(extensionId, connectInfo)
   }
 
@@ -181,14 +202,19 @@ object Runtime {
     bindings.Runtime.connectNative(application)
   }
 
-  def sendMessage(extensionId: UndefOr[AppID] = undefined, message: js.Any,
+  def sendMessage(extensionId: UndefOr[AppID] = undefined,
+                  message: js.Any,
                   options: UndefOr[SendMessageOptions] = undefined,
-                  responseCallback: UndefOr[js.Function1[js.Object, _]] = js.undefined): Unit = {
-    bindings.Runtime.sendMessage(extensionId, message, options, responseCallback)
+                  responseCallback: UndefOr[js.Function1[js.Object, _]] =
+                    js.undefined): Unit = {
+    bindings.Runtime
+      .sendMessage(extensionId, message, options, responseCallback)
   }
 
-  def sendNativeMessage(application: String, message: js.Object,
-                        responseCallback: UndefOr[js.Function1[js.Object, _]]): Unit = {
+  def sendNativeMessage(
+      application: String,
+      message: js.Object,
+      responseCallback: UndefOr[js.Function1[js.Object, _]]): Unit = {
     bindings.Runtime.sendNativeMessage(application, message, responseCallback)
   }
 

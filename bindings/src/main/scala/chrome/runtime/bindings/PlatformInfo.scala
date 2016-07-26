@@ -3,7 +3,6 @@ package chrome.runtime.bindings
 import scala.scalajs.js
 import scala.scalajs.js.annotation.JSName
 
-
 object PlatformInfo {
 
   type OperatingSystem = String
@@ -39,6 +38,5 @@ trait PlatformInfo extends js.Object {
 
   @JSName("nacl_arch")
   def naclArch: PlatformInfo.Architecture = js.native
-
 
 }

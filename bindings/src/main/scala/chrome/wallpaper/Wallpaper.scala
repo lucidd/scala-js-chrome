@@ -14,9 +14,10 @@ object Wallpaper extends ChromeAPI {
 
   def setWallpaper(details: WallpaperDetails): Future[Option[Any]] = {
     val promise = Promise[Option[Any]]()
-    bindings.Wallpaper.setWallpaper(details, (thumbnail: js.UndefOr[js.Any]) => {
-      promise.complete(lastErrorOrValue(thumbnail.toOption))
-    })
+    bindings.Wallpaper
+      .setWallpaper(details, (thumbnail: js.UndefOr[js.Any]) => {
+        promise.complete(lastErrorOrValue(thumbnail.toOption))
+      })
     promise.future
   }
 

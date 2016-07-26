@@ -8,7 +8,6 @@ import chrome.utils.ErrorHandling._
 import scala.concurrent.{Future, Promise}
 import scala.scalajs.js
 
-
 object Window {
 
   val onBoundsChanged: EventSource[Unit] = bindings.Window.onBoundsChanged
@@ -20,11 +19,14 @@ object Window {
 
   def current: AppWindow = bindings.Window.current()
 
-  def create(url: String, options: js.UndefOr[CreateWindowOptions] = js.undefined): Future[AppWindow] = {
+  def create(url: String,
+             options: js.UndefOr[CreateWindowOptions] = js.undefined)
+    : Future[AppWindow] = {
     val promise = Promise[AppWindow]()
-    bindings.Window.create(url, options, js.Any.fromFunction1((appWindow: AppWindow) => {
-      promise.complete(lastErrorOrValue(appWindow))
-    }))
+    bindings.Window
+      .create(url, options, js.Any.fromFunction1((appWindow: AppWindow) => {
+        promise.complete(lastErrorOrValue(appWindow))
+      }))
     promise.future
   }
 
@@ -32,6 +34,7 @@ object Window {
 
   def get(id: AppWindow.Id): AppWindow = bindings.Window.get(id)
 
-  def canSetVisibleOnAllWorkspaces: Boolean = bindings.Window.canSetVisibleOnAllWorkspaces()
+  def canSetVisibleOnAllWorkspaces: Boolean =
+    bindings.Window.canSetVisibleOnAllWorkspaces()
 
 }

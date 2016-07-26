@@ -9,13 +9,14 @@ trait DefaultSuggestion extends js.Object {
 
 }
 
-
 object DefaultSuggestion {
 
   def apply(description: String): DefaultSuggestion = {
-    js.Dynamic.literal(
-      description = description
-    ).asInstanceOf[DefaultSuggestion]
+    js.Dynamic
+      .literal(
+          description = description
+      )
+      .asInstanceOf[DefaultSuggestion]
   }
 
 }

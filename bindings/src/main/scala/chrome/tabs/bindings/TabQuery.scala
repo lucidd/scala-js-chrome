@@ -43,21 +43,22 @@ object TabQuery {
             url: js.UndefOr[js.Any] = js.undefined,
             windowId: js.UndefOr[Window.Id] = js.undefined,
             windowType: js.UndefOr[Window.Type] = js.undefined,
-            index: js.UndefOr[Int] = js.undefined
-             ): TabQuery = {
-    js.Dynamic.literal(
-      active = active,
-      pinned = pinned,
-      highlighted = highlighted,
-      currentWindow = currentWindow,
-      lastFocusedWindow = lastFocusedWindow,
-      status = status,
-      title = title,
-      url = url,
-      windowId = windowId,
-      windowType = windowType,
-      index = index
-    ).asInstanceOf[TabQuery]
+            index: js.UndefOr[Int] = js.undefined): TabQuery = {
+    js.Dynamic
+      .literal(
+          active = active,
+          pinned = pinned,
+          highlighted = highlighted,
+          currentWindow = currentWindow,
+          lastFocusedWindow = lastFocusedWindow,
+          status = status,
+          title = title,
+          url = url,
+          windowId = windowId,
+          windowType = windowType,
+          index = index
+      )
+      .asInstanceOf[TabQuery]
   }
 
 }

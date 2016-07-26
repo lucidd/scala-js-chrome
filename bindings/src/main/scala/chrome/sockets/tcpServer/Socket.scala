@@ -26,7 +26,9 @@ class Socket(val socketId: SocketId) {
     TCPServer.setPaused(socketId, paused)
   }
 
-  def listen(address: String, port: Int, backlog: js.UndefOr[Int] = js.undefined): Future[Int] = {
+  def listen(address: String,
+             port: Int,
+             backlog: js.UndefOr[Int] = js.undefined): Future[Int] = {
     TCPServer.listen(socketId, address, port, backlog)
   }
 
@@ -53,7 +55,9 @@ object Socket {
   def apply(id: SocketId): Socket = new Socket(id)
 
   def apply(name: String = "", persistent: Boolean): Future[Socket] = {
-    TCPServer.create(SocketProperties(persistent, name)).map(i => Socket(i.socketId))
+    TCPServer
+      .create(SocketProperties(persistent, name))
+      .map(i => Socket(i.socketId))
   }
 
 }

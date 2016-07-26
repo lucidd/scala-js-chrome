@@ -5,7 +5,6 @@ import chrome.app.runtime.bindings.{LaunchData, Request}
 
 import scala.scalajs.js
 
-
 trait ChromeApp extends js.JSApp {
 
   def main(): Unit = {

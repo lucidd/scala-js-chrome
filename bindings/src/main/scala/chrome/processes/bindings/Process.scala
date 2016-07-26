@@ -11,7 +11,7 @@ trait Process extends js.Object {
   val osProcessId: Process.Id = js.native
   val title: String = js.native
   val `type`: Process.Type = js.native
-  val profile: String  = js.native
+  val profile: String = js.native
   val naclDebugPort: Int = js.native
   val tabs: js.Array[Tab.Id] = js.native
   val cpu: js.UndefOr[Double] = js.native
@@ -23,7 +23,6 @@ trait Process extends js.Object {
   val imageCache: js.UndefOr[Cache] = js.native
   val scriptCache: js.UndefOr[Cache] = js.native
   val cssCache: js.UndefOr[Cache] = js.native
-
 
 }
 

@@ -19,8 +19,10 @@ object Window extends js.Object {
 
   def current(): AppWindow = native
 
-  def create(url: String, options: UndefOr[CreateWindowOptions] = undefined,
-             callback: UndefOr[js.Function1[AppWindow, _]] = undefined): Unit = native
+  def create(url: String,
+             options: UndefOr[CreateWindowOptions] = undefined,
+             callback: UndefOr[js.Function1[AppWindow, _]] = undefined): Unit =
+    native
 
   def getAll(): js.Array[AppWindow] = native
 

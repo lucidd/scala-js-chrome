@@ -4,8 +4,8 @@ import chrome.events.bindings.Event
 
 import scala.scalajs.js
 
-
-class EventSource0Impl(event: Event[js.Function0[_]]) extends EventSource[Unit] {
+class EventSource0Impl(event: Event[js.Function0[_]])
+    extends EventSource[Unit] {
 
   class SubscriptionImpl(fn: Unit => Unit) extends Subscription {
 
@@ -25,7 +25,8 @@ class EventSource0Impl(event: Event[js.Function0[_]]) extends EventSource[Unit] 
 
 }
 
-class EventSource1Impl[A](event: Event[js.Function1[A, _]]) extends EventSource[A] {
+class EventSource1Impl[A](event: Event[js.Function1[A, _]])
+    extends EventSource[A] {
 
   class SubscriptionImpl(fn: A => Unit) extends Subscription {
 
@@ -43,7 +44,8 @@ class EventSource1Impl[A](event: Event[js.Function1[A, _]]) extends EventSource[
 
 }
 
-class EventSource2Impl[A, B](event: Event[js.Function2[A, B, _]]) extends EventSource[(A, B)] {
+class EventSource2Impl[A, B](event: Event[js.Function2[A, B, _]])
+    extends EventSource[(A, B)] {
 
   class SubscriptionImpl(fn: ((A, B)) => Unit) extends Subscription {
 
@@ -63,7 +65,8 @@ class EventSource2Impl[A, B](event: Event[js.Function2[A, B, _]]) extends EventS
 
 }
 
-class EventSource3Impl[A, B, C](event: Event[js.Function3[A, B, C, _]]) extends EventSource[(A, B, C)] {
+class EventSource3Impl[A, B, C](event: Event[js.Function3[A, B, C, _]])
+    extends EventSource[(A, B, C)] {
 
   class SubscriptionImpl(fn: ((A, B, C)) => Unit) extends Subscription {
 
@@ -87,15 +90,17 @@ object EventSourceImplicits {
 
   import scala.language.implicitConversions
 
-  implicit def eventAsEventSource0(event: Event[js.Function0[_]]): EventSource[Unit] = new EventSource0Impl(event)
-  implicit def eventAsEventSource1[A](event: Event[js.Function1[A, _]]): EventSource[A] = new EventSource1Impl(event)
-  implicit def eventAsEventSource2[A, B](event: Event[js.Function2[A, B, _]]): EventSource[(A, B)] =
+  implicit def eventAsEventSource0(
+      event: Event[js.Function0[_]]): EventSource[Unit] =
+    new EventSource0Impl(event)
+  implicit def eventAsEventSource1[A](
+      event: Event[js.Function1[A, _]]): EventSource[A] =
+    new EventSource1Impl(event)
+  implicit def eventAsEventSource2[A, B](
+      event: Event[js.Function2[A, B, _]]): EventSource[(A, B)] =
     new EventSource2Impl(event)
-  implicit def eventAsEventSource3[A, B, C](event: Event[js.Function3[A, B, C, _]]): EventSource[(A, B, C)] =
+  implicit def eventAsEventSource3[A, B, C](
+      event: Event[js.Function3[A, B, C, _]]): EventSource[(A, B, C)] =
     new EventSource3Impl(event)
 
-
 }
-
-
-

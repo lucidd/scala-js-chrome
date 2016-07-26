@@ -22,35 +22,37 @@ trait NotificationOptions extends js.Object {
 }
 
 object NotificationOptions {
-  def apply(`type`: js.UndefOr[TemplateType] = js.undefined,
-            iconUrl: js.UndefOr[String] = js.undefined,
-            appIconMaskUrl: js.UndefOr[String] = js.undefined,
-            title: js.UndefOr[String] = js.undefined,
-            message: js.UndefOr[String] = js.undefined,
-            contextMessage: js.UndefOr[String] = js.undefined,
-            priority: js.UndefOr[Int] = js.undefined,
-            eventTime: js.UndefOr[Double] = js.undefined,
-            buttons: js.UndefOr[js.Array[Button]] = js.undefined,
-            imageUrl: js.UndefOr[String] = js.undefined,
-            items: js.UndefOr[js.Array[Item]] = js.undefined,
-            progress: js.UndefOr[Int] = js.undefined,
-            isClickable: js.UndefOr[Boolean] = js.undefined
-             ): NotificationOptions = {
-    js.Dynamic.literal(
-      `type` = `type`,
-      iconUrl = iconUrl,
-      appIconMaskUrl = appIconMaskUrl,
-      title = title,
-      message = message,
-      contextMessage = contextMessage,
-      priority = priority,
-      eventTime = eventTime,
-      buttons = buttons,
-      imageUrl = imageUrl,
-      items = items,
-      progress = progress,
-      isClickable = isClickable
-    ).asInstanceOf[NotificationOptions]
+  def apply(
+      `type`: js.UndefOr[TemplateType] = js.undefined,
+      iconUrl: js.UndefOr[String] = js.undefined,
+      appIconMaskUrl: js.UndefOr[String] = js.undefined,
+      title: js.UndefOr[String] = js.undefined,
+      message: js.UndefOr[String] = js.undefined,
+      contextMessage: js.UndefOr[String] = js.undefined,
+      priority: js.UndefOr[Int] = js.undefined,
+      eventTime: js.UndefOr[Double] = js.undefined,
+      buttons: js.UndefOr[js.Array[Button]] = js.undefined,
+      imageUrl: js.UndefOr[String] = js.undefined,
+      items: js.UndefOr[js.Array[Item]] = js.undefined,
+      progress: js.UndefOr[Int] = js.undefined,
+      isClickable: js.UndefOr[Boolean] = js.undefined): NotificationOptions = {
+    js.Dynamic
+      .literal(
+          `type` = `type`,
+          iconUrl = iconUrl,
+          appIconMaskUrl = appIconMaskUrl,
+          title = title,
+          message = message,
+          contextMessage = contextMessage,
+          priority = priority,
+          eventTime = eventTime,
+          buttons = buttons,
+          imageUrl = imageUrl,
+          items = items,
+          progress = progress,
+          isClickable = isClickable
+      )
+      .asInstanceOf[NotificationOptions]
   }
 }
 
@@ -62,11 +64,14 @@ trait Button extends js.Object {
 
 object Button {
 
-  def apply(title: String, iconUrl: js.UndefOr[String] = js.undefined): Button = {
-    js.Dynamic.literal(
-      title = title,
-      iconUrl = iconUrl
-    ).asInstanceOf[Button]
+  def apply(title: String,
+            iconUrl: js.UndefOr[String] = js.undefined): Button = {
+    js.Dynamic
+      .literal(
+          title = title,
+          iconUrl = iconUrl
+      )
+      .asInstanceOf[Button]
   }
 
 }
@@ -80,10 +85,12 @@ trait Item extends js.Object {
 object Item {
 
   def apply(title: String, message: String): Item = {
-    js.Dynamic.literal(
-      title = title,
-      message = message
-    ).asInstanceOf[Item]
+    js.Dynamic
+      .literal(
+          title = title,
+          message = message
+      )
+      .asInstanceOf[Item]
   }
 
 }
