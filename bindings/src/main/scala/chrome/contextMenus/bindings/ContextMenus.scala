@@ -31,13 +31,14 @@ object MenuType {
 
 @js.native
 @JSName("chrome.contextMenus")
-object ContextMenus extends js.Object{
+object ContextMenus extends js.Object {
 
   def create(createProperties: CreateProperties): String | Int = js.native
 
   def update(id: String | Int, properties: UpdateProperties): Unit = js.native
 
-  def remove(menuItemId: String | Int, callback: js.Function0[Unit]): String | Int = js.native
+  def remove(menuItemId: String | Int,
+             callback: js.Function0[Unit]): String | Int = js.native
 
   def removeAll(callback: js.Function0[Unit]): Unit = js.native
 
@@ -47,40 +48,42 @@ object ContextMenus extends js.Object{
 
 @ScalaJSDefined
 class UpdateProperties(
-  val `type`: String = MenuType.NORMAL,
-  val title: String,
-  val checked: js.UndefOr[Boolean] = js.undefined,
-  val contexts: js.UndefOr[js.Array[String]] = js.undefined,
-  val onclick: js.UndefOr[js.Function2[MenuInfo, Tab, Unit]],
-  val parentId: js.UndefOr[String | Int] = js.undefined,
-  val documentUrlPatterns: js.UndefOr[js.Array[String]] = js.undefined,
-  val targetUrlPatterns: js.UndefOr[js.Array[String]] = js.undefined,
-  val enabled: Boolean = true
+    val `type`: String = MenuType.NORMAL,
+    val title: String,
+    val checked: js.UndefOr[Boolean] = js.undefined,
+    val contexts: js.UndefOr[js.Array[String]] = js.undefined,
+    val onclick: js.UndefOr[js.Function2[MenuInfo, Tab, Unit]],
+    val parentId: js.UndefOr[String | Int] = js.undefined,
+    val documentUrlPatterns: js.UndefOr[js.Array[String]] = js.undefined,
+    val targetUrlPatterns: js.UndefOr[js.Array[String]] = js.undefined,
+    val enabled: Boolean = true
 ) extends js.Object
 
 object CreateProperties {
 
-  def apply(id: String, title: String, contexts: js.Array[String] = js.Array(MenuContexts.ALL)): CreateProperties =
-    new CreateProperties(id = id, title = title , contexts = contexts)
+  def apply(id: String,
+            title: String,
+            contexts: js.Array[String] = js.Array(MenuContexts.ALL))
+    : CreateProperties =
+    new CreateProperties(id = id, title = title, contexts = contexts)
 }
-
 
 @ScalaJSDefined
 class CreateProperties(
-  val `type`: String = MenuType.NORMAL,
-  val id: String | Int,
-  val title: String,
-  val checked: js.UndefOr[Boolean] = js.undefined,
-  val contexts: js.UndefOr[js.Array[String]] = js.undefined,
-  val onclick: js.UndefOr[js.Function2[MenuInfo, Tab, Unit]] = js.undefined,
-  val parentId: js.UndefOr[String | Int] = js.undefined,
-  val documentUrlPatterns: js.UndefOr[js.Array[String]] = js.undefined,
-  val targetUrlPatterns: js.UndefOr[js.Array[String]] = js.undefined,
-  val enabled: Boolean = true
+    val `type`: String = MenuType.NORMAL,
+    val id: String | Int,
+    val title: String,
+    val checked: js.UndefOr[Boolean] = js.undefined,
+    val contexts: js.UndefOr[js.Array[String]] = js.undefined,
+    val onclick: js.UndefOr[js.Function2[MenuInfo, Tab, Unit]] = js.undefined,
+    val parentId: js.UndefOr[String | Int] = js.undefined,
+    val documentUrlPatterns: js.UndefOr[js.Array[String]] = js.undefined,
+    val targetUrlPatterns: js.UndefOr[js.Array[String]] = js.undefined,
+    val enabled: Boolean = true
 ) extends js.Object
 
 @js.native
-trait  MenuInfo extends js.Object{
+trait MenuInfo extends js.Object {
   val menuItemId: String | Int = js.native
   val parentMenuItemId: js.UndefOr[String | Int]
   val mediaType: js.UndefOr[String]

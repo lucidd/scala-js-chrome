@@ -12,26 +12,30 @@ import scala.scalajs.concurrent.JSExecutionContext.Implicits.queue
 import scala.scalajs.js
 import scala.scalajs.js.|
 
-object ContextMenus  extends ChromeAPI
-{
+object ContextMenus extends ChromeAPI {
 
   def onClicked: EventSource[(MenuInfo, Tab)] = bindings.ContextMenus.onClicked
 
   val requiredPermissions: Set[API] = Set(API.ContextMenus)
 
-  def create(createProperties: CreateProperties): String | Int = bindings.ContextMenus.create(createProperties)
+  def create(createProperties: CreateProperties): String | Int =
+    bindings.ContextMenus.create(createProperties)
 
   def create(id: String, title: String, contexts: List[String]): String | Int =
-    create(bindings.CreateProperties(id, title, contexts = js.Array(contexts:_*)))
+    create(
+        bindings
+          .CreateProperties(id, title, contexts = js.Array(contexts: _*)))
 
-  def update(id: String | Int, properties: UpdateProperties): Unit = bindings.ContextMenus.update(id, properties )
+  def update(id: String | Int, properties: UpdateProperties): Unit =
+    bindings.ContextMenus.update(id, properties)
 
   def remove(menuItemId: String | Int): Future[String | Int] = {
     val promise = Promise[Unit]
-    val result = bindings.ContextMenus.remove(menuItemId, js.Any.fromFunction0[Unit](() => {
-      promise.success(Unit)
-    }))
-    promise.future.map(_=>result)
+    val result = bindings.ContextMenus
+      .remove(menuItemId, js.Any.fromFunction0[Unit](() => {
+        promise.success(Unit)
+      }))
+    promise.future.map(_ => result)
   }
 
   def removeAll(): Future[Unit] = {
@@ -43,4 +47,3 @@ object ContextMenus  extends ChromeAPI
   }
 
 }
-

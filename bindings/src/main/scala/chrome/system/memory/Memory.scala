@@ -9,8 +9,7 @@ import scala.concurrent.{Future, Promise}
 
 object Memory extends ChromeAPI {
 
-  val requiredPermissions: Set[API] = Set(
-      API.System.Memory)
+  val requiredPermissions: Set[API] = Set(API.System.Memory)
 
   def getInfo: Future[MemoryInfo] = {
     val promise = Promise[MemoryInfo]()

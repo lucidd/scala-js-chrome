@@ -14,8 +14,7 @@ import scala.concurrent.{Promise, Future}
 
 object Notifications extends ChromeAPI {
 
-  val requiredPermissions: Set[API] = Set(
-      API.Notifications)
+  val requiredPermissions: Set[API] = Set(API.Notifications)
 
   val onClose: EventSource[(Id, Boolean)] = bindings.Notifications.onClose
   val onClicked: EventSource[Id] = bindings.Notifications.onClicked
