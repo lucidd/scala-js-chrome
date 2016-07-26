@@ -2,4 +2,4 @@ language: scala
 before_script:
 script:
   - sbt compile
-  - (cd examples; sbt compile)
+  - (cd examples; sbt chromeUnpackedOpt)
