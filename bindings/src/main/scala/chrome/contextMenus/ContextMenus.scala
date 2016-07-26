@@ -4,7 +4,7 @@ import chrome.ChromeAPI
 import chrome.contextMenus.bindings.{CreateProperties, MenuInfo, UpdateProperties}
 import chrome.events.EventSource
 import chrome.events.EventSourceImplicits._
-import chrome.permissions.APIPermission
+import chrome.permissions.Permission.API
 import chrome.tabs.bindings.Tab
 
 import scala.concurrent.{Future, Promise}
@@ -17,7 +17,7 @@ object ContextMenus  extends ChromeAPI
 
   def onClicked: EventSource[(MenuInfo, Tab)] = bindings.ContextMenus.onClicked
 
-  val requiredPermissions: Set[APIPermission] = Set(APIPermission.ContextMenus)
+  val requiredPermissions: Set[API] = Set(API.ContextMenus)
 
   def create(createProperties: CreateProperties): String | Int = bindings.ContextMenus.create(createProperties)
 
