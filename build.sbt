@@ -32,6 +32,7 @@ lazy val commonSettings = Seq(
 
 lazy val commonPlugins = Seq(GitVersioning)
 
+
 lazy val bindings = project.in(file("bindings")).
   settings(commonSettings: _*).
   settings(
@@ -60,7 +61,9 @@ lazy val plugin = project.in(file("sbt-plugin")).
     sbtPlugin := true,
     name := "sbt-chrome-plugin",
     libraryDependencies ++= Seq(
-      "com.lihaoyi" %% "upickle" % "0.4.0"
+      "io.circe" %% "circe-core" % "0.4.1",
+      "io.circe" %% "circe-generic" % "0.4.1",
+      "io.circe" %% "circe-parser" % "0.4.1"
     ),
     publishMavenStyle := false,
     bintrayRepository := "sbt-plugins",
@@ -68,4 +71,6 @@ lazy val plugin = project.in(file("sbt-plugin")).
     addSbtPlugin("org.scala-js" % "sbt-scalajs" % "0.6.10")
   ).
   enablePlugins(commonPlugins: _*)
+
+
 

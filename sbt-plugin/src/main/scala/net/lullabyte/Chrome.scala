@@ -1,8 +1,9 @@
 package net.lullabyte
 
-import chrome.Impl.{App, AppManifest, ExtensionManifest, Background}
+import chrome.{App, AppManifest, Background, ExtensionManifest}
 import chrome.Manifest
 import chrome.permissions.{APIPermission, HostPermission, Permission}
+import io.circe.Printer
 import sbt._
 
 object Chrome {
@@ -35,9 +36,12 @@ object Chrome {
     unpacked
   }
 
+  val printer = Printer.noSpaces.copy(dropNullKeys = true)
+
   def generateManifest(out: File)(manifest: Manifest): File = {
-    import Pickler._
-    val content = upickle.default.write(manifest)
+    import JsonCodecs._
+    import io.circe.syntax._
+    val content = printer.pretty(manifest.asJson)
     IO.write(out, content)
     out
   }
