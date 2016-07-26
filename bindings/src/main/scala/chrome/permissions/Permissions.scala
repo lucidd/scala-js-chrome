@@ -3,6 +3,7 @@ package chrome.permissions
 import chrome.events.EventSource
 import chrome.events.EventSourceImplicits._
 import chrome.permissions.bindings._
+import chrome.permissions.Permission.{Host, API}
 import chrome.utils.ErrorHandling._
 
 import scala.concurrent.{Future, Promise}
@@ -30,7 +31,7 @@ object Permissions {
 
         val hostPerms = for {
           pattern <- perms.origins.getOrElse(js.Array())
-        } yield new HostPermission(pattern)
+        } yield new Host(pattern)
 
         apiPerms ++ hostPerms
       }))
@@ -39,7 +40,7 @@ object Permissions {
   }
 
   def permissionFromString(perm: String): Option[Permission] = {
-    APIPermission.All.get(perm).orElse(Some(HostPermission(perm)))
+    API.All.get(perm).orElse(Some(Host(perm)))
   }
 
   def contains(permissions: Permission*): Future[Boolean] = {
@@ -57,8 +58,8 @@ object Permissions {
     permissions.foldLeft((js.Array[String](), js.Array[String]())) {
       (acc, p) =>
         p match {
-          case api: APIPermission => acc._1.append(api.name)
-          case host: HostPermission => acc._2.append(host.urlPattern)
+          case api: API => acc._1.append(api.name)
+          case host: Host => acc._2.append(host.urlPattern)
         }
         acc
     }

@@ -5,7 +5,7 @@ import io.circe.syntax._
 import io.circe.generic.semiauto._
 import chrome._
 import chrome.Commands._
-import chrome.permissions.{APIPermission, HostPermission}
+import chrome.permissions.Permission.{API, Host}
 
 object JsonCodecs {
 
@@ -160,14 +160,14 @@ object JsonCodecs {
       ("platforms", if(manifest.platforms.isEmpty) Json.Null else manifest.platforms.asJson),
       ("permissions",
         omitIfEmpty(manifest.permissions) {
-          case APIPermission(name) => Json.fromString(name)
-          case HostPermission(url) => Json.fromString(url)
+          case API(name) => Json.fromString(name)
+          case Host(url) => Json.fromString(url)
         }
       ),
       ("optional_permissions",
         omitIfEmpty(manifest.optionalPermissions) {
-          case APIPermission(name) => Json.fromString(name)
-          case HostPermission(url) => Json.fromString(url)
+          case API(name) => Json.fromString(name)
+          case Host(url) => Json.fromString(url)
         }
       )
     )

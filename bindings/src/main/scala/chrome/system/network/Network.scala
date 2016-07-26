@@ -1,7 +1,7 @@
 package chrome.system.network
 
 import chrome.ChromeAPI
-import chrome.permissions.APIPermission
+import chrome.permissions.Permission.{Host, API}
 import chrome.utils.ErrorHandling._
 
 import scala.concurrent.{Future, Promise}
@@ -9,8 +9,8 @@ import scala.scalajs.js
 
 object Network extends ChromeAPI {
 
-  val requiredPermissions: Set[APIPermission] = Set(
-      APIPermission.System.Network)
+  val requiredPermissions: Set[API] = Set(
+      API.System.Network)
 
   def getNetworkInterfaces: Future[List[Interface]] = {
     val promise = Promise[List[Interface]]()

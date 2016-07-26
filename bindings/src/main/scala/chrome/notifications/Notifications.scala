@@ -6,7 +6,7 @@ import chrome.ChromeAPI
 import chrome.events.EventSource
 import chrome.events.EventSourceImplicits._
 import chrome.utils.ErrorHandling._
-import chrome.permissions.APIPermission
+import chrome.permissions.Permission.API
 import scala.scalajs.js
 import scala.scalajs.js.JSConverters._
 
@@ -14,8 +14,8 @@ import scala.concurrent.{Promise, Future}
 
 object Notifications extends ChromeAPI {
 
-  val requiredPermissions: Set[APIPermission] = Set(
-      APIPermission.Notifications)
+  val requiredPermissions: Set[API] = Set(
+      API.Notifications)
 
   val onClose: EventSource[(Id, Boolean)] = bindings.Notifications.onClose
   val onClicked: EventSource[Id] = bindings.Notifications.onClicked

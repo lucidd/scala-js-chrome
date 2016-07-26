@@ -4,14 +4,14 @@ import chrome.ChromeAPI
 import chrome.events.EventSource
 import chrome.events.EventSourceImplicits._
 import bindings._
-import chrome.permissions.APIPermission
+import chrome.permissions.Permission.API
 import chrome.utils.ErrorHandling._
 
 import scala.concurrent.{Promise, Future}
 
 object Idle extends ChromeAPI {
 
-  val requiredPermissions: Set[APIPermission] = Set(APIPermission.Idle)
+  val requiredPermissions: Set[API] = Set(API.Idle)
 
   val onStateChanged: EventSource[State] = bindings.Idle.onStateChanged
 

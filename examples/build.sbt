@@ -1,6 +1,6 @@
 import chrome._
-import chrome.permissions.APIPermission._
-import chrome.permissions.{APIPermission, Permission}
+import chrome.permissions.Permission
+import chrome.permissions.Permission.API
 import net.lullabyte.{Chrome, ChromeSbtPlugin}
 
 lazy val examples = project.in(file(".")).aggregate(exampleApp, extension)
@@ -41,11 +41,11 @@ lazy val exampleApp = project.in(file("app"))
         Set(256)
       )
       override val permissions = Set[Permission](
-        System.CPU,
-        System.Display,
-        System.Memory,
-        System.Network,
-        APIPermission.Storage
+        API.System.CPU,
+        API.System.Display,
+        API.System.Memory,
+        API.System.Network,
+        API.Storage
       )
     }
   )
@@ -83,8 +83,8 @@ lazy val extension = project.in(file("extension"))
         Set(256)
       )
       override val permissions = Set[Permission](
-        APIPermission.Tabs,
-        APIPermission.Management
+        API.Tabs,
+        API.Management
       )
     }
   )

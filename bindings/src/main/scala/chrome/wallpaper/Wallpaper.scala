@@ -1,7 +1,7 @@
 package chrome.wallpaper
 
 import chrome.ChromeAPI
-import chrome.permissions.APIPermission
+import chrome.permissions.Permission.API
 import chrome.utils.ErrorHandling._
 import chrome.wallpaper.bindings.WallpaperDetails
 
@@ -10,7 +10,7 @@ import scala.scalajs.js
 
 object Wallpaper extends ChromeAPI {
 
-  val requiredPermissions: Set[APIPermission] = Set(APIPermission.Wallpaper)
+  val requiredPermissions: Set[API] = Set(API.Wallpaper)
 
   def setWallpaper(details: WallpaperDetails): Future[Option[Any]] = {
     val promise = Promise[Option[Any]]()

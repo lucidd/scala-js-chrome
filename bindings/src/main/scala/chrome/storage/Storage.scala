@@ -3,7 +3,7 @@ package chrome.storage
 import chrome.ChromeAPI
 import chrome.events.EventSource
 import chrome.events.EventSourceImplicits._
-import chrome.permissions.APIPermission
+import chrome.permissions.Permission.{Host, API}
 import chrome.storage.bindings.StorageChange
 import chrome.utils.ErrorHandling._
 import scala.concurrent.{Promise, Future}
@@ -55,7 +55,7 @@ object Storage extends ChromeAPI {
     }
   }
 
-  val requiredPermissions: Set[APIPermission] = Set(APIPermission.Storage)
+  val requiredPermissions: Set[API] = Set(API.Storage)
   val onChanged: EventSource[(Map[String, StorageChange], String)] =
     bindings.Storage.onChanged
 

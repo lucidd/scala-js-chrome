@@ -3,7 +3,7 @@ package chrome.tabs
 import chrome.ChromeAPI
 import chrome.events.EventSource
 import chrome.events.EventSourceImplicits._
-import chrome.permissions.APIPermission
+import chrome.permissions.Permission.API
 import chrome.runtime.bindings.Port
 import chrome.tabs.bindings._
 import chrome.windows.bindings.Window
@@ -16,7 +16,7 @@ import scala.scalajs.js.`|`
 
 object Tabs extends ChromeAPI {
 
-  val requiredPermissions: Set[APIPermission] = Set(APIPermission.Tabs)
+  val requiredPermissions: Set[API] = Set(API.Tabs)
 
   val onCreated: EventSource[Tab] = bindings.Tabs.onCreated
   val onUpdated: EventSource[(Tab.Id, ChangeInfo, Tab)] =

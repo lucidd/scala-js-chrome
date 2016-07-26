@@ -2,7 +2,7 @@ package net.lullabyte
 
 import chrome.{App, AppManifest, Background, ExtensionManifest}
 import chrome.Manifest
-import chrome.permissions.{APIPermission, HostPermission, Permission}
+import chrome.permissions.Permission.{API, Host}
 import io.circe.Printer
 import sbt._
 

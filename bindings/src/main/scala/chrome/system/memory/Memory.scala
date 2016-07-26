@@ -1,7 +1,7 @@
 package chrome.system.memory
 
 import chrome.ChromeAPI
-import chrome.permissions.APIPermission
+import chrome.permissions.Permission.{Host, API}
 import chrome.system.memory.bindings._
 import chrome.utils.ErrorHandling._
 
@@ -9,8 +9,8 @@ import scala.concurrent.{Future, Promise}
 
 object Memory extends ChromeAPI {
 
-  val requiredPermissions: Set[APIPermission] = Set(
-      APIPermission.System.Memory)
+  val requiredPermissions: Set[API] = Set(
+      API.System.Memory)
 
   def getInfo: Future[MemoryInfo] = {
     val promise = Promise[MemoryInfo]()

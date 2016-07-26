@@ -1,7 +1,7 @@
 package chrome
 
-import chrome.permissions.APIPermission
+import chrome.permissions.Permission.API
 
 trait ChromeAPI {
-  val requiredPermissions: Set[APIPermission]
+  val requiredPermissions: Set[API]
 }

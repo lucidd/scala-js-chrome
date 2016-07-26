@@ -1,7 +1,7 @@
 package chrome.tts
 
 import chrome.ChromeAPI
-import chrome.permissions.APIPermission
+import chrome.permissions.Permission.API
 import chrome.tts.bindings._
 import chrome.utils.ErrorHandling._
 
@@ -10,7 +10,7 @@ import scala.scalajs.js
 
 object TTS extends ChromeAPI {
 
-  val requiredPermissions: Set[APIPermission] = Set(APIPermission.TTS)
+  val requiredPermissions: Set[API] = Set(API.TTS)
 
   def speak(utterance: String,
             options: js.UndefOr[SpeakOptions] = js.undefined): Future[Unit] = {
