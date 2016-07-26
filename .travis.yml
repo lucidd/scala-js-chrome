@@ -1,3 +1,5 @@
 language: scala
 before_script:
-script: sbt compile
+script:
+  - sbt compile
+  - (cd examples; sbt compile)
