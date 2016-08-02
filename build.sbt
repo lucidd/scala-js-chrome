@@ -37,7 +37,7 @@ lazy val bindings = project.in(file("bindings")).
   settings(commonSettings: _*).
   settings(
     name := "scala-js-chrome",
-    scalaVersion := "2.11.8",
+    crossScalaVersions := Seq("2.10.6", "2.11.8", "2.12.0-M4"),
     persistLauncher := false,
     persistLauncher in Test := false,
     libraryDependencies ++= Seq(
