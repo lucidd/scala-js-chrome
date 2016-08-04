@@ -113,7 +113,7 @@ In chrome apps and extensions there are multiple places where you can run
 javascript. Normaly you split your logic into different files and load them into
 whatever context they need to run. Since ScalaJS compiles your whole project
 into one big file all contexts need to load this big file with all the logic
-even if they only need a smell subset. This can cause your app you use more
+even if they only need a small subset. This can cause your app you use more
 memory then it need to. In some cases this can be worked around for example the
 a background page can manipulate the DOM of a App window so you don't need any
 javascript at all in the window itself.
