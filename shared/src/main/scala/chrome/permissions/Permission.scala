@@ -28,7 +28,9 @@ object Permission {
     val Diagnostics = API("diagnostics")
     val DNS = API("dns")
     val DocumentScan = API("documentScan")
-    val Downloads = API("downloads")
+    object Downloads extends API("downloads") {
+      val Shelf = API("downloads.shelf")
+    }
     object Enterprise {
       val PlatformKeys = API("enterprise.platformKeys")
     }
