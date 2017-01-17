@@ -4,3 +4,5 @@ script:
   - echo "project bindings\n +compile\n" | sbt
   - echo  "project plugin\n compile" | sbt
   - (cd examples; sbt chromeUnpackedOpt)
+jdk:
+  - oraclejdk8
