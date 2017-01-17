@@ -1,7 +1,7 @@
 language: scala
 before_script:
 script:
-  - echo "project bindings\n +compile\n" | sbt
+  - echo "project bindings\n +compile" | sbt
   - echo  "project plugin\n compile" | sbt
   - (cd examples; sbt chromeUnpackedOpt)
 jdk:
