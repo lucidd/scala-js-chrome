@@ -61,11 +61,14 @@ lazy val plugin = project.in(file("sbt-plugin")).
   settings(
     sbtPlugin := true,
     name := "sbt-chrome-plugin",
-    libraryDependencies ++= Seq(
-      "io.circe" %% "circe-core" % "0.7.0-M2",
-      "io.circe" %% "circe-generic" % "0.7.0-M2",
-      "io.circe" %% "circe-parser" % "0.7.0-M2"
-    ),
+    libraryDependencies ++= {
+      val circeVersion = "0.7.0"
+      Seq(
+        "io.circe" %% "circe-core"    % circeVersion,
+        "io.circe" %% "circe-generic" % circeVersion,
+        "io.circe" %% "circe-parser"  % circeVersion
+      )
+    },
     publishMavenStyle := false,
     bintrayRepository := "sbt-plugins",
     bintrayOrganization := None,
