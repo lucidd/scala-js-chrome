@@ -60,12 +60,12 @@ unpacked extension/app.
 
 Add this to your `project/plugins.sbt`
 ```scala
-addSbtPlugin("net.lullabyte" % "sbt-chrome-plugin" % "0.3.0")
+addSbtPlugin("net.lullabyte" % "sbt-chrome-plugin" % "0.4.0")
 ```
 
 Add this to your projects dependencies
 ```scala
-"net.lullabyte" %%% "scala-js-chrome" % "0.3.0"
+"net.lullabyte" %%% "scala-js-chrome" % "0.4.0"
 ```
 
 ### Creating a basic Window
@@ -93,7 +93,8 @@ object ChromeAppExample extends ChromeApp {
 
 }
 ```
-For a more complete example see https://github.com/lucidd/chrome-system-monitor.
+For a more complete example see https://github.com/lucidd/chrome-system-monitor
+and https://github.com/lucidd/scala-js-chrome/tree/master/examples
 
 ### UI Libraries
 
