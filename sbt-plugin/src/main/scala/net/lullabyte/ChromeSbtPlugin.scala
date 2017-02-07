@@ -43,7 +43,11 @@ object ChromeSbtPlugin extends AutoPlugin {
         val out = target.value / "chrome"
         val chromeAppDir = chromeUnpackedOpt.value
         val zipFile = new File(out, s"${name.value}.zip")
-        IO.zip(allSubpaths(chromeAppDir), zipFile)
+        val excludeFileNames = Set(
+          ".DS_Store"
+        )
+        val fileFilter = AllPassFilter - new SimpleFilter(excludeFileNames.contains)
+        IO.zip(selectSubpaths(chromeAppDir, fileFilter), zipFile)
         zipFile
       },
       chromeGenerateManifest := {

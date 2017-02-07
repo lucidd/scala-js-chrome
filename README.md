@@ -106,6 +106,7 @@ available for ScalaJS.
 - [scalajs-react](https://github.com/japgolly/scalajs-react) Bindings for using react.js
 - [scalacss](https://github.com/japgolly/scalacss) Typesafe way to write CSS
   with Scala
+- [Binding.scala](https://github.com/ThoughtWorksInc/Binding.scala) Reactive data-binding for Scala
 
 
 ### Known Issues
