@@ -8,16 +8,17 @@ import chrome.storage.bindings.StorageChange
 import chrome.utils.ErrorHandling._
 import scala.concurrent.{Promise, Future}
 import scala.scalajs.js
+import js.JSConverters._
 
 object Storage extends ChromeAPI {
 
   implicit class StorageArea(area: bindings.StorageArea) {
 
-    def get(keys: js.UndefOr[js.Any] = js.undefined)
+    def get(keys: js.UndefOr[Array[String]] = js.undefined)
       : Future[Map[String, js.Any]] = {
       val promise = Promise[Map[String, js.Any]]()
-      area.get(keys, (results: Map[String, js.Any]) => {
-        promise.complete(lastErrorOrValue(results))
+      area.get(keys.map(_.toJSArray), (results: js.Dictionary[js.Any]) => {
+        promise.complete(lastErrorOrValue(results.toMap))
       })
       promise.future
     }
@@ -32,7 +33,7 @@ object Storage extends ChromeAPI {
 
     def set(items: Map[String, js.Any]): Future[Unit] = {
       val promise = Promise[Unit]()
-      area.set(items, js.Any.fromFunction0(() => {
+      area.set(items.toJSDictionary, js.Any.fromFunction0(() => {
         promise.complete(lastErrorOrValue(()))
       }))
       promise.future
