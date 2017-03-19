@@ -14,7 +14,7 @@ trait Port extends js.Object {
 
   def disconnect(): Unit = js.native
 
-  def postMessage(message: js.Object): Unit = js.native
+  def postMessage(message: js.Any): Unit = js.native
 
   def sender: js.UndefOr[MessageSender] = js.native
 
