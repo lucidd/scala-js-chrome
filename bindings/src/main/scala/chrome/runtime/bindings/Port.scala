@@ -10,7 +10,7 @@ trait Port extends js.Object {
   val name: String = js.native
   val onDisconnect: Event[js.Function0[_]] = js.native
   //TODO: find out how the callback function for onMessage looks
-  val onMessage: Event[js.Function1[js.Object, _]] = js.native
+  val onMessage: Event[js.Function2[js.Any, MessageSender, _]] = js.native
 
   def disconnect(): Unit = js.native
 
