@@ -25,12 +25,21 @@ object IconDetails {
     val anyImageData: js.UndefOr[js.Any] = imageData.map(_.merge)
     val anyPath: js.UndefOr[js.Any] = path.map(_.merge)
 
-    js.Dynamic
-      .literal(
-        imageData = anyImageData,
-        path = anyPath,
-        tabId = tabId
-      )
-      .asInstanceOf[IconDetails]
+    if (anyImageData.isDefined) {
+      js.Dynamic
+        .literal(
+          imageData = anyImageData,
+          tabId = tabId
+        )
+        .asInstanceOf[IconDetails]
+    }
+    else {
+      js.Dynamic
+        .literal(
+          path = anyPath,
+          tabId = tabId
+        )
+        .asInstanceOf[IconDetails]
+    }
   }
 }
