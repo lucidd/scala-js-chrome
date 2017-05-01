@@ -60,12 +60,12 @@ unpacked extension/app.
 
 Add this to your `project/plugins.sbt`
 ```scala
-addSbtPlugin("net.lullabyte" % "sbt-chrome-plugin" % "0.4.0")
+addSbtPlugin("net.lullabyte" % "sbt-chrome-plugin" % "0.5.0")
 ```
 
 Add this to your projects dependencies
 ```scala
-"net.lullabyte" %%% "scala-js-chrome" % "0.4.0"
+"net.lullabyte" %%% "scala-js-chrome" % "0.5.0"
 ```
 
 ### Creating a basic Window
