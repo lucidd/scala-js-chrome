@@ -105,6 +105,13 @@ object JsonCodecs {
     )
   }
 
+  implicit val oauth2SettingsEncoder = Encoder.instance[chrome.Oauth2Settings] { oauth2Settings =>
+    Json.obj(
+      ("client_id", oauth2Settings.clientId.asJson),
+      ("scopes", oauth2Settings.scopes.asJson)
+    )
+  }
+
   implicit val bookmarksUIEncoder = Encoder.instance[chrome.BookmarksUI] { bookmarksUI =>
     Json.obj(
       ("remove_button", bookmarksUI.removeButton.asJson),
