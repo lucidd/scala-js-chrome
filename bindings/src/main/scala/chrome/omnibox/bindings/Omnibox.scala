@@ -3,10 +3,10 @@ package chrome.omnibox.bindings
 import chrome.events.bindings.Event
 
 import scala.scalajs.js
-import scala.scalajs.js.annotation.JSName
+import scala.scalajs.js.annotation.JSGlobal
 
 @js.native
-@JSName("chrome.omnibox")
+@JSGlobal("chrome.omnibox")
 object Omnibox extends js.Object {
 
   val onInputStarted: Event[js.Function0[_]] = js.native

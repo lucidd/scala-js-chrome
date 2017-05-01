@@ -4,10 +4,10 @@ import chrome.events.bindings.Event
 import chrome.tabs.bindings.Tab
 
 import scala.scalajs.js
-import scala.scalajs.js.annotation.JSName
+import scala.scalajs.js.annotation.JSGlobal
 
 @js.native
-@JSName("chrome.processes")
+@JSGlobal("chrome.processes")
 object Processes extends js.Object {
 
   val onUpdated: Event[js.Function1[Map[Process.Id, Process], _]] = js.native

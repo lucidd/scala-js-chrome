@@ -37,10 +37,8 @@ lazy val bindings = project.in(file("bindings")).
   settings(commonSettings: _*).
   settings(
     name := "scala-js-chrome",
-    scalaVersion := "2.12.1",
-    crossScalaVersions := Seq("2.10.6", "2.11.8", "2.12.1"),
-    persistLauncher := false,
-    persistLauncher in Test := false,
+    scalaVersion := "2.12.2",
+    crossScalaVersions := Seq("2.10.6", "2.11.11", "2.12.2"),
     libraryDependencies ++= Seq(
       "org.scala-js" %%% "scalajs-dom" % "0.9.1"
     ),
@@ -62,7 +60,7 @@ lazy val plugin = project.in(file("sbt-plugin")).
     sbtPlugin := true,
     name := "sbt-chrome-plugin",
     libraryDependencies ++= {
-      val circeVersion = "0.7.0"
+      val circeVersion = "0.7.1"
       Seq(
         "io.circe" %% "circe-core"    % circeVersion,
         "io.circe" %% "circe-generic" % circeVersion,
@@ -72,7 +70,7 @@ lazy val plugin = project.in(file("sbt-plugin")).
     publishMavenStyle := false,
     bintrayRepository := "sbt-plugins",
     bintrayOrganization := None,
-    addSbtPlugin("org.scala-js" % "sbt-scalajs" % "0.6.14")
+    addSbtPlugin("org.scala-js" % "sbt-scalajs" % "0.6.16")
   ).
   enablePlugins(commonPlugins: _*)
 
@@ -82,12 +80,10 @@ lazy val monixInterop = project.in(file("interop/monix")).
   settings(commonSettings: _*).
   settings(
     name := "scala-js-chrome-monix",
-    scalaVersion := "2.12.1",
-    crossScalaVersions := Seq("2.10.6", "2.11.8", "2.12.1"),
-    persistLauncher := false,
-    persistLauncher in Test := false,
+    scalaVersion := "2.12.2",
+    crossScalaVersions := Seq("2.10.6", "2.11.11", "2.12.2"),
     libraryDependencies ++= Seq(
-      "io.monix" %%% "monix" % "2.1.2"
+      "io.monix" %%% "monix" % "2.2.4"
     ),
     publishMavenStyle := true,
     publishTo := {
@@ -105,12 +101,10 @@ lazy val fs2Interop = project.in(file("interop/fs2")).
   settings(commonSettings: _*).
   settings(
     name := "scala-js-chrome-fs2",
-    scalaVersion := "2.12.1",
-    crossScalaVersions := Seq("2.11.8", "2.12.1"),
-    persistLauncher := false,
-    persistLauncher in Test := false,
+    scalaVersion := "2.12.2",
+    crossScalaVersions := Seq("2.11.11", "2.12.2"),
     libraryDependencies ++= Seq(
-      "co.fs2" %%% "fs2-core" % "0.9.2"
+      "co.fs2" %%% "fs2-core" % "0.9.5"
     ),
     publishMavenStyle := true,
     publishTo := {

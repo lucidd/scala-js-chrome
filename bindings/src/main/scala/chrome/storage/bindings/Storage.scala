@@ -2,11 +2,11 @@ package chrome.storage.bindings
 
 import chrome.events.bindings.Event
 
-import scala.scalajs.js.annotation.JSName
 import scala.scalajs.js
+import scala.scalajs.js.annotation.JSGlobal
 
 @js.native
-class StorageChange extends js.Object {
+trait StorageChange extends js.Object {
 
   val oldValue: js.UndefOr[js.Any] = js.native
   val newValue: js.UndefOr[js.Any] = js.native
@@ -32,7 +32,7 @@ trait StorageArea extends js.Object {
 }
 
 @js.native
-@JSName("chrome.storage")
+@JSGlobal("chrome.storage")
 object Storage extends js.Object {
 
   val onChanged: Event[js.Function2[Map[String, StorageChange], String, _]] =

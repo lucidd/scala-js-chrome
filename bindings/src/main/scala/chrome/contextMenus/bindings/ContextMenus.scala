@@ -4,7 +4,7 @@ import chrome.events.bindings.Event
 import chrome.tabs.bindings.Tab
 
 import scala.scalajs.js
-import scala.scalajs.js.annotation.{JSName, ScalaJSDefined}
+import scala.scalajs.js.annotation.{JSGlobal, ScalaJSDefined}
 import scala.scalajs.js.|
 
 object MenuContexts {
@@ -30,7 +30,7 @@ object MenuType {
 }
 
 @js.native
-@JSName("chrome.contextMenus")
+@JSGlobal("chrome.contextMenus")
 object ContextMenus extends js.Object {
 
   def create(createProperties: CreateProperties): String | Int = js.native

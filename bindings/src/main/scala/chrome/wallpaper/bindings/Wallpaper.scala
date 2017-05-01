@@ -1,7 +1,7 @@
 package chrome.wallpaper.bindings
 
 import scala.scalajs.js
-import scala.scalajs.js.annotation.JSName
+import scala.scalajs.js.annotation.JSGlobal
 
 @js.native
 trait WallpaperDetails extends js.Object {
@@ -32,7 +32,7 @@ object WallpaperDetails {
 }
 
 @js.native
-@JSName("chrome.wallpaper")
+@JSGlobal("chrome.wallpaper")
 object Wallpaper extends js.Object {
 
   def setWallpaper(details: WallpaperDetails,

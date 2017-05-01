@@ -3,11 +3,11 @@ package chrome.sockets.tcpServer.bindings
 import chrome.events.bindings.Event
 
 import scala.scalajs.js
-import scala.scalajs.js.annotation.JSName
+import scala.scalajs.js.annotation.JSGlobal
 import scala.scalajs.js.{UndefOr, native, undefined}
 
 @js.native
-@JSName("chrome.sockets.tcpServer")
+@JSGlobal("chrome.sockets.tcpServer")
 object TCPServer extends js.Object {
 
   val onAccept: Event[js.Function1[AcceptEvent, _]] = native

@@ -2,7 +2,7 @@ package chrome.processes
 
 import chrome.events.EventSource
 import chrome.events.EventSourceImplicits._
-import chrome.permissions.Permission.{Host, API}
+import chrome.permissions.Permission.API
 import chrome.processes.bindings._
 import chrome.tabs.bindings.Tab
 import chrome.utils.ErrorHandling._

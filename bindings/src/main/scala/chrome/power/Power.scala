@@ -1,7 +1,7 @@
 package chrome.power
 
 import chrome.ChromeAPI
-import chrome.permissions.Permission.{Host, API}
+import chrome.permissions.Permission.API
 import chrome.power.bindings._
 
 object Power extends ChromeAPI {

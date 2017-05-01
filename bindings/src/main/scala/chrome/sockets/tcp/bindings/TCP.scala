@@ -3,12 +3,12 @@ package chrome.sockets.tcp.bindings
 import chrome.events.bindings.Event
 
 import scala.scalajs.js
-import scala.scalajs.js.annotation.JSName
+import scala.scalajs.js.annotation.JSGlobal
 import scala.scalajs.js.typedarray.ArrayBuffer
 import scala.scalajs.js.{UndefOr, native, undefined}
 
 @js.native
-@JSName("chrome.sockets.tcp")
+@JSGlobal("chrome.sockets.tcp")
 object TCP extends js.Object {
 
   val onReceive: Event[js.Function1[ReceiveEvent, _]] = native

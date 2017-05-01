@@ -3,10 +3,10 @@ package chrome.desktopCapture.bindings
 import chrome.tabs.bindings.Tab
 
 import scala.scalajs.js
-import scala.scalajs.js.annotation.JSName
+import scala.scalajs.js.annotation.JSGlobal
 
 @js.native
-@JSName("chrome.desktopCapture")
+@JSGlobal("chrome.desktopCapture")
 object DesktopCapture extends js.Object {
 
   def chooseDesktopMedia(

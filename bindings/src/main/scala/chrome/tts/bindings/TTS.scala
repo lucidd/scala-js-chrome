@@ -1,11 +1,11 @@
 package chrome.tts.bindings
 
 import scala.scalajs.js
-import scala.scalajs.js.annotation.JSName
+import scala.scalajs.js.annotation.JSGlobal
 import scala.scalajs.js.{UndefOr, native, undefined}
 
 @js.native
-@JSName("chrome.tts")
+@JSGlobal("chrome.tts")
 object TTS extends js.Object {
 
   def speak(utterance: String,

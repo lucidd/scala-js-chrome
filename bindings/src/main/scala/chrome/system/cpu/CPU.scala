@@ -1,7 +1,7 @@
 package chrome.system.cpu
 
 import chrome.ChromeAPI
-import chrome.permissions.Permission.{Host, API}
+import chrome.permissions.Permission.API
 import chrome.system.cpu.bindings._
 import chrome.utils.ErrorHandling._
 

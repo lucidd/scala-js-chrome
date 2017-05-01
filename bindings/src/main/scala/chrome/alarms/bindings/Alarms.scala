@@ -3,10 +3,10 @@ package chrome.alarms.bindings
 import chrome.events.bindings.Event
 
 import scala.scalajs.js
-import scala.scalajs.js.annotation.JSName
+import scala.scalajs.js.annotation.JSGlobal
 
 @js.native
-@JSName("chrome.alarms")
+@JSGlobal("chrome.alarms")
 object Alarms extends js.Object {
 
   val onAlarm: Event[js.Function1[Alarm, _]] = js.native

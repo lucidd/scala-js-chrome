@@ -2,11 +2,11 @@ package chrome.downloads.bindings
 
 import chrome.events.bindings.Event
 
-import scala.scalajs.js.annotation.JSName
-import scalajs.js
+import scala.scalajs.js
+import scala.scalajs.js.annotation.JSGlobal
 
 @js.native
-@JSName("chrome.downloads")
+@JSGlobal("chrome.downloads")
 object Downloads extends js.Object {
 
   type Suggest = Option[Suggestion] => Unit

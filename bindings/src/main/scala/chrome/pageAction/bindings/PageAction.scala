@@ -5,11 +5,11 @@ import chrome.pageAction.bindings.PageAction.ImageDataType
 import chrome.tabs.bindings.Tab
 
 import scala.scalajs.js
-import scala.scalajs.js.annotation.{JSName, ScalaJSDefined}
+import scala.scalajs.js.annotation.{JSGlobal, ScalaJSDefined}
 import scala.scalajs.js.|
 
 @js.native
-@JSName("chrome.pageAction")
+@JSGlobal("chrome.pageAction")
 object PageAction extends js.Object {
 
   type ImageDataType = org.scalajs.dom.ImageData

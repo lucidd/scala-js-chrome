@@ -3,10 +3,10 @@ package chrome.notifications.bindings
 import chrome.events.bindings.Event
 
 import scala.scalajs.js
-import scala.scalajs.js.annotation.JSName
+import scala.scalajs.js.annotation.JSGlobal
 
 @js.native
-@JSName("chrome.notifications")
+@JSGlobal("chrome.notifications")
 object Notifications extends js.Object {
 
   type Id = String

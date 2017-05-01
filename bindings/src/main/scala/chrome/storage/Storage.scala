@@ -3,7 +3,7 @@ package chrome.storage
 import chrome.ChromeAPI
 import chrome.events.EventSource
 import chrome.events.EventSourceImplicits._
-import chrome.permissions.Permission.{Host, API}
+import chrome.permissions.Permission.API
 import chrome.storage.bindings.StorageChange
 import chrome.utils.ErrorHandling._
 import scala.concurrent.{Promise, Future}

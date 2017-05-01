@@ -1,7 +1,5 @@
 package chrome.browserAction.bindings
 
-import org.scalajs.dom.ImageData
-
 import scala.scalajs.js
 import scala.scalajs.js.|
 import scala.scalajs.js.|.Evidence

@@ -3,11 +3,11 @@ package chrome.app.window.bindings
 import chrome.events.bindings.Event
 
 import scala.scalajs.js
-import scala.scalajs.js.annotation.JSName
+import scala.scalajs.js.annotation.JSGlobal
 import scala.scalajs.js.{UndefOr, native, undefined}
 
 @js.native
-@JSName("chrome.app.window")
+@JSGlobal("chrome.app.window")
 object Window extends js.Object {
 
   val onBoundsChanged: Event[js.Function0[_]] = native

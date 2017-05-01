@@ -10,8 +10,7 @@ object Chrome {
 
   val mainFileName = "main.js"
   val dependenciesFileName = "dependencies.js"
-  val launcherFileName = "launcher.js"
-  val defaultScripts = List(dependenciesFileName, mainFileName, launcherFileName)
+  val defaultScripts = List(dependenciesFileName, mainFileName)
 
   def i18n(msg: String): String = s"__MSG_${msg}__"
 
@@ -22,7 +21,7 @@ object Chrome {
   }
 
   def buildUnpackedDirectory(unpacked: File)(manifest: File, jsLib: File,
-                                             jsDeps: File, jsLauncher: File, resources: Seq[File]): File =  {
+                                             jsDeps: File, resources: Seq[File]): File =  {
     IO.createDirectory(unpacked)
     resources.foreach { resource =>
       IO.copyDirectory(resource, unpacked, overwrite = true, preserveLastModified = true)
@@ -30,7 +29,6 @@ object Chrome {
     IO.copy(List(
       (jsLib, unpacked / mainFileName),
       (jsDeps, unpacked / dependenciesFileName),
-      (jsLauncher, unpacked / launcherFileName),
       (manifest, unpacked / "manifest.json")
     ), overwrite = true, preserveLastModified = true)
     unpacked

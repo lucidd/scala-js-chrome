@@ -1,6 +1,6 @@
 import chrome._
 import chrome.permissions.Permission
-import chrome.permissions.Permission.API
+import chrome.permissions.Permission.{API, Host}
 import net.lullabyte.{Chrome, ChromeSbtPlugin}
 
 lazy val examples = project.in(file(".")).aggregate(exampleApp, extension)
@@ -13,7 +13,7 @@ lazy val exampleApp = project.in(file("app"))
   .settings(
     name := "Example App",
     version := "0.1.0",
-    scalaVersion := "2.12.1",
+    scalaVersion := "2.12.2",
     scalacOptions ++= Seq(
       "-language:implicitConversions",
       "-language:existentials",
@@ -22,8 +22,8 @@ lazy val exampleApp = project.in(file("app"))
       "-Xfatal-warnings",
       "-feature"
     ),
-    persistLauncher := true,
-    persistLauncher in Test := false,
+    scalaJSUseMainModuleInitializer := true,
+    scalaJSUseMainModuleInitializer in Test := false,
     relativeSourceMaps := true,
     skip in packageJSDependencies := false,
     chromeManifest := new AppManifest {
@@ -58,7 +58,7 @@ lazy val extension = project.in(file("extension"))
   .settings(
     name := "Example Extension",
     version := "0.1.0",
-    scalaVersion := "2.12.1",
+    scalaVersion := "2.12.2",
     scalacOptions ++= Seq(
       "-language:implicitConversions",
       "-language:existentials",
@@ -67,8 +67,8 @@ lazy val extension = project.in(file("extension"))
       "-Xfatal-warnings",
       "-feature"
     ),
-    persistLauncher := true,
-    persistLauncher in Test := false,
+    scalaJSUseMainModuleInitializer := true,
+    scalaJSUseMainModuleInitializer in Test := false,
     relativeSourceMaps := true,
     skip in packageJSDependencies := false,
     chromeManifest := new ExtensionManifest {
@@ -84,7 +84,8 @@ lazy val extension = project.in(file("extension"))
       )
       override val permissions = Set[Permission](
         API.Tabs,
-        API.Management
+        API.Management,
+        API.Storage
       )
     }
   )
