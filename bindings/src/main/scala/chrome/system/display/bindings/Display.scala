@@ -3,11 +3,11 @@ package chrome.system.display.bindings
 import chrome.events.bindings.Event
 
 import scala.scalajs.js
-import scala.scalajs.js.annotation.JSName
+import scala.scalajs.js.annotation.JSGlobal
 import scala.scalajs.js.{UndefOr, native, undefined}
 
 @js.native
-@JSName("chrome.system.display")
+@JSGlobal("chrome.system.display")
 object Display extends js.Object {
 
   type ID = String

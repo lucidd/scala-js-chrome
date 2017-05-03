@@ -1,10 +1,10 @@
 package chrome.browser.bindings
 
 import scala.scalajs.js
-import scala.scalajs.js.annotation.JSName
+import scala.scalajs.js.annotation.JSGlobal
 
 @js.native
-@JSName("chrome.browser")
+@JSGlobal("chrome.browser")
 object Browser extends js.Object {
 
   def openTab(options: OpenTabOptions,

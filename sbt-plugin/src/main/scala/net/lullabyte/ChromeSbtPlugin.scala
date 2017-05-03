@@ -26,7 +26,6 @@ object ChromeSbtPlugin extends AutoPlugin {
           (chromeGenerateManifest in Compile).value,
           (fastOptJS in Compile).value.data,
           (packageJSDependencies in Compile).value,
-          (packageScalaJSLauncher in Compile).value.data,
           (resourceDirectories in Compile).value
         )
       },
@@ -35,7 +34,6 @@ object ChromeSbtPlugin extends AutoPlugin {
           (chromeGenerateManifest in Compile).value,
           (fullOptJS in Compile).value.data,
           (packageMinifiedJSDependencies in Compile).value,
-          (packageScalaJSLauncher in Compile).value.data,
           (resourceDirectories in Compile).value
         )
       },

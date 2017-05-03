@@ -1,10 +1,10 @@
 package chrome.power.bindings
 
 import scala.scalajs.js
-import scala.scalajs.js.annotation.JSName
+import scala.scalajs.js.annotation.JSGlobal
 
 @js.native
-@JSName("chrome.power")
+@JSGlobal("chrome.power")
 object Power extends js.Object {
 
   def requestKeepAwake(level: Level.Level): Unit = js.native

@@ -3,10 +3,10 @@ package chrome.audio.bindings
 import chrome.events.bindings.Event
 
 import scala.scalajs.js
-import scala.scalajs.js.annotation.JSName
+import scala.scalajs.js.annotation.JSGlobal
 
 @js.native
-@JSName("chrome.audio")
+@JSGlobal("chrome.audio")
 object Audio extends js.Object {
 
   type DeviceID = String

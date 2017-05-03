@@ -3,10 +3,10 @@ package chrome.app.runtime.bindings
 import chrome.events.bindings.Event
 
 import scala.scalajs.js
-import scala.scalajs.js.annotation.JSName
+import scala.scalajs.js.annotation.JSGlobal
 
 @js.native
-@JSName("chrome.app.runtime")
+@JSGlobal("chrome.app.runtime")
 object Runtime extends js.Object {
 
   val onEmbedRequested: Event[js.Function1[Request, _]] = js.native

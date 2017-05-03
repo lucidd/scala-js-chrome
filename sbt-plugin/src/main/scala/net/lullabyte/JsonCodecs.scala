@@ -125,6 +125,13 @@ object JsonCodecs {
     )
   }
 
+  implicit val oauth2SettingsEncoder = Encoder.instance[chrome.Oauth2Settings] { oauth2Settings =>
+    Json.obj(
+      ("client_id", oauth2Settings.clientId.asJson),
+      ("scopes", oauth2Settings.scopes.asJson)
+    )
+  }
+
   implicit val bookmarksUIEncoder = Encoder.instance[chrome.BookmarksUI] { bookmarksUI =>
     Json.obj(
       ("remove_button", bookmarksUI.removeButton.asJson),
@@ -134,6 +141,7 @@ object JsonCodecs {
 
   implicit val chromeUIOverridesEncoder = Encoder.instance[chrome.ChromeUIOverrides] { chromeUIOverrides =>
     Json.obj(
+      ("newtab", Json.fromString(chromeUIOverrides.newtab)),
       ("bookmarks_ui", chromeUIOverrides.bookmarksUI.asJson)
     )
   }
@@ -162,7 +170,6 @@ object JsonCodecs {
       ("manifest_version", Json.fromInt(manifest.manifestVersion)),
       ("name", Json.fromString(manifest.name)),
       ("version", Json.fromString(manifest.version)),
-
       ("default_locale", manifest.defaultLocale.asJson),
       ("description", manifest.description.asJson),
       ("icons", Json.fromFields(manifest.icons.map {
@@ -178,6 +185,9 @@ object JsonCodecs {
       ("minimum_chrome_version", manifest.minimumChromeVersion.asJson),
       ("storage", manifest.storage.asJson),
       ("platforms", if(manifest.platforms.isEmpty) Json.Null else manifest.platforms.asJson),
+      ("oauth2", manifest.oauth2.asJson),
+      ("web_accessible_resources",
+        if (manifest.webAccessibleResources.isEmpty) Json.Null else manifest.webAccessibleResources.asJson),
       ("permissions",
         omitIfEmpty(manifest.permissions) {
           case API(name) => Json.fromString(name)
@@ -241,7 +251,6 @@ object JsonCodecs {
     //},
     //"import": [{"id": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"}],
     //"nacl_modules": [...],
-    //"oauth2": ...,
     //"requirements": {...},
     //"sandbox": [...],
     //"signature": ...,

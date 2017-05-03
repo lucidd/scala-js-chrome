@@ -4,7 +4,7 @@ import chrome.events.bindings.Event
 import chrome.tabs.bindings.Tab
 
 import scala.scalajs.js
-import scala.scalajs.js.annotation.JSName
+import scala.scalajs.js.annotation.JSGlobal
 
 @js.native
 trait GetOptions extends js.Object {
@@ -101,7 +101,7 @@ object UpdateOptions {
 }
 
 @js.native
-@JSName("chrome.windows")
+@JSGlobal("chrome.windows")
 object Windows extends js.Object {
 
   val WINDOW_ID_NONE: Window.Id = js.native

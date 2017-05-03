@@ -22,6 +22,8 @@ sealed trait Manifest {
   val versionName: Option[String] = None
   val platforms: List[Platform] = Nil
   val externallyConnectable: Option[ExternallyConnectable] = None
+  val oauth2: Option[Oauth2Settings] = None
+  val webAccessibleResources: List[String] = Nil
 }
 
 case class Background(scripts: List[String])
@@ -62,7 +64,7 @@ case class Requirements(webgl: Option[Boolean] = None,
 case class Omnibox(keyword: String)
 case class Storage(managedSchema: String)
 
-case class ChromeUIOverrides(bookmarksUI: BookmarksUI)
+case class ChromeUIOverrides(newtab: String, bookmarksUI: BookmarksUI)
 case class BookmarksUI(
     removeButton: Option[Boolean] = None,
     removeBookmarkShortcut: Option[Boolean] = None
@@ -101,6 +103,8 @@ object Commands {
   val ExecuteBrowserAction = "_execute_browser_action"
   val ExecutePageAction = "_execute_page_action"
 }
+
+case class Oauth2Settings(clientId: String, scopes: List[String])
 
 trait AppManifest extends chrome.Manifest {
   val app: chrome.App

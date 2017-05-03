@@ -5,10 +5,8 @@ import chrome.events.EventSource
 import chrome.events.EventSourceImplicits._
 import chrome.utils.ErrorHandling._
 
-import scala.concurrent.duration._
 import scala.concurrent.{Future, Promise}
 import scala.scalajs.js
-import scala.scalajs.js.Any
 
 object Alarms {
 

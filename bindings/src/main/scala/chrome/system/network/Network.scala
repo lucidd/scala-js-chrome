@@ -1,7 +1,7 @@
 package chrome.system.network
 
 import chrome.ChromeAPI
-import chrome.permissions.Permission.{Host, API}
+import chrome.permissions.Permission.API
 import chrome.utils.ErrorHandling._
 
 import scala.concurrent.{Future, Promise}

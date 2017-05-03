@@ -3,7 +3,7 @@ package chrome.system.display
 import chrome.ChromeAPI
 import chrome.events.EventSource
 import chrome.events.EventSourceImplicits._
-import chrome.permissions.Permission.{Host, API}
+import chrome.permissions.Permission.API
 import chrome.system.display.bindings._
 import chrome.utils.ErrorHandling._
 

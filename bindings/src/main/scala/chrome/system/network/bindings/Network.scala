@@ -1,10 +1,10 @@
 package chrome.system.network.bindings
 
 import scala.scalajs.js
-import scala.scalajs.js.annotation.JSName
+import scala.scalajs.js.annotation.JSGlobal
 
 @js.native
-@JSName("chrome.system.network")
+@JSGlobal("chrome.system.network")
 object Network extends js.Object {
 
   def getNetworkInterfaces(

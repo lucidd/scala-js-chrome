@@ -5,10 +5,10 @@ import chrome.management.bindings.ExtensionInfo.LaunchType
 import chrome.runtime.bindings.Runtime.AppID
 
 import scala.scalajs.js
-import scala.scalajs.js.annotation.JSName
+import scala.scalajs.js.annotation.JSGlobal
 
 @js.native
-@JSName("chrome.management")
+@JSGlobal("chrome.management")
 object Management extends js.Object {
 
   val onInstalled: Event[js.Function1[ExtensionInfo, _]] = js.native
