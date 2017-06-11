@@ -52,8 +52,8 @@ apps/extensions. It also provides a way to configure your app/extension in your
 SBT file and automatically generate the manifest file.
 
 - `chromePackage` will create a ZIP file you can upload to the chrome store.
-- `chromeBuildOpt` will build your projects with optimizations enabled. The
-output will be in `target/chrome/unpacked` and can be loaded by chrome as an
+- `chromeUnpackedOpt` (or `chromeUnpackedFast`) will build your projects with (or without) optimizations enabled. The
+output will be in `target/chrome/unpacked-opt` (or `target/chrome/unpacked-fast`) and can be loaded by chrome as an
 unpacked extension/app.
 
 ## Getting Started
