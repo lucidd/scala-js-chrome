@@ -60,7 +60,7 @@ lazy val plugin = project.in(file("sbt-plugin")).
     sbtPlugin := true,
     name := "sbt-chrome-plugin",
     libraryDependencies ++= {
-      val circeVersion = "0.7.1"
+      val circeVersion = "0.8.0"
       Seq(
         "io.circe" %% "circe-core"    % circeVersion,
         "io.circe" %% "circe-generic" % circeVersion,
