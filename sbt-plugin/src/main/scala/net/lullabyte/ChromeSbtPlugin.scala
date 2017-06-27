@@ -18,21 +18,25 @@ object ChromeSbtPlugin extends AutoPlugin {
     val chromePackage = TaskKey[File]("chromePackage")
     val chromeGenerateManifest = TaskKey[File]("chromeGenerateManifest")
     val chromeManifest = TaskKey[Manifest]("chromeManifest")
+    val fullOptJsLib = TaskKey[Attributed[File]]("fullOptJsLib")
+    val fastOptJsLib = TaskKey[Attributed[File]]("fastOptJsLib")
 
 
     lazy val baseSettings: Seq[Def.Setting[_]] = Seq(
+      fastOptJsLib := (fastOptJS in Compile).value,
       chromeUnpackedFast := {
         Chrome.buildUnpackedDirectory(target.value / "chrome" / "unpacked-fast")(
           (chromeGenerateManifest in Compile).value,
-          (fastOptJS in Compile).value.data,
+          fastOptJsLib.value.data,
           (packageJSDependencies in Compile).value,
           (resourceDirectories in Compile).value
         )
       },
+      fullOptJsLib := (fullOptJS in Compile).value,
       chromeUnpackedOpt := {
         Chrome.buildUnpackedDirectory(target.value / "chrome" / "unpacked-opt")(
           (chromeGenerateManifest in Compile).value,
-          (fullOptJS in Compile).value.data,
+          fullOptJsLib.value.data,
           (packageMinifiedJSDependencies in Compile).value,
           (resourceDirectories in Compile).value
         )
