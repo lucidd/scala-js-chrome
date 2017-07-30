@@ -14,9 +14,9 @@ object Storage extends ChromeAPI {
   implicit class StorageArea(area: bindings.StorageArea) {
 
     def get(keys: js.UndefOr[js.Any] = js.undefined)
-      : Future[Map[String, js.Any]] = {
-      val promise = Promise[Map[String, js.Any]]()
-      area.get(keys, (results: Map[String, js.Any]) => {
+      : Future[js.Dictionary[js.Any]] = {
+      val promise = Promise[js.Dictionary[js.Any]]()
+      area.get(keys, (results: js.Dictionary[js.Any]) => {
         promise.complete(lastErrorOrValue(results))
       })
       promise.future
@@ -30,7 +30,7 @@ object Storage extends ChromeAPI {
       promise.future
     }
 
-    def set(items: Map[String, js.Any]): Future[Unit] = {
+    def set(items: js.Dictionary[js.Any]): Future[Unit] = {
       val promise = Promise[Unit]()
       area.set(items, js.Any.fromFunction0(() => {
         promise.complete(lastErrorOrValue(()))
