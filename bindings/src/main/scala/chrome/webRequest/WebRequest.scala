@@ -2,7 +2,7 @@ package chrome.webRequest
 
 import chrome.ChromeAPI
 import chrome.permissions.Permission.API
-import chrome.webRequest.bindings.WebRequest.{BlockableCallback, Callback}
+import chrome.webRequest.bindings.WebRequest.{BlockableAuthCallback, BlockableCallback, Callback}
 import chrome.webRequest.bindings._
 
 import scala.scalajs.js
@@ -62,8 +62,7 @@ object WebRequest extends ChromeAPI {
     * credentials, it can cancel the request and display the error page, or it can take no action on the challenge. If
     * bad user credentials are provided, this may be called multiple times for the same request.
     */
-  var onAuthRequired: WebRequestEventSource[js.Function2[WebAuthenticationChallengeDetails,
-    js.UndefOr[js.Function1[BlockingResponse, _]], js.UndefOr[BlockingResponse]]] = {
+  var onAuthRequired: WebRequestEventSource[BlockableAuthCallback[WebAuthenticationChallengeDetails]] = {
     bindings.WebRequest.onAuthRequired
   }
 
