@@ -38,11 +38,11 @@ chrome.system.cpu.CPU.getInfo.onComplete {
 }
 ```
 
-The scala idiomatic binding provieds the following general changes:
+The scala idiomatic binding provides the following general changes:
 
 - Futures instead of callbacks
 - Error handling using types like `Future` / `Try` instead of global error 
-varibale.
+variable.
 - Using `Option` for things that may or may not be defined.
 
 ## SBT Plugin
@@ -124,10 +124,10 @@ available for ScalaJS.
 ### Known Issues
 
 In chrome apps and extensions there are multiple places where you can run
-javascript. Normaly you split your logic into different files and load them into
+javascript. Normally you split your logic into different files and load them into
 whatever context they need to run. Since ScalaJS compiles your whole project
 into one big file all contexts need to load this big file with all the logic
 even if they only need a small subset. This can cause your app you use more
 memory then it need to. In some cases this can be worked around for example the
-a background page can manipulate the DOM of a App window so you don't need any
+a background page can manipulate the DOM of an App window so you don't need any
 javascript at all in the window itself.
