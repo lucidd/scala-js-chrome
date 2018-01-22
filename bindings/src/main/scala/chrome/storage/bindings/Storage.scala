@@ -17,10 +17,10 @@ trait StorageChange extends js.Object {
 trait StorageArea extends js.Object {
 
   def get(keys: js.UndefOr[js.Any] = js.undefined,
-          callback: js.Function1[Map[String, js.Any], _]): Unit = js.native
+          callback: js.Function1[js.Dictionary[js.Any], _]): Unit = js.native
   def getBytesInUse(keys: js.UndefOr[js.Any] = js.undefined,
                     callback: js.Function1[Int, _]): Unit = js.native
-  def set(items: Map[String, js.Any],
+  def set(items: js.Dictionary[js.Any],
           callback: js.UndefOr[js.Function0[_]] = js.undefined): Unit =
     js.native
   def remove(keys: js.Any,
