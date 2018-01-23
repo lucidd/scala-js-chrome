@@ -4,7 +4,7 @@ import chrome.events.bindings.Event
 import chrome.tabs.bindings.Tab
 
 import scala.scalajs.js
-import scala.scalajs.js.annotation.{JSGlobal, ScalaJSDefined}
+import scala.scalajs.js.annotation.JSGlobal
 import scala.scalajs.js.|
 
 object MenuContexts {
@@ -46,7 +46,6 @@ object ContextMenus extends js.Object {
 
 }
 
-@ScalaJSDefined
 class UpdateProperties(
     val `type`: String = MenuType.NORMAL,
     val title: String,
@@ -68,7 +67,6 @@ object CreateProperties {
     new CreateProperties(id = id, title = title, contexts = contexts)
 }
 
-@ScalaJSDefined
 class CreateProperties(
     val `type`: String = MenuType.NORMAL,
     val id: String | Int,

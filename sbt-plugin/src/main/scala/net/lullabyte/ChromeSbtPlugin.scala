@@ -2,7 +2,6 @@ package net.lullabyte
 
 import chrome.Manifest
 import org.scalajs.sbtplugin.ScalaJSPlugin
-
 import org.scalajs.sbtplugin.ScalaJSPlugin.autoImport._
 import sbt.Keys._
 import sbt._
@@ -49,7 +48,7 @@ object ChromeSbtPlugin extends AutoPlugin {
           ".DS_Store"
         )
         val fileFilter = AllPassFilter - new SimpleFilter(excludeFileNames.contains)
-        IO.zip(selectSubpaths(chromeAppDir, fileFilter), zipFile)
+        IO.zip(Path.selectSubpaths(chromeAppDir, fileFilter), zipFile)
         zipFile
       },
       chromeGenerateManifest := {

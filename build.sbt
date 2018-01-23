@@ -32,24 +32,23 @@ lazy val commonSettings = Seq(
 
 lazy val commonPlugins = Seq(GitVersioning)
 
-
-lazy val bindings = project.in(file("bindings")).
-  settings(commonSettings: _*).
-  settings(
+lazy val bindings = project.in(file("bindings"))
+  .settings(commonSettings: _*)
+  .settings(
     name := "scala-js-chrome",
     scalaVersion := "2.12.2",
     crossScalaVersions := Seq("2.10.6", "2.11.11", "2.12.2"),
     libraryDependencies ++= Seq(
-      "org.scala-js" %%% "scalajs-dom" % "0.9.1"
+      "org.scala-js" %%% "scalajs-dom" % "0.9.4"
     ),
     publishMavenStyle := true,
     publishTo := {
       val nexus = "https://oss.sonatype.org/"
-      if (isSnapshot.value)
-        Some("snapshots" at nexus + "content/repositories/snapshots")
-      else
-        Some("releases"  at nexus + "service/local/staging/deploy/maven2")
-    }
+      if (isSnapshot.value) Some("snapshots" at nexus + "content/repositories/snapshots")
+      else Some("releases"  at nexus + "service/local/staging/deploy/maven2")
+    },
+    scalacOptions += "-P:scalajs:sjsDefinedByDefault",
+    scalaJSUseMainModuleInitializer := true
   ).
   enablePlugins(commonPlugins: _*).
   enablePlugins(ScalaJSPlugin)
@@ -60,7 +59,7 @@ lazy val plugin = project.in(file("sbt-plugin")).
     sbtPlugin := true,
     name := "sbt-chrome-plugin",
     libraryDependencies ++= {
-      val circeVersion = "0.8.0"
+      val circeVersion = "0.9.0"
       Seq(
         "io.circe" %% "circe-core"    % circeVersion,
         "io.circe" %% "circe-generic" % circeVersion,
@@ -74,8 +73,6 @@ lazy val plugin = project.in(file("sbt-plugin")).
   ).
   enablePlugins(commonPlugins: _*)
 
-
-
 lazy val monixInterop = project.in(file("interop/monix")).
   settings(commonSettings: _*).
   settings(
@@ -88,10 +85,8 @@ lazy val monixInterop = project.in(file("interop/monix")).
     publishMavenStyle := true,
     publishTo := {
       val nexus = "https://oss.sonatype.org/"
-      if (isSnapshot.value)
-        Some("snapshots" at nexus + "content/repositories/snapshots")
-      else
-        Some("releases"  at nexus + "service/local/staging/deploy/maven2")
+      if (isSnapshot.value) Some("snapshots" at nexus + "content/repositories/snapshots")
+      else                  Some("releases"  at nexus + "service/local/staging/deploy/maven2")
     }
   ).dependsOn(bindings)
    .enablePlugins(commonPlugins: _*)
@@ -109,10 +104,8 @@ lazy val fs2Interop = project.in(file("interop/fs2")).
     publishMavenStyle := true,
     publishTo := {
       val nexus = "https://oss.sonatype.org/"
-      if (isSnapshot.value)
-        Some("snapshots" at nexus + "content/repositories/snapshots")
-      else
-        Some("releases"  at nexus + "service/local/staging/deploy/maven2")
+      if (isSnapshot.value) Some("snapshots" at nexus + "content/repositories/snapshots")
+      else                  Some("releases"  at nexus + "service/local/staging/deploy/maven2")
     }
   ).dependsOn(bindings)
   .enablePlugins(commonPlugins: _*)
