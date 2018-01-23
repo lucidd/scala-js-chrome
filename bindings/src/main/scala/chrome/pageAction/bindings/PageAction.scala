@@ -5,7 +5,7 @@ import chrome.pageAction.bindings.PageAction.ImageDataType
 import chrome.tabs.bindings.Tab
 
 import scala.scalajs.js
-import scala.scalajs.js.annotation.{JSGlobal, ScalaJSDefined}
+import scala.scalajs.js.annotation.JSGlobal
 import scala.scalajs.js.|
 
 @js.native
@@ -40,7 +40,6 @@ object PageAction extends js.Object {
     js.native
 }
 
-@ScalaJSDefined
 class GetPopupDetails(val tabId: Tab.Id) extends js.Object
 
 object GetPopupDetails {
@@ -49,7 +48,6 @@ object GetPopupDetails {
     new GetPopupDetails(tabId)
 }
 
-@ScalaJSDefined
 class GetTitleDetails(val tabId: Tab.Id) extends js.Object
 
 object GetTitleDetails {
@@ -58,7 +56,6 @@ object GetTitleDetails {
     new GetTitleDetails(tabId)
 }
 
-@ScalaJSDefined
 class SetIconDetails(
   val tabId: Tab.Id,
   val imageData: js.UndefOr[ImageDataType | js.Dictionary[ImageDataType]],
@@ -74,7 +71,6 @@ object SetIconDetails {
   ): SetIconDetails = new SetIconDetails(tabId, imageData, path)
 }
 
-@ScalaJSDefined
 class SetPopupDetails(val tabId: Tab.Id, val popup: String) extends js.Object
 
 object SetPopupDetails {
@@ -83,7 +79,6 @@ object SetPopupDetails {
     new SetPopupDetails(tabId, popup)
 }
 
-@ScalaJSDefined
 class SetTitleDetails(val tabId: Tab.Id, val title: String) extends js.Object
 
 object SetTitleDetails {

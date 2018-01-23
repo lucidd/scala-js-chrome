@@ -2,9 +2,7 @@ package net.lullabyte
 
 import io.circe._
 import io.circe.syntax._
-import io.circe.generic.semiauto._
 import chrome._
-import chrome.Commands._
 import chrome.permissions.Permission.{API, Host}
 
 object JsonCodecs {
