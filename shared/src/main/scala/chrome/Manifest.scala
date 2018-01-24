@@ -28,6 +28,24 @@ sealed trait Manifest {
 
 case class Background(scripts: List[String])
 case class App(background: Background)
+case class ContentScript(
+    matches: Set[String],
+    excludeMatches: Set[String] = Set.empty,
+    matchAboutBlank: Option[Boolean] = None,
+    css: List[String] = List.empty,
+    js: List[String] = List.empty,
+    runAt: Option[RunAt] = None,
+    allFrames: Option[Boolean] = None,
+    includeGlobs: Set[String] = Set.empty,
+    excludeGlobs: Set[String] = Set.empty
+)
+
+sealed trait RunAt
+object RunAt {
+  case object DocumentStart extends RunAt
+  case object DocumentEnd extends RunAt
+  case object DocumentIdle extends RunAt
+}
 
 case class BrowserAction(
     icon: Map[Int, String] = Map.empty,
@@ -98,6 +116,7 @@ trait AppManifest extends chrome.Manifest {
 
 trait ExtensionManifest extends chrome.Manifest {
   val background: Background
+  val contentScripts: List[ContentScript] = List.empty
   val browserAction: Option[BrowserAction] = None
   val omnibox: Option[Omnibox] = None
   val optionsUI: Option[OptionsUI] = None

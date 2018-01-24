@@ -75,6 +75,12 @@ lazy val extension = project.in(file("extension"))
       val background = Background(
         scripts = Chrome.defaultScripts
       )
+      override val contentScripts = List(
+        ContentScript(
+          matches = Set("https://www.example.org/*"),
+          js = Chrome.defaultScripts
+        )
+      )
       val name = Keys.name.value
       val version = Keys.version.value
       override val icons = Chrome.icons(

@@ -39,6 +39,26 @@ object JsonCodecs {
       )
   }
 
+  implicit val runAtEncoder = Encoder.instance[chrome.RunAt] {
+    case RunAt.DocumentStart => Json.fromString("document_start")
+    case RunAt.DocumentEnd => Json.fromString("document_end")
+    case RunAt.DocumentIdle => Json.fromString("document_idle")
+  }
+
+  implicit val contentScriptEncoder = Encoder.instance[chrome.ContentScript] { cs =>
+    Json.obj(
+      ("matches", Json.fromValues(cs.matches.map(Json.fromString))),
+      ("exclude_matches", omitIfEmpty(cs.excludeMatches)(Json.fromString)),
+      ("match_about_blank", cs.matchAboutBlank.asJson),
+      ("css", omitIfEmpty(cs.css)(Json.fromString)),
+      ("js", omitIfEmpty(cs.js)(Json.fromString)),
+      ("run_at", cs.runAt.asJson),
+      ("all_frames", cs.allFrames.asJson),
+      ("include_globs", omitIfEmpty(cs.includeGlobs)(Json.fromString)),
+      ("exclude_globs", omitIfEmpty(cs.css)(Json.fromString))
+    )
+  }
+
   implicit val omniboxEncoder = Encoder.instance[chrome.Omnibox] { omnibox =>
     Json.obj(
       ("keyword", Json.fromString(omnibox.keyword))
@@ -187,6 +207,7 @@ object JsonCodecs {
     val commonValues = manifest2json(manifest)
     val extValues = Seq(
       ("background", manifest.background.asJson),
+      ("content_scripts", omitIfEmpty(manifest.contentScripts)(_.asJson)),
       ("omnibox", manifest.omnibox.asJson),
       ("options_ui", manifest.optionsUI.asJson),
       ("browser_action", manifest.browserAction.asJson),
