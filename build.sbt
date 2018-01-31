@@ -99,7 +99,7 @@ lazy val fs2Interop = project.in(file("interop/fs2")).
     scalaVersion := "2.12.2",
     crossScalaVersions := Seq("2.11.11", "2.12.2"),
     libraryDependencies ++= Seq(
-      "co.fs2" %%% "fs2-core" % "0.9.5"
+      "co.fs2" %%% "fs2-core" % "0.9.7"
     ),
     publishMavenStyle := true,
     publishTo := {
