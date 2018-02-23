@@ -1,9 +1,6 @@
-import scala.scalajs.js.JSApp
+object Main {
 
-object Main extends JSApp {
-
-
-  def main(): Unit = {
+  def main(args: Array[String]): Unit = {
     println("Hello world!")
   }
 

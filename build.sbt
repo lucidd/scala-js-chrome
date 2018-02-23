@@ -59,7 +59,7 @@ lazy val plugin = project.in(file("sbt-plugin")).
     sbtPlugin := true,
     name := "sbt-chrome-plugin",
     libraryDependencies ++= {
-      val circeVersion = "0.9.0"
+      val circeVersion = "0.9.1"
       Seq(
         "io.circe" %% "circe-core"    % circeVersion,
         "io.circe" %% "circe-generic" % circeVersion,
@@ -69,7 +69,7 @@ lazy val plugin = project.in(file("sbt-plugin")).
     publishMavenStyle := false,
     bintrayRepository := "sbt-plugins",
     bintrayOrganization := None,
-    addSbtPlugin("org.scala-js" % "sbt-scalajs" % "0.6.21")
+    addSbtPlugin("org.scala-js" % "sbt-scalajs" % "0.6.22")
   ).
   enablePlugins(commonPlugins: _*)
 
@@ -80,7 +80,7 @@ lazy val monixInterop = project.in(file("interop/monix")).
     scalaVersion := "2.12.4",
     crossScalaVersions := Seq("2.10.6", "2.11.11", "2.12.4"),
     libraryDependencies ++= Seq(
-      "io.monix" %%% "monix" % "2.2.4"
+      "io.monix" %%% "monix" % "2.3.3"
     ),
     publishMavenStyle := true,
     publishTo := {
@@ -99,7 +99,7 @@ lazy val fs2Interop = project.in(file("interop/fs2")).
     scalaVersion := "2.12.4",
     crossScalaVersions := Seq("2.11.11", "2.12.4"),
     libraryDependencies ++= Seq(
-      "co.fs2" %%% "fs2-core" % "0.9.7"
+      "co.fs2" %%% "fs2-core" % "0.10.2"
     ),
     publishMavenStyle := true,
     publishTo := {
