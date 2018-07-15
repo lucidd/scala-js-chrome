@@ -24,6 +24,7 @@ sealed trait Manifest {
   val externallyConnectable: Option[ExternallyConnectable] = None
   val oauth2: Option[Oauth2Settings] = None
   val webAccessibleResources: List[String] = Nil
+  val contentSecurityPolicy: Option[String] = None
 }
 
 case class Background(scripts: List[String])

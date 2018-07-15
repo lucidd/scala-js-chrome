@@ -140,6 +140,7 @@ object Runtime {
         override val offlineEnabled = manifest.offlineEnabled.toOption
         override val permissions = perms
         override val icons = iconsValue
+        override val contentSecurityPolicy = manifest.content_security_policy.toOption
       }
     } else {
       val extension = manifest.asExtensionManifest.get
@@ -157,6 +158,7 @@ object Runtime {
             scripts =
               extension.background.map(_.scripts.toList).getOrElse(List())
         )
+        override val contentSecurityPolicy = manifest.content_security_policy.toOption
       }
     }
   }
