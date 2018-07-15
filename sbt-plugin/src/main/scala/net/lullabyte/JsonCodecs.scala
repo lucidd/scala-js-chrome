@@ -177,7 +177,8 @@ object JsonCodecs {
           case API(name) => Json.fromString(name)
           case Host(url) => Json.fromString(url)
         }
-      )
+      ),
+      ("content_security_policy", manifest.contentSecurityPolicy.asJson)
     )
   }
 

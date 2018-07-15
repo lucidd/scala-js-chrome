@@ -34,6 +34,7 @@ trait Manifest extends js.Object {
   val offlineEnabled: js.UndefOr[Boolean] = js.native
   val permissions: js.UndefOr[js.Array[String]] = js.native
   val icons: js.UndefOr[Map[String, String]] = js.native
+  val content_security_policy: js.UndefOr[String] = js.native
 
 }
 
