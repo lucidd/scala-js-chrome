@@ -4,6 +4,9 @@ import scala.concurrent.{Future, Promise}
 import scala.scalajs.js
 import chrome.utils.ErrorHandling._
 
+import js.JSConverters._
+import scala.scalajs.js.|
+
 object I18N {
 
   def getAcceptLanguages: Future[js.Array[String]] = {
@@ -14,9 +17,14 @@ object I18N {
     promise.future
   }
 
-  def getMessage(messageName: String,
-                 substitutions: String*): js.UndefOr[String] =
-    bindings.I18N.getMessage(messageName, substitutions: _*)
+  def getMessage(messageName: String, substitutions: String*): js.UndefOr[String] = {
+    if(substitutions.isEmpty) {
+      bindings.I18N.getMessage(messageName)
+    } else {
+      val jsArraySubstitutions = substitutions.toJSArray.asInstanceOf[String | js.Array[String]]
+      bindings.I18N.getMessage(messageName, Some(jsArraySubstitutions).orUndefined)
+    }
+  }
 
   def getUILanguage: String = bindings.I18N.getUILanguage()
 
