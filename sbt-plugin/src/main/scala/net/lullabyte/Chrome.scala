@@ -7,9 +7,7 @@ import sbt._
 
 object Chrome {
 
-  val mainFileName = "main.js"
-  val dependenciesFileName = "dependencies.js"
-  val defaultScripts = List(dependenciesFileName, mainFileName)
+  val manifestFileName = "manifest.json"
 
   def i18n(msg: String): String = s"__MSG_${msg}__"
 
@@ -20,16 +18,34 @@ object Chrome {
   }
 
   def buildUnpackedDirectory(unpacked: File)(manifest: File, jsLib: File,
-                                             jsDeps: File, resources: Seq[File]): File =  {
+                                             jsDeps: File, resources: Seq[File]): File = {
+
+    val libsAndDependencies = List(
+      jsLib -> unpacked / jsLib.getName,
+      jsDeps -> unpacked / jsDeps.getName
+    )
+
+    val sourceMaps = List(jsLib, jsDeps) map { sourceFile =>
+      val fileName = sourceFile.getName + ".map"
+      val originalSourceMap = sourceFile.getParentFile / fileName
+      originalSourceMap -> unpacked / fileName
+    } filter (_._1.exists())
+
+    val chromeSpecific = List(
+      manifest -> unpacked / manifestFileName
+    )
+
     IO.createDirectory(unpacked)
+
     resources.foreach { resource =>
       IO.copyDirectory(resource, unpacked, overwrite = true, preserveLastModified = true)
     }
-    IO.copy(List(
-      (jsLib, unpacked / mainFileName),
-      (jsDeps, unpacked / dependenciesFileName),
-      (manifest, unpacked / "manifest.json")
-    ), overwrite = true, preserveLastModified = true, preserveExecutable = true)
+
+    IO.copy(
+      libsAndDependencies ::: sourceMaps ::: chromeSpecific,
+      overwrite = true, preserveLastModified = true, preserveExecutable = true
+    )
+
     unpacked
   }
 

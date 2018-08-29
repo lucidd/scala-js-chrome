@@ -26,12 +26,28 @@ lazy val exampleApp = project.in(file("app"))
     scalaJSUseMainModuleInitializer in Test := false,
     relativeSourceMaps := true,
     skip in packageJSDependencies := false,
+
+    // you can customize and have a static output name for lib and dependencies
+    // instead of having the default files names like app-fastopt.js, ...
+    artifactPath in (Compile, fastOptJS) := {
+      (crossTarget in fastOptJS).value / "main.js"
+    },
+    artifactPath in (Compile, fullOptJS) := {
+      (crossTarget in fullOptJS).value / "main.js"
+    },
+    artifactPath in (Compile, packageJSDependencies) := {
+      (crossTarget in packageJSDependencies).value / "dependencies.js"
+    },
+    artifactPath in (Compile, packageMinifiedJSDependencies) := {
+      (crossTarget in packageMinifiedJSDependencies).value / "dependencies.js"
+    },
+
     chromeManifest := new AppManifest {
       val name = Keys.name.value
       val version = Keys.version.value
       val app = App(
         background = Background(
-          scripts = Chrome.defaultScripts
+          scripts = List("main.js", "dependencies.js")
         )
       )
       override val defaultLocale = Some("en")
@@ -71,9 +87,25 @@ lazy val extension = project.in(file("extension"))
     scalaJSUseMainModuleInitializer in Test := false,
     relativeSourceMaps := true,
     skip in packageJSDependencies := false,
+
+    // you can customize and have a static output name for lib and dependencies
+    // instead of having the default files names like extension-fastopt.js, ...
+    artifactPath in (Compile, fastOptJS) := {
+      (crossTarget in fastOptJS).value / "main.js"
+    },
+    artifactPath in (Compile, fullOptJS) := {
+      (crossTarget in fullOptJS).value / "main.js"
+    },
+    artifactPath in (Compile, packageJSDependencies) := {
+      (crossTarget in packageJSDependencies).value / "dependencies.js"
+    },
+    artifactPath in (Compile, packageMinifiedJSDependencies) := {
+      (crossTarget in packageMinifiedJSDependencies).value / "dependencies.js"
+    },
+
     chromeManifest := new ExtensionManifest {
       val background = Background(
-        scripts = Chrome.defaultScripts
+        scripts = List("main.js", "dependencies.js")
       )
       val name = Keys.name.value
       val version = Keys.version.value
