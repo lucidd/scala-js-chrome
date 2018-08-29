@@ -37,7 +37,7 @@ lazy val bindings = project.in(file("bindings"))
   .settings(
     name := "scala-js-chrome",
     scalaVersion := "2.12.6",
-    crossScalaVersions := Seq("2.10.6", "2.11.11", "2.12.6"),
+    crossScalaVersions := Seq("2.10.6", "2.11.12", "2.12.6"),
     libraryDependencies ++= Seq(
       "org.scala-js" %%% "scalajs-dom" % "0.9.6"
     ),
@@ -78,7 +78,7 @@ lazy val monixInterop = project.in(file("interop/monix")).
   settings(
     name := "scala-js-chrome-monix",
     scalaVersion := "2.12.6",
-    crossScalaVersions := Seq("2.10.6", "2.11.11", "2.12.6"),
+    crossScalaVersions := Seq("2.10.6", "2.11.12", "2.12.6"),
     libraryDependencies ++= Seq(
       "io.monix" %%% "monix" % "2.3.3"
     ),
@@ -97,7 +97,7 @@ lazy val fs2Interop = project.in(file("interop/fs2")).
   settings(
     name := "scala-js-chrome-fs2",
     scalaVersion := "2.12.6",
-    crossScalaVersions := Seq("2.11.11", "2.12.6"),
+    crossScalaVersions := Seq("2.11.12", "2.12.6"),
     libraryDependencies ++= Seq(
       "co.fs2" %%% "fs2-core" % "0.10.5"
     ),
