@@ -20,11 +20,12 @@ object ChromeSbtPlugin extends AutoPlugin {
     val fullOptJsLib = TaskKey[Attributed[File]]("fullOptJsLib")
     val fastOptJsLib = TaskKey[Attributed[File]]("fastOptJsLib")
 
+    private val chromeDir = "chrome"
 
     lazy val baseSettings: Seq[Def.Setting[_]] = Seq(
       fastOptJsLib := (fastOptJS in Compile).value,
       chromeUnpackedFast := {
-        Chrome.buildUnpackedDirectory(target.value / "chrome" / "unpacked-fast")(
+        Chrome.buildUnpackedDirectory(target.value / chromeDir / "unpacked-fast")(
           (chromeGenerateManifest in Compile).value,
           fastOptJsLib.value.data,
           (packageJSDependencies in Compile).value,
@@ -33,7 +34,7 @@ object ChromeSbtPlugin extends AutoPlugin {
       },
       fullOptJsLib := (fullOptJS in Compile).value,
       chromeUnpackedOpt := {
-        Chrome.buildUnpackedDirectory(target.value / "chrome" / "unpacked-opt")(
+        Chrome.buildUnpackedDirectory(target.value / chromeDir / "unpacked-opt")(
           (chromeGenerateManifest in Compile).value,
           fullOptJsLib.value.data,
           (packageMinifiedJSDependencies in Compile).value,
@@ -41,7 +42,7 @@ object ChromeSbtPlugin extends AutoPlugin {
         )
       },
       chromePackage := {
-        val out = target.value / "chrome"
+        val out = target.value / chromeDir
         val chromeAppDir = chromeUnpackedOpt.value
         val zipFile = new File(out, s"${name.value}.zip")
         val excludeFileNames = Set(
@@ -52,7 +53,7 @@ object ChromeSbtPlugin extends AutoPlugin {
         zipFile
       },
       chromeGenerateManifest := {
-        Chrome.generateManifest(target.value / "chrome" / "generated_manifest.json")(
+        Chrome.generateManifest(target.value / chromeDir / "generated_manifest.json")(
           (chromeManifest in Compile).value
         )
       }
