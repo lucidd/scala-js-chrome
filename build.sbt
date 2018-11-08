@@ -36,8 +36,8 @@ lazy val bindings = project.in(file("bindings"))
   .settings(commonSettings: _*)
   .settings(
     name := "scala-js-chrome",
-    scalaVersion := "2.12.6",
-    crossScalaVersions := Seq("2.10.6", "2.11.12", "2.12.6"),
+    scalaVersion := "2.12.7",
+    crossScalaVersions := Seq("2.10.6", "2.11.12", "2.12.7"),
     libraryDependencies ++= Seq(
       "org.scala-js" %%% "scalajs-dom" % "0.9.6"
     ),
@@ -59,7 +59,7 @@ lazy val plugin = project.in(file("sbt-plugin")).
     sbtPlugin := true,
     name := "sbt-chrome-plugin",
     libraryDependencies ++= {
-      val circeVersion = "0.9.1"
+      val circeVersion = "0.10.1"
       Seq(
         "io.circe" %% "circe-core"    % circeVersion,
         "io.circe" %% "circe-generic" % circeVersion,
@@ -69,7 +69,7 @@ lazy val plugin = project.in(file("sbt-plugin")).
     publishMavenStyle := false,
     bintrayRepository := "sbt-plugins",
     bintrayOrganization := None,
-    addSbtPlugin("org.scala-js" % "sbt-scalajs" % "0.6.24")
+    addSbtPlugin("org.scala-js" % "sbt-scalajs" % "0.6.25")
   ).
   enablePlugins(commonPlugins: _*)
 
@@ -77,10 +77,10 @@ lazy val monixInterop = project.in(file("interop/monix")).
   settings(commonSettings: _*).
   settings(
     name := "scala-js-chrome-monix",
-    scalaVersion := "2.12.6",
-    crossScalaVersions := Seq("2.10.6", "2.11.12", "2.12.6"),
+    scalaVersion := "2.12.7",
+    crossScalaVersions := Seq("2.10.6", "2.11.12", "2.12.7"),
     libraryDependencies ++= Seq(
-      "io.monix" %%% "monix" % "2.3.3"
+      "io.monix" %%% "monix" % "3.0.0-RC2"
     ),
     publishMavenStyle := true,
     publishTo := {
@@ -96,10 +96,10 @@ lazy val fs2Interop = project.in(file("interop/fs2")).
   settings(commonSettings: _*).
   settings(
     name := "scala-js-chrome-fs2",
-    scalaVersion := "2.12.6",
-    crossScalaVersions := Seq("2.11.12", "2.12.6"),
+    scalaVersion := "2.12.7",
+    crossScalaVersions := Seq("2.11.12", "2.12.7"),
     libraryDependencies ++= Seq(
-      "co.fs2" %%% "fs2-core" % "0.10.5"
+      "co.fs2" %%% "fs2-core" % "1.0.0"
     ),
     publishMavenStyle := true,
     publishTo := {
