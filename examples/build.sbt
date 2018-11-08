@@ -13,7 +13,7 @@ lazy val exampleApp = project.in(file("app"))
   .settings(
     name := "Example App",
     version := "0.1.0",
-    scalaVersion := "2.12.6",
+    scalaVersion := "2.12.7",
     scalacOptions ++= Seq(
       "-language:implicitConversions",
       "-language:existentials",
@@ -58,7 +58,7 @@ lazy val extension = project.in(file("extension"))
   .settings(
     name := "Example Extension",
     version := "0.1.0",
-    scalaVersion := "2.12.6",
+    scalaVersion := "2.12.7",
     scalacOptions ++= Seq(
       "-language:implicitConversions",
       "-language:existentials",
