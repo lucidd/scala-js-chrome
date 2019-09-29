@@ -35,6 +35,12 @@ case class BrowserAction(
     title: Option[String] = None,
     popup: Option[String] = None
 )
+
+case class ContentScript(
+    matches: List[String],
+    css: List[String],
+    js: List[String])
+
 case class Bluetooth(
     uuids: List[String] = Nil,
     socket: Option[Boolean] = None,
@@ -103,4 +109,5 @@ trait ExtensionManifest extends chrome.Manifest {
   val omnibox: Option[Omnibox] = None
   val optionsUI: Option[OptionsUI] = None
   val chromeUIOverrides: Option[ChromeUIOverrides] = None
+  val contentScripts: List[ContentScript] = List.empty
 }
