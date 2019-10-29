@@ -5,4 +5,4 @@ script:
   - sbt plugin/compile
   - (cd examples; sbt chromeUnpackedOpt)
 jdk:
-  - oraclejdk8
+  - oraclejdk11
