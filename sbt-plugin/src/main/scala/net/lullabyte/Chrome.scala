@@ -54,7 +54,7 @@ object Chrome {
   def generateManifest(out: File)(manifest: Manifest): File = {
     import JsonCodecs._
 
-    val content = printer.pretty(manifest.asJson)
+    val content = printer.print(manifest.asJson)
     IO.write(out, content)
     out
   }

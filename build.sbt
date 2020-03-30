@@ -39,7 +39,7 @@ lazy val bindings = project.in(file("bindings"))
     scalaVersion := "2.12.7",
     crossScalaVersions := Seq("2.10.6", "2.11.12", "2.12.7"),
     libraryDependencies ++= Seq(
-      "org.scala-js" %%% "scalajs-dom" % "0.9.6"
+      "org.scala-js" %%% "scalajs-dom" % "1.0.0"
     ),
     publishMavenStyle := true,
     publishTo := {
@@ -47,11 +47,11 @@ lazy val bindings = project.in(file("bindings"))
       if (isSnapshot.value) Some("snapshots" at nexus + "content/repositories/snapshots")
       else Some("releases"  at nexus + "service/local/staging/deploy/maven2")
     },
-    scalacOptions += "-P:scalajs:sjsDefinedByDefault",
     scalaJSUseMainModuleInitializer := true
   ).
   enablePlugins(commonPlugins: _*).
-  enablePlugins(ScalaJSPlugin)
+  enablePlugins(ScalaJSPlugin).
+  enablePlugins(JSDependenciesPlugin)
 
 lazy val plugin = project.in(file("sbt-plugin")).
   settings(commonSettings: _*).
@@ -59,7 +59,7 @@ lazy val plugin = project.in(file("sbt-plugin")).
     sbtPlugin := true,
     name := "sbt-chrome-plugin",
     libraryDependencies ++= {
-      val circeVersion = "0.10.1"
+      val circeVersion = "0.13.0"
       Seq(
         "io.circe" %% "circe-core"    % circeVersion,
         "io.circe" %% "circe-generic" % circeVersion,
@@ -69,44 +69,7 @@ lazy val plugin = project.in(file("sbt-plugin")).
     publishMavenStyle := false,
     bintrayRepository := "sbt-plugins",
     bintrayOrganization := None,
-    addSbtPlugin("org.scala-js" % "sbt-scalajs" % "0.6.25")
+    addSbtPlugin("org.scala-js" % "sbt-scalajs" % "1.0.1"),
+    addSbtPlugin("org.scala-js" % "sbt-jsdependencies" % "1.0.0")
   ).
   enablePlugins(commonPlugins: _*)
-
-lazy val monixInterop = project.in(file("interop/monix")).
-  settings(commonSettings: _*).
-  settings(
-    name := "scala-js-chrome-monix",
-    scalaVersion := "2.12.7",
-    crossScalaVersions := Seq("2.10.6", "2.11.12", "2.12.7"),
-    libraryDependencies ++= Seq(
-      "io.monix" %%% "monix" % "3.0.0-RC2"
-    ),
-    publishMavenStyle := true,
-    publishTo := {
-      val nexus = "https://oss.sonatype.org/"
-      if (isSnapshot.value) Some("snapshots" at nexus + "content/repositories/snapshots")
-      else                  Some("releases"  at nexus + "service/local/staging/deploy/maven2")
-    }
-  ).dependsOn(bindings)
-   .enablePlugins(commonPlugins: _*)
-   .enablePlugins(ScalaJSPlugin)
-
-lazy val fs2Interop = project.in(file("interop/fs2")).
-  settings(commonSettings: _*).
-  settings(
-    name := "scala-js-chrome-fs2",
-    scalaVersion := "2.12.7",
-    crossScalaVersions := Seq("2.11.12", "2.12.7"),
-    libraryDependencies ++= Seq(
-      "co.fs2" %%% "fs2-core" % "1.0.0"
-    ),
-    publishMavenStyle := true,
-    publishTo := {
-      val nexus = "https://oss.sonatype.org/"
-      if (isSnapshot.value) Some("snapshots" at nexus + "content/repositories/snapshots")
-      else                  Some("releases"  at nexus + "service/local/staging/deploy/maven2")
-    }
-  ).dependsOn(bindings)
-  .enablePlugins(commonPlugins: _*)
-  .enablePlugins(ScalaJSPlugin)

@@ -1,6 +1,8 @@
 package net.lullabyte
 
 import chrome.Manifest
+import org.scalajs.jsdependencies.sbtplugin.JSDependenciesPlugin
+import org.scalajs.jsdependencies.sbtplugin.JSDependenciesPlugin.autoImport._
 import org.scalajs.sbtplugin.ScalaJSPlugin
 import org.scalajs.sbtplugin.ScalaJSPlugin.autoImport._
 import sbt.Keys._
@@ -8,7 +10,7 @@ import sbt._
 
 object ChromeSbtPlugin extends AutoPlugin {
 
-  override def requires: Plugins = ScalaJSPlugin
+  override def requires: Plugins = ScalaJSPlugin && JSDependenciesPlugin
 
   object autoImport {
 
