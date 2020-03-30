@@ -1,4 +1,4 @@
-package net.lullabyte
+package com.alexitc
 
 import chrome.Manifest
 import org.scalajs.jsdependencies.sbtplugin.JSDependenciesPlugin

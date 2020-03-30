@@ -1,7 +1,12 @@
-# Chrome for Scala.js [![Build Status](https://travis-ci.org/lucidd/scala-js-chrome.svg?branch=master)](https://travis-ci.org/lucidd/scala-js-chrome) [![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/lucidd/scala-js-chrome?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge) [![Latest version](https://index.scala-lang.org/lucidd/scala-js-chrome/scala-js-chrome/latest.svg?color=orange)](https://index.scala-lang.org/lucidd/scala-js-chrome/scala-js-chrome) [![Javadocs](https://www.javadoc.io/badge/net.lullabyte/scala-js-chrome_sjs0.6_2.12.svg)](https://www.javadoc.io/doc/net.lullabyte/scala-js-chrome_sjs0.6_2.12)
+# Chrome for Scala.js
 
 The goal of this project is to provide an easy and typesafe way to create Chrome
 apps and extensions in Scala using the [Scala.js](https://www.scala-js.org/) project.
+
+**DISCLAIMER**: As of today (2020-03-30), I decided to fork the plugin so that I can
+keep applying updates and releasing new versions, the main reason to do this is to
+migrate to scalajs 1.0.0, which support is still experimental, if you use an older scalajs
+version, use the original [plugin](https://github.com/lucidd/scala-js-chrome) instead.
 
 ## Chrome API bindings
 
@@ -62,13 +67,13 @@ unpacked extension/app.
 Add this to your `project/plugins.sbt`:
 
 ```scala
-addSbtPlugin("net.lullabyte" % "sbt-chrome-plugin" % "0.5.0")
+addSbtPlugin("com.alexitc" % "sbt-chrome-plugin" % "0.5.0")
 ```
 
 Add this to your project dependencies:
 
 ```scala
-"net.lullabyte" %%% "scala-js-chrome" % "0.5.0"
+"com.alexitc" %%% "scala-js-chrome" % "0.5.0"
 ```
 
 ### with [scalajs-bundler](https://scalacenter.github.io/scalajs-bundler/)
@@ -113,7 +118,7 @@ object ChromeAppExample extends ChromeApp {
 ```
 
 For a more complete example see [chrome-system-monitor](https://github.com/lucidd/chrome-system-monitor)
-and [scala-js-chrome examples](https://github.com/lucidd/scala-js-chrome/tree/master/examples).
+and [scala-js-chrome examples](/examples).
 
 ### UI Libraries
 

@@ -1,7 +1,7 @@
 import com.typesafe.sbt.SbtGit.GitKeys._
 
 lazy val commonSettings = Seq(
-  organization := "net.lullabyte",
+  organization := "com.alexitc",
   scalacOptions ++= Seq(
     "-Xlint",
     "-deprecation",
@@ -12,20 +12,20 @@ lazy val commonSettings = Seq(
   ),
   scmInfo := Some(
     ScmInfo(
-      url("http://github.com/lucidd/scala-js-chrome"),
-      "scm:git@github.com:lucidd/scala-js-chrome.git"
+      url("http://github.com/AlexITC/scala-js-chrome"),
+      "scm:git@github.com:AlexITC/scala-js-chrome.git"
     )
   ),
   developers := List(
     Developer(
-      "lucidd",
-      "Kevin Walter",
-      "kevin.walter.private@gmail.com",
-      url("http://lullabyte.net")
+      "AlexITC",
+      "Alexis Hernandez",
+      "alexis22229@gmail.com",
+      url("https://wiringbits.net")
     )
   ),
   licenses += "MIT" -> url("http://www.opensource.org/licenses/mit-license.html"),
-  homepage := Some(url("http://github.com/lucidd/scala-js-chrome")),
+  homepage := Some(url("http://github.com/AlexITC/scala-js-chrome")),
   useGpg := true,
   useGitDescribe := true
 )
@@ -36,8 +36,8 @@ lazy val bindings = project.in(file("bindings"))
   .settings(commonSettings: _*)
   .settings(
     name := "scala-js-chrome",
-    scalaVersion := "2.12.7",
-    crossScalaVersions := Seq("2.10.6", "2.11.12", "2.12.7"),
+    scalaVersion := "2.12.10",
+  //  crossScalaVersions := Seq("2.10.6", "2.11.12", "2.12.7"), TODO: cross-compile to scala 2.13
     libraryDependencies ++= Seq(
       "org.scala-js" %%% "scalajs-dom" % "1.0.0"
     ),

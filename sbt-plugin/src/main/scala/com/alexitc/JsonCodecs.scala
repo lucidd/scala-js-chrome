@@ -1,9 +1,9 @@
-package net.lullabyte
+package com.alexitc
 
-import io.circe._
-import io.circe.syntax._
 import chrome._
 import chrome.permissions.Permission.{API, Host}
+import io.circe._
+import io.circe.syntax._
 
 object JsonCodecs {
 
