@@ -1,7 +1,7 @@
 import chrome._
 import chrome.permissions.Permission
 import chrome.permissions.Permission.{API, Host}
-import net.lullabyte.{Chrome, ChromeSbtPlugin}
+import com.alexitc.{Chrome, ChromeSbtPlugin}
 
 lazy val examples = project.in(file(".")).aggregate(exampleApp, extension)
 
@@ -24,7 +24,9 @@ lazy val exampleApp = project.in(file("app"))
     ),
     scalaJSUseMainModuleInitializer := true,
     scalaJSUseMainModuleInitializer in Test := false,
-    relativeSourceMaps := true,
+    scalaJSLinkerConfig := scalaJSLinkerConfig.value.withRelativizeSourceMapBase(
+      Some((Compile / fastOptJS / artifactPath).value.toURI)
+    ),
     skip in packageJSDependencies := false,
 
     // you can customize and have a static output name for lib and dependencies
@@ -85,7 +87,9 @@ lazy val extension = project.in(file("extension"))
     ),
     scalaJSUseMainModuleInitializer := true,
     scalaJSUseMainModuleInitializer in Test := false,
-    relativeSourceMaps := true,
+    scalaJSLinkerConfig := scalaJSLinkerConfig.value.withRelativizeSourceMapBase(
+      Some((Compile / fastOptJS / artifactPath).value.toURI)
+    ),
     skip in packageJSDependencies := false,
 
     // you can customize and have a static output name for lib and dependencies
