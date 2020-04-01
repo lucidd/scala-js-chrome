@@ -36,8 +36,7 @@ lazy val bindings = project.in(file("bindings"))
   .settings(commonSettings: _*)
   .settings(
     name := "scala-js-chrome",
-    scalaVersion := "2.12.10",
-  //  crossScalaVersions := Seq("2.10.6", "2.11.12", "2.12.7"), TODO: cross-compile to scala 2.13
+    crossScalaVersions := Seq("2.12.10", "2.13.1"),
     libraryDependencies ++= Seq(
       "org.scala-js" %%% "scalajs-dom" % "1.0.0"
     ),

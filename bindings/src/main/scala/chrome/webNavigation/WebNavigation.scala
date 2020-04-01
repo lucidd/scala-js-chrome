@@ -9,6 +9,7 @@ import chrome.webNavigation.bindings._
 
 import scala.concurrent.{Future, Promise}
 import scala.scalajs.js
+import scala.collection.mutable.Seq
 
 /**
   * @see <a href="https://developer.chrome.com/extensions/webNavigation">chrome.webNavigation API</a>

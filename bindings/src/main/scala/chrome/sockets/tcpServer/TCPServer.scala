@@ -7,6 +7,7 @@ import chrome.utils.ErrorHandling._
 
 import scala.concurrent.{Future, Promise}
 import scala.scalajs.js
+import scala.scalajs.js.JSConverters._
 
 object TCPServer {
 
@@ -25,18 +26,15 @@ object TCPServer {
 
   def update(socketId: SocketId, properties: SocketProperties): Future[Unit] = {
     val promise = Promise[Unit]()
-    bindings.TCPServer
-      .update(socketId, properties, js.Any.fromFunction0(() => {
-        promise.complete(lastErrorOrValue(()))
-      }))
+    bindings.TCPServer.update(socketId, properties,
+      Option[js.Function0[_]](() => promise.complete(lastErrorOrValue(()))).orUndefined)
     promise.future
   }
 
   def setPaused(socketId: SocketId, paused: Boolean): Future[Unit] = {
     val promise = Promise[Unit]()
-    bindings.TCPServer.setPaused(socketId, paused, js.Any.fromFunction0(() => {
-      promise.complete(lastErrorOrValue(()))
-    }))
+    bindings.TCPServer.setPaused(socketId, paused,
+      Option[js.Function0[_]](() => promise.complete(lastErrorOrValue(()))).orUndefined)
     promise.future
   }
 
@@ -54,17 +52,15 @@ object TCPServer {
 
   def disconnect(socketId: SocketId): Future[Unit] = {
     val promise = Promise[Unit]()
-    bindings.TCPServer.disconnect(socketId, js.Any.fromFunction0(() => {
-      promise.complete(lastErrorOrValue(()))
-    }))
+    bindings.TCPServer.disconnect(socketId,
+      Option[js.Function0[_]](() => promise.complete(lastErrorOrValue(()))).orUndefined)
     promise.future
   }
 
   def close(socketId: SocketId): Future[Unit] = {
     val promise = Promise[Unit]()
-    bindings.TCPServer.close(socketId, js.Any.fromFunction0(() => {
-      promise.complete(lastErrorOrValue(()))
-    }))
+    bindings.TCPServer.close(socketId,
+      Option[js.Function0[_]](() => promise.complete(lastErrorOrValue(()))).orUndefined)
     promise.future
   }
 
