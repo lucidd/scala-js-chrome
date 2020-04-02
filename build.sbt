@@ -1,5 +1,21 @@
 import com.typesafe.sbt.SbtGit.GitKeys._
 
+inThisBuild(List(
+  organization := "com.alexitc",
+  homepage := Some(url("https://github.com/AlexITC/scala-js-chrome")),
+  licenses := List("MIT" -> url("http://www.opensource.org/licenses/mit-license.html")),
+  developers := List(
+    Developer(
+      "AlexITC",
+      "Alexis Hernandez",
+      "alexis22229@gmail.com",
+      url("https://wiringbits.net")
+    )
+  )
+))
+
+skip in publish := true
+
 lazy val commonSettings = Seq(
   organization := "com.alexitc",
   scalacOptions ++= Seq(
@@ -10,9 +26,10 @@ lazy val commonSettings = Seq(
   ), unmanagedSourceDirectories in Compile ++= Seq(
     baseDirectory.value.getParentFile / "shared" / "src" / "main" / "scala"
   ),
+  sonatypeProfileName := "com.alexitc",
   scmInfo := Some(
     ScmInfo(
-      url("http://github.com/AlexITC/scala-js-chrome"),
+      url("https://github.com/AlexITC/scala-js-chrome"),
       "scm:git@github.com:AlexITC/scala-js-chrome.git"
     )
   ),
@@ -25,8 +42,7 @@ lazy val commonSettings = Seq(
     )
   ),
   licenses += "MIT" -> url("http://www.opensource.org/licenses/mit-license.html"),
-  homepage := Some(url("http://github.com/AlexITC/scala-js-chrome")),
-  useGpg := true,
+  homepage := Some(url("https://github.com/AlexITC/scala-js-chrome")),
   useGitDescribe := true
 )
 
@@ -41,11 +57,6 @@ lazy val bindings = project.in(file("bindings"))
       "org.scala-js" %%% "scalajs-dom" % "1.0.0"
     ),
     publishMavenStyle := true,
-    publishTo := {
-      val nexus = "https://oss.sonatype.org/"
-      if (isSnapshot.value) Some("snapshots" at nexus + "content/repositories/snapshots")
-      else Some("releases"  at nexus + "service/local/staging/deploy/maven2")
-    },
     scalaJSUseMainModuleInitializer := true
   ).
   enablePlugins(commonPlugins: _*).
@@ -66,8 +77,6 @@ lazy val plugin = project.in(file("sbt-plugin")).
       )
     },
     publishMavenStyle := false,
-    bintrayRepository := "sbt-plugins",
-    bintrayOrganization := None,
     addSbtPlugin("org.scala-js" % "sbt-scalajs" % "1.0.1"),
     addSbtPlugin("org.scala-js" % "sbt-jsdependencies" % "1.0.0")
   ).
