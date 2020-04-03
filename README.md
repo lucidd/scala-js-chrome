@@ -69,13 +69,13 @@ unpacked extension/app.
 Add this to your `project/plugins.sbt`:
 
 ```scala
-addSbtPlugin("com.alexitc" % "sbt-chrome-plugin" % "0.5.0")
+addSbtPlugin("com.alexitc" % "sbt-chrome-plugin" % "0.6.0")
 ```
 
 Add this to your project dependencies:
 
 ```scala
-"com.alexitc" %%% "scala-js-chrome" % "0.5.0"
+"com.alexitc" %%% "scala-js-chrome" % "0.6.0"
 ```
 
 ### with [scalajs-bundler](https://scalacenter.github.io/scalajs-bundler/)
