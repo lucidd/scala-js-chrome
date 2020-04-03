@@ -25,7 +25,7 @@ lazy val commonSettings = Seq(
   ),
 )
 
-lazy val commonPlugins = Seq(GitVersioning)
+lazy val commonPlugins = Seq()
 
 lazy val bindings = project.in(file("bindings"))
   .settings(commonSettings: _*)
