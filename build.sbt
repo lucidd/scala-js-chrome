@@ -1,5 +1,3 @@
-import com.typesafe.sbt.SbtGit.GitKeys._
-
 inThisBuild(List(
   organization := "com.alexitc",
   homepage := Some(url("https://github.com/AlexITC/scala-js-chrome")),
@@ -43,7 +41,6 @@ lazy val commonSettings = Seq(
   ),
   licenses += "MIT" -> url("http://www.opensource.org/licenses/mit-license.html"),
   homepage := Some(url("https://github.com/AlexITC/scala-js-chrome")),
-  useGitDescribe := true
 )
 
 lazy val commonPlugins = Seq(GitVersioning)
