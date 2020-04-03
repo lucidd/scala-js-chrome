@@ -15,7 +15,6 @@ inThisBuild(List(
 skip in publish := true
 
 lazy val commonSettings = Seq(
-  organization := "com.alexitc",
   scalacOptions ++= Seq(
     "-Xlint",
     "-deprecation",
@@ -24,23 +23,6 @@ lazy val commonSettings = Seq(
   ), unmanagedSourceDirectories in Compile ++= Seq(
     baseDirectory.value.getParentFile / "shared" / "src" / "main" / "scala"
   ),
-  sonatypeProfileName := "com.alexitc",
-  scmInfo := Some(
-    ScmInfo(
-      url("https://github.com/AlexITC/scala-js-chrome"),
-      "scm:git@github.com:AlexITC/scala-js-chrome.git"
-    )
-  ),
-  developers := List(
-    Developer(
-      "AlexITC",
-      "Alexis Hernandez",
-      "alexis22229@gmail.com",
-      url("https://wiringbits.net")
-    )
-  ),
-  licenses += "MIT" -> url("http://www.opensource.org/licenses/mit-license.html"),
-  homepage := Some(url("https://github.com/AlexITC/scala-js-chrome")),
 )
 
 lazy val commonPlugins = Seq(GitVersioning)
@@ -53,7 +35,6 @@ lazy val bindings = project.in(file("bindings"))
     libraryDependencies ++= Seq(
       "org.scala-js" %%% "scalajs-dom" % "1.0.0"
     ),
-    publishMavenStyle := true,
     scalaJSUseMainModuleInitializer := true
   ).
   enablePlugins(commonPlugins: _*).
@@ -73,7 +54,6 @@ lazy val plugin = project.in(file("sbt-plugin")).
         "io.circe" %% "circe-parser"  % circeVersion
       )
     },
-    publishMavenStyle := false,
     addSbtPlugin("org.scala-js" % "sbt-scalajs" % "1.0.1"),
     addSbtPlugin("org.scala-js" % "sbt-jsdependencies" % "1.0.0")
   ).
