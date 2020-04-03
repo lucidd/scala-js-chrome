@@ -124,6 +124,14 @@ object JsonCodecs {
     )
   }
 
+  implicit val contentScriptEncoder = Encoder.instance[chrome.ContentScript] { contentScript =>
+    Json.obj(
+      ("matches", Json.fromValues(contentScript.matches.map(Json.fromString))),
+      ("css", Json.fromValues(contentScript.css.map(Json.fromString))),
+      ("js", Json.fromValues(contentScript.js.map(Json.fromString)))
+    )
+  }
+
   implicit val actionEncoder = Encoder.instance[chrome.Commands.Action] { action =>
     Json.obj(
       ("suggested_key", action.suggestedKey.asJson),
@@ -189,7 +197,8 @@ object JsonCodecs {
       ("omnibox", manifest.omnibox.asJson),
       ("options_ui", manifest.optionsUI.asJson),
       ("browser_action", manifest.browserAction.asJson),
-      ("chrome_ui_overrides", manifest.chromeUIOverrides.asJson)
+      ("chrome_ui_overrides", manifest.chromeUIOverrides.asJson),
+      ("content_scripts", manifest.contentScripts.asJson)
     )
     Json.fromFields(
       commonValues ++ extValues
