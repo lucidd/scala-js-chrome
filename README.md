@@ -1,6 +1,4 @@
-# Chrome for Scala.js
-
-[![Build Status](https://travis-ci.org/AlexITC/scala-js-chrome.svg?branch=master)](https://travis-ci.org/AlexITC/scala-js-chrome)
+# Chrome for Scala.js [![Build Status](https://travis-ci.org/AlexITC/scala-js-chrome.svg?branch=master)](https://travis-ci.org/AlexITC/scala-js-chrome) [![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/scala-js-chrome/community?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge) [![Latest version](https://index.scala-lang.org/AlexITC/scala-js-chrome/scala-js-chrome/latest.svg?color=orange)](https://index.scala-lang.org/AlexITC/scala-js-chrome/scala-js-chrome)
 
 The goal of this project is to provide an easy and typesafe way to create Chrome
 apps and extensions in Scala using the [Scala.js](https://www.scala-js.org/) project.
