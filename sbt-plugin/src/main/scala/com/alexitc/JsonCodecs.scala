@@ -1,227 +1,267 @@
 package com.alexitc
 
-import chrome._
 import chrome.permissions.Permission.{API, Host}
-import io.circe._
-import io.circe.syntax._
+import chrome.{AppManifest, ExtensionManifest, Manifest}
 
 object JsonCodecs {
 
-  private def omitIfEmpty[T](seq: Iterable[T])(encode: T => Json): Json =
-    if (seq.isEmpty) Json.Null
-    else Json.fromValues(seq.map(encode))
+  import OptionPickler._
 
-  implicit val socketEncoder = Encoder.instance[chrome.Sockets] { sockets =>
-    Json.obj(
-      ("udp", Json.obj(
-        ("bind", sockets.udp.map(x => Json.fromValues(x.bind.map(Json.fromString))).asJson),
-        ("send", sockets.udp.map(x => Json.fromValues(x.send.map(Json.fromString))).asJson),
-        ("multicastMembership", sockets.udp.map(
-          x => Json.fromValues(x.multicastMembership.map(Json.fromString))).asJson
-        )
-      )),
-      ("tcp", Json.obj(
-        ("connect", sockets.tcp.map(x => Json.fromValues(x.connect.map(Json.fromString))).asJson)
-      )),
-      ("tcpServer", Json.obj(
-        ("listen", sockets.tcp.map(x => Json.fromValues(x.listen.map(Json.fromString))).asJson)
-      ))
-    )
+  implicit class JsonExt(val json: ujson.Value) extends AnyVal {
+    def dropNullValues: Option[ujson.Value] = {
+      json match {
+        case ujson.Null => None
+        case obj: ujson.Obj =>
+          val newValues = obj.value.toList.flatMap {
+            case (key, value) =>
+              value.dropNullValues.map(key -> _)
+          }
+          if (newValues.isEmpty) None
+          else Some(ujson.Obj.from(newValues))
+
+        case arr: ujson.Arr =>
+          val newValues = arr.value.toList.flatMap { value =>
+            value.dropNullValues
+          }
+          if (newValues.isEmpty) None
+          else Some(ujson.Arr.from(newValues))
+
+        case x => Some(x)
+      }
+    }
   }
 
-  implicit val backgroundEncoder = Encoder.instance[chrome.Background] { background =>
-    Json.obj(
-        ("scripts", Json.fromValues(
-          background.scripts.map(Json.fromString)
-        ))
+  private def omitIfEmpty[T](
+    seq: Iterable[T]
+  )(encode: T => ujson.Value): ujson.Value = {
+    if (seq.isEmpty) ujson.Null
+    else ujson.Arr.from(seq.map(encode))
+  }
+
+  private def omitIfEmpty[T](
+    seq: Option[Iterable[T]]
+  )(encode: T => ujson.Value): ujson.Value = {
+    seq.map(s => omitIfEmpty(s)(encode)).getOrElse(ujson.Null)
+  }
+
+  implicit val socketEncoder: Writer[chrome.Sockets] = {
+    writer[ujson.Value].comap { sockets =>
+      val udp = ujson
+        .Obj(
+          "bind" -> omitIfEmpty(sockets.udp.map(_.bind))(ujson.Str.apply),
+          "send" -> omitIfEmpty(sockets.udp.map(_.send))(ujson.Str.apply),
+          "multicastMembership" ->
+            omitIfEmpty(sockets.udp.map(_.multicastMembership))(ujson.Str.apply)
+        )
+
+      val tcp = ujson.Obj(
+        "connect" -> omitIfEmpty(sockets.tcp.map(_.connect))(ujson.Str.apply)
+      )
+
+      val tcpServer = ujson.Obj(
+        "listen" -> omitIfEmpty(sockets.tcp.map(_.listen))(ujson.Str.apply)
+      )
+      ujson.Obj("udp" -> udp, "tcp" -> tcp, "tcpServer" -> tcpServer)
+    }
+  }
+
+  implicit val backgroundEncoder: Writer[chrome.Background] = {
+    writer[ujson.Value].comap { background =>
+      ujson.Obj("scripts" -> background.scripts.map(ujson.Str.apply))
+    }
+  }
+
+  implicit val omniboxEncoder = writer[ujson.Value].comap[chrome.Omnibox] {
+    omnibox =>
+      ujson.Obj(("keyword", ujson.Str.apply(omnibox.keyword)))
+  }
+
+  implicit val externallyConnectableEncoder =
+    writer[ujson.Value].comap[chrome.ExternallyConnectable] { ec =>
+      ujson.Obj(
+        ("keyword", writeJs(ec.acceptsTlsChannelId)),
+        ("ids", omitIfEmpty(ec.ids)(ujson.Str.apply)),
+        ("matches", omitIfEmpty(ec.ids)(ujson.Str.apply))
+      )
+    }
+
+  implicit val storageEncoder = writer[ujson.Value].comap[chrome.Storage] {
+    storage =>
+      ujson.Obj(("managed_schema", ujson.Str.apply(storage.managedSchema)))
+  }
+
+  implicit val platformEncoder = writer[ujson.Value].comap[chrome.Platform] {
+    platform =>
+      ujson.Obj(
+        ("nacl_arch", ujson.Str.apply(platform.naclArch)),
+        ("sub_package_path", ujson.Str.apply(platform.subPackagePath))
       )
   }
 
-  implicit val omniboxEncoder = Encoder.instance[chrome.Omnibox] { omnibox =>
-    Json.obj(
-      ("keyword", Json.fromString(omnibox.keyword))
-    )
+  implicit val bluetoothEncoder = writer[ujson.Value].comap[chrome.Bluetooth] {
+    bluetooth =>
+      ujson.Obj(
+        ("uuids", ujson.Arr.from(bluetooth.uuids.map(ujson.Str.apply))),
+        ("socket", writeJs(bluetooth.socket)),
+        ("low_energy", writeJs(bluetooth.lowEnergy)),
+        ("peripheral", writeJs(bluetooth.peripheral))
+      )
   }
 
-  implicit val externallyConnectableEncoder = Encoder.instance[chrome.ExternallyConnectable] { ec =>
-    Json.obj(
-      ("keyword", ec.acceptsTlsChannelId.asJson),
-      ("ids", omitIfEmpty(ec.ids)(Json.fromString)),
-      ("matches", omitIfEmpty(ec.ids)(Json.fromString))
-    )
+  implicit val suggestedKeyEncoderr =
+    writer[ujson.Value].comap[chrome.Commands.SuggestedKey] { key =>
+      ujson.Obj(
+        ("chromeos", writeJs(key.chromeos)),
+        ("linux", writeJs(key.linux)),
+        ("windows", writeJs(key.windows)),
+        ("mac", writeJs(key.mac)),
+        ("default", writeJs(key.default))
+      )
+    }
+
+  implicit val browserActionEncoder =
+    writer[ujson.Value].comap[chrome.BrowserAction] { browserAction =>
+      ujson.Obj(
+        ("default_title", writeJs(browserAction.title)),
+        ("default_popup", writeJs(browserAction.popup)),
+        ("default_icon", ujson.Obj.from(browserAction.icon.map {
+          case (k, v) => (k.toString, ujson.Str.apply(v))
+        }))
+      )
+    }
+
+  implicit val optionUIEncoder = writer[ujson.Value].comap[chrome.OptionsUI] {
+    optionUI =>
+      ujson.Obj(
+        ("page", ujson.Str.apply(optionUI.page)),
+        ("chrome_style", writeJs(optionUI.chromeStyle))
+      )
   }
 
-  implicit val storageEncoder = Encoder.instance[chrome.Storage] { storage =>
-    Json.obj(
-      ("managed_schema", Json.fromString(storage.managedSchema))
-    )
+  implicit val oauth2SettingsEncoder =
+    writer[ujson.Value].comap[chrome.Oauth2Settings] { oauth2Settings =>
+      ujson.Obj(
+        ("client_id", writeJs(oauth2Settings.clientId)),
+        ("scopes", writeJs(oauth2Settings.scopes))
+      )
+    }
+
+  implicit val bookmarksUIEncoder =
+    writer[ujson.Value].comap[chrome.BookmarksUI] { bookmarksUI =>
+      ujson.Obj(
+        ("remove_button", writeJs(bookmarksUI.removeButton)),
+        (
+          "remove_bookmark_shortcut",
+          writeJs(bookmarksUI.removeBookmarkShortcut)
+        )
+      )
+    }
+
+  implicit val chromeUIOverridesEncoder =
+    writer[ujson.Value].comap[chrome.ChromeUIOverrides] { chromeUIOverrides =>
+      ujson.Obj(
+        ("newtab", ujson.Str.apply(chromeUIOverrides.newtab)),
+        ("bookmarks_ui", writeJs(chromeUIOverrides.bookmarksUI))
+      )
+    }
+
+  implicit val contentScriptEncoder = {
+    writer[ujson.Value].comap[chrome.ContentScript] { contentScript =>
+      ujson.Obj(
+        ("matches", ujson.Arr.from(contentScript.matches.map(ujson.Str.apply))),
+        ("css", ujson.Arr.from(contentScript.css.map(ujson.Str.apply))),
+        ("js", ujson.Arr.from(contentScript.js.map(ujson.Str.apply)))
+      )
+    }
   }
 
-  implicit val platformEncoder = Encoder.instance[chrome.Platform] { platform =>
-    Json.obj(
-      ("nacl_arch", Json.fromString(platform.naclArch)),
-      ("sub_package_path", Json.fromString(platform.subPackagePath))
-    )
+  implicit val actionEncoder =
+    writer[ujson.Value].comap[chrome.Commands.Action] { action =>
+      ujson.Obj(
+        ("suggested_key", writeJs(action.suggestedKey)),
+        ("description", writeJs(action.description)),
+        ("global", writeJs(action.global))
+      )
+    }
+
+  implicit val commandsEncoder = writer[ujson.Value].comap[chrome.Commands] {
+    commands =>
+      ujson.Obj.from(commands.actions.mapValues(x => writeJs(x)))
   }
 
-  implicit val bluetoothEncoder = Encoder.instance[chrome.Bluetooth] { bluetooth =>
-    Json.obj(
-      ("uuids", Json.fromValues(bluetooth.uuids.map(Json.fromString))),
-      ("socket", bluetooth.socket.asJson),
-      ("low_energy", bluetooth.lowEnergy.asJson),
-      ("peripheral", bluetooth.peripheral.asJson)
-    )
+  implicit val appEncoder = writer[ujson.Value].comap[chrome.App] { app =>
+    ujson.Obj(("background", writeJs(app.background)))
   }
 
-
-  implicit val suggestedKeyEncoderr = Encoder.instance[chrome.Commands.SuggestedKey] { key =>
-    Json.obj(
-      ("chromeos", key.chromeos.asJson),
-      ("linux", key.linux.asJson),
-      ("windows", key.windows.asJson),
-      ("mac", key.mac.asJson),
-      ("default", key.default.asJson)
-    )
-  }
-
-  implicit val browserActionEncoder = Encoder.instance[chrome.BrowserAction] { browserAction =>
-    Json.obj(
-      ("default_title", browserAction.title.asJson),
-      ("default_popup", browserAction.popup.asJson),
-      ("default_icon", Json.fromFields(
-        browserAction.icon.map {
-          case (k, v) => (k.toString, Json.fromString(v))
-        }
-      ))
-    )
-  }
-
-  implicit val optionUIEncoder = Encoder.instance[chrome.OptionsUI] { optionUI =>
-    Json.obj(
-      ("page", Json.fromString(optionUI.page)),
-      ("chrome_style", optionUI.chromeStyle.asJson)
-    )
-  }
-
-  implicit val oauth2SettingsEncoder = Encoder.instance[chrome.Oauth2Settings] { oauth2Settings =>
-    Json.obj(
-      ("client_id", oauth2Settings.clientId.asJson),
-      ("scopes", oauth2Settings.scopes.asJson)
-    )
-  }
-
-  implicit val bookmarksUIEncoder = Encoder.instance[chrome.BookmarksUI] { bookmarksUI =>
-    Json.obj(
-      ("remove_button", bookmarksUI.removeButton.asJson),
-      ("remove_bookmark_shortcut", bookmarksUI.removeBookmarkShortcut.asJson)
-    )
-  }
-
-  implicit val chromeUIOverridesEncoder = Encoder.instance[chrome.ChromeUIOverrides] { chromeUIOverrides =>
-    Json.obj(
-      ("newtab", Json.fromString(chromeUIOverrides.newtab)),
-      ("bookmarks_ui", chromeUIOverrides.bookmarksUI.asJson)
-    )
-  }
-
-  implicit val contentScriptEncoder = Encoder.instance[chrome.ContentScript] { contentScript =>
-    Json.obj(
-      ("matches", Json.fromValues(contentScript.matches.map(Json.fromString))),
-      ("css", Json.fromValues(contentScript.css.map(Json.fromString))),
-      ("js", Json.fromValues(contentScript.js.map(Json.fromString)))
-    )
-  }
-
-  implicit val actionEncoder = Encoder.instance[chrome.Commands.Action] { action =>
-    Json.obj(
-      ("suggested_key", action.suggestedKey.asJson),
-      ("description", action.description.asJson),
-      ("global", action.global.asJson)
-    )
-  }
-
-  implicit val commandsEncoder = Encoder.instance[chrome.Commands] { commands =>
-    Json.fromFields(commands.actions.mapValues(_.asJson))
-  }
-
-  implicit val appEncoder = Encoder.instance[chrome.App] { app =>
-    Json.obj(
-      ("background", app.background.asJson)
-    )
-  }
-
-
-  def manifest2json(manifest: Manifest): Seq[(String, Json)] = {
+  def manifest2json(manifest: Manifest): Seq[(String, ujson.Value)] = {
     Seq(
-      ("manifest_version", Json.fromInt(manifest.manifestVersion)),
-      ("name", Json.fromString(manifest.name)),
-      ("version", Json.fromString(manifest.version)),
-      ("default_locale", manifest.defaultLocale.asJson),
-      ("description", manifest.description.asJson),
-      ("icons", Json.fromFields(manifest.icons.map {
-        case (k, v) => (k.toString, Json.fromString(v))
+      ("manifest_version", ujson.Num(manifest.manifestVersion)),
+      ("name", ujson.Str.apply(manifest.name)),
+      ("version", ujson.Str.apply(manifest.version)),
+      ("default_locale", writeJs(manifest.defaultLocale)),
+      ("description", writeJs(manifest.description)),
+      ("icons", ujson.Obj.from(manifest.icons.map {
+        case (k, v) => (k.toString, ujson.Str.apply(v))
       })),
-      ("author", manifest.author.asJson),
-      ("commands", manifest.commands.asJson),
-      ("key", manifest.key.asJson),
-      ("offline_enabled", manifest.offlineEnabled.asJson),
-      ("version_name", manifest.versionName.asJson),
-      ("update_url", manifest.updateUrl.asJson),
-      ("short_name", manifest.shortName.asJson),
-      ("minimum_chrome_version", manifest.minimumChromeVersion.asJson),
-      ("storage", manifest.storage.asJson),
-      ("platforms", if(manifest.platforms.isEmpty) Json.Null else manifest.platforms.asJson),
-      ("oauth2", manifest.oauth2.asJson),
-      ("web_accessible_resources",
-        if (manifest.webAccessibleResources.isEmpty) Json.Null else manifest.webAccessibleResources.asJson),
-      ("permissions",
-        omitIfEmpty(manifest.permissions) {
-          case API(name) => Json.fromString(name)
-          case Host(url) => Json.fromString(url)
-        }
+      ("author", writeJs(manifest.author)),
+      ("commands", writeJs(manifest.commands)),
+      ("key", writeJs(manifest.key)),
+      ("offline_enabled", writeJs(manifest.offlineEnabled)),
+      ("version_name", writeJs(manifest.versionName)),
+      ("update_url", writeJs(manifest.updateUrl)),
+      ("short_name", writeJs(manifest.shortName)),
+      ("minimum_chrome_version", writeJs(manifest.minimumChromeVersion)),
+      ("storage", writeJs(manifest.storage)),
+      (
+        "platforms",
+        if (manifest.platforms.isEmpty) ujson.Null
+        else ujson.Arr.from(manifest.platforms.map(x => writeJs(x)))
       ),
-      ("optional_permissions",
-        omitIfEmpty(manifest.optionalPermissions) {
-          case API(name) => Json.fromString(name)
-          case Host(url) => Json.fromString(url)
-        }
+      ("oauth2", writeJs(manifest.oauth2)),
+      (
+        "web_accessible_resources",
+        if (manifest.webAccessibleResources.isEmpty) ujson.Null
+        else writeJs(manifest.webAccessibleResources)
       ),
-      ("content_security_policy", manifest.contentSecurityPolicy.asJson)
+      ("permissions", omitIfEmpty(manifest.permissions) {
+        case API(name) => ujson.Str.apply(name)
+        case Host(url) => ujson.Str.apply(url)
+      }),
+      ("optional_permissions", omitIfEmpty(manifest.optionalPermissions) {
+        case API(name) => ujson.Str.apply(name)
+        case Host(url) => ujson.Str.apply(url)
+      }),
+      ("content_security_policy", writeJs(manifest.contentSecurityPolicy))
     )
   }
 
-  implicit val extManifestEncoder = Encoder.instance[chrome.ExtensionManifest] { manifest =>
-    val commonValues = manifest2json(manifest)
-    val extValues = Seq(
-      ("background", manifest.background.asJson),
-      ("omnibox", manifest.omnibox.asJson),
-      ("options_ui", manifest.optionsUI.asJson),
-      ("browser_action", manifest.browserAction.asJson),
-      ("chrome_ui_overrides", manifest.chromeUIOverrides.asJson),
-      ("content_scripts", manifest.contentScripts.asJson)
-    )
-    Json.fromFields(
-      commonValues ++ extValues
-    )
+  implicit val extManifestEncoder = {
+    writer[ujson.Value].comap[chrome.ExtensionManifest] { manifest =>
+      val commonValues = manifest2json(manifest)
+      val extValues = Seq(
+        ("background", writeJs(manifest.background)),
+        ("omnibox", writeJs(manifest.omnibox)),
+        ("options_ui", writeJs(manifest.optionsUI)),
+        ("browser_action", writeJs(manifest.browserAction)),
+        ("chrome_ui_overrides", writeJs(manifest.chromeUIOverrides)),
+        ("content_scripts", writeJs(manifest.contentScripts))
+      )
+      ujson.Obj.from(commonValues ++ extValues)
+    }
   }
 
-
-  implicit val appManifestEncoder = Encoder.instance[chrome.AppManifest] { manifest =>
-    val commonValues = manifest2json(manifest)
-    val appValues = Seq(
-      ("app", appEncoder(manifest.app)),
-      ("bluetooth", manifest.bluetooth.asJson),
-      ("kiosk_enabled", manifest.kioskEnabled.asJson),
-      ("kiosk_only", manifest.kioskOnly.asJson),
-      ("sockets", manifest.sockets.asJson)
-    )
-    Json.fromFields(
-      commonValues ++ appValues
-    )
-
-
-    // Required
-
+  implicit val appManifestEncoder = {
+    writer[ujson.Value].comap[chrome.AppManifest] { manifest =>
+      val commonValues = manifest2json(manifest)
+      val appValues = Seq(
+        ("app", writeJs(manifest.app)),
+        ("bluetooth", writeJs(manifest.bluetooth)),
+        ("kiosk_enabled", writeJs(manifest.kioskEnabled)),
+        ("kiosk_only", writeJs(manifest.kioskOnly)),
+        ("sockets", writeJs(manifest.sockets))
+      )
+      ujson.Obj.from(commonValues ++ appValues)
+    }
 
     //// Optional
     //"copresence": ...,
@@ -249,10 +289,10 @@ object JsonCodecs {
     //"webview": {...}
   }
 
-  implicit val manifestEncoder = Encoder.instance[Manifest] {
-    case app: AppManifest => appManifestEncoder(app)
-    case ext: ExtensionManifest => extManifestEncoder(ext)
+  implicit val w: Writer[Manifest] = {
+    writer[ujson.Value].comap[Manifest] {
+      case am: AppManifest       => writeJs(am)
+      case em: ExtensionManifest => writeJs(em)
+    }
   }
-
-
 }

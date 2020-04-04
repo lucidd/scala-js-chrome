@@ -1,8 +1,6 @@
 package com.alexitc
 
 import chrome.Manifest
-import io.circe.Printer
-import io.circe.syntax._
 import sbt._
 
 object Chrome {
@@ -12,13 +10,14 @@ object Chrome {
   def i18n(msg: String): String = s"__MSG_${msg}__"
 
   def icons(base: String, name: String, sizes: Set[Int]): Map[Int, String] = {
-    sizes.map{ size =>
+    sizes.map { size =>
       size -> s"$base/$size/$name"
     }.toMap
   }
 
-  def buildUnpackedDirectory(unpacked: File)(manifest: File, jsLib: File,
-                                             jsDeps: File, resources: Seq[File]): File = {
+  def buildUnpackedDirectory(
+    unpacked: File
+  )(manifest: File, jsLib: File, jsDeps: File, resources: Seq[File]): File = {
 
     val libsAndDependencies = List(
       jsLib -> unpacked / jsLib.getName,
@@ -31,30 +30,36 @@ object Chrome {
       originalSourceMap -> unpacked / fileName
     } filter (_._1.exists())
 
-    val chromeSpecific = List(
-      manifest -> unpacked / manifestFileName
-    )
+    val chromeSpecific = List(manifest -> unpacked / manifestFileName)
 
     IO.createDirectory(unpacked)
 
     resources.foreach { resource =>
-      IO.copyDirectory(resource, unpacked, overwrite = true, preserveLastModified = true)
+      IO.copyDirectory(
+        resource,
+        unpacked,
+        overwrite = true,
+        preserveLastModified = true
+      )
     }
 
     IO.copy(
       libsAndDependencies ::: sourceMaps ::: chromeSpecific,
-      overwrite = true, preserveLastModified = true, preserveExecutable = true
+      overwrite = true,
+      preserveLastModified = true,
+      preserveExecutable = true
     )
 
     unpacked
   }
 
-  val printer = Printer.noSpaces.copy(dropNullValues = true)
-
   def generateManifest(out: File)(manifest: Manifest): File = {
     import JsonCodecs._
+    import OptionPickler._
 
-    val content = printer.print(manifest.asJson)
+    // no spaces, drop null values
+    val contentJson = writeJs(manifest).dropNullValues.getOrElse(ujson.Obj())
+    val content = write(contentJson)
     IO.write(out, content)
     out
   }

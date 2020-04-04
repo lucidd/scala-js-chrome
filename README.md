@@ -3,10 +3,10 @@
 The goal of this project is to provide an easy and typesafe way to create Chrome
 apps and extensions in Scala using the [Scala.js](https://www.scala-js.org/) project.
 
-**DISCLAIMER**: As of today (2020-03-30), I decided to fork the plugin so that I can
-keep applying updates and releasing new versions, the main reason to do this is to
-migrate to scalajs 1.0.0, which support is still experimental, if you use an older scalajs
-version, use the original [plugin](https://github.com/lucidd/scala-js-chrome) instead.
+**DISCLAIMERS**:
+- As of today (2020-03-30), I decided to fork the plugin so that I can keep applying updates and releasing new versions, the main reason to do this is to migrate to scalajs 1.0.0, which support is still experimental, if you use an older scalajs version, use the original [plugin](https://github.com/lucidd/scala-js-chrome) instead.
+- Versions after `v0.6.1` replaced the manifest encoding, while it has been tested on some browser extensions, there might be errors, if you find any while installing the extension/app, try the `v0.6.1` version to see if the error disappears, in any case, please submit an issue with your manifest details, or even better, submit a pull request.
+
 
 ## Chrome API bindings
 

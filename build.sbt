@@ -47,11 +47,11 @@ lazy val plugin = project.in(file("sbt-plugin")).
     sbtPlugin := true,
     name := "sbt-chrome-plugin",
     libraryDependencies ++= {
-      val circeVersion = "0.13.0"
+      // NOTE: Avoid circe as it doesn't respect binary compatibility which causes lots of issues
       Seq(
-        "io.circe" %% "circe-core"    % circeVersion,
-        "io.circe" %% "circe-generic" % circeVersion,
-        "io.circe" %% "circe-parser"  % circeVersion
+        "com.lihaoyi" %%% "upickle" % "1.0.0",
+        "org.scalactic" %% "scalactic" % "3.1.1" % "test",
+        "org.scalatest" %% "scalatest" % "3.1.1" % "test"
       )
     },
     addSbtPlugin("org.scala-js" % "sbt-scalajs" % "1.0.1"),
