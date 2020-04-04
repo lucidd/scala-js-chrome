@@ -67,13 +67,13 @@ unpacked extension/app.
 Add this to your `project/plugins.sbt`:
 
 ```scala
-addSbtPlugin("com.alexitc" % "sbt-chrome-plugin" % "0.6.1")
+addSbtPlugin("com.alexitc" % "sbt-chrome-plugin" % "0.7.0")
 ```
 
 Add this to your project dependencies:
 
 ```scala
-"com.alexitc" %%% "scala-js-chrome" % "0.6.1"
+"com.alexitc" %%% "scala-js-chrome" % "0.7.0"
 ```
 
 If you need the latest version, clone the repository and run `sbt version` on it, replace the current version with that value.
