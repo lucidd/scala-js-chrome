@@ -14,6 +14,8 @@ jobs:
     script: sbt +bindings/compile
   - name: compile plugin
     script: sbt plugin/compile
+  - name: run tests
+    script: sbt test
   - name: compile examples
     script: (cd examples; sbt chromePackage)
   # run ci-release only if previous stages passed
