@@ -64,6 +64,8 @@ unpacked extension/app.
 
 ## Getting Started
 
+If you like to get an extension working fast, just follow the [chrome-scalajs-template](https://github.com/AlexITC/chrome-scalajs-template) instead.
+
 Add this to your `project/plugins.sbt`:
 
 ```scala
