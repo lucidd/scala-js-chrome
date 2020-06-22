@@ -8,6 +8,7 @@ object JsonCodecs {
   import OptionPickler._
 
   implicit class JsonExt(val json: ujson.Value) extends AnyVal {
+
     def dropNullValues: Option[ujson.Value] = {
       json match {
         case ujson.Null => None
@@ -32,14 +33,14 @@ object JsonCodecs {
   }
 
   private def omitIfEmpty[T](
-    seq: Iterable[T]
+      seq: Iterable[T]
   )(encode: T => ujson.Value): ujson.Value = {
     if (seq.isEmpty) ujson.Null
     else ujson.Arr.from(seq.map(encode))
   }
 
   private def omitIfEmpty[T](
-    seq: Option[Iterable[T]]
+      seq: Option[Iterable[T]]
   )(encode: T => ujson.Value): ujson.Value = {
     seq.map(s => omitIfEmpty(s)(encode)).getOrElse(ujson.Null)
   }
@@ -71,9 +72,8 @@ object JsonCodecs {
     }
   }
 
-  implicit val omniboxEncoder = writer[ujson.Value].comap[chrome.Omnibox] {
-    omnibox =>
-      ujson.Obj(("keyword", ujson.Str.apply(omnibox.keyword)))
+  implicit val omniboxEncoder = writer[ujson.Value].comap[chrome.Omnibox] { omnibox =>
+    ujson.Obj(("keyword", ujson.Str.apply(omnibox.keyword)))
   }
 
   implicit val externallyConnectableEncoder =
@@ -85,27 +85,24 @@ object JsonCodecs {
       )
     }
 
-  implicit val storageEncoder = writer[ujson.Value].comap[chrome.Storage] {
-    storage =>
-      ujson.Obj(("managed_schema", ujson.Str.apply(storage.managedSchema)))
+  implicit val storageEncoder = writer[ujson.Value].comap[chrome.Storage] { storage =>
+    ujson.Obj(("managed_schema", ujson.Str.apply(storage.managedSchema)))
   }
 
-  implicit val platformEncoder = writer[ujson.Value].comap[chrome.Platform] {
-    platform =>
-      ujson.Obj(
-        ("nacl_arch", ujson.Str.apply(platform.naclArch)),
-        ("sub_package_path", ujson.Str.apply(platform.subPackagePath))
-      )
+  implicit val platformEncoder = writer[ujson.Value].comap[chrome.Platform] { platform =>
+    ujson.Obj(
+      ("nacl_arch", ujson.Str.apply(platform.naclArch)),
+      ("sub_package_path", ujson.Str.apply(platform.subPackagePath))
+    )
   }
 
-  implicit val bluetoothEncoder = writer[ujson.Value].comap[chrome.Bluetooth] {
-    bluetooth =>
-      ujson.Obj(
-        ("uuids", ujson.Arr.from(bluetooth.uuids.map(ujson.Str.apply))),
-        ("socket", writeJs(bluetooth.socket)),
-        ("low_energy", writeJs(bluetooth.lowEnergy)),
-        ("peripheral", writeJs(bluetooth.peripheral))
-      )
+  implicit val bluetoothEncoder = writer[ujson.Value].comap[chrome.Bluetooth] { bluetooth =>
+    ujson.Obj(
+      ("uuids", ujson.Arr.from(bluetooth.uuids.map(ujson.Str.apply))),
+      ("socket", writeJs(bluetooth.socket)),
+      ("low_energy", writeJs(bluetooth.lowEnergy)),
+      ("peripheral", writeJs(bluetooth.peripheral))
+    )
   }
 
   implicit val suggestedKeyEncoderr =
@@ -130,12 +127,11 @@ object JsonCodecs {
       )
     }
 
-  implicit val optionUIEncoder = writer[ujson.Value].comap[chrome.OptionsUI] {
-    optionUI =>
-      ujson.Obj(
-        ("page", ujson.Str.apply(optionUI.page)),
-        ("chrome_style", writeJs(optionUI.chromeStyle))
-      )
+  implicit val optionUIEncoder = writer[ujson.Value].comap[chrome.OptionsUI] { optionUI =>
+    ujson.Obj(
+      ("page", ujson.Str.apply(optionUI.page)),
+      ("chrome_style", writeJs(optionUI.chromeStyle))
+    )
   }
 
   implicit val oauth2SettingsEncoder =
@@ -165,6 +161,14 @@ object JsonCodecs {
       )
     }
 
+  implicit val chromeUrlOverridesEncoder = writer[ujson.Value].comap[chrome.ChromeUrlOverrides] { chromeUrlOverrides =>
+    ujson.Obj(
+      ("newtab", writeJs(chromeUrlOverrides.newtab)),
+      ("bookmarks", writeJs(chromeUrlOverrides.bookmarks)),
+      ("history", writeJs(chromeUrlOverrides.history))
+    )
+  }
+
   implicit val contentScriptEncoder = {
     writer[ujson.Value].comap[chrome.ContentScript] { contentScript =>
       ujson.Obj(
@@ -184,9 +188,8 @@ object JsonCodecs {
       )
     }
 
-  implicit val commandsEncoder = writer[ujson.Value].comap[chrome.Commands] {
-    commands =>
-      ujson.Obj.from(commands.actions.mapValues(x => writeJs(x)))
+  implicit val commandsEncoder = writer[ujson.Value].comap[chrome.Commands] { commands =>
+    ujson.Obj.from(commands.actions.mapValues(x => writeJs(x)))
   }
 
   implicit val appEncoder = writer[ujson.Value].comap[chrome.App] { app =>
@@ -244,6 +247,7 @@ object JsonCodecs {
         ("options_ui", writeJs(manifest.optionsUI)),
         ("browser_action", writeJs(manifest.browserAction)),
         ("chrome_ui_overrides", writeJs(manifest.chromeUIOverrides)),
+        ("chrome_url_overrides", writeJs(manifest.chromeUrlOverrides)),
         ("content_scripts", writeJs(manifest.contentScripts))
       )
       ujson.Obj.from(commonValues ++ extValues)
@@ -291,7 +295,7 @@ object JsonCodecs {
 
   implicit val w: Writer[Manifest] = {
     writer[ujson.Value].comap[Manifest] {
-      case am: AppManifest       => writeJs(am)
+      case am: AppManifest => writeJs(am)
       case em: ExtensionManifest => writeJs(em)
     }
   }

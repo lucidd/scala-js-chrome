@@ -36,10 +36,7 @@ case class BrowserAction(
     popup: Option[String] = None
 )
 
-case class ContentScript(
-    matches: List[String],
-    css: List[String],
-    js: List[String])
+case class ContentScript(matches: List[String], css: List[String], js: List[String])
 
 case class Bluetooth(
     uuids: List[String] = Nil,
@@ -48,11 +45,11 @@ case class Bluetooth(
     peripheral: Option[Boolean] = None
 )
 
-case class Requirements(webgl: Option[Boolean] = None,
-                        npapi: Option[Boolean] = None)
+case class Requirements(webgl: Option[Boolean] = None, npapi: Option[Boolean] = None)
 case class Omnibox(keyword: String)
 case class Storage(managedSchema: String)
 
+case class ChromeUrlOverrides(bookmarks: Option[String] = None, history: Option[String] = None, newtab: Option[String])
 case class ChromeUIOverrides(newtab: String, bookmarksUI: BookmarksUI)
 case class BookmarksUI(
     removeButton: Option[Boolean] = None,
@@ -76,6 +73,7 @@ case class ExternallyConnectable(
 )
 
 case class Commands(actions: Map[String, Commands.Action] = Map.empty)
+
 object Commands {
   case class Action(
       suggestedKey: SuggestedKey,
@@ -109,5 +107,6 @@ trait ExtensionManifest extends chrome.Manifest {
   val omnibox: Option[Omnibox] = None
   val optionsUI: Option[OptionsUI] = None
   val chromeUIOverrides: Option[ChromeUIOverrides] = None
+  val chromeUrlOverrides: Option[ChromeUrlOverrides] = None
   val contentScripts: List[ContentScript] = List.empty
 }
