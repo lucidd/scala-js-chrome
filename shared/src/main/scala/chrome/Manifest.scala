@@ -36,6 +36,12 @@ case class BrowserAction(
     popup: Option[String] = None
 )
 
+case class PageAction(
+    icon: Map[Int, String] = Map.empty,
+    title: Option[String] = None,
+    popup: Option[String] = None
+)
+
 case class ContentScript(matches: List[String], css: List[String], js: List[String])
 
 case class Bluetooth(
@@ -104,6 +110,7 @@ trait AppManifest extends chrome.Manifest {
 trait ExtensionManifest extends chrome.Manifest {
   val background: Background
   val browserAction: Option[BrowserAction] = None
+  val pageAction: Option[PageAction] = None
   val omnibox: Option[Omnibox] = None
   val optionsUI: Option[OptionsUI] = None
   val chromeUIOverrides: Option[ChromeUIOverrides] = None

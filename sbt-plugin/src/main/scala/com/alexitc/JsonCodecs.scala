@@ -127,6 +127,17 @@ object JsonCodecs {
       )
     }
 
+  implicit val pageActionEncoder =
+    writer[ujson.Value].comap[chrome.PageAction] { pageAction =>
+      ujson.Obj(
+        ("default_title", writeJs(pageAction.title)),
+        ("default_popup", writeJs(pageAction.popup)),
+        ("default_icon", ujson.Obj.from(pageAction.icon.map {
+          case (k, v) => (k.toString, ujson.Str.apply(v))
+        }))
+      )
+    }
+
   implicit val optionUIEncoder = writer[ujson.Value].comap[chrome.OptionsUI] { optionUI =>
     ujson.Obj(
       ("page", ujson.Str.apply(optionUI.page)),
@@ -246,6 +257,7 @@ object JsonCodecs {
         ("omnibox", writeJs(manifest.omnibox)),
         ("options_ui", writeJs(manifest.optionsUI)),
         ("browser_action", writeJs(manifest.browserAction)),
+        ("page_action", writeJs(manifest.pageAction)),
         ("chrome_ui_overrides", writeJs(manifest.chromeUIOverrides)),
         ("chrome_url_overrides", writeJs(manifest.chromeUrlOverrides)),
         ("content_scripts", writeJs(manifest.contentScripts))
