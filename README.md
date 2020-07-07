@@ -69,13 +69,13 @@ If you like to get an extension working fast, just follow the [chrome-scalajs-te
 Add this to your `project/plugins.sbt`:
 
 ```scala
-addSbtPlugin("com.alexitc" % "sbt-chrome-plugin" % "0.7.3")
+addSbtPlugin("com.alexitc" % "sbt-chrome-plugin" % "0.7.4")
 ```
 
 Add this to your project dependencies:
 
 ```scala
-"com.alexitc" %%% "scala-js-chrome" % "0.7.3"
+"com.alexitc" %%% "scala-js-chrome" % "0.7.4"
 ```
 
 If you need the latest version, clone the repository and run `sbt version` on it, replace the current version with that value.
