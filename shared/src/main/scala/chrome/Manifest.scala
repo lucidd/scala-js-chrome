@@ -42,7 +42,19 @@ case class PageAction(
     popup: Option[String] = None
 )
 
-case class ContentScript(matches: List[String], css: List[String], js: List[String])
+case class ContentScript(matches: List[String], css: List[String], js: List[String], run_at: Option[RunAt] = None)
+sealed trait RunAt {
+  val name: String
+}
+case object DocumentIdle extends RunAt {
+  val name = "document_idle"
+}
+case object DocumentStart extends RunAt {
+  val name = "document_start"
+}
+case object DocumentEnd extends RunAt {
+  val name = "document_end"
+}
 
 case class Bluetooth(
     uuids: List[String] = Nil,

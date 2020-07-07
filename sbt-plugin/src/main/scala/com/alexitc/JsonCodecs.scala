@@ -185,7 +185,8 @@ object JsonCodecs {
       ujson.Obj(
         ("matches", ujson.Arr.from(contentScript.matches.map(ujson.Str.apply))),
         ("css", ujson.Arr.from(contentScript.css.map(ujson.Str.apply))),
-        ("js", ujson.Arr.from(contentScript.js.map(ujson.Str.apply)))
+        ("js", ujson.Arr.from(contentScript.js.map(ujson.Str.apply))),
+        ("run_at", writeJs(contentScript.run_at.map(_.name)))
       )
     }
   }
