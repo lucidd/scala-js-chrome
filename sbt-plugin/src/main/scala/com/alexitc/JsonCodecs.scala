@@ -68,7 +68,10 @@ object JsonCodecs {
 
   implicit val backgroundEncoder: Writer[chrome.Background] = {
     writer[ujson.Value].comap { background =>
-      ujson.Obj("scripts" -> background.scripts.map(ujson.Str.apply))
+      ujson.Obj(
+        "scripts" -> background.scripts.map(ujson.Str.apply),
+        "persistent" -> writeJs(background.persistent)
+      )
     }
   }
 

@@ -27,7 +27,7 @@ sealed trait Manifest {
   val contentSecurityPolicy: Option[String] = None
 }
 
-case class Background(scripts: List[String])
+case class Background(scripts: List[String], persistent: Option[Boolean] = None)
 case class App(background: Background)
 
 case class BrowserAction(
