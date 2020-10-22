@@ -34,17 +34,23 @@ object Alarms {
 
   def get(name: String): Future[Option[Alarm]] = {
     val promise = Promise[Option[Alarm]]
-    bindings.Alarms.get(name, (alarm: js.UndefOr[Alarm]) => {
-      promise.complete(lastErrorOrValue(alarm.toOption))
-    })
+    bindings.Alarms.get(
+      name,
+      (alarm: js.UndefOr[Alarm]) => {
+        promise.complete(lastErrorOrValue(alarm.toOption))
+      }
+    )
     promise.future
   }
 
   def clear(name: String = ""): Future[Boolean] = {
     val promise = Promise[Boolean]()
-    bindings.Alarms.clear(name, js.Any.fromFunction1((wasCleared: Boolean) => {
-      promise.complete(lastErrorOrValue(wasCleared))
-    }))
+    bindings.Alarms.clear(
+      name,
+      js.Any.fromFunction1((wasCleared: Boolean) => {
+        promise.complete(lastErrorOrValue(wasCleared))
+      })
+    )
     promise.future
   }
 

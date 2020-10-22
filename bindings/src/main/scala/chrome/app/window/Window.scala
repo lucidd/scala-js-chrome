@@ -19,14 +19,16 @@ object Window {
 
   def current: AppWindow = bindings.Window.current()
 
-  def create(url: String,
-             options: js.UndefOr[CreateWindowOptions] = js.undefined)
-    : Future[AppWindow] = {
+  def create(url: String, options: js.UndefOr[CreateWindowOptions] = js.undefined): Future[AppWindow] = {
     val promise = Promise[AppWindow]()
     bindings.Window
-      .create(url, options, js.Any.fromFunction1((appWindow: AppWindow) => {
-        promise.complete(lastErrorOrValue(appWindow))
-      }))
+      .create(
+        url,
+        options,
+        js.Any.fromFunction1((appWindow: AppWindow) => {
+          promise.complete(lastErrorOrValue(appWindow))
+        })
+      )
     promise.future
   }
 

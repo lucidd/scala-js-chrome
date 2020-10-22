@@ -14,7 +14,7 @@ object DefaultSuggestion {
   def apply(description: String): DefaultSuggestion = {
     js.Dynamic
       .literal(
-          description = description
+        description = description
       )
       .asInstanceOf[DefaultSuggestion]
   }

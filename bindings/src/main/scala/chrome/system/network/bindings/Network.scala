@@ -7,7 +7,6 @@ import scala.scalajs.js.annotation.JSGlobal
 @JSGlobal("chrome.system.network")
 object Network extends js.Object {
 
-  def getNetworkInterfaces(
-      callback: js.Function1[js.Array[NetworkInterface], _]): Unit = js.native
+  def getNetworkInterfaces(callback: js.Function1[js.Array[NetworkInterface], _]): Unit = js.native
 
 }

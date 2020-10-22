@@ -24,17 +24,23 @@ object PageAction {
 
   def getTitle(details: GetTitleDetails): Future[String] = {
     val promise = Promise[String]()
-    bindings.PageAction.getTitle(details, js.Any.fromFunction1((title) => {
-      promise.complete(lastErrorOrValue(title))
-    }))
+    bindings.PageAction.getTitle(
+      details,
+      js.Any.fromFunction1((title) => {
+        promise.complete(lastErrorOrValue(title))
+      })
+    )
     promise.future
   }
 
   def setIcon(details: SetIconDetails): Future[Unit] = {
     val promise = Promise[Unit]()
-    bindings.PageAction.setIcon(details, js.Any.fromFunction0(() => {
-      promise.complete(lastErrorOrValue(()))
-    }))
+    bindings.PageAction.setIcon(
+      details,
+      js.Any.fromFunction0(() => {
+        promise.complete(lastErrorOrValue(()))
+      })
+    )
     promise.future
   }
 
@@ -43,9 +49,12 @@ object PageAction {
 
   def getPopup(details: GetPopupDetails): Future[String] = {
     val promise = Promise[String]()
-    bindings.PageAction.getPopup(details, js.Any.fromFunction1((popup) => {
-      promise.complete(lastErrorOrValue(popup))
-    }))
+    bindings.PageAction.getPopup(
+      details,
+      js.Any.fromFunction1((popup) => {
+        promise.complete(lastErrorOrValue(popup))
+      })
+    )
     promise.future
   }
 }

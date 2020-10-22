@@ -12,15 +12,10 @@ object Audio extends js.Object {
   type DeviceID = String
   val onDeviceChanged: Event[js.Function0[_]] = js.native
 
-  def getInfo(
-      callback: js.Function2[js.Array[OutputInfo], js.Array[InputInfo], _])
-    : Unit = js.native
+  def getInfo(callback: js.Function2[js.Array[OutputInfo], js.Array[InputInfo], _]): Unit = js.native
 
-  def setActiveDevice(ids: js.Array[DeviceID],
-                      callback: js.Function0[_]): Unit = js.native
+  def setActiveDevice(ids: js.Array[DeviceID], callback: js.Function0[_]): Unit = js.native
 
-  def setProperties(id: DeviceID,
-                    properties: Properties,
-                    callback: js.Function0[_]): Unit = js.native
+  def setProperties(id: DeviceID, properties: Properties, callback: js.Function0[_]): Unit = js.native
 
 }

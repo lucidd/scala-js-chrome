@@ -47,41 +47,46 @@ object Permissions {
     val promise = Promise[Boolean]()
     val (api, host) = permissions2PermissionList(permissions)
     bindings.Permissions
-      .contains(PermissionList(api, host), (result: Boolean) => {
-        promise.complete(lastErrorOrValue(result))
-      })
+      .contains(
+        PermissionList(api, host),
+        (result: Boolean) => {
+          promise.complete(lastErrorOrValue(result))
+        }
+      )
     promise.future
   }
 
-  private def permissions2PermissionList[A <: Seq[Permission]](
-      permissions: A): (js.Array[String], js.Array[String]) = {
-    permissions.foldLeft((js.Array[String](), js.Array[String]())) {
-      (acc, p) =>
-        p match {
-          case api: API => acc._1.append(api.name)
-          case host: Host => acc._2.append(host.urlPattern)
-        }
-        acc
+  private def permissions2PermissionList[A <: Seq[Permission]](permissions: A): (js.Array[String], js.Array[String]) = {
+    permissions.foldLeft((js.Array[String](), js.Array[String]())) { (acc, p) =>
+      p match {
+        case api: API => acc._1.append(api.name)
+        case host: Host => acc._2.append(host.urlPattern)
+      }
+      acc
     }
   }
 
   def request(permissions: Permission*): Future[Boolean] = {
     val promise = Promise[Boolean]()
     val (api, host) = permissions2PermissionList(permissions)
-    bindings.Permissions.request(PermissionList(api, host),
-                                 js.Any.fromFunction1((result: Boolean) => {
-                                   promise.complete(lastErrorOrValue(result))
-                                 }))
+    bindings.Permissions.request(
+      PermissionList(api, host),
+      js.Any.fromFunction1((result: Boolean) => {
+        promise.complete(lastErrorOrValue(result))
+      })
+    )
     promise.future
   }
 
   def remove(permissions: Permission*): Future[Boolean] = {
     val promise = Promise[Boolean]()
     val (api, host) = permissions2PermissionList(permissions)
-    bindings.Permissions.remove(PermissionList(api, host),
-                                js.Any.fromFunction1((result: Boolean) => {
-                                  promise.complete(lastErrorOrValue(result))
-                                }))
+    bindings.Permissions.remove(
+      PermissionList(api, host),
+      js.Any.fromFunction1((result: Boolean) => {
+        promise.complete(lastErrorOrValue(result))
+      })
+    )
     promise.future
   }
 

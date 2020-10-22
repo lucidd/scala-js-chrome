@@ -18,19 +18,15 @@ object Runtime extends js.Object {
   val onInstalled: Event[js.Function1[OnInstalledDetails, _]] = native
   val onSuspend: Event[js.Function0[_]] = native
   val onSuspendCanceled: Event[js.Function0[_]] = native
+
   val onUpdateAvailable: Event[js.Function1[OnUpdateAvailableDetails, _]] =
     native
   val onBrowserUpdateAvailable: Event[js.Function0[_]] = native
   val onConnect: Event[js.Function1[Port, _]] = native
   val onConnectExternal: Event[js.Function1[Port, _]] = native
-  val onMessage: Event[js.Function3[UndefOr[Any],
-                                    MessageSender,
-                                    js.Function1[Any, _],
-                                    Boolean]] = native
-  val onMessageExternal: Event[js.Function3[UndefOr[Any],
-                                            MessageSender,
-                                            js.Function1[Any, _],
-                                            Boolean]] = native
+  val onMessage: Event[js.Function3[UndefOr[Any], MessageSender, js.Function1[Any, _], Boolean]] = native
+  val onMessageExternal: Event[js.Function3[UndefOr[Any], MessageSender, js.Function1[Any, _], Boolean]] = native
+
   val onRestartRequired: Event[js.Function1[RestartReasons.RestartReason, _]] =
     native
 
@@ -50,31 +46,28 @@ object Runtime extends js.Object {
 
   def setUninstallURL(url: String): Unit = native
 
-  def requestUpdateCheck(
-      callback: js.Function2[UpdateCheck.Status,
-                             UndefOr[UpdateCheck.Details],
-                             _]): Unit = native
+  def requestUpdateCheck(callback: js.Function2[UpdateCheck.Status, UndefOr[UpdateCheck.Details], _]): Unit = native
 
-  def connect(extensionId: UndefOr[AppID] = undefined,
-              connectInfo: UndefOr[ConnectInfo] = undefined): Port = native
+  def connect(extensionId: UndefOr[AppID] = undefined, connectInfo: UndefOr[ConnectInfo] = undefined): Port = native
 
   def connectNative(application: String): Port = native
 
-  def sendMessage(extensionId: UndefOr[AppID] = undefined,
-                  message: js.Any,
-                  options: UndefOr[SendMessageOptions] = undefined,
-                  responseCallback: UndefOr[js.Function1[js.Object, _]] =
-                    js.undefined): Unit = native
+  def sendMessage(
+      extensionId: UndefOr[AppID] = undefined,
+      message: js.Any,
+      options: UndefOr[SendMessageOptions] = undefined,
+      responseCallback: UndefOr[js.Function1[js.Object, _]] = js.undefined
+  ): Unit = native
 
   def sendNativeMessage(
       application: String,
       message: js.Object,
-      responseCallback: UndefOr[js.Function1[js.Object, _]]): Unit = native
+      responseCallback: UndefOr[js.Function1[js.Object, _]]
+  ): Unit = native
 
   def getPlatformInfo(callback: js.Function1[PlatformInfo, _]): Unit = native
 
-  def getPackageDirectoryEntry(
-      callback: js.Function1[DirectoryEntry, _]): Unit = native
+  def getPackageDirectoryEntry(callback: js.Function1[DirectoryEntry, _]): Unit = native
 
 }
 

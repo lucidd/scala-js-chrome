@@ -1,6 +1,7 @@
 package chrome.downloads.bindings
 
 sealed trait InterruptReason
+
 object InterruptReason {
   val FILE_FAILED: InterruptReason = "FILE_FAILED".asInstanceOf[InterruptReason]
   val FILE_ACCESS_DENIED: InterruptReason = "FILE_ACCESS_DENIED".asInstanceOf[InterruptReason]

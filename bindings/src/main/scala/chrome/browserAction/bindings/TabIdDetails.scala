@@ -8,6 +8,7 @@ trait TabIdDetails extends js.Object {
 }
 
 object TabIdDetails {
+
   def apply(tabId: js.UndefOr[Int] = js.undefined): TabIdDetails = {
     js.Dynamic
       .literal(

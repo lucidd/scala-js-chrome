@@ -17,9 +17,12 @@ object Idle extends ChromeAPI {
 
   def queryState(detectionIntervalInSeconds: Int): Future[State] = {
     val promise = Promise[State]()
-    bindings.Idle.queryState(detectionIntervalInSeconds, (state: State) => {
-      promise.complete(lastErrorOrValue(state))
-    })
+    bindings.Idle.queryState(
+      detectionIntervalInSeconds,
+      (state: State) => {
+        promise.complete(lastErrorOrValue(state))
+      }
+    )
     promise.future
   }
 

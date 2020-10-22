@@ -3,7 +3,7 @@ package chrome.downloads.bindings
 import scalajs.js
 
 trait DownloadDelta {
-  def	id: Int
+  def id: Int
   def url: js.UndefOr[Delta[String]]
   def finalUrl: js.UndefOr[Delta[String]]
   def filename: js.UndefOr[Delta[String]]

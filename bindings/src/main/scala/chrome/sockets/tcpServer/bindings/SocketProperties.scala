@@ -13,12 +13,14 @@ trait SocketProperties extends js.Object {
 
 object SocketProperties {
 
-  def apply(persistent: js.UndefOr[Boolean] = js.undefined,
-            name: js.UndefOr[String] = js.undefined): SocketProperties = {
+  def apply(
+      persistent: js.UndefOr[Boolean] = js.undefined,
+      name: js.UndefOr[String] = js.undefined
+  ): SocketProperties = {
     js.Dynamic
       .literal(
-          persistent = persistent,
-          name = name
+        persistent = persistent,
+        name = name
       )
       .asInstanceOf[SocketProperties]
   }

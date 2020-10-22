@@ -8,6 +8,7 @@ trait BadgeTextDetails extends TabIdDetails {
 }
 
 object BadgeTextDetails {
+
   def apply(text: String, tabId: js.UndefOr[Int] = js.undefined): BadgeTextDetails = {
     js.Dynamic
       .literal(

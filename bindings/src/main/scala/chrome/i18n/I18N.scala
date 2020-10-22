@@ -18,7 +18,7 @@ object I18N {
   }
 
   def getMessage(messageName: String, substitutions: String*): js.UndefOr[String] = {
-    if(substitutions.isEmpty) {
+    if (substitutions.isEmpty) {
       bindings.I18N.getMessage(messageName)
     } else {
       val jsArraySubstitutions = substitutions.toJSArray.asInstanceOf[String | js.Array[String]]

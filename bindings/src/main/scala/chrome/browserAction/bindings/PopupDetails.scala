@@ -8,6 +8,7 @@ trait PopupDetails extends TabIdDetails {
 }
 
 object PopupDetails {
+
   def apply(popup: String, tabId: js.UndefOr[Int] = js.undefined): PopupDetails = {
     js.Dynamic
       .literal(

@@ -24,14 +24,16 @@ object Display extends ChromeAPI {
     promise.future
   }
 
-  def setDisplayProperties(
-      id: bindings.Display.ID,
-      info: DisplayProperties): Future[bindings.Display.ID] = {
+  def setDisplayProperties(id: bindings.Display.ID, info: DisplayProperties): Future[bindings.Display.ID] = {
     val promise = Promise[bindings.Display.ID]()
     bindings.Display
-      .setDisplayProperties(id, info, js.Any.fromFunction0(() => {
-        promise.complete(lastErrorOrValue(id))
-      }))
+      .setDisplayProperties(
+        id,
+        info,
+        js.Any.fromFunction0(() => {
+          promise.complete(lastErrorOrValue(id))
+        })
+      )
     promise.future
   }
 

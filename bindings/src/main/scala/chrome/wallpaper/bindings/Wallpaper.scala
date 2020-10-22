@@ -13,19 +13,21 @@ trait WallpaperDetails extends js.Object {
 }
 
 object WallpaperDetails {
+
   def apply(
       filename: String,
       layout: WallpaperLayout,
       binary: js.UndefOr[js.Any] = js.undefined,
       url: js.UndefOr[String] = js.undefined,
-      thumbnail: js.UndefOr[Boolean] = js.undefined): WallpaperDetails = {
+      thumbnail: js.UndefOr[Boolean] = js.undefined
+  ): WallpaperDetails = {
     js.Dynamic
       .literal(
-          filename = filename,
-          layout = layout,
-          binary = binary,
-          url = url,
-          thumbnail = thumbnail
+        filename = filename,
+        layout = layout,
+        binary = binary,
+        url = url,
+        thumbnail = thumbnail
       )
       .asInstanceOf[WallpaperDetails]
   }
@@ -35,8 +37,7 @@ object WallpaperDetails {
 @JSGlobal("chrome.wallpaper")
 object Wallpaper extends js.Object {
 
-  def setWallpaper(details: WallpaperDetails,
-                   callback: js.Function1[js.UndefOr[js.Any], _]): Unit =
+  def setWallpaper(details: WallpaperDetails, callback: js.Function1[js.UndefOr[js.Any], _]): Unit =
     js.native
 
 }

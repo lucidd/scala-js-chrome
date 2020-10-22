@@ -41,12 +41,12 @@ class EventSourceController[A] extends EventSource[A] {
   }
 
   def emit(value: A): Unit = {
-    subcribers.foreach(
-        fn =>
-          scala.scalajs.concurrent.JSExecutionContext.queue
-            .execute(new Runnable {
+    subcribers.foreach(fn =>
+      scala.scalajs.concurrent.JSExecutionContext.queue
+        .execute(new Runnable {
           override def run(): Unit = fn(value)
-        }))
+        })
+    )
   }
 
   def source: EventSource[A] = this

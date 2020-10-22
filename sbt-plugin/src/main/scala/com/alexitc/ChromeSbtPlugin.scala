@@ -63,7 +63,6 @@ object ChromeSbtPlugin extends AutoPlugin {
 
   }
 
-
   import autoImport._
 
   override val projectSettings = baseSettings

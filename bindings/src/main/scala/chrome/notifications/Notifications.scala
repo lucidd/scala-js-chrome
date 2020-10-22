@@ -18,8 +18,10 @@ object Notifications extends ChromeAPI {
 
   val onClose: EventSource[(Id, Boolean)] = bindings.Notifications.onClose
   val onClicked: EventSource[Id] = bindings.Notifications.onClicked
+
   val onButtonClicked: EventSource[(Id, Int)] =
     bindings.Notifications.onButtonClicked
+
   val onPermissionLevelChanged: EventSource[PermissionLevel] =
     bindings.Notifications.onPermissionLevelChanged
   val onShowSettings: EventSource[Unit] = bindings.Notifications.onShowSettings
@@ -27,27 +29,38 @@ object Notifications extends ChromeAPI {
   def create(options: NotificationOptions, id: Option[Id] = None): Future[Id] = {
     val promise = Promise[Id]()
     bindings.Notifications
-      .create(id.orUndefined, options, js.Any.fromFunction1((id: Id) => {
-        promise.complete(lastErrorOrValue(id))
-      }))
+      .create(
+        id.orUndefined,
+        options,
+        js.Any.fromFunction1((id: Id) => {
+          promise.complete(lastErrorOrValue(id))
+        })
+      )
     promise.future
   }
 
   def update(id: Id, options: NotificationOptions): Future[Boolean] = {
     val promise = Promise[Boolean]()
     bindings.Notifications
-      .update(id, options, js.Any.fromFunction1((wasUpdated: Boolean) => {
-        promise.complete(lastErrorOrValue(wasUpdated))
-      }))
+      .update(
+        id,
+        options,
+        js.Any.fromFunction1((wasUpdated: Boolean) => {
+          promise.complete(lastErrorOrValue(wasUpdated))
+        })
+      )
     promise.future
   }
 
   def clear(id: Id): Future[Boolean] = {
     val promise = Promise[Boolean]()
     bindings.Notifications
-      .clear(id, js.Any.fromFunction1((wasCleared: Boolean) => {
-        promise.complete(lastErrorOrValue(wasCleared))
-      }))
+      .clear(
+        id,
+        js.Any.fromFunction1((wasCleared: Boolean) => {
+          promise.complete(lastErrorOrValue(wasCleared))
+        })
+      )
     promise.future
   }
 

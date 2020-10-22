@@ -13,9 +13,8 @@ object JsonCodecs {
       json match {
         case ujson.Null => None
         case obj: ujson.Obj =>
-          val newValues = obj.value.toList.flatMap {
-            case (key, value) =>
-              value.dropNullValues.map(key -> _)
+          val newValues = obj.value.toList.flatMap { case (key, value) =>
+            value.dropNullValues.map(key -> _)
           }
           if (newValues.isEmpty) None
           else Some(ujson.Obj.from(newValues))
@@ -124,9 +123,12 @@ object JsonCodecs {
       ujson.Obj(
         ("default_title", writeJs(browserAction.title)),
         ("default_popup", writeJs(browserAction.popup)),
-        ("default_icon", ujson.Obj.from(browserAction.icon.map {
-          case (k, v) => (k.toString, ujson.Str.apply(v))
-        }))
+        (
+          "default_icon",
+          ujson.Obj.from(browserAction.icon.map { case (k, v) =>
+            (k.toString, ujson.Str.apply(v))
+          })
+        )
       )
     }
 
@@ -135,9 +137,12 @@ object JsonCodecs {
       ujson.Obj(
         ("default_title", writeJs(pageAction.title)),
         ("default_popup", writeJs(pageAction.popup)),
-        ("default_icon", ujson.Obj.from(pageAction.icon.map {
-          case (k, v) => (k.toString, ujson.Str.apply(v))
-        }))
+        (
+          "default_icon",
+          ujson.Obj.from(pageAction.icon.map { case (k, v) =>
+            (k.toString, ujson.Str.apply(v))
+          })
+        )
       )
     }
 
@@ -218,9 +223,12 @@ object JsonCodecs {
       ("version", ujson.Str.apply(manifest.version)),
       ("default_locale", writeJs(manifest.defaultLocale)),
       ("description", writeJs(manifest.description)),
-      ("icons", ujson.Obj.from(manifest.icons.map {
-        case (k, v) => (k.toString, ujson.Str.apply(v))
-      })),
+      (
+        "icons",
+        ujson.Obj.from(manifest.icons.map { case (k, v) =>
+          (k.toString, ujson.Str.apply(v))
+        })
+      ),
       ("author", writeJs(manifest.author)),
       ("commands", writeJs(manifest.commands)),
       ("key", writeJs(manifest.key)),
@@ -241,14 +249,20 @@ object JsonCodecs {
         if (manifest.webAccessibleResources.isEmpty) ujson.Null
         else writeJs(manifest.webAccessibleResources)
       ),
-      ("permissions", omitIfEmpty(manifest.permissions) {
-        case API(name) => ujson.Str.apply(name)
-        case Host(url) => ujson.Str.apply(url)
-      }),
-      ("optional_permissions", omitIfEmpty(manifest.optionalPermissions) {
-        case API(name) => ujson.Str.apply(name)
-        case Host(url) => ujson.Str.apply(url)
-      }),
+      (
+        "permissions",
+        omitIfEmpty(manifest.permissions) {
+          case API(name) => ujson.Str.apply(name)
+          case Host(url) => ujson.Str.apply(url)
+        }
+      ),
+      (
+        "optional_permissions",
+        omitIfEmpty(manifest.optionalPermissions) {
+          case API(name) => ujson.Str.apply(name)
+          case Host(url) => ujson.Str.apply(url)
+        }
+      ),
       ("content_security_policy", writeJs(manifest.contentSecurityPolicy))
     )
   }

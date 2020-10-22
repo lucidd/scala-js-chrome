@@ -24,15 +24,21 @@ class Socket(val socketId: SocketId) {
 
   def update(properties: SocketProperties): Future[Unit] = {
     val promise = Promise[Unit]()
-    tcp.bindings.TCP.update(socketId, properties,
-      Option[js.Function0[_]](() => promise.complete(lastErrorOrValue(()))).orUndefined)
+    tcp.bindings.TCP.update(
+      socketId,
+      properties,
+      Option[js.Function0[_]](() => promise.complete(lastErrorOrValue(()))).orUndefined
+    )
     promise.future
   }
 
   def setPaused(paused: Boolean): Future[Unit] = {
     val promise = Promise[Unit]()
-    bindings.TCP.setPaused(socketId, paused,
-      Option[js.Function0[_]](() => promise.complete(lastErrorOrValue(()))).orUndefined)
+    bindings.TCP.setPaused(
+      socketId,
+      paused,
+      Option[js.Function0[_]](() => promise.complete(lastErrorOrValue(()))).orUndefined
+    )
     promise.future
   }
 
@@ -56,8 +62,7 @@ class Socket(val socketId: SocketId) {
 
   def disconnect: Future[Unit] = {
     val promise = Promise[Unit]()
-    bindings.TCP.disconnect(socketId,
-      Option[js.Function0[_]](() => promise.complete(lastErrorOrValue(()))).orUndefined)
+    bindings.TCP.disconnect(socketId, Option[js.Function0[_]](() => promise.complete(lastErrorOrValue(()))).orUndefined)
     promise.future
   }
 
@@ -95,9 +100,7 @@ object Socket {
 
   def apply(id: SocketId): Socket = new Socket(id)
 
-  def apply(name: String = "",
-            persistent: Boolean,
-            bufferSize: Int): Future[Socket] = {
+  def apply(name: String = "", persistent: Boolean, bufferSize: Int): Future[Socket] = {
 
     tcp.TCP
       .create(SocketProperties(persistent, name, bufferSize))

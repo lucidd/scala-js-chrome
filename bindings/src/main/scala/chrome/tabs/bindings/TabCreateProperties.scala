@@ -12,15 +12,16 @@ object TabCreateProperties {
       url: js.UndefOr[String] = js.undefined,
       active: js.UndefOr[Boolean] = js.undefined,
       pinned: js.UndefOr[Boolean] = js.undefined,
-      openerTabId: js.UndefOr[Tab.Id] = js.undefined): TabCreateProperties = {
+      openerTabId: js.UndefOr[Tab.Id] = js.undefined
+  ): TabCreateProperties = {
     js.Dynamic
       .literal(
-          windowId = windowId,
-          index = index,
-          url = url,
-          active = active,
-          pinned = pinned,
-          openerTabId = openerTabId
+        windowId = windowId,
+        index = index,
+        url = url,
+        active = active,
+        pinned = pinned,
+        openerTabId = openerTabId
       )
       .asInstanceOf[TabCreateProperties]
   }

@@ -8,9 +8,11 @@ import scala.scalajs.js.{UndefOr, native, undefined}
 @JSGlobal("chrome.tts")
 object TTS extends js.Object {
 
-  def speak(utterance: String,
-            options: UndefOr[SpeakOptions] = undefined,
-            callback: UndefOr[js.Function0[_]] = undefined): Unit = native
+  def speak(
+      utterance: String,
+      options: UndefOr[SpeakOptions] = undefined,
+      callback: UndefOr[js.Function0[_]] = undefined
+  ): Unit = native
 
   def stop(): Unit = native
 
@@ -18,10 +20,8 @@ object TTS extends js.Object {
 
   def resume(): Unit = native
 
-  def isSpeaking(
-      callback: UndefOr[js.Function1[Boolean, _]] = undefined): Unit = native
+  def isSpeaking(callback: UndefOr[js.Function1[Boolean, _]] = undefined): Unit = native
 
-  def getVoices(callback: UndefOr[js.Function1[js.Array[TTSVoice], _]] =
-        undefined): Unit = native
+  def getVoices(callback: UndefOr[js.Function1[js.Array[TTSVoice], _]] = undefined): Unit = native
 
 }

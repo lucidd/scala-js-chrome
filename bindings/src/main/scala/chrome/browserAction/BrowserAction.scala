@@ -18,29 +18,41 @@ object BrowserAction {
 
   def getTitle(tabId: js.UndefOr[Int] = js.undefined): Future[String] = {
     val promise = Promise[String]()
-    bindings.BrowserAction.getTitle(TabIdDetails(tabId), (result: String) => {
-      promise.success(result)
-    })
+    bindings.BrowserAction.getTitle(
+      TabIdDetails(tabId),
+      (result: String) => {
+        promise.success(result)
+      }
+    )
     promise.future
   }
 
-  def setIconImageData(imageData: js.UndefOr[ImageData | js.Dictionary[ImageData]],
-                       tabId: js.UndefOr[Int] = js.undefined): Future[Unit] = {
+  def setIconImageData(
+      imageData: js.UndefOr[ImageData | js.Dictionary[ImageData]],
+      tabId: js.UndefOr[Int] = js.undefined
+  ): Future[Unit] = {
     setIcon(imageData, js.undefined, tabId)
   }
 
-  def setIconPath(pathData: js.UndefOr[String | js.Dictionary[String]],
-                  tabId: js.UndefOr[Int] = js.undefined): Future[Unit] = {
+  def setIconPath(
+      pathData: js.UndefOr[String | js.Dictionary[String]],
+      tabId: js.UndefOr[Int] = js.undefined
+  ): Future[Unit] = {
     setIcon(js.undefined, pathData, tabId)
   }
 
-  def setIcon(imageData: js.UndefOr[ImageData | js.Dictionary[ImageData]],
-              pathData: js.UndefOr[String | js.Dictionary[String]],
-              tabId: js.UndefOr[Int]): Future[Unit] = {
+  def setIcon(
+      imageData: js.UndefOr[ImageData | js.Dictionary[ImageData]],
+      pathData: js.UndefOr[String | js.Dictionary[String]],
+      tabId: js.UndefOr[Int]
+  ): Future[Unit] = {
     val promise = Promise[Unit]()
-    bindings.BrowserAction.setIcon(IconDetails(imageData, pathData, tabId), () => {
-      promise.success(())
-    })
+    bindings.BrowserAction.setIcon(
+      IconDetails(imageData, pathData, tabId),
+      () => {
+        promise.success(())
+      }
+    )
 
     promise.future
   }
@@ -51,9 +63,12 @@ object BrowserAction {
 
   def getPopup(tabId: js.UndefOr[Int] = js.undefined): Future[String] = {
     val promise = Promise[String]()
-    bindings.BrowserAction.getPopup(TabIdDetails(tabId), (result: String) => {
-      promise.success(result)
-    })
+    bindings.BrowserAction.getPopup(
+      TabIdDetails(tabId),
+      (result: String) => {
+        promise.success(result)
+      }
+    )
     promise.future
   }
 
@@ -63,9 +78,12 @@ object BrowserAction {
 
   def getBadgeText(tabId: js.UndefOr[Int] = js.undefined): Future[String] = {
     val promise = Promise[String]()
-    bindings.BrowserAction.getBadgeText(TabIdDetails(tabId), (result: String) => {
-      promise.success(result)
-    })
+    bindings.BrowserAction.getBadgeText(
+      TabIdDetails(tabId),
+      (result: String) => {
+        promise.success(result)
+      }
+    )
     promise.future
   }
 
@@ -75,9 +93,12 @@ object BrowserAction {
 
   def getBadgeBackgroundColor(tabId: js.UndefOr[Int] = js.undefined): Future[js.Array[Int]] = {
     val promise = Promise[js.Array[Int]]()
-    bindings.BrowserAction.getBadgeBackgroundColor(TabIdDetails(tabId), (result: js.Array[Int]) => {
-      promise.success(result)
-    })
+    bindings.BrowserAction.getBadgeBackgroundColor(
+      TabIdDetails(tabId),
+      (result: js.Array[Int]) => {
+        promise.success(result)
+      }
+    )
     promise.future
   }
 

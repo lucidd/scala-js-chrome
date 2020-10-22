@@ -7,7 +7,8 @@ lazy val examples = project.in(file(".")).aggregate(exampleApp, extension)
 
 lazy val scalaJsChrome = ProjectRef(file("../."), "bindings")
 
-lazy val exampleApp = project.in(file("app"))
+lazy val exampleApp = project
+  .in(file("app"))
   .dependsOn(scalaJsChrome)
   .enablePlugins(ChromeSbtPlugin)
   .settings(
@@ -28,7 +29,6 @@ lazy val exampleApp = project.in(file("app"))
       Some((Compile / fastOptJS / artifactPath).value.toURI)
     ),
     skip in packageJSDependencies := false,
-
     // you can customize and have a static output name for lib and dependencies
     // instead of having the default files names like app-fastopt.js, ...
     artifactPath in (Compile, fastOptJS) := {
@@ -43,21 +43,23 @@ lazy val exampleApp = project.in(file("app"))
     artifactPath in (Compile, packageMinifiedJSDependencies) := {
       (crossTarget in packageMinifiedJSDependencies).value / "dependencies.js"
     },
-
     chromeManifest := new AppManifest {
       val name = Keys.name.value
       val version = Keys.version.value
+
       val app = App(
         background = Background(
           scripts = List("main.js", "dependencies.js")
         )
       )
       override val defaultLocale = Some("en")
+
       override val icons = Chrome.icons(
         "icons",
         "app.png",
         Set(256)
       )
+
       override val permissions = Set[Permission](
         API.System.CPU,
         API.System.Display,
@@ -68,9 +70,8 @@ lazy val exampleApp = project.in(file("app"))
     }
   )
 
-
-
-lazy val extension = project.in(file("extension"))
+lazy val extension = project
+  .in(file("extension"))
   .dependsOn(scalaJsChrome)
   .enablePlugins(ChromeSbtPlugin)
   .settings(
@@ -91,7 +92,6 @@ lazy val extension = project.in(file("extension"))
       Some((Compile / fastOptJS / artifactPath).value.toURI)
     ),
     skip in packageJSDependencies := false,
-
     // you can customize and have a static output name for lib and dependencies
     // instead of having the default files names like extension-fastopt.js, ...
     artifactPath in (Compile, fastOptJS) := {
@@ -106,18 +106,20 @@ lazy val extension = project.in(file("extension"))
     artifactPath in (Compile, packageMinifiedJSDependencies) := {
       (crossTarget in packageMinifiedJSDependencies).value / "dependencies.js"
     },
-
     chromeManifest := new ExtensionManifest {
+
       val background = Background(
         scripts = List("main.js", "dependencies.js")
       )
       val name = Keys.name.value
       val version = Keys.version.value
+
       override val icons = Chrome.icons(
         "icons",
         "app.png",
         Set(256)
       )
+
       override val permissions = Set[Permission](
         API.Tabs,
         API.Management,

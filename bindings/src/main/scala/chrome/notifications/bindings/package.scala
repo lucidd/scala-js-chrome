@@ -3,6 +3,7 @@ package chrome.notifications
 package object bindings {
 
   type TemplateType = String
+
   object TemplateType {
     val BASIC: TemplateType = "basic"
     val IMAGE: TemplateType = "image"
@@ -11,6 +12,7 @@ package object bindings {
   }
 
   type PermissionLevel = String
+
   object PermissionLevel {
     val GRANTED: PermissionLevel = "granted"
     val DENIED: PermissionLevel = "denied"

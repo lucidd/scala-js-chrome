@@ -18,11 +18,12 @@ object ZoomSettings {
 
   def apply(
       mode: js.UndefOr[ZoomSettings.Mode] = js.undefined,
-      scope: js.UndefOr[ZoomSettings.Scope] = js.undefined): ZoomSettings = {
+      scope: js.UndefOr[ZoomSettings.Scope] = js.undefined
+  ): ZoomSettings = {
     js.Dynamic
       .literal(
-          mode = mode,
-          scope = scope
+        mode = mode,
+        scope = scope
       )
       .asInstanceOf[ZoomSettings]
   }

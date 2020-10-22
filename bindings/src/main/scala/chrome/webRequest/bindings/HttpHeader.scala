@@ -4,8 +4,8 @@ import scala.scalajs.js
 import scala.scalajs.js.typedarray.ArrayBuffer
 
 /**
-  * An HTTP Header, represented as an object containing a key and either a value or a binaryValue.
-  */
+ * An HTTP Header, represented as an object containing a key and either a value or a binaryValue.
+ */
 @js.native
 trait HttpHeader extends js.Object {
   val name: String = js.native

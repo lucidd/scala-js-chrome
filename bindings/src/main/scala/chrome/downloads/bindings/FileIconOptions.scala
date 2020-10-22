@@ -1,6 +1,5 @@
 package chrome.downloads.bindings
 
-
 import scalajs.js
 
 @js.native
@@ -9,9 +8,12 @@ trait FileIconOptions extends js.Object {
 }
 
 object FileIconOptions {
+
   def apply(size: js.UndefOr[Int] = js.undefined): FileIconOptions = {
-    js.Dynamic.literal(
-      size = size
-    ).asInstanceOf[FileIconOptions]
+    js.Dynamic
+      .literal(
+        size = size
+      )
+      .asInstanceOf[FileIconOptions]
   }
 }

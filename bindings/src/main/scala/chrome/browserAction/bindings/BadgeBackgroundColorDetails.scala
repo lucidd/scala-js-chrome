@@ -22,4 +22,3 @@ object BadgeBackgroundColorDetails {
       .asInstanceOf[BadgeBackgroundColorDetails]
   }
 }
-

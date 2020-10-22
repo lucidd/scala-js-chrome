@@ -11,11 +11,10 @@ trait ReloadProperties extends js.Object {
 
 object ReloadProperties {
 
-  def apply(
-      bypassCache: js.UndefOr[Boolean] = js.undefined): ReloadProperties = {
+  def apply(bypassCache: js.UndefOr[Boolean] = js.undefined): ReloadProperties = {
     js.Dynamic
       .literal(
-          bypassCache = bypassCache
+        bypassCache = bypassCache
       )
       .asInstanceOf[ReloadProperties]
   }

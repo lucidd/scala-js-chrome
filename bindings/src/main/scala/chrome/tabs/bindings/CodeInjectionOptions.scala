@@ -10,18 +10,20 @@ object CodeInjectionOptions {
   val DOCUMENT_END: ExeutionTime = "document_end"
   val DOCUMENT_IDLE: ExeutionTime = "document_idle"
 
-  def apply(code: js.UndefOr[String] = js.undefined,
-            file: js.UndefOr[String] = js.undefined,
-            allFrames: js.UndefOr[Boolean] = js.undefined,
-            matchAboutBlank: js.UndefOr[Boolean] = js.undefined,
-            runAt: js.UndefOr[String] = js.undefined): CodeInjectionOptions = {
+  def apply(
+      code: js.UndefOr[String] = js.undefined,
+      file: js.UndefOr[String] = js.undefined,
+      allFrames: js.UndefOr[Boolean] = js.undefined,
+      matchAboutBlank: js.UndefOr[Boolean] = js.undefined,
+      runAt: js.UndefOr[String] = js.undefined
+  ): CodeInjectionOptions = {
     js.Dynamic
       .literal(
-          code = code,
-          file = file,
-          allFrames = allFrames,
-          matchAboutBlank = matchAboutBlank,
-          runAt = runAt
+        code = code,
+        file = file,
+        allFrames = allFrames,
+        matchAboutBlank = matchAboutBlank,
+        runAt = runAt
       )
       .asInstanceOf[CodeInjectionOptions]
   }

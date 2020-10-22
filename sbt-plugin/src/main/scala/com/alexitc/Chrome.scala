@@ -16,7 +16,7 @@ object Chrome {
   }
 
   def buildUnpackedDirectory(
-    unpacked: File
+      unpacked: File
   )(manifest: File, jsLib: File, jsDeps: File, resources: Seq[File]): File = {
 
     val libsAndDependencies = List(

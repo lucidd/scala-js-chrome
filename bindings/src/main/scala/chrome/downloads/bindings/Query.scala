@@ -64,34 +64,36 @@ object Query {
       fileSize: js.UndefOr[Double] = js.undefined,
       exists: js.UndefOr[Boolean] = js.undefined
   ): DownloadOptions = {
-    js.Dynamic.literal(
-      query = query,
-      startedBefore = startedBefore,
-      startedAfter = startedAfter,
-      endedBefore = endedBefore,
-      endedAfter = endedAfter,
-      totalBytesGreater = totalBytesGreater,
-      totalBytesLess = totalBytesLess,
-      filenameRegex = filenameRegex,
-      urlRegex = urlRegex,
-      finalUrlRegex = finalUrlRegex,
-      limit = limit,
-      orderBy = orderBy,
-      id = id,
-      url = url,
-      finalUrl = finalUrl,
-      filename = filename,
-      danger = danger.asInstanceOf[String],
-      mime = mime,
-      startTime = startTime,
-      endTime = endTime,
-      state = state.asInstanceOf[String],
-      paused = paused,
-      error = error.asInstanceOf[String],
-      bytesReceived = bytesReceived,
-      totalBytes = totalBytes,
-      fileSize = fileSize,
-      exists = exists
-    ).asInstanceOf[DownloadOptions]
+    js.Dynamic
+      .literal(
+        query = query,
+        startedBefore = startedBefore,
+        startedAfter = startedAfter,
+        endedBefore = endedBefore,
+        endedAfter = endedAfter,
+        totalBytesGreater = totalBytesGreater,
+        totalBytesLess = totalBytesLess,
+        filenameRegex = filenameRegex,
+        urlRegex = urlRegex,
+        finalUrlRegex = finalUrlRegex,
+        limit = limit,
+        orderBy = orderBy,
+        id = id,
+        url = url,
+        finalUrl = finalUrl,
+        filename = filename,
+        danger = danger.asInstanceOf[String],
+        mime = mime,
+        startTime = startTime,
+        endTime = endTime,
+        state = state.asInstanceOf[String],
+        paused = paused,
+        error = error.asInstanceOf[String],
+        bytesReceived = bytesReceived,
+        totalBytes = totalBytes,
+        fileSize = fileSize,
+        exists = exists
+      )
+      .asInstanceOf[DownloadOptions]
   }
 }

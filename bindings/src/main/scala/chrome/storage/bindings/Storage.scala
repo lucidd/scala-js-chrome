@@ -16,16 +16,15 @@ trait StorageChange extends js.Object {
 @js.native
 trait StorageArea extends js.Object {
 
-  def get(keys: js.UndefOr[js.Any] = js.undefined,
-          callback: js.Function1[js.Dictionary[js.Any], _]): Unit = js.native
-  def getBytesInUse(keys: js.UndefOr[js.Any] = js.undefined,
-                    callback: js.Function1[Int, _]): Unit = js.native
-  def set(items: js.Dictionary[js.Any],
-          callback: js.UndefOr[js.Function0[_]] = js.undefined): Unit =
+  def get(keys: js.UndefOr[js.Any] = js.undefined, callback: js.Function1[js.Dictionary[js.Any], _]): Unit = js.native
+  def getBytesInUse(keys: js.UndefOr[js.Any] = js.undefined, callback: js.Function1[Int, _]): Unit = js.native
+
+  def set(items: js.Dictionary[js.Any], callback: js.UndefOr[js.Function0[_]] = js.undefined): Unit =
     js.native
-  def remove(keys: js.Any,
-             callback: js.UndefOr[js.Function0[_]] = js.undefined): Unit =
+
+  def remove(keys: js.Any, callback: js.UndefOr[js.Function0[_]] = js.undefined): Unit =
     js.native
+
   def clear(callback: js.UndefOr[js.Function0[_]] = js.undefined): Unit =
     js.native
 

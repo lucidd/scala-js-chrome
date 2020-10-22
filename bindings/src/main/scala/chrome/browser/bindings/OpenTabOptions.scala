@@ -12,7 +12,7 @@ object OpenTabOptions {
   def apply(url: String): OpenTabOptions = {
     js.Dynamic
       .literal(
-          url = url
+        url = url
       )
       .asInstanceOf[OpenTabOptions]
   }

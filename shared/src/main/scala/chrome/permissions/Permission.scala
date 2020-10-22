@@ -1,9 +1,11 @@
 package chrome.permissions
 
 sealed trait Permission
+
 object Permission {
   case class Host(urlPattern: String) extends Permission
   case class API(name: String) extends Permission
+
   object API {
 
     val ActiveTab = API("activeTab")
@@ -28,9 +30,11 @@ object Permission {
     val Diagnostics = API("diagnostics")
     val DNS = API("dns")
     val DocumentScan = API("documentScan")
+
     object Downloads extends API("downloads") {
       val Shelf = API("downloads.shelf")
     }
+
     object Enterprise {
       val PlatformKeys = API("enterprise.platformKeys")
     }
@@ -47,6 +51,7 @@ object Permission {
     val Location = API("location")
     val Management = API("management")
     val NativeMessaging = API("nativeMessaging")
+
     object Networking {
       val Config = API("networking.config")
     }
@@ -62,6 +67,7 @@ object Permission {
     val Sessions = API("sessions")
     val SignedInDevices = API("signedInDevices")
     val Storage = API("storage")
+
     object System {
       val CPU = API("system.cpu")
       val Display = API("system.display")
@@ -93,83 +99,83 @@ object Permission {
     val USB = API("usb")
 
     val All: Map[String, API] = Set(
-        ActiveTab,
-        Alarms,
-        Audio,
-        AudioCapture,
-        AudioModem,
-        Background,
-        Bookmarks,
-        Browser,
-        BrowsingData,
-        ClipboardRead,
-        ClipboardWrite,
-        ContentSettings,
-        ContextMenus,
-        Cookies,
-        Copresence,
-        Debugger,
-        DeclarativeContent,
-        DeclarativeWebRequest,
-        DesktopCapture,
-        Diagnostics,
-        DNS,
-        DocumentScan,
-        Downloads,
-        PlatformKeys,
-        Experimental,
-        FileBrowserHandler,
-        FileSystemProvider,
-        FontSettings,
-        GCM,
-        Geolocation,
-        History,
-        Identity,
-        Idle,
-        Idltest,
-        Location,
-        Management,
-        NativeMessaging,
-        Networking.Config,
-        NotificationProvider,
-        Notifications,
-        PageCapture,
-        PlatformKeys,
-        Power,
-        PrinterProvider,
-        Privacy,
-        Processes,
-        Proxy,
-        Sessions,
-        SignedInDevices,
-        Storage,
-        System.CPU,
-        System.Display,
-        System.Memory,
-        System.Network,
-        Storage,
-        TabCapture,
-        Tabs,
-        TopSites,
-        TTS,
-        TTSEngine,
-        UnlimitedStorage,
-        VideoCapture,
-        VpnProvider,
-        Wallpaper,
-        Webview,
-        WebNavigation,
-        WebRequest,
-        WebRequestBlocking,
-        FileSystem,
-        HID,
-        MDNS,
-        MediaGalleries,
-        PointerLock,
-        Serial,
-        Socket,
-        SyncFileSystem,
-        USB
+      ActiveTab,
+      Alarms,
+      Audio,
+      AudioCapture,
+      AudioModem,
+      Background,
+      Bookmarks,
+      Browser,
+      BrowsingData,
+      ClipboardRead,
+      ClipboardWrite,
+      ContentSettings,
+      ContextMenus,
+      Cookies,
+      Copresence,
+      Debugger,
+      DeclarativeContent,
+      DeclarativeWebRequest,
+      DesktopCapture,
+      Diagnostics,
+      DNS,
+      DocumentScan,
+      Downloads,
+      PlatformKeys,
+      Experimental,
+      FileBrowserHandler,
+      FileSystemProvider,
+      FontSettings,
+      GCM,
+      Geolocation,
+      History,
+      Identity,
+      Idle,
+      Idltest,
+      Location,
+      Management,
+      NativeMessaging,
+      Networking.Config,
+      NotificationProvider,
+      Notifications,
+      PageCapture,
+      PlatformKeys,
+      Power,
+      PrinterProvider,
+      Privacy,
+      Processes,
+      Proxy,
+      Sessions,
+      SignedInDevices,
+      Storage,
+      System.CPU,
+      System.Display,
+      System.Memory,
+      System.Network,
+      Storage,
+      TabCapture,
+      Tabs,
+      TopSites,
+      TTS,
+      TTSEngine,
+      UnlimitedStorage,
+      VideoCapture,
+      VpnProvider,
+      Wallpaper,
+      Webview,
+      WebNavigation,
+      WebRequest,
+      WebRequestBlocking,
+      FileSystem,
+      HID,
+      MDNS,
+      MediaGalleries,
+      PointerLock,
+      Serial,
+      Socket,
+      SyncFileSystem,
+      USB
     ).map(x => x.name -> x).toMap
 
   }

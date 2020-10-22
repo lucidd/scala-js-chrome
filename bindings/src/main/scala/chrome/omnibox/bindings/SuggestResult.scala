@@ -15,8 +15,8 @@ object SuggestResult {
   def apply(content: String, description: String): SuggestResult = {
     js.Dynamic
       .literal(
-          content = content,
-          description = description
+        content = content,
+        description = description
       )
       .asInstanceOf[SuggestResult]
   }

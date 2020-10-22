@@ -20,12 +20,11 @@ object TLSVersionBounds {
   val TLS1_1: Version = "tls1.1"
   val TLS1_2: Version = "tls1.2"
 
-  def apply(min: js.UndefOr[Version] = js.undefined,
-            max: js.UndefOr[Version] = js.undefined): TLSVersionBounds = {
+  def apply(min: js.UndefOr[Version] = js.undefined, max: js.UndefOr[Version] = js.undefined): TLSVersionBounds = {
     js.Dynamic
       .literal(
-          min = min,
-          max = max
+        min = min,
+        max = max
       )
       .asInstanceOf[TLSVersionBounds]
   }

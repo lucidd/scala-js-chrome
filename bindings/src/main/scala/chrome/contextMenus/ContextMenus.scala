@@ -23,8 +23,9 @@ object ContextMenus extends ChromeAPI {
 
   def create(id: String, title: String, contexts: List[String]): String | Int =
     create(
-        bindings
-          .CreateProperties(id, title, contexts = js.Array(contexts: _*)))
+      bindings
+        .CreateProperties(id, title, contexts = js.Array(contexts: _*))
+    )
 
   def update(id: String | Int, properties: UpdateProperties): Unit =
     bindings.ContextMenus.update(id, properties)
@@ -32,9 +33,12 @@ object ContextMenus extends ChromeAPI {
   def remove(menuItemId: String | Int): Future[String | Int] = {
     val promise = Promise[Unit]
     val result = bindings.ContextMenus
-      .remove(menuItemId, js.Any.fromFunction0[Unit](() => {
-        promise.success(())
-      }))
+      .remove(
+        menuItemId,
+        js.Any.fromFunction0[Unit](() => {
+          promise.success(())
+        })
+      )
     promise.future.map(_ => result)
   }
 

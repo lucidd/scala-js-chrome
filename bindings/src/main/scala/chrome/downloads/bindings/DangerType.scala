@@ -1,6 +1,7 @@
 package chrome.downloads.bindings
 
 sealed trait DangerType
+
 object DangerType {
   val file: DangerType = "file".asInstanceOf[DangerType]
   val url: DangerType = "url".asInstanceOf[DangerType]

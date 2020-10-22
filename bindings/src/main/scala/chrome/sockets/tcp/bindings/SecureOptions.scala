@@ -11,11 +11,10 @@ trait SecureOptions extends js.Object {
 
 object SecureOptions {
 
-  def apply(tlsVersion: js.UndefOr[TLSVersionBounds] = js.undefined)
-    : SecureOptions = {
+  def apply(tlsVersion: js.UndefOr[TLSVersionBounds] = js.undefined): SecureOptions = {
     js.Dynamic
       .literal(
-          tlsVersion = tlsVersion
+        tlsVersion = tlsVersion
       )
       .asInstanceOf[SecureOptions]
   }

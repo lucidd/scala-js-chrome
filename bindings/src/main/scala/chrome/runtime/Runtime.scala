@@ -116,8 +116,8 @@ object Runtime {
   def getManifest: chrome.Manifest = {
     val manifest = bindings.Runtime.getManifest()
     val perms = manifest.permissions
-      .map(_.foldLeft(Set[Permission]()) {
-        case (acc, perm) => acc ++ Permissions.permissionFromString(perm)
+      .map(_.foldLeft(Set[Permission]()) { case (acc, perm) =>
+        acc ++ Permissions.permissionFromString(perm)
       })
       .getOrElse(Set())
     val iconsValue = for {

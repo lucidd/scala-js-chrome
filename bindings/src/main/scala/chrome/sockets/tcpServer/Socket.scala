@@ -24,47 +24,60 @@ class Socket(val socketId: SocketId) {
 
   def update(properties: SocketProperties): Future[Unit] = {
     val promise = Promise[Unit]()
-    tcpServer.bindings.TCPServer.update(socketId, properties,
-      Option[js.Function0[_]](() => promise.complete(lastErrorOrValue(()))).orUndefined)
+    tcpServer.bindings.TCPServer.update(
+      socketId,
+      properties,
+      Option[js.Function0[_]](() => promise.complete(lastErrorOrValue(()))).orUndefined
+    )
     promise.future
   }
 
   def setPaused(paused: Boolean): Future[Unit] = {
     val promise = Promise[Unit]()
-    tcpServer.bindings.TCPServer.setPaused(socketId, paused,
-      Option[js.Function0[_]](() => promise.complete(lastErrorOrValue(()))).orUndefined)
+    tcpServer.bindings.TCPServer.setPaused(
+      socketId,
+      paused,
+      Option[js.Function0[_]](() => promise.complete(lastErrorOrValue(()))).orUndefined
+    )
     promise.future
   }
 
-  def listen(address: String,
-             port: Int,
-             backlog: js.UndefOr[Int] = js.undefined): Future[Int] = {
+  def listen(address: String, port: Int, backlog: js.UndefOr[Int] = js.undefined): Future[Int] = {
     val promise = Promise[Int]()
-    tcpServer.bindings.TCPServer.listen(socketId, address, port, backlog, (result: Int) => {
-      promise.complete(lastErrorOrValue(result))
-    })
+    tcpServer.bindings.TCPServer.listen(
+      socketId,
+      address,
+      port,
+      backlog,
+      (result: Int) => {
+        promise.complete(lastErrorOrValue(result))
+      }
+    )
     promise.future
   }
 
   def disconnect: Future[Unit] = {
     val promise = Promise[Unit]()
-    tcpServer.bindings.TCPServer.disconnect(socketId,
-      Option[js.Function0[_]](() => promise.complete(lastErrorOrValue(()))).orUndefined)
+    tcpServer.bindings.TCPServer
+      .disconnect(socketId, Option[js.Function0[_]](() => promise.complete(lastErrorOrValue(()))).orUndefined)
     promise.future
   }
 
   def close: Future[Unit] = {
     val promise = Promise[Unit]()
-    tcpServer.bindings.TCPServer.close(socketId,
-      Option[js.Function0[_]](() => promise.complete(lastErrorOrValue(()))).orUndefined)
+    tcpServer.bindings.TCPServer
+      .close(socketId, Option[js.Function0[_]](() => promise.complete(lastErrorOrValue(()))).orUndefined)
     promise.future
   }
 
   def getInfo: Future[SocketInfo] = {
     val promise = Promise[SocketInfo]()
-    tcpServer.bindings.TCPServer.getInfo(socketId, (info: SocketInfo) => {
-      promise.complete(lastErrorOrValue(info))
-    })
+    tcpServer.bindings.TCPServer.getInfo(
+      socketId,
+      (info: SocketInfo) => {
+        promise.complete(lastErrorOrValue(info))
+      }
+    )
     promise.future
   }
 

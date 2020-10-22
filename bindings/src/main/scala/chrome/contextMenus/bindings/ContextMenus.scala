@@ -37,8 +37,7 @@ object ContextMenus extends js.Object {
 
   def update(id: String | Int, properties: UpdateProperties): Unit = js.native
 
-  def remove(menuItemId: String | Int,
-             callback: js.Function0[Unit]): String | Int = js.native
+  def remove(menuItemId: String | Int, callback: js.Function0[Unit]): String | Int = js.native
 
   def removeAll(callback: js.Function0[Unit]): Unit = js.native
 
@@ -60,10 +59,7 @@ class UpdateProperties(
 
 object CreateProperties {
 
-  def apply(id: String,
-            title: String,
-            contexts: js.Array[String] = js.Array(MenuContexts.ALL))
-    : CreateProperties =
+  def apply(id: String, title: String, contexts: js.Array[String] = js.Array(MenuContexts.ALL)): CreateProperties =
     new CreateProperties(id = id, title = title, contexts = contexts)
 }
 

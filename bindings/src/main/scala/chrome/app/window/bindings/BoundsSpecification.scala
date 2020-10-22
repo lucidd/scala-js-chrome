@@ -17,14 +17,14 @@ object BoundsSpecification {
 
     js.Dynamic
       .literal(
-          left = left,
-          top = top,
-          width = width,
-          height = height,
-          minWidth = minWidth,
-          minHeight = minHeight,
-          maxWidth = maxWidth,
-          maxHeight = maxHeight
+        left = left,
+        top = top,
+        width = width,
+        height = height,
+        minWidth = minWidth,
+        minHeight = minHeight,
+        maxWidth = maxWidth,
+        maxHeight = maxHeight
       )
       .asInstanceOf[BoundsSpecification]
 

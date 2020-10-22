@@ -10,15 +10,16 @@ object DisplayProperties {
       overscan: js.UndefOr[Insets] = js.undefined,
       rotation: js.UndefOr[Int] = js.undefined,
       boundsOriginX: js.UndefOr[Int] = js.undefined,
-      boundsOriginY: js.UndefOr[Int] = js.undefined): DisplayProperties = {
+      boundsOriginY: js.UndefOr[Int] = js.undefined
+  ): DisplayProperties = {
     js.Dynamic
       .literal(
-          mirroringSourceId = mirroringSourceId,
-          isPrimary = isPrimary,
-          overscan = overscan,
-          rotation = rotation,
-          boundsOriginX = boundsOriginX,
-          boundsOriginY = boundsOriginY
+        mirroringSourceId = mirroringSourceId,
+        isPrimary = isPrimary,
+        overscan = overscan,
+        rotation = rotation,
+        boundsOriginX = boundsOriginX,
+        boundsOriginY = boundsOriginY
       )
       .asInstanceOf[DisplayProperties]
   }

@@ -22,21 +22,15 @@ object PageAction extends js.Object {
 
   def setTitle(details: SetTitleDetails): Unit = js.native
 
-  def getTitle(
-    details: GetTitleDetails,
-    callback: js.Function1[String, _]): Unit =
+  def getTitle(details: GetTitleDetails, callback: js.Function1[String, _]): Unit =
     js.native
 
-  def setIcon(
-    details: SetIconDetails,
-    callback: js.Function0[_]): Unit =
+  def setIcon(details: SetIconDetails, callback: js.Function0[_]): Unit =
     js.native
 
   def setPopup(details: SetPopupDetails): Unit = js.native
 
-  def getPopup(
-    details: GetPopupDetails,
-    callback: js.Function1[String, _]): Unit =
+  def getPopup(details: GetPopupDetails, callback: js.Function1[String, _]): Unit =
     js.native
 }
 
@@ -57,17 +51,17 @@ object GetTitleDetails {
 }
 
 class SetIconDetails(
-  val tabId: Tab.Id,
-  val imageData: js.UndefOr[ImageDataType | js.Dictionary[ImageDataType]],
-  val path: js.UndefOr[String | js.Dictionary[String]]
+    val tabId: Tab.Id,
+    val imageData: js.UndefOr[ImageDataType | js.Dictionary[ImageDataType]],
+    val path: js.UndefOr[String | js.Dictionary[String]]
 ) extends js.Object
 
 object SetIconDetails {
 
   def apply(
-    tabId: Tab.Id,
-    imageData: js.UndefOr[ImageDataType | js.Dictionary[ImageDataType]] = js.undefined,
-    path: js.UndefOr[String | js.Dictionary[String]] = js.undefined
+      tabId: Tab.Id,
+      imageData: js.UndefOr[ImageDataType | js.Dictionary[ImageDataType]] = js.undefined,
+      path: js.UndefOr[String | js.Dictionary[String]] = js.undefined
   ): SetIconDetails = new SetIconDetails(tabId, imageData, path)
 }
 
@@ -86,4 +80,3 @@ object SetTitleDetails {
   def apply(tabId: Tab.Id, title: String): SetTitleDetails =
     new SetTitleDetails(tabId, title)
 }
-

@@ -22,6 +22,7 @@ trait NotificationOptions extends js.Object {
 }
 
 object NotificationOptions {
+
   def apply(
       `type`: js.UndefOr[TemplateType] = js.undefined,
       iconUrl: js.UndefOr[String] = js.undefined,
@@ -35,22 +36,23 @@ object NotificationOptions {
       imageUrl: js.UndefOr[String] = js.undefined,
       items: js.UndefOr[js.Array[Item]] = js.undefined,
       progress: js.UndefOr[Int] = js.undefined,
-      isClickable: js.UndefOr[Boolean] = js.undefined): NotificationOptions = {
+      isClickable: js.UndefOr[Boolean] = js.undefined
+  ): NotificationOptions = {
     js.Dynamic
       .literal(
-          `type` = `type`,
-          iconUrl = iconUrl,
-          appIconMaskUrl = appIconMaskUrl,
-          title = title,
-          message = message,
-          contextMessage = contextMessage,
-          priority = priority,
-          eventTime = eventTime,
-          buttons = buttons,
-          imageUrl = imageUrl,
-          items = items,
-          progress = progress,
-          isClickable = isClickable
+        `type` = `type`,
+        iconUrl = iconUrl,
+        appIconMaskUrl = appIconMaskUrl,
+        title = title,
+        message = message,
+        contextMessage = contextMessage,
+        priority = priority,
+        eventTime = eventTime,
+        buttons = buttons,
+        imageUrl = imageUrl,
+        items = items,
+        progress = progress,
+        isClickable = isClickable
       )
       .asInstanceOf[NotificationOptions]
   }
@@ -64,12 +66,11 @@ trait Button extends js.Object {
 
 object Button {
 
-  def apply(title: String,
-            iconUrl: js.UndefOr[String] = js.undefined): Button = {
+  def apply(title: String, iconUrl: js.UndefOr[String] = js.undefined): Button = {
     js.Dynamic
       .literal(
-          title = title,
-          iconUrl = iconUrl
+        title = title,
+        iconUrl = iconUrl
       )
       .asInstanceOf[Button]
   }
@@ -87,8 +88,8 @@ object Item {
   def apply(title: String, message: String): Item = {
     js.Dynamic
       .literal(
-          title = title,
-          message = message
+        title = title,
+        message = message
       )
       .asInstanceOf[Item]
   }

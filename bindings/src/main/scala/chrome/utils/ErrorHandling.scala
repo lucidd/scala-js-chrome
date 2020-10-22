@@ -11,7 +11,8 @@ object ErrorHandling {
       .filter(_ != null)
       .map { x =>
         Failure(new Exception(x.message.getOrElse("")))
-      }.getOrElse(Success(value))
+      }
+      .getOrElse(Success(value))
   }
 
 }

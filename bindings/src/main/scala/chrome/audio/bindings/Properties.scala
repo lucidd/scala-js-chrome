@@ -4,14 +4,16 @@ import scala.scalajs.js
 
 object Properties {
 
-  def apply(isMuted: Boolean,
-            volume: js.UndefOr[Double] = js.undefined,
-            gain: js.UndefOr[Double] = js.undefined): Properties = {
+  def apply(
+      isMuted: Boolean,
+      volume: js.UndefOr[Double] = js.undefined,
+      gain: js.UndefOr[Double] = js.undefined
+  ): Properties = {
     js.Dynamic
       .literal(
-          isMuted = isMuted,
-          volume = volume,
-          gain = gain
+        isMuted = isMuted,
+        volume = volume,
+        gain = gain
       )
       .asInstanceOf[Properties]
   }

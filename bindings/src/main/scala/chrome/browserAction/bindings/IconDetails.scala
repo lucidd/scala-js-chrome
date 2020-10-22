@@ -18,9 +18,11 @@ object IconDetails {
   implicit val imageEvidence: Evidence[ImageData | js.Dictionary[ImageData], js.Any] = implicitly
   implicit val pathEvidence: Evidence[String | js.Dictionary[String], js.Any] = implicitly
 
-  def apply(imageData: js.UndefOr[ImageData | js.Dictionary[ImageData]] = js.undefined,
-            path: js.UndefOr[String | js.Dictionary[String]] = js.undefined,
-            tabId: js.UndefOr[Int] = js.undefined): IconDetails = {
+  def apply(
+      imageData: js.UndefOr[ImageData | js.Dictionary[ImageData]] = js.undefined,
+      path: js.UndefOr[String | js.Dictionary[String]] = js.undefined,
+      tabId: js.UndefOr[Int] = js.undefined
+  ): IconDetails = {
     // explicitly merge our union types so that dynamic is happy
     val anyImageData: js.UndefOr[js.Any] = imageData.map(_.merge)
     val anyPath: js.UndefOr[js.Any] = path.map(_.merge)
@@ -32,8 +34,7 @@ object IconDetails {
           tabId = tabId
         )
         .asInstanceOf[IconDetails]
-    }
-    else {
+    } else {
       js.Dynamic
         .literal(
           path = anyPath,

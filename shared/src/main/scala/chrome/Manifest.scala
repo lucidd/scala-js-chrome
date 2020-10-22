@@ -72,6 +72,7 @@ case class Storage(managedSchema: String)
 
 case class ChromeUrlOverrides(bookmarks: Option[String] = None, history: Option[String] = None, newtab: Option[String])
 case class ChromeUIOverrides(newtab: String, bookmarksUI: BookmarksUI)
+
 case class BookmarksUI(
     removeButton: Option[Boolean] = None,
     removeBookmarkShortcut: Option[Boolean] = None
@@ -96,11 +97,13 @@ case class ExternallyConnectable(
 case class Commands(actions: Map[String, Commands.Action] = Map.empty)
 
 object Commands {
+
   case class Action(
       suggestedKey: SuggestedKey,
       description: Option[String] = None,
       global: Option[Boolean] = None
   )
+
   case class SuggestedKey(
       default: Option[String] = None,
       linux: Option[String] = None,

@@ -4,14 +4,16 @@ import scala.scalajs.js
 
 object AlarmInfo {
 
-  def apply(when: js.UndefOr[Double] = js.undefined,
-            delayInMinutes: js.UndefOr[Double] = js.undefined,
-            periodInMinutes: js.UndefOr[Double] = js.undefined): AlarmInfo = {
+  def apply(
+      when: js.UndefOr[Double] = js.undefined,
+      delayInMinutes: js.UndefOr[Double] = js.undefined,
+      periodInMinutes: js.UndefOr[Double] = js.undefined
+  ): AlarmInfo = {
     js.Dynamic
       .literal(
-          when = when,
-          delayInMinutes = delayInMinutes,
-          periodInMinutes = periodInMinutes
+        when = when,
+        delayInMinutes = delayInMinutes,
+        periodInMinutes = periodInMinutes
       )
       .asInstanceOf[AlarmInfo]
   }

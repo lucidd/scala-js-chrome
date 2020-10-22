@@ -15,15 +15,12 @@ object Permissions extends js.Object {
 
   def getAll(callback: js.Function1[PermissionList, _]): Unit = native
 
-  def contains(permissions: PermissionList,
-               callback: js.Function1[Boolean, _]): Unit = native
+  def contains(permissions: PermissionList, callback: js.Function1[Boolean, _]): Unit = native
 
-  def request(permissions: PermissionList,
-              callback: UndefOr[js.Function1[Boolean, _]] = undefined): Unit =
+  def request(permissions: PermissionList, callback: UndefOr[js.Function1[Boolean, _]] = undefined): Unit =
     native
 
-  def remove(permissions: PermissionList,
-             callback: UndefOr[js.Function1[Boolean, _]] = undefined): Unit =
+  def remove(permissions: PermissionList, callback: UndefOr[js.Function1[Boolean, _]] = undefined): Unit =
     native
 
 }
@@ -38,12 +35,14 @@ trait PermissionList extends js.Object {
 
 object PermissionList {
 
-  def apply(permissions: UndefOr[js.Array[String]] = undefined,
-            origins: UndefOr[js.Array[String]] = undefined): PermissionList = {
+  def apply(
+      permissions: UndefOr[js.Array[String]] = undefined,
+      origins: UndefOr[js.Array[String]] = undefined
+  ): PermissionList = {
     js.Dynamic
       .literal(
-          permissions = permissions,
-          origins = origins
+        permissions = permissions,
+        origins = origins
       )
       .asInstanceOf[PermissionList]
   }

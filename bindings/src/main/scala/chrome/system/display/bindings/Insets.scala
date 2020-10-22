@@ -17,10 +17,10 @@ object Insets {
   def apply(left: Int, top: Int, right: Int, bottom: Int): Insets = {
     js.Dynamic
       .literal(
-          left = left,
-          top = top,
-          right = right,
-          bottom = bottom
+        left = left,
+        top = top,
+        right = right,
+        bottom = bottom
       )
       .asInstanceOf[Insets]
   }

@@ -31,9 +31,12 @@ object Management extends ChromeAPI {
 
   def get(id: AppID): Future[ExtensionInfo] = {
     val promise = Promise[ExtensionInfo]()
-    bindings.Management.get(id, (extension: ExtensionInfo) => {
-      promise.complete(lastErrorOrValue(extension))
-    })
+    bindings.Management.get(
+      id,
+      (extension: ExtensionInfo) => {
+        promise.complete(lastErrorOrValue(extension))
+      }
+    )
     promise.future
   }
 
@@ -48,84 +51,108 @@ object Management extends ChromeAPI {
   def getPermissionWarningsById(id: AppID): Future[js.Array[String]] = {
     val promise = Promise[js.Array[String]]()
     bindings.Management
-      .getPermissionWarningsById(id, (warnings: js.Array[String]) => {
-        promise.complete(lastErrorOrValue(warnings))
-      })
+      .getPermissionWarningsById(
+        id,
+        (warnings: js.Array[String]) => {
+          promise.complete(lastErrorOrValue(warnings))
+        }
+      )
     promise.future
   }
 
-  def getPermissionWarningsByManifest(
-      manifestStr: String): Future[js.Array[String]] = {
+  def getPermissionWarningsByManifest(manifestStr: String): Future[js.Array[String]] = {
     val promise = Promise[js.Array[String]]()
     bindings.Management.getPermissionWarningsByManifest(
-        manifestStr,
-        (warnings: js.Array[String]) => {
-          promise.complete(lastErrorOrValue(warnings))
-        })
+      manifestStr,
+      (warnings: js.Array[String]) => {
+        promise.complete(lastErrorOrValue(warnings))
+      }
+    )
     promise.future
   }
 
   def setEnabled(id: AppID, enabled: Boolean): Future[Boolean] = {
     val promise = Promise[Boolean]()
-    bindings.Management.setEnabled(id, enabled, js.Any.fromFunction0(() => {
-      promise.complete(lastErrorOrValue(enabled))
-    }))
+    bindings.Management.setEnabled(
+      id,
+      enabled,
+      js.Any.fromFunction0(() => {
+        promise.complete(lastErrorOrValue(enabled))
+      })
+    )
     promise.future
   }
 
-  def uninstall(
-      id: AppID,
-      options: js.UndefOr[js.Object] = js.undefined): Future[Unit] = {
+  def uninstall(id: AppID, options: js.UndefOr[js.Object] = js.undefined): Future[Unit] = {
     val promise = Promise[Unit]()
-    bindings.Management.uninstall(id, options, js.Any.fromFunction0(() => {
-      promise.complete(lastErrorOrValue(()))
-    }))
+    bindings.Management.uninstall(
+      id,
+      options,
+      js.Any.fromFunction0(() => {
+        promise.complete(lastErrorOrValue(()))
+      })
+    )
     promise.future
   }
 
   def uninstallSelf(
       options: js.UndefOr[js.Object] = js.undefined,
-      callback: js.UndefOr[js.Function0[_]] = js.undefined): Future[Unit] = {
+      callback: js.UndefOr[js.Function0[_]] = js.undefined
+  ): Future[Unit] = {
     val promise = Promise[Unit]()
-    bindings.Management.uninstallSelf(options, js.Any.fromFunction0(() => {
-      promise.complete(lastErrorOrValue(()))
-    }))
+    bindings.Management.uninstallSelf(
+      options,
+      js.Any.fromFunction0(() => {
+        promise.complete(lastErrorOrValue(()))
+      })
+    )
     promise.future
   }
 
   def launchApp(id: AppID): Future[Unit] = {
     val promise = Promise[Unit]()
-    bindings.Management.launchApp(id, js.Any.fromFunction0(() => {
-      promise.complete(lastErrorOrValue(()))
-    }))
+    bindings.Management.launchApp(
+      id,
+      js.Any.fromFunction0(() => {
+        promise.complete(lastErrorOrValue(()))
+      })
+    )
     promise.future
   }
 
   def createAppShortcut(id: AppID): Future[Unit] = {
     val promise = Promise[Unit]()
-    bindings.Management.createAppShortcut(id, js.Any.fromFunction0(() => {
-      promise.complete(lastErrorOrValue(()))
-    }))
+    bindings.Management.createAppShortcut(
+      id,
+      js.Any.fromFunction0(() => {
+        promise.complete(lastErrorOrValue(()))
+      })
+    )
     promise.future
   }
 
   def setLaunchType(id: AppID, launchType: LaunchType): Future[Unit] = {
     val promise = Promise[Unit]()
     bindings.Management
-      .setLaunchType(id, launchType, js.Any.fromFunction0(() => {
-        promise.complete(lastErrorOrValue(()))
-      }))
+      .setLaunchType(
+        id,
+        launchType,
+        js.Any.fromFunction0(() => {
+          promise.complete(lastErrorOrValue(()))
+        })
+      )
     promise.future
   }
 
   def generateAppForLink(url: String, title: String): Future[ExtensionInfo] = {
     val promise = Promise[ExtensionInfo]()
     bindings.Management.generateAppForLink(
-        url,
-        title,
-        js.Any.fromFunction1((info: ExtensionInfo) => {
-          promise.complete(lastErrorOrValue(info))
-        }))
+      url,
+      title,
+      js.Any.fromFunction1((info: ExtensionInfo) => {
+        promise.complete(lastErrorOrValue(info))
+      })
+    )
     promise.future
   }
 
