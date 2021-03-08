@@ -54,7 +54,7 @@ lazy val plugin = project
     libraryDependencies ++= {
       // NOTE: Avoid circe as it doesn't respect binary compatibility which causes lots of issues
       Seq(
-        "com.lihaoyi" %%% "upickle" % "1.2.3",
+        "com.lihaoyi" %%% "upickle" % "1.3.0",
         "org.scalactic" %% "scalactic" % "3.1.1" % "test",
         "org.scalatest" %% "scalatest" % "3.2.6" % "test"
       )
