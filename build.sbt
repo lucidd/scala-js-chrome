@@ -59,7 +59,7 @@ lazy val plugin = project
         "org.scalatest" %% "scalatest" % "3.2.6" % "test"
       )
     },
-    addSbtPlugin("org.scala-js" % "sbt-scalajs" % "1.5.0"),
+    addSbtPlugin("org.scala-js" % "sbt-scalajs" % "1.5.1"),
     addSbtPlugin("org.scala-js" % "sbt-jsdependencies" % "1.0.0")
   )
   .enablePlugins(commonPlugins: _*)
