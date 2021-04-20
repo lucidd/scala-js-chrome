@@ -56,7 +56,7 @@ lazy val plugin = project
       Seq(
         "com.lihaoyi" %%% "upickle" % "1.3.11",
         "org.scalactic" %% "scalactic" % "3.1.1" % "test",
-        "org.scalatest" %% "scalatest" % "3.2.7" % "test"
+        "org.scalatest" %% "scalatest" % "3.2.8" % "test"
       )
     },
     addSbtPlugin("org.scala-js" % "sbt-scalajs" % "1.5.1"),
