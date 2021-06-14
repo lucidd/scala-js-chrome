@@ -33,7 +33,7 @@ object Alarms {
   }
 
   def get(name: String): Future[Option[Alarm]] = {
-    val promise = Promise[Option[Alarm]]
+    val promise = Promise[Option[Alarm]]()
     bindings.Alarms.get(
       name,
       (alarm: js.UndefOr[Alarm]) => {

@@ -12,7 +12,7 @@ object Commands {
   val onCommand: EventSource[String] = new EventSource1Impl(bindings.Commands.onCommand)
 
   def getAll: Future[List[Command]] = {
-    val promise = Promise[List[Command]]
+    val promise = Promise[List[Command]]()
     bindings.Commands.getAll(js.Any.fromFunction1((commands: js.Array[Command]) => {
       promise.complete(lastErrorOrValue(commands.toList))
     }))

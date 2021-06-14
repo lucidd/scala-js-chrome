@@ -31,7 +31,7 @@ object ContextMenus extends ChromeAPI {
     bindings.ContextMenus.update(id, properties)
 
   def remove(menuItemId: String | Int): Future[String | Int] = {
-    val promise = Promise[Unit]
+    val promise = Promise[Unit]()
     val result = bindings.ContextMenus
       .remove(
         menuItemId,
@@ -43,7 +43,7 @@ object ContextMenus extends ChromeAPI {
   }
 
   def removeAll(): Future[Unit] = {
-    val promise = Promise[Unit]
+    val promise = Promise[Unit]()
     bindings.ContextMenus.removeAll(js.Any.fromFunction0[Unit](() => {
       promise.success(())
     }))

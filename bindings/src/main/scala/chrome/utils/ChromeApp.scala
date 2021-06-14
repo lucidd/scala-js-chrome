@@ -7,7 +7,7 @@ trait ChromeApp {
 
   def main(args: Array[String]): Unit = {
     Runtime.onLaunched.listen(onLaunched)
-    Runtime.onRestarted.listen((_) => onRestart)
+    Runtime.onRestarted.listen((_) => onRestart())
     Runtime.onEmbedRequested.listen(onEmbedRequested)
   }
 

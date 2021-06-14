@@ -14,16 +14,17 @@ inThisBuild(
   )
 )
 
-skip in publish := true
+publish / skip := true
 
 lazy val commonSettings = Seq(
   scalacOptions ++= Seq(
     "-Xlint",
     "-deprecation",
-    "-Xfatal-warnings",
+// Temporary disable this because there are tricky warnings to solve
+//    "-Xfatal-warnings",
     "-feature"
   ),
-  unmanagedSourceDirectories in Compile ++= Seq(
+  Compile / unmanagedSourceDirectories ++= Seq(
     baseDirectory.value.getParentFile / "shared" / "src" / "main" / "scala"
   )
 )

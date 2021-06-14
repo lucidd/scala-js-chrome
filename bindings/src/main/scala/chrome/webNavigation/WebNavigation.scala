@@ -75,7 +75,7 @@ object WebNavigation extends ChromeAPI {
    * @param details Information about the frame to retrieve information about.
    */
   def getFrame(details: GetFrameOptions): Future[FrameDetails] = {
-    val promise = Promise[FrameDetails]
+    val promise = Promise[FrameDetails]()
     bindings.WebNavigation.getFrame(
       details,
       (frameDetails: FrameDetails) => promise.complete(lastErrorOrValue(frameDetails))
@@ -89,7 +89,7 @@ object WebNavigation extends ChromeAPI {
    * @param details Information about the tab to retrieve all frames from.
    */
   def getAllFrames(details: GetAllFramesOptions): Future[Seq[AllFramesDetails]] = {
-    val promise = Promise[Seq[AllFramesDetails]]
+    val promise = Promise[Seq[AllFramesDetails]]()
     bindings.WebNavigation.getAllFrames(
       details,
       (allFrames: js.Array[AllFramesDetails]) => promise.complete(lastErrorOrValue(allFrames))

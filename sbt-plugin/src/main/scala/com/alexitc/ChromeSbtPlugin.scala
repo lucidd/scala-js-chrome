@@ -25,22 +25,22 @@ object ChromeSbtPlugin extends AutoPlugin {
     private val chromeDir = "chrome"
 
     lazy val baseSettings: Seq[Def.Setting[_]] = Seq(
-      fastOptJsLib := (fastOptJS in Compile).value,
+      fastOptJsLib := (Compile / fastOptJS).value,
       chromeUnpackedFast := {
         Chrome.buildUnpackedDirectory(target.value / chromeDir / "unpacked-fast")(
-          (chromeGenerateManifest in Compile).value,
+          (Compile / chromeGenerateManifest).value,
           fastOptJsLib.value.data,
-          (packageJSDependencies in Compile).value,
-          (resourceDirectories in Compile).value
+          (Compile / packageJSDependencies).value,
+          (Compile / resourceDirectories).value
         )
       },
-      fullOptJsLib := (fullOptJS in Compile).value,
+      fullOptJsLib := (Compile / fullOptJS).value,
       chromeUnpackedOpt := {
         Chrome.buildUnpackedDirectory(target.value / chromeDir / "unpacked-opt")(
-          (chromeGenerateManifest in Compile).value,
+          (Compile / chromeGenerateManifest).value,
           fullOptJsLib.value.data,
-          (packageMinifiedJSDependencies in Compile).value,
-          (resourceDirectories in Compile).value
+          (Compile / packageMinifiedJSDependencies).value,
+          (Compile / resourceDirectories).value
         )
       },
       chromePackage := {
@@ -51,12 +51,12 @@ object ChromeSbtPlugin extends AutoPlugin {
           ".DS_Store"
         )
         val fileFilter = AllPassFilter - new SimpleFilter(excludeFileNames.contains)
-        IO.zip(Path.selectSubpaths(chromeAppDir, fileFilter), zipFile)
+        IO.zip(Path.selectSubpaths(chromeAppDir, fileFilter), zipFile, None)
         zipFile
       },
       chromeGenerateManifest := {
         Chrome.generateManifest(target.value / chromeDir / "generated_manifest.json")(
-          (chromeManifest in Compile).value
+          (Compile / chromeManifest).value
         )
       }
     )

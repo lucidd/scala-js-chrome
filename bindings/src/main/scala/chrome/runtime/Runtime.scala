@@ -163,7 +163,7 @@ object Runtime {
   }
 
   def openOptionsPage: Future[Unit] = {
-    val promise = Promise[Unit]
+    val promise = Promise[Unit]()
     bindings.Runtime.openOptionsPage(js.Any.fromFunction0(() => {
       promise.complete(lastErrorOrValue(()))
     }))
@@ -185,6 +185,7 @@ object Runtime {
               UpdateAvailable(details.get.version)
             case UpdateCheck.NO_UPDATE => NoUpdate()
             case UpdateCheck.THROTTLED => Throttled()
+            case s => throw new RuntimeException(s"Unknown status: $s")
           }
         )
       )
