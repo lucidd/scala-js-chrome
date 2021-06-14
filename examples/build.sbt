@@ -14,7 +14,7 @@ lazy val exampleApp = project
   .settings(
     name := "Example App",
     version := "0.1.0",
-    scalaVersion := "2.12.7",
+    scalaVersion := "2.13.6",
     scalacOptions ++= Seq(
       "-language:implicitConversions",
       "-language:existentials",
@@ -24,24 +24,24 @@ lazy val exampleApp = project
       "-feature"
     ),
     scalaJSUseMainModuleInitializer := true,
-    scalaJSUseMainModuleInitializer in Test := false,
+    Test / scalaJSUseMainModuleInitializer := false,
     scalaJSLinkerConfig := scalaJSLinkerConfig.value.withRelativizeSourceMapBase(
       Some((Compile / fastOptJS / artifactPath).value.toURI)
     ),
-    skip in packageJSDependencies := false,
+    packageJSDependencies / skip := false,
     // you can customize and have a static output name for lib and dependencies
     // instead of having the default files names like app-fastopt.js, ...
-    artifactPath in (Compile, fastOptJS) := {
-      (crossTarget in fastOptJS).value / "main.js"
+    (Compile / fastOptJS / artifactPath) := {
+      (fastOptJS / crossTarget).value / "main.js"
     },
-    artifactPath in (Compile, fullOptJS) := {
-      (crossTarget in fullOptJS).value / "main.js"
+    (Compile / fullOptJS / artifactPath) := {
+      (fullOptJS / crossTarget).value / "main.js"
     },
-    artifactPath in (Compile, packageJSDependencies) := {
-      (crossTarget in packageJSDependencies).value / "dependencies.js"
+    (Compile / packageJSDependencies / artifactPath) := {
+      (packageJSDependencies / crossTarget).value / "dependencies.js"
     },
-    artifactPath in (Compile, packageMinifiedJSDependencies) := {
-      (crossTarget in packageMinifiedJSDependencies).value / "dependencies.js"
+    (Compile / packageMinifiedJSDependencies / artifactPath) := {
+      (packageMinifiedJSDependencies / crossTarget).value / "dependencies.js"
     },
     chromeManifest := new AppManifest {
       val name = Keys.name.value
@@ -77,7 +77,7 @@ lazy val extension = project
   .settings(
     name := "Example Extension",
     version := "0.1.0",
-    scalaVersion := "2.12.7",
+    scalaVersion := "2.13.6",
     scalacOptions ++= Seq(
       "-language:implicitConversions",
       "-language:existentials",
@@ -87,24 +87,24 @@ lazy val extension = project
       "-feature"
     ),
     scalaJSUseMainModuleInitializer := true,
-    scalaJSUseMainModuleInitializer in Test := false,
+    Test / scalaJSUseMainModuleInitializer := false,
     scalaJSLinkerConfig := scalaJSLinkerConfig.value.withRelativizeSourceMapBase(
       Some((Compile / fastOptJS / artifactPath).value.toURI)
     ),
-    skip in packageJSDependencies := false,
+    packageJSDependencies / skip := false,
     // you can customize and have a static output name for lib and dependencies
     // instead of having the default files names like extension-fastopt.js, ...
-    artifactPath in (Compile, fastOptJS) := {
-      (crossTarget in fastOptJS).value / "main.js"
+    (Compile / fastOptJS / artifactPath) := {
+      (fastOptJS / crossTarget).value / "main.js"
     },
-    artifactPath in (Compile, fullOptJS) := {
-      (crossTarget in fullOptJS).value / "main.js"
+    (Compile / fullOptJS / artifactPath) := {
+      (fullOptJS / crossTarget).value / "main.js"
     },
-    artifactPath in (Compile, packageJSDependencies) := {
-      (crossTarget in packageJSDependencies).value / "dependencies.js"
+    (Compile / packageJSDependencies / artifactPath) := {
+      (packageJSDependencies / crossTarget).value / "dependencies.js"
     },
-    artifactPath in (Compile, packageMinifiedJSDependencies) := {
-      (crossTarget in packageMinifiedJSDependencies).value / "dependencies.js"
+    (Compile / packageMinifiedJSDependencies / artifactPath) := {
+      (packageMinifiedJSDependencies / crossTarget).value / "dependencies.js"
     },
     chromeManifest := new ExtensionManifest {
 
