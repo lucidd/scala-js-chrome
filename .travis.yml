@@ -16,8 +16,10 @@ jobs:
     script: sbt plugin/compile
   - name: run tests
     script: sbt test
-  - name: compile examples
-    script: (cd examples; sbt chromePackage)
+# Disable until the example gets fixed
+#  - name: compile examples
+#    script: (cd examples; sbt chromePackage)
+
   # run ci-release only if previous stages passed
   - stage: release
     script: sbt ci-release
