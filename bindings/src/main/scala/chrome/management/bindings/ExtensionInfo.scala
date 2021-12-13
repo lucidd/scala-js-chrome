@@ -24,7 +24,7 @@ trait ExtensionInfo extends js.Object {
   val hostPermissions: js.Array[String] = js.native
   val installType: ExtensionInfo.InstallType = js.native
 
-  //TODO: find a good way to make sure this can only be accessed if we are in a app (maybe using implicits)
+  // TODO: find a good way to make sure this can only be accessed if we are in a app (maybe using implicits)
   val appLaunchUrl: js.UndefOr[String] = js.native
   val launchType: js.UndefOr[ExtensionInfo.LaunchType] = js.native
 

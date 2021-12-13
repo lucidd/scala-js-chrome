@@ -7,9 +7,8 @@ import scala.scalajs.js
 @js.native
 trait GetAllFramesOptions extends js.Object {
 
-  /**
-   * The ID of the tab.
-   */
+  /** The ID of the tab.
+    */
   val tabId: Tab.Id
 }
 

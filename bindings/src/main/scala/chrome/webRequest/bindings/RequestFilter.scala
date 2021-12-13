@@ -26,11 +26,9 @@ trait RequestFilter extends js.Object {
 
   val tabId: js.UndefOr[Int] = js.native
 
-  /**
-   * A list of request types. Requests that cannot match any of the types will be filtered out.
-   * Each element one of: "main_frame", "sub_frame", "stylesheet", "script", "image", "object", "xmlhttprequest",
-   * or "other"
-   */
+  /** A list of request types. Requests that cannot match any of the types will be filtered out. Each element one of:
+    * "main_frame", "sub_frame", "stylesheet", "script", "image", "object", "xmlhttprequest", or "other"
+    */
   val types: js.UndefOr[js.Array[String]] = js.native
 
   /** A list of URLs or URL patterns. Requests that cannot match any of the URLs will be filtered out. */

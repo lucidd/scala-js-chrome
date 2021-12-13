@@ -297,30 +297,30 @@ object JsonCodecs {
       ujson.Obj.from(commonValues ++ appValues)
     }
 
-    //// Optional
-    //"copresence": ...,
-    //"current_locale": ...,
-    //"event_rules": [{...}],
-    //"externally_connectable": {
+    // // Optional
+    // "copresence": ...,
+    // "current_locale": ...,
+    // "event_rules": [{...}],
+    // "externally_connectable": {
     //  "matches": ["*://*.example.com/*"]
-    //},
-    //"file_handlers": {...},
-    //"file_system_provider_capabilities": {
+    // },
+    // "file_handlers": {...},
+    // "file_system_provider_capabilities": {
     //  "configurable": true,
     //  "multiple_mounts": true,
     //  "source": "network"
-    //},
-    //"import": [{"id": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"}],
-    //"nacl_modules": [...],
-    //"requirements": {...},
-    //"sandbox": [...],
-    //"signature": ...,
-    //"system_indicator": ...,
-    //"url_handlers": {...},
-    //"usb_printers": {
+    // },
+    // "import": [{"id": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"}],
+    // "nacl_modules": [...],
+    // "requirements": {...},
+    // "sandbox": [...],
+    // "signature": ...,
+    // "system_indicator": ...,
+    // "url_handlers": {...},
+    // "usb_printers": {
     //  "filters": [...]
-    //},
-    //"webview": {...}
+    // },
+    // "webview": {...}
   }
 
   implicit val w: Writer[Manifest] = {

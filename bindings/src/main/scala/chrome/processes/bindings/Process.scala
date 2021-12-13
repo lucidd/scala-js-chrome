@@ -32,7 +32,7 @@ object Process {
   type ExitType = Int
 
   object ExitType {
-    //TODO: find out the values of these
+    // TODO: find out the values of these
     val NORMAL: ExitType = ???
     val ABNORMAL: ExitType = ???
     val KILLED: ExitType = ???
