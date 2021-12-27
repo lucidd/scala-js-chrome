@@ -14,6 +14,8 @@ inThisBuild(
   )
 )
 
+ThisBuild / versionScheme := Some("early-semver")
+
 publish / skip := true
 
 lazy val commonSettings = Seq(
