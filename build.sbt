@@ -22,7 +22,8 @@ lazy val commonSettings = Seq(
   scalacOptions ++= Seq(
     "-Xlint",
     "-deprecation",
-    "-Xfatal-warnings",
+// there are weird warnings in the ci release process
+//    "-Xfatal-warnings",
     "-feature"
   ),
   Compile / unmanagedSourceDirectories ++= Seq(
