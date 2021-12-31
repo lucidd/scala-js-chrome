@@ -40,7 +40,7 @@ lazy val bindings = project
     name := "scala-js-chrome",
     crossScalaVersions := Seq("2.12.15", "2.13.7"),
     libraryDependencies ++= Seq(
-      "org.scala-js" %%% "scalajs-dom" % "2.0.0"
+      "org.scala-js" %%% "scalajs-dom" % "2.1.0"
     ),
     scalaJSUseMainModuleInitializer := true
   )
