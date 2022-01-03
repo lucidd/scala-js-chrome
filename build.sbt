@@ -58,7 +58,7 @@ lazy val plugin = project
       // NOTE: Avoid circe as it doesn't respect binary compatibility which causes lots of issues
       Seq(
         "com.lihaoyi" %%% "upickle" % "1.4.3",
-        "org.scalactic" %% "scalactic" % "3.1.1" % "test",
+        "org.scalactic" %% "scalactic" % "3.2.9" % "test",
         "org.scalatest" %% "scalatest" % "3.2.10" % "test"
       )
     },
