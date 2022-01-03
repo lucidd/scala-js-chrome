@@ -1,16 +1,16 @@
 package com.alexitc
 
 import chrome.Manifest
-import org.scalajs.jsdependencies.sbtplugin.JSDependenciesPlugin
-import org.scalajs.jsdependencies.sbtplugin.JSDependenciesPlugin.autoImport._
 import org.scalajs.sbtplugin.ScalaJSPlugin
-import org.scalajs.sbtplugin.ScalaJSPlugin.autoImport._
-import sbt.Keys._
-import sbt._
+import org.scalajs.sbtplugin.ScalaJSPlugin.autoImport.*
+import sbt.*
+import sbt.Keys.*
+import scalajsbundler.sbtplugin.ScalaJSBundlerPlugin
+import scalajsbundler.sbtplugin.ScalaJSBundlerPlugin.autoImport.*
 
 object ChromeSbtPlugin extends AutoPlugin {
 
-  override def requires: Plugins = ScalaJSPlugin && JSDependenciesPlugin
+  override def requires: Plugins = ScalaJSPlugin && ScalaJSBundlerPlugin
 
   object autoImport {
 
@@ -30,7 +30,7 @@ object ChromeSbtPlugin extends AutoPlugin {
         Chrome.buildUnpackedDirectory(target.value / chromeDir / "unpacked-fast")(
           (Compile / chromeGenerateManifest).value,
           fastOptJsLib.value.data,
-          (Compile / packageJSDependencies).value,
+          (Compile / fastOptJS / webpack).value.map(_.data),
           (Compile / resourceDirectories).value
         )
       },
@@ -39,7 +39,7 @@ object ChromeSbtPlugin extends AutoPlugin {
         Chrome.buildUnpackedDirectory(target.value / chromeDir / "unpacked-opt")(
           (Compile / chromeGenerateManifest).value,
           fullOptJsLib.value.data,
-          (Compile / packageMinifiedJSDependencies).value,
+          (Compile / fullOptJS / webpack).value.map(_.data),
           (Compile / resourceDirectories).value
         )
       },
@@ -63,7 +63,7 @@ object ChromeSbtPlugin extends AutoPlugin {
 
   }
 
-  import autoImport._
+  import autoImport.*
 
   override val projectSettings = baseSettings
 

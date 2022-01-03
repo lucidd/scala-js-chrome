@@ -46,7 +46,7 @@ lazy val bindings = project
   )
   .enablePlugins(commonPlugins: _*)
   .enablePlugins(ScalaJSPlugin)
-  .enablePlugins(JSDependenciesPlugin)
+  .enablePlugins(ScalaJSBundlerPlugin)
 
 lazy val plugin = project
   .in(file("sbt-plugin"))
@@ -63,6 +63,6 @@ lazy val plugin = project
       )
     },
     addSbtPlugin("org.scala-js" % "sbt-scalajs" % "1.8.0"),
-    addSbtPlugin("org.scala-js" % "sbt-jsdependencies" % "1.0.0")
+    addSbtPlugin("ch.epfl.scala" % "sbt-scalajs-bundler" % "0.20.0")
   )
   .enablePlugins(commonPlugins: _*)
