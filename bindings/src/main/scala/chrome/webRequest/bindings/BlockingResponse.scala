@@ -1,6 +1,7 @@
 package chrome.webRequest.bindings
 
 import scala.scalajs.js
+import scala.scalajs.js.|.undefOr2jsAny
 
 object BlockingResponse {
 

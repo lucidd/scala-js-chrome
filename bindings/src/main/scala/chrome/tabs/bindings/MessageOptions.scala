@@ -1,6 +1,7 @@
 package chrome.tabs.bindings
 
 import scala.scalajs.js
+import scala.scalajs.js.|.undefOr2jsAny
 
 object MessageOptions {
 

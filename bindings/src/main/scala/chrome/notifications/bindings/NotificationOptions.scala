@@ -1,6 +1,7 @@
 package chrome.notifications.bindings
 
 import scala.scalajs.js
+import scala.scalajs.js.|.undefOr2jsAny
 
 @js.native
 trait NotificationOptions extends js.Object {

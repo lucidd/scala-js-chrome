@@ -19,13 +19,27 @@ ThisBuild / versionScheme := Some("early-semver")
 publish / skip := true
 
 lazy val commonSettings = Seq(
-  scalacOptions ++= Seq(
-    "-Xlint",
-    "-deprecation",
-// there are weird warnings in the ci release process
-//    "-Xfatal-warnings",
-    "-feature"
-  ),
+  scalacOptions ++= {
+    Seq(
+      "-encoding",
+      "UTF-8",
+      "-feature",
+      "-language:implicitConversions"
+//      "-Xfatal-warnings"
+    ) ++
+      (CrossVersion.partialVersion(scalaVersion.value) match {
+        case Some((3, _)) =>
+          Seq(
+            "-unchecked",
+            "-source:3.0-migration"
+          )
+        case _ =>
+          Seq(
+            "-Xlint",
+            "-deprecation"
+          )
+      })
+  },
   Compile / unmanagedSourceDirectories ++= Seq(
     baseDirectory.value.getParentFile / "shared" / "src" / "main" / "scala"
   )
@@ -38,7 +52,8 @@ lazy val bindings = project
   .settings(commonSettings: _*)
   .settings(
     name := "scala-js-chrome",
-    crossScalaVersions := Seq("2.12.15", "2.13.8"),
+    scalaVersion := "3.1.0",
+    crossScalaVersions ++= Seq("2.12.15", "2.13.8", "3.1.0"),
     libraryDependencies ++= Seq(
       "org.scala-js" %%% "scalajs-dom" % "2.1.0"
     ),

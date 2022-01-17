@@ -84,8 +84,6 @@ class EventSource3Impl[A, B, C](event: Event[js.Function3[A, B, C, _]]) extends 
 
 object EventSourceImplicits {
 
-  import scala.language.implicitConversions
-
   implicit def eventAsEventSource0(event: Event[js.Function0[_]]): EventSource[Unit] =
     new EventSource0Impl(event)
 

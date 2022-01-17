@@ -53,9 +53,9 @@ object ContentScript {
   sealed abstract class RunAt(val name: String)
 
   object RunAt {
-    final case object DocumentIdle extends RunAt("document_idle")
-    final case object DocumentStart extends RunAt("document_start")
-    final case object DocumentEnd extends RunAt("document_end")
+    case object DocumentIdle extends RunAt("document_idle")
+    case object DocumentStart extends RunAt("document_start")
+    case object DocumentEnd extends RunAt("document_end")
   }
 }
 

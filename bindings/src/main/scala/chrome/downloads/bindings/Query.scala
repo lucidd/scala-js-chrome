@@ -1,6 +1,7 @@
 package chrome.downloads.bindings
 
 import scala.scalajs.js
+import scala.scalajs.js.|.undefOr2jsAny
 
 @js.native
 trait Query extends js.Object {

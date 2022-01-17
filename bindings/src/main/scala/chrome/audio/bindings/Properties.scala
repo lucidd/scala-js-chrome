@@ -1,6 +1,7 @@
 package chrome.audio.bindings
 
 import scala.scalajs.js
+import scala.scalajs.js.|.undefOr2jsAny
 
 object Properties {
 

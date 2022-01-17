@@ -1,6 +1,7 @@
 package chrome.downloads.bindings
 
-import scalajs.js
+import scala.scalajs.js
+import scala.scalajs.js.|.undefOr2jsAny
 
 @js.native
 trait FileIconOptions extends js.Object {

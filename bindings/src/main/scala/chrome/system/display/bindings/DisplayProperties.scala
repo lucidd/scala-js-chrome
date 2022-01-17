@@ -1,6 +1,7 @@
 package chrome.system.display.bindings
 
 import scala.scalajs.js
+import scala.scalajs.js.|.undefOr2jsAny
 
 object DisplayProperties {
 

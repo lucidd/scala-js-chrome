@@ -5,6 +5,7 @@ import chrome.tabs.bindings.Tab
 
 import scala.scalajs.js
 import scala.scalajs.js.annotation.JSGlobal
+import scala.scalajs.js.|.undefOr2jsAny
 
 @js.native
 trait GetOptions extends js.Object {
@@ -50,13 +51,14 @@ object CreateOptions {
       `type`: js.UndefOr[Window.CreateType] = js.undefined,
       state: js.UndefOr[Window.State] = js.undefined
   ): CreateOptions = {
+    val jsUrl: js.Any = url.length match {
+      case 0 => js.undefined.asInstanceOf[js.Any]
+      case 1 => url(0)
+      case _ => url
+    }
     js.Dynamic
       .literal(
-        url = url.length match {
-          case 0 => js.undefined
-          case 1 => url(0)
-          case _ => url
-        },
+        url = jsUrl,
         tabId = tabId,
         left = left,
         top = top,

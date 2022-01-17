@@ -4,7 +4,7 @@ import org.scalajs.dom.ImageData
 
 import scala.scalajs.js
 import scala.scalajs.js.|
-import scala.scalajs.js.|.Evidence
+import scala.scalajs.js.|.{Evidence, UnionOps, undefOr2jsAny}
 
 @js.native
 trait IconDetails extends TabIdDetails {
@@ -25,7 +25,7 @@ object IconDetails {
   ): IconDetails = {
     // explicitly merge our union types so that dynamic is happy
     val anyImageData: js.UndefOr[js.Any] = imageData.map(_.merge)
-    val anyPath: js.UndefOr[js.Any] = path.map(_.merge)
+    val anyPath: js.UndefOr[js.Any] = path.map(_.asInstanceOf[js.Any])
 
     if (anyImageData.isDefined) {
       js.Dynamic

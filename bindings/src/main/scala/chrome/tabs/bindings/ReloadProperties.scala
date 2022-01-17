@@ -1,6 +1,7 @@
 package chrome.tabs.bindings
 
 import scala.scalajs.js
+import scala.scalajs.js.|.undefOr2jsAny
 
 @js.native
 trait ReloadProperties extends js.Object {

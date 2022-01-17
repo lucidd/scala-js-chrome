@@ -2,6 +2,7 @@ package chrome.wallpaper.bindings
 
 import scala.scalajs.js
 import scala.scalajs.js.annotation.JSGlobal
+import scala.scalajs.js.|.undefOr2jsAny
 
 @js.native
 trait WallpaperDetails extends js.Object {

@@ -1,6 +1,7 @@
 package chrome.app.window.bindings
 
 import scala.scalajs.js
+import scala.scalajs.js.|.undefOr2jsAny
 
 object CreateWindowOptions {
 

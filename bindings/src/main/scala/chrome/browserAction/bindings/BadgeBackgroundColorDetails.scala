@@ -2,7 +2,7 @@ package chrome.browserAction.bindings
 
 import scala.scalajs.js
 import scala.scalajs.js.|
-import scala.scalajs.js.|.Evidence
+import scala.scalajs.js.|.{Evidence, UnionOps, undefOr2jsAny}
 
 @js.native
 trait BadgeBackgroundColorDetails extends TabIdDetails {

@@ -1,6 +1,7 @@
 package chrome.sockets.tcp.bindings
 
 import scala.scalajs.js
+import scala.scalajs.js.|.undefOr2jsAny
 
 @js.native
 trait SocketProperties extends js.Object {

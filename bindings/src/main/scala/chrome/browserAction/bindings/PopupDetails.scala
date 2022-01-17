@@ -1,6 +1,7 @@
 package chrome.browserAction.bindings
 
 import scala.scalajs.js
+import scala.scalajs.js.|.undefOr2jsAny
 
 @js.native
 trait PopupDetails extends TabIdDetails {

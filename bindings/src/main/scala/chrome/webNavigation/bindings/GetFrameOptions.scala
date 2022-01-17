@@ -3,6 +3,7 @@ package chrome.webNavigation.bindings
 import chrome.tabs.bindings.Tab
 
 import scala.scalajs.js
+import scala.scalajs.js.|.undefOr2jsAny
 
 @js.native
 trait GetFrameOptions extends js.Object {

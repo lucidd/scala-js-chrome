@@ -3,7 +3,6 @@ package chrome.webRequest
 import chrome.events._
 import chrome.webRequest.bindings._
 
-import scala.language.implicitConversions
 import scala.scalajs.js
 import scala.scalajs.js.UndefOr
 

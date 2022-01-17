@@ -2,8 +2,8 @@ package chrome.permissions
 
 import chrome.events.EventSource
 import chrome.events.EventSourceImplicits._
+import chrome.permissions.Permission.{API, Host}
 import chrome.permissions.bindings._
-import chrome.permissions.Permission.{Host, API}
 import chrome.utils.ErrorHandling._
 
 import scala.concurrent.{Future, Promise}

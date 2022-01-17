@@ -3,6 +3,7 @@ package chrome.tabs.bindings
 import chrome.windows.bindings.Window
 
 import scala.scalajs.js
+import scala.scalajs.js.|.undefOr2jsAny
 
 object TabCreateProperties {
 
