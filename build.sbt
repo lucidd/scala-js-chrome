@@ -52,8 +52,8 @@ lazy val bindings = project
   .settings(commonSettings: _*)
   .settings(
     name := "scala-js-chrome",
-    scalaVersion := "3.1.0",
-    crossScalaVersions ++= Seq("2.12.15", "2.13.8", "3.1.0"),
+    scalaVersion := "3.1.1",
+    crossScalaVersions ++= Seq("2.12.15", "2.13.8", "3.1.1"),
     libraryDependencies ++= Seq(
       "org.scala-js" %%% "scalajs-dom" % "2.1.0"
     ),
