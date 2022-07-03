@@ -5,12 +5,10 @@ import org.scalajs.sbtplugin.ScalaJSPlugin
 import org.scalajs.sbtplugin.ScalaJSPlugin.autoImport.*
 import sbt.*
 import sbt.Keys.*
-import scalajsbundler.sbtplugin.ScalaJSBundlerPlugin
-import scalajsbundler.sbtplugin.ScalaJSBundlerPlugin.autoImport.*
 
 object ChromeSbtPlugin extends AutoPlugin {
 
-  override def requires: Plugins = ScalaJSPlugin && ScalaJSBundlerPlugin
+  override def requires: Plugins = ScalaJSPlugin
 
   object autoImport {
 
@@ -30,7 +28,6 @@ object ChromeSbtPlugin extends AutoPlugin {
         Chrome.buildUnpackedDirectory(target.value / chromeDir / "unpacked-fast")(
           (Compile / chromeGenerateManifest).value,
           fastOptJsLib.value.data,
-          (Compile / fastOptJS / webpack).value.map(_.data),
           (Compile / resourceDirectories).value
         )
       },
@@ -39,7 +36,6 @@ object ChromeSbtPlugin extends AutoPlugin {
         Chrome.buildUnpackedDirectory(target.value / chromeDir / "unpacked-opt")(
           (Compile / chromeGenerateManifest).value,
           fullOptJsLib.value.data,
-          (Compile / fullOptJS / webpack).value.map(_.data),
           (Compile / resourceDirectories).value
         )
       },

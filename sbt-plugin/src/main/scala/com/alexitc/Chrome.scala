@@ -15,16 +15,10 @@ object Chrome {
     }.toMap
   }
 
-  // TODO: I'm not sure if the jsDeps are actually useful but I'm keeping those just because
-  // the original plugin had them, now that we use scalajs-bundler, it can be that we need
-  // to re-work the source maps strategy for js dependencies
-  def buildUnpackedDirectory(
-      unpacked: File
-  )(manifest: File, jsLib: File, jsDeps: Seq[File], resources: Seq[File]): File = {
-    val libsAndDependencies =
-      List(jsLib -> unpacked / jsLib.getName) ++ jsDeps.map(file => file -> unpacked / file.getName)
+  def buildUnpackedDirectory(unpacked: File)(manifest: File, jsLib: File, resources: Seq[File]): File = {
+    val libsAndDependencies = List(jsLib -> unpacked / jsLib.getName)
 
-    val sourceMaps = (List(jsLib) ++ jsDeps)
+    val sourceMaps = List(jsLib)
       .map { sourceFile =>
         val fileName = sourceFile.getName + ".map"
         val originalSourceMap = sourceFile.getParentFile / fileName

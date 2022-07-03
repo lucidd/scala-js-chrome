@@ -16,8 +16,6 @@ inThisBuild(
 
 ThisBuild / versionScheme := Some("early-semver")
 
-publish / skip := true
-
 lazy val commonSettings = Seq(
   scalacOptions ++= {
     Seq(
@@ -45,8 +43,6 @@ lazy val commonSettings = Seq(
   )
 )
 
-lazy val commonPlugins = Seq()
-
 lazy val bindings = project
   .in(file("bindings"))
   .settings(commonSettings: _*)
@@ -59,9 +55,7 @@ lazy val bindings = project
     ),
     scalaJSUseMainModuleInitializer := true
   )
-  .enablePlugins(commonPlugins: _*)
   .enablePlugins(ScalaJSPlugin)
-  .enablePlugins(ScalaJSBundlerPlugin)
 
 lazy val plugin = project
   .in(file("sbt-plugin"))
@@ -77,7 +71,12 @@ lazy val plugin = project
         "org.scalatest" %% "scalatest" % "3.2.11" % "test"
       )
     },
-    addSbtPlugin("org.scala-js" % "sbt-scalajs" % "1.10.0"),
-    addSbtPlugin("ch.epfl.scala" % "sbt-scalajs-bundler" % "0.20.0")
+    addSbtPlugin("org.scala-js" % "sbt-scalajs" % "1.10.0")
   )
-  .enablePlugins(commonPlugins: _*)
+
+val root = project
+  .in(file("."))
+  .aggregate(bindings, plugin)
+  .settings(
+    publish / skip := true
+  )
