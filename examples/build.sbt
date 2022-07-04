@@ -5,11 +5,8 @@ import com.alexitc.{Chrome, ChromeSbtPlugin}
 
 lazy val examples = project.in(file(".")).aggregate(exampleApp, extension)
 
-lazy val scalaJsChrome = ProjectRef(file("../."), "bindings")
-
 lazy val exampleApp = project
   .in(file("app"))
-  .dependsOn(scalaJsChrome)
   .enablePlugins(ChromeSbtPlugin)
   .settings(
     name := "Example App",
@@ -23,12 +20,12 @@ lazy val exampleApp = project
       "-Xfatal-warnings",
       "-feature"
     ),
+    libraryDependencies += "com.alexitc" %%% "scala-js-chrome" % scalajsChromeV,
     scalaJSUseMainModuleInitializer := true,
     Test / scalaJSUseMainModuleInitializer := false,
     scalaJSLinkerConfig := scalaJSLinkerConfig.value.withRelativizeSourceMapBase(
       Some((Compile / fastOptJS / artifactPath).value.toURI)
     ),
-    packageJSDependencies / skip := false,
     // you can customize and have a static output name for lib and dependencies
     // instead of having the default files names like app-fastopt.js, ...
     (Compile / fastOptJS / artifactPath) := {
@@ -37,19 +34,13 @@ lazy val exampleApp = project
     (Compile / fullOptJS / artifactPath) := {
       (fullOptJS / crossTarget).value / "main.js"
     },
-    (Compile / packageJSDependencies / artifactPath) := {
-      (packageJSDependencies / crossTarget).value / "dependencies.js"
-    },
-    (Compile / packageMinifiedJSDependencies / artifactPath) := {
-      (packageMinifiedJSDependencies / crossTarget).value / "dependencies.js"
-    },
     chromeManifest := new AppManifest {
       val name = Keys.name.value
       val version = Keys.version.value
 
       val app = App(
         background = Background(
-          scripts = List("main.js", "dependencies.js")
+          scripts = List("main.js", "main-bundle.js")
         )
       )
       override val defaultLocale = Some("en")
@@ -72,7 +63,6 @@ lazy val exampleApp = project
 
 lazy val extension = project
   .in(file("extension"))
-  .dependsOn(scalaJsChrome)
   .enablePlugins(ChromeSbtPlugin)
   .settings(
     name := "Example Extension",
@@ -86,12 +76,12 @@ lazy val extension = project
       "-Xfatal-warnings",
       "-feature"
     ),
+    libraryDependencies += "com.alexitc" %%% "scala-js-chrome" % scalajsChromeV,
     scalaJSUseMainModuleInitializer := true,
     Test / scalaJSUseMainModuleInitializer := false,
     scalaJSLinkerConfig := scalaJSLinkerConfig.value.withRelativizeSourceMapBase(
       Some((Compile / fastOptJS / artifactPath).value.toURI)
     ),
-    packageJSDependencies / skip := false,
     // you can customize and have a static output name for lib and dependencies
     // instead of having the default files names like extension-fastopt.js, ...
     (Compile / fastOptJS / artifactPath) := {
@@ -100,16 +90,10 @@ lazy val extension = project
     (Compile / fullOptJS / artifactPath) := {
       (fullOptJS / crossTarget).value / "main.js"
     },
-    (Compile / packageJSDependencies / artifactPath) := {
-      (packageJSDependencies / crossTarget).value / "dependencies.js"
-    },
-    (Compile / packageMinifiedJSDependencies / artifactPath) := {
-      (packageMinifiedJSDependencies / crossTarget).value / "dependencies.js"
-    },
     chromeManifest := new ExtensionManifest {
 
       val background = Background(
-        scripts = List("main.js", "dependencies.js")
+        scripts = List("main.js", "main-bundle.js")
       )
       val name = Keys.name.value
       val version = Keys.version.value

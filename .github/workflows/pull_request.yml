@@ -25,3 +25,12 @@ jobs:
 
       - name: Run tests
         run: sbt test
+
+      - name: Publish local
+        run: sbt +publishLocal
+
+      - name: Compile examples
+        run: |
+          examples/version && sbt version | tail -n 1 | awk -F " " '{print $2}' > examples/version
+          echo "export SCALAJS_CHROME_VERSION=$(cat examples/version)" > examples/version
+          cd examples && source version sbt compile
